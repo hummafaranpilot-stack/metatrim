@@ -1,0 +1,498 @@
+<link href="popup/css/style1.css" type="text/css" rel="stylesheet">
+<section class="custom-social-proof">
+    <div class="custom-notification">
+        <div class="custom-notification-container">
+            <div class="custom-notification-image-wrapper">
+                <img src="popup/img/img/1bottle.png">
+            </div>
+            <div class="custom-notification-content-wrapper">
+                <p class="custom-notification-content">
+                    <span id="notify-customer">Eli H</span> - <span id="notify-state">TX</span><br> Purchased <strong><span id="notify-quantity">7</span></strong> Bottle(s) of <b>MetaTrim BHB</b> <small><span id="notify-ago">9 minutes ago</span></small>
+                </p>
+            </div>
+        </div>
+        <div class="custom-close"></div>
+    </div>
+</section>
+
+<div class="popup-loading-wrapper" style="display:none;">
+    <div class="popup">
+        <figure class="product-image"></figure>
+        <p>Reserving Your Bottle Of</p>
+        <h2>MetaTrim BHB</h2>
+        <img src="images/icon-loading.png" alt="" class="loading-image">
+    </div>
+</div>
+
+<p id="loading-indicator" style="display:none;">Processing...</p>
+<p id="crm-response-container" style="display:none;">Limelight messages will appear here...</p>
+
+<script type="text/javascript" src="popup/js/jquery-3.5.1.min.js"></script> 
+<script type="text/javascript" src="popup/js/slick.min.js"></script>
+<script type="text/javascript" src="popup/js/social-proof.js"></script>
+<script type="text/javascript" src="popup/js/scripts.js"></script>
+<script type="text/javascript" src="popup/js/jquery.mask.min5e1f.js?v=2"></script>	
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#fields_phone').mask('000-000-0000');
+	
+  	$('.single-item').slick({
+		arrows: false,
+		dots: true,
+		autoplay: true,
+		autoplaySpeed: 2600,
+  	});
+  
+	/*$('.loading-btn').click(function(e) {
+		$('.popup-loading-wrapper').show();
+		setTimeout(function() {
+		  $('#lpFrm').submit();
+		}, 2000);
+		return false
+	});*/
+});
+</script>
+<script type="text/javascript" src="bmf/assets/popup/js/jquery.autocomplete.min.js"></script>
+<script>
+var smtKey = '';
+var smtAuto = 0;
+var smtVerify = 0;
+var smartUrl = "https://us-autocomplete-pro.api.smartystreets.com/lookup?key=" + smtKey + "&prefer_geolocation=city";
+var lastAddress1 = '';
+var lastAddress2 = '';
+
+if(typeof smtKey !== "undefined" && smtKey != '') {
+	function submitAddress2() {
+		if(lastAddress1 == '') {
+			lastAddress1 = $('input[name="fields_address1"]').val();
+			lastAddress1.replace('"', '');
+		}
+		lastAddress2 = $('input[name="fields_address2"]').val();
+		lastAddress2.replace('"', '');
+		var combAddr = lastAddress1 + ', ' + lastAddress2;
+		$('input[name="fields_address1"]').val(combAddr);
+		$('#app_common_modal').remove();
+		$('#theForm').trigger('submit');
+		return false;
+	}
+
+	var utils2 = (function () {
+		return {
+			escapeRegExChars: function (value) {
+				return value.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+			},
+			createNode: function (containerClass) {
+				var div = document.createElement('div');
+				div.className = containerClass;
+				div.style.position = 'absolute';
+				div.style.display = 'none';
+				return div;
+			}
+		};
+	}());
+
+	$(document).ready(function(ee) {
+		if(typeof smtAuto !== "undefined" && smtAuto == 1) {
+			$('#fields_address1').autocomplete({
+				serviceUrl: smartUrl,
+				paramName: "search",
+				ajaxSettings: {},
+				minChars: 2,
+				deferRequestBy: 400,
+				transformResult: function(response) {
+					if (typeof response === "undefined") { 
+						return {
+							"suggestions": []
+						};
+					} else if (typeof response == "string") { 
+						respJson = JSON.parse(response); 
+					} else {
+						respJson = response;
+					}
+					if(!(respJson) || typeof respJson.suggestions === "undefined" || respJson.suggestions == null) {
+						return {
+							"suggestions": []
+						};
+					}
+					
+					return {
+						suggestions: $.map(respJson.suggestions, function(dataItem) {
+							return { value: dataItem.street_line + (dataItem.secondary != '' && dataItem.entries == 1 ? (', ' + dataItem.secondary) : '') , data: dataItem};
+						})
+					};
+				},
+				formatResult: function (suggestion, currentValue) {
+					if(typeof suggestion.data === "undefined") {
+						return "";
+					} else {
+						if (!currentValue) {
+							return suggestion.data.text;
+						}
+				
+						var pattern = '(' + utils2.escapeRegExChars(currentValue) + ')';
+						
+						var addrfull = suggestion.data.street_line + (
+							suggestion.data.secondary != '' ? ( 
+								suggestion.data.entries > 1 ? (', ' + suggestion.data.secondary + ' (' + suggestion.data.entries + ' entries)') : (', ' + suggestion.data.secondary) 
+							) : '') + ', ' + suggestion.data.city + ' ' + suggestion.data.state + ' ' + suggestion.data.zipcode;  
+				
+						return addrfull
+							.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>')
+							.replace(/&/g, '&amp;')
+							.replace(/</g, '&lt;')
+							.replace(/>/g, '&gt;')
+							.replace(/"/g, '&quot;')
+							.replace(/&lt;(\/?strong)&gt;/g, '<$1>');
+					}
+				},
+				onSelect: function (suggestion) {
+					if($('#fields_city').length == 1 && (suggestion.data.city)) {
+						$('#fields_city').val(suggestion.data.city);
+					}
+					if($('#fields_state').length == 1 && (suggestion.data.state)) {
+						$('#fields_state').val(suggestion.data.state);
+					}
+					if($('#fields_zip').length == 1 && (suggestion.data.zipcode)) {
+						$('#fields_zip').val(suggestion.data.zipcode);
+					}
+								
+				}
+			});
+		}
+	});
+
+}
+
+
+$('form.form123').find('#fields_email').on('change keyup', function() {
+	var emailReg2 = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	if ( !emailReg2.test($('#fields_email').val()) ) {
+		$(this).addClass('has-error');
+		$(this).removeClass('no-error');
+	}
+});
+
+$('form.form123').find('#fields_zip').on('change keyup', function() {
+	var zip = $('#fields_zip').val();
+	if ((zip.length)< 5 ){
+		$(this).addClass('has-error');
+		$(this).removeClass('no-error');
+	}
+});
+
+$('form#theForm').find('input, select, textarea').on('change keyup', function() {
+	$('form#theForm').find('input, select').each(function() {
+		if($(this).val()==''){
+			$(this).addClass('has-error');
+			$(this).removeClass('no-error');
+		}else{
+			$(this).removeClass('has-error');
+			$(this).addClass('no-error');	
+		}
+	});
+});
+
+
+function validate_optin_form(){
+	ShowExitPopup = false;
+	internal = 1;
+	isExit=false;
+
+	var errors = new Array();
+	var phonefilter = /^([0-9\-\+\(\)]{8,22})+$/ ;
+	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	//var is_terms_condtion_cheked = $('#agree_terms').prop('checked'); 
+	//console.log($('#fields_fname').val().replace(/^\s+|\s+$/g,"")==''));
+
+	$("input").removeClass("has-error");
+	
+	if ($('#fields_fname').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your first name');
+		$('#fields_fname').addClass("has-error");
+	}
+	if ($('#fields_lname').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your last name');
+		$('#fields_lname').addClass("has-error");
+	}
+	if ($('#fields_address1').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please select your address');
+		$('#fields_address1').addClass("has-error");
+	}
+	if ($('#fields_city').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your city');
+		$('#fields_city').addClass("has-error");
+	}
+	if ($('#country').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your country');
+		$('#country').addClass("has-error");
+	}
+	if ($('#fields_state').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your State');
+		$('#fields_state').addClass("has-error");
+	}
+	if ($('#fields_zip').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your Zip Code');
+		$('#fields_zip').addClass("has-error");
+	}
+	if ($('#fields_phone').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your phone number');
+		$('#fields_phone').addClass("has-error");
+	}
+	if ($('#fields_email').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your email address');
+		$('#fields_email').addClass("has-error");
+	} else if ( !emailReg.test($('#fields_email').val()) ) {
+		errors.push('Please enter valid email address');
+		$('#fields_email').addClass("has-error");
+	}
+	
+	/*if($('#agree_terms:checked').length == 0) {
+	errors.push('Please accept our terms and condition');
+	}*/
+	
+	
+	if(typeof smtKey !== "undefined" && smtKey != '' && typeof smtVerify !== "undefined" && smtVerify == 1) {
+		if (errors.length == 0 ) {
+			var addr = $('input[name="fields_address1"]').val() + ', ' + $('input[name="fields_city"]').val() + ' ' + $('select[name="fields_state"]').val() + ' ' + $('input[name="fields_zip"]').val() ;
+			var errmsg = "";
+			var vcode = "";
+			var apiUrl = "https://us-street.api.smartystreets.com/street-address"
+				+ "?street=" + encodeURI(addr)
+				+ "&key=" + smtKey;
+			$.ajax({
+			  url: apiUrl,
+			  method: "get",
+			  async: false,
+			  beforeSend: function( xhr ) {
+			  }
+			})
+			.done(function(resData) {
+				var errmsg = "";
+				if(!(resData) || !(resData[0]) || !(resData[0].analysis) || !(resData[0].analysis.dpv_match_code)) {
+					vcode = "";
+				} else {
+					vcode = resData[0].analysis.dpv_match_code;
+				}
+				
+				if(vcode != '' && vcode != 'N' && vcode != 'D') {
+					if(typeof resData[0].delivery_line_1 !== "undefined" && resData[0].delivery_line_1 != "") {
+						$('input[name="fields_address1"]').val(resData[0].delivery_line_1);
+						lastAddress1 = $('input[name="fields_address1"]').val();
+					}
+					
+					if(typeof resData[0].components !== "undefined") {
+						if(typeof resData[0].components.city_name !== "undefined" && resData[0].components.city_name != "") {
+							$('input[name="fields_city"]').val(resData[0].components.city_name);
+						}
+						if(typeof resData[0].components.zipcode !== "undefined" && resData[0].components.zipcode != "") {
+							$('input[name="fields_zip"]').val(resData[0].components.zipcode);
+						}
+						if(typeof resData[0].components.state_abbreviation !== "undefined" && resData[0].components.state_abbreviation != "") {
+							$('select[name="fields_state"]').val(resData[0].components.state_abbreviation);
+						}
+					}
+					
+				}
+			})
+			.fail(function() {
+			})
+			.always(function() {
+			});
+			
+			
+			if(vcode == '') {
+				errors.push('Address could not be found');
+			} else if(vcode == 'N') {
+				errors.push('Address does not seem to be deliverable');
+			} else if(vcode == 'D') {
+				
+				var html = '';
+				html += '<div id="app_common_modal">';
+				html += '<div class="app_modal_body" style="text-align:center;min-height:150px;"><a href="javascript:void(0);" id="app_common_modal_close">X</a>';
+	
+				html += '<div>'
+					+ '<form method="get" action="" onSubmit="return submitAddress2();">'
+					+ '<h4>' + "Please enter your Apartment/Suite/Unit # to proceed" + '</h4>'
+					+ '<input type="text" name="fields_address2" id="fields_address2" placeholder="" autocomplete="off" required style="width:80%;line-height:22px;margin:10px;padding:5px" maxlength="50" value="'+ (lastAddress2 != '' ? lastAddress2 : '') +'" data-error-message="Please enter your address!" />'
+					+ '<button type="submit" style="width:40%;height:30px;line-height:22px;cursor:pointer;">OK</button>'
+					+ '</form>';
+					+ '</div>';
+	
+				html += '</div>';
+				html += '</div>';
+				
+				if (!$('#app_common_modal').length) {
+					$('body').append(html);
+				}
+				$('#app_common_modal').fadeIn(500);
+				return false;
+				
+			}
+			
+		}
+	}
+	
+	
+	if (errors.length == 0 ) {
+		$('.popup-loading-wrapper').show();
+		$('#fields_phone').unmask();
+		document.getElementById('theForm').submit();
+		return false;
+	} else {
+		var li = '';
+		$.each(errors, function(key, value) {
+			li += '<li>' + value + '</li>';
+		});
+	
+		var html = '';
+		html += '<div id="error_handler_overlay">';
+		html += '<div class="error_handler_body"><a href="javascript:void(0);" id="error_handler_overlay_close">X</a><ul>' + li + '</ul></div>';
+		html += '</div>';
+	
+		$('body').append(html);
+	
+		$('#error_handler_overlay').fadeIn(500);
+		return false;
+	}
+}
+
+
+$(function() {
+	$(window).keydown(function(e) {
+		if (e.which === 27 && $('#error_handler_overlay').length) {
+			$('#error_handler_overlay').remove();
+		}
+	});
+	
+	$(document).off('click', '#error_handler_overlay');
+	$(document).on('click', '#error_handler_overlay', function() {
+		$(this).remove();
+	});
+
+	$(document).off('click', '#error_handler_overlay_close');
+	$(document).on('click', '#error_handler_overlay_close', function() {
+		$('#error_handler_overlay').remove();
+	});
+
+	$(document).on('click', '#app_common_modal_close', function() {
+		//     alert('close');
+		$('#app_common_modal').remove();
+	});	
+});
+
+</script> 
+<script>
+function onlyNumbers(e,type)
+{
+	var keynum;
+	var keychar;
+	var numcheck;
+	if(window.event) // IE
+	{
+		keynum = e.keyCode;
+	}
+	else if(e.which) // Netscape/Firefox/Opera
+	{
+		keynum = e.which;
+	}
+	keychar = String.fromCharCode(keynum);
+	numcheck = /\d/;
+	
+	switch (keynum){
+		case 8:    //backspace
+		case 9:    //tab
+		case 35:   //end
+		case 36:   //home
+		case 37:   //left arrow
+		case 38:   //right arrow
+		case 39:   //insert
+		case 45:   //delete
+		case 46:   //0
+		case 48:   //1
+		case 49:   //2
+		case 50:   //3
+		case 51:   //4
+		case 52:   //5
+		case 54:   //6
+		case 55:   //7
+		case 56:   //8
+		case 57:   //9
+		case 96:   //0
+		case 97:   //1
+		case 98:   //2
+		case 99:   //3
+		case 100:  //4
+		case 101:  //5
+		case 102:  //6
+		case 103:  //7
+		case 104:  //8
+		case 105:  //9
+			result2 = true;
+			break;
+		case 109: // dash -
+			if (type == 'phone'){
+				result2 = true;
+			} else {
+				result2 = false;
+			}
+			break;
+		default:
+			result2 = numcheck.test(keychar);
+			break;
+	}
+	
+	return result2;
+}
+
+function openNewWindow(page_url, type, window_name, width, height, top, left, features) {
+    if (!type) {
+        type = 'popup';
+    }
+
+    if (!width) {
+        width = 480;
+    }
+
+    if (!height) {
+        height = 480;
+    }
+
+    if (!top) {
+        top = 50;
+    }
+
+    if (!left) {
+        left = 50;
+    }
+
+    if (!features) {
+        features = 'resizable,scrollbars';
+    }
+
+    if (type == 'popup') {
+        var settings = 'height=' + height + ',';
+        settings += 'width=' + width + ',';
+        settings += 'top=' + top + ',';
+        settings += 'left=' + left + ',';
+        settings += features;
+
+        win = window.open(page_url, window_name, settings);
+        win.window.focus();
+    } else if (type == 'modal') {
+        var html = '';
+        html += '<div id="app_common_modal">';
+        html += '<div class="app_modal_body"><a href="javascript:void(0);" id="app_common_modal_close">X</a><iframe src="' + page_url + '" frameborder="0"></iframe></div>';
+        html += '</div>';
+
+        if (!$('#app_common_modal').length) {
+
+            $('body').append(html);
+        }
+        $('#app_common_modal').fadeIn();
+    }
+
+}
+
+
+

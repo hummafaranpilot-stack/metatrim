@@ -1,0 +1,12 @@
+{
+  "name": "clickbank-pdf-generator",
+  "version": "1.0.0",
+  "description": "Generate PDF from ClickBank Structure HTML",
+  "main": "generate-pdf.js",
+  "scripts": {
+    "generate": "node generate-pdf.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}

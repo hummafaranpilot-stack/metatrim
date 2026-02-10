@@ -1,0 +1,3829 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<div class="campaign-bar fixed-bottom text-white" id="ScarcityBar" style="display:none;background:#BC0028; padding: 5px;">
+        <h1 class="mb-0 text-center" style="font-size:28px;">Meta Trim BHB</h1>
+		<link rel="icon" type="image/png" href="../lib/img/2nd.png">
+        <h5 class="mb-0 text-center" style="background:#BC0028;color:white;">
+            <script language="JavaScript">
+                function setCookie(name, value, days) {
+                    var expires = "";
+                    if (days) {
+                        var date = new Date();
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        expires = "; expires=" + date.toUTCString();
+                    }
+                    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                }
+
+                function getCookie(name) {
+                    var nameEQ = name + "=";
+                    var ca = document.cookie.split(';');
+                    for (var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                    }
+                    return null;
+                }
+                
+                var countDownCookie = getCookie('fecountdown');
+                if (countDownCookie) {
+                    countdowntime = '2025-08-16 14:58:10 GMT-04:00';
+                    timestamp = '1755370690';
+                    pohdate = '2025-08-16 14:58:10 GMT-04:00';
+
+                } else {
+                    countdowntime = '2025-08-16 14:58:10 GMT-04:00';
+                    timestamp = '1755370690';
+                    pohdate = '2025-08-16 14:58:10 GMT-04:00';
+
+                    setTimeout(() => {
+                        setCookie('fecountdown', countdowntime, 1);
+                    }, 1000);
+                }
+
+                var TargetDate = pohdate;
+                var BackColor = "red";
+                var ForeColor = "white";
+                var CountActive = true;
+                var CountStepper = -1;
+                var LeadingZero = false;
+                var DisplayFormat = "Your Special Discount Expires In <span style='white-space:nowrap;'>%%M%% Min, %%S%% Secs<span>";
+                var FinishMessage = "Last Chance to Claim your Special Discount!";
+
+                function calcage(secs, num1, num2) {
+                    s = ((Math.floor(secs / num1)) % num2).toString();
+                    if (LeadingZero && s.length < 6)
+                        s = "0" + s;
+                    return "<b>" + s + "</b>";
+                }
+
+                function CountBack(secs) {
+                    if (secs < 0) {
+                        document.getElementById("cntdwn").innerHTML = FinishMessage;
+                        return;
+                    }
+                    var DisplayStr = DisplayFormat.replace(/%%D%%/g, calcage(secs, 86400, 100000))
+                                                .replace(/%%H%%/g, calcage(secs, 3600, 24))
+                                                .replace(/%%M%%/g, calcage(secs, 60, 60))
+                                                .replace(/%%S%%/g, calcage(secs, 1, 60));
+
+                    document.getElementById("cntdwn").innerHTML = DisplayStr;
+                    if (CountActive)
+                        setTimeout("CountBack(" + (secs + CountStepper) + ")", SetTimeOutPeriod);
+                }
+
+                function putspan(backcolor, forecolor) {
+                    document.write("<span id='cntdwn' style='background-color:#BC0028; color:" + forecolor + "'></span>");
+                }
+
+                if (typeof(BackColor) == "undefined")
+                    BackColor = "white";
+                if (typeof(ForeColor) == "undefined")
+                    ForeColor = "black";
+                if (typeof(TargetDate) == "undefined")
+                    TargetDate = "12/31/2020 5:00 AM";
+                if (typeof(DisplayFormat) == "undefined")
+                    DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
+                if (typeof(CountActive) == "undefined")
+                    CountActive = true;
+                if (typeof(FinishMessage) == "undefined")
+                    FinishMessage = "";
+                if (typeof(CountStepper) != "number")
+                    CountStepper = -1;
+                if (typeof(LeadingZero) == "undefined")
+                    LeadingZero = true;
+
+                CountStepper = Math.ceil(CountStepper);
+                if (CountStepper == 0)
+                    CountActive = false;
+                var SetTimeOutPeriod = (Math.abs(CountStepper) - 1) * 1000 + 1290;
+                putspan(BackColor, ForeColor);
+
+                var dthen = convertToServerTimeZone(TargetDate);
+                var dnow = convertToServerTimeZone();
+
+                if (CountStepper > 0)
+                    var ddiff = new Date(dnow - dthen);
+                else
+                    var ddiff = new Date(dthen - dnow);
+                var gsecs = Math.floor(ddiff.valueOf() / 1000);
+                CountBack(gsecs);
+
+                function convertToServerTimeZone(datestring) {
+                    // This function gets the server timezone
+                    var offset = -5.0; // EST
+
+                    var clientDate = datestring ? new Date(datestring) : new Date();
+                    var utc = clientDate.getTime() + (clientDate.getTimezoneOffset() * 60000);
+                    var serverDate = new Date(utc + (3600000 * offset));
+                    return serverDate;
+                }
+            </script>
+        </h4>
+    </div>
+   
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+<!-- ============ SHAVING + BUYGOODS (ALL-IN-ONE) ============ -->
+<!-- This single script handles: shaving check, URL cleanup, and BuyGoods tracking -->
+<script src="https://metatrim.trustednutraproduct.com/shaver/shaving-check.php"></script>
+<!-- ============ END SHAVING + BUYGOODS ============ -->
+    <script>
+        var protocol = ((document.location.protocol=='https:')?'https://':'http://');
+    	var uri = encodeURIComponent(window.location.hostname+window.location.pathname+window.location.search);
+    	document.write('<s' + 'cript src="' + protocol + 'main.tgoptimize.com/load.js?r='+Math.random()+((typeof tg_opt_verifier !== 'undefined')?'&v='+tg_opt_verifier:'')+'&u='+uri+'" type="text/javascript">' + '<\/s' + 'cript>');
+    </script>
+    <script>
+        dataLayer = [{
+    		'split_page_test': 'go-index33'
+    	  }];
+    </script>
+<!-- Google Tag Manager -->
+
+<!-- End Google Tag Manager --> 
+<!-- Google tag (gtag.js) -->  
+<script>
+  </script>
+<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+<script src="js/jquery.1.9.1.min.js?v=2.0.1"></script>
+
+<!-- Start Visual Website Optimizer Synchronous Code -->
+<script type='text/javascript'>
+    var _vis_opt_account_id = 407590;
+    var _vis_opt_protocol = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+    document.write('<s' + 'cript src="' + _vis_opt_protocol +
+        'dev.visualwebsiteoptimizer.com/deploy/js_visitor_settings.php?v=1&a=' + _vis_opt_account_id + '&url=' + encodeURIComponent(document.URL) + '&random=' + Math.random() + '" type="text/javascript">' + '<\/s' + 'cript>');
+</script>
+
+<script type='text/javascript'>
+    if (typeof(_vis_opt_settings_loaded) == "boolean") {
+        document.write('<s' + 'cript src="' + _vis_opt_protocol +
+            'd5phz18u4wuww.cloudfront.net/vis_opt.js" type="text/javascript">' + '<\/s' + 'cript>');
+    }
+    // if your site already has jQuery 1.4.2, replace vis_opt.js with vis_opt_no_jquery.js above
+</script>
+
+<script type='text/javascript'>
+    if (typeof(_vis_opt_settings_loaded) == "boolean" && typeof(_vis_opt_top_initialize) == "function") {
+        _vis_opt_top_initialize();
+        vwo_$(document).ready(function() {
+            _vis_opt_bottom_initialize();
+        });
+    }
+</script>
+<!-- End Visual Website Optimizer Synchronous Code -->
+<!-- Facebook Pixel Code -->
+<!-- End Facebook Pixel Code -->
+<script type="text/javascript">
+    function hideGreyHead() {
+      document.getElementById("greyhead").style.display = "none";
+    }
+	function showBuyLink() {
+	  document.getElementById("buylink").style.display = "block";
+	}
+        // adjust this as needed, 1 sec = 1000
+    setTimeout("hideGreyHead()", 15000);
+	setTimeout("showBuyLink()", 1000);
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="robots" content="index, follow">
+
+<title>Meta Trim BHB </title>
+<meta name="description" content="Meta Trim BHB Weight Loss Supplement">
+<link rel="icon" type="image/png" href="../lib/img/2nd.png">
+<link href="css/video/skeleton.min.css?v=2.0.1" rel="stylesheet">
+<link href="css/video/all.min.css?v=2.0.1" rel="stylesheet">
+<link href="css/video/main.css?v=2.0.1" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i|Montserrat:400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+
+<!-- Header Logo -->
+<nav class="fixed-top">
+	<img src="../lib/img/logo.png" alt="" class="d-none d-md-block">
+</nav>
+
+<!-- Call Reveal -->
+
+<script type='text/javascript'>
+window.__lo_site_id = 329229;
+
+	(function() {
+		var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+		wa.src = 'js/purchase10/w.js?v=2.0.1';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+	  })();
+</script>
+	<!-- Additional CSS Goes Here -->
+	<link href="css/video/redscarcitybar2.css?v=2.0.1" rel="stylesheet" />
+	<link href="css/video/indexwritten-sl.css?v=2.0.1" rel="stylesheet" />
+
+	<style>
+		.wistia-video-size{
+			max-width:100%;
+			width:100%;
+			margin-left:auto;
+			margin-right:auto;
+			overflow: hidden;
+		}
+
+		.fixed-top, .fullscreen-headline{
+			display:none;
+		}
+
+		.asob-img{
+			margin-top:0px !important;
+			margin-bottom:30px !important;
+		}
+
+		.mbg-img{
+			margin-bottom:0px !important;
+		}
+
+		#wistia-fs {
+			background: #000 !important;
+			overflow: hidden;
+		}
+
+		#wistia-fs.fullscreen{
+			max-width: 100% !important;
+			border: none;
+			margin-top: 0;
+			border-radius: 0;
+			background-color: #000000;
+		}
+		
+		#wistia-fs.not-fullscreen{
+			max-width: 890px;
+			border: solid 12px white;
+			margin-top: 18px !important;
+			border-radius: 8px;
+		}
+
+		#wistia-fs-inner{
+			position: relative; 
+			margin:0 auto;
+		}
+
+		./* .vida-vh {
+			display: grid;
+			align-content: center;
+			aspect-ratio: 16/9;
+			height: 100vh;
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			object-fit: contain;
+		} */
+		.vida-vh {
+			display: grid;
+			align-content: center;
+			aspect-ratio: 16/9;
+			height: 100vh;
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			object-fit: contain;
+		}
+	</style>
+
+<!-- NEW PRICING CARDS CSS -->
+<style>
+.mt-product-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-color: transparent;
+  font-family: "Montserrat", sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.mt-product-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  max-width: 340px;
+  width: calc(33.333% - 0.75rem);
+  min-width: 280px;
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mt-product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.mt-product-card.mt-featured {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border: 2px solid #ffc107;
+}
+
+.mt-product-header {
+  background: linear-gradient(135deg, #1a237e 0%, #303f9f 100%);
+  text-align: center;
+  padding: 0.6rem 1rem;
+  color: white;
+}
+
+.mt-product-card.mt-featured .mt-product-header {
+  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+}
+
+.mt-product-header h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.mt-product-header p {
+  font-size: 1.1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.mt-product-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.mt-product-image {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  padding: 0.6rem;
+  border: 2px solid #bbdefb;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  margin-bottom: 0.5rem;
+}
+
+.mt-product-image img {
+  width: 100%;
+  max-width: 252px;
+  height: auto;
+  object-fit: contain;
+}
+
+.mt-best-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #1a237e, #303f9f);
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+}
+
+.mt-product-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+}
+
+.mt-product-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.mt-product-price h4, .mt-display-price {
+  font-size: 4.5rem;
+  color: #1565c0;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1;
+}
+
+.mt-price-info p {
+  font-size: 1.3rem;
+  color: #1565c0;
+  font-weight: 600;
+  margin: 0;
+}
+
+.mt-subscription-toggle {
+  width: 100%;
+  background: #1a1a2e;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.mt-subscription-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.mt-subscription-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mt-subscription-option.active {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mt-option-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mt-radio-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #666;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mt-subscription-option.active .mt-radio-dot {
+  border-color: #fff;
+  background: #fff;
+}
+
+.mt-radio-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  opacity: 0;
+}
+
+.mt-subscription-option.active .mt-radio-dot::after {
+  opacity: 1;
+}
+
+.mt-option-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.mt-option-price {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.mt-option-price span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.mt-savings-badge {
+  background: none;
+  color: #000;
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 8px 0 0 0;
+  display: block;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.mt-buy-now-btn {
+  display: block;
+  margin-top: 2px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.mt-buy-now-btn img {
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.mt-buy-now-btn:hover img {
+  transform: scale(1.05);
+}
+
+.mt-shipping-text {
+  color: #000;
+  font-size: 1rem;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.mt-total-line {
+  font-size: 1.1rem;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.mt-strikethrough {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 0.5rem;
+}
+
+.mt-final-price {
+  font-weight: bold;
+  color: #000;
+}
+
+.mt-payment-icons {
+  margin: 0.4rem 0;
+  padding: 0;
+}
+
+.mt-payment-icons img {
+  width: 100%;
+  max-width: 200px;
+  padding: 0;
+}
+
+.mt-subscribe-savings {
+  display: none;
+  text-align: center;
+  margin: 4px 0;
+  background: rgba(26, 26, 46, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(26, 26, 46, 0.15);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.mt-subscribe-savings.show {
+  display: block;
+  animation: borderFlicker 2.5s ease-in-out infinite;
+}
+
+@keyframes borderFlicker {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #000; }
+}
+
+.mt-subscribe-savings .line1 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1565c0;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.mt-subscribe-savings .line2 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #333;
+  display: block;
+  line-height: 1.3;
+}
+
+.mt-subscribe-savings .line2 .price-highlight {
+  font-weight: 700;
+  color: #1565c0;
+}
+
+.mt-cancel-notice {
+  display: none;
+  text-align: center;
+  margin: 4px 0;
+  padding: 6px 10px;
+  background: #28a745;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.mt-cancel-notice.show {
+  display: block;
+}
+
+.mt-subscription-guarantee {
+  text-align: center;
+  padding: 25px 30px;
+  margin-top: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-subscription-guarantee .guarantee-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a237e;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.mt-subscription-guarantee .guarantee-title span {
+  color: #1565c0;
+}
+
+.mt-subscription-guarantee .guarantee-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 992px) {
+  .mt-product-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mt-product-card {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .mt-product-card.mt-featured {
+    order: -1;
+  }
+
+  .mt-product-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8rem;
+  }
+
+  .mt-product-image {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.5rem;
+  }
+
+  .mt-product-details {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 3rem;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .mt-product-header p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Side-by-Side Layout (767px and below) */
+@media (max-width: 767px) {
+  .mt-product-grid {
+    padding: 0 5px;
+    gap: 0.8rem;
+  }
+
+  .mt-product-card {
+    border: 2px solid #1565c0;
+    border-radius: 8px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .mt-product-card.mt-featured {
+    border-color: #FFD700;
+  }
+
+  .mt-product-header {
+    padding: 8px 12px;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .mt-product-header p {
+    font-size: 0.7rem;
+    margin: 0;
+  }
+
+  .mt-product-content {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    grid-template-rows: auto 1fr;
+    padding: 0;
+    background: #fff;
+    position: relative;
+  }
+
+  .mt-product-image {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 130px;
+    max-width: 200px;
+    padding: 5px 5px 8px 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border: none;
+    background: transparent;
+  }
+
+  .mt-product-image img {
+    max-height: 180px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .mt-product-details {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 0 8px 8px 5px;
+    border-left: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mt-subscription-toggle {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    gap: 3px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 6px 8px;
+  }
+
+  .mt-subscription-option {
+    padding: 5px 8px;
+  }
+
+  .mt-option-label {
+    font-size: 0.75rem;
+  }
+
+  .mt-radio-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mt-cancel-notice {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
+
+  .mt-product-card.mt-featured .mt-product-details {
+    border-left: none;
+  }
+
+  .mt-best-badge {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    right: auto;
+    font-size: 0.5rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  .mt-option-btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .mt-option-label {
+    font-size: 0.65rem;
+  }
+
+  .mt-option-price {
+    font-size: 0.75rem;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 2.2rem;
+    margin: 5px 0;
+  }
+
+  .mt-savings-badge {
+    font-size: 0.85rem;
+    margin: 5px 0;
+  }
+
+  .mt-buy-now-btn {
+    max-width: 150px;
+    margin: 5px auto 0;
+  }
+
+  .mt-shipping-text {
+    font-size: 0.75rem;
+    margin-top: 5px;
+  }
+
+  .mt-total-line {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+
+  .mt-payment-icons {
+    margin: 8px 0;
+  }
+
+  .mt-payment-icons img {
+    max-width: 150px;
+  }
+
+  .mt-subscribe-savings {
+    padding: 6px 8px;
+    margin: 5px 0;
+  }
+
+  .mt-subscribe-savings .line1 {
+    font-size: 0.75rem;
+  }
+
+  .mt-subscribe-savings .line2 {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mt-product-price h4, .mt-display-price {
+    font-size: 1.8rem;
+  }
+
+  .mt-product-image {
+    width: 42%;
+    min-width: 110px;
+    max-width: 150px;
+  }
+
+  .mt-product-image img {
+    max-height: 130px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .mt-option-label {
+    font-size: 0.6rem;
+  }
+
+  .mt-option-price {
+    font-size: 0.7rem;
+  }
+
+  .mt-buy-now-btn {
+    max-width: 130px;
+  }
+}
+</style>
+<!-- END NEW PRICING CARDS CSS -->
+
+	<style>
+		.greytext {
+			background-color: #BC0028;
+			color: #ffffff;
+			text-align: center;
+			padding: 5px;
+			margin-top:5px;
+			margin-right: auto;
+			margin-left: auto;
+			font-weight: bold;
+			font-size:20px;
+			position:fixed;
+			z-index:999;
+			width:100%;
+		} 
+		
+		.buybutton {
+			text-align: center;
+			background: #f4bb00;
+			padding: 15px 10px;
+			font-weight: bold;
+			box-shadow: 3px 3px 1px rgb(0 0 0 / 47%);
+			color: black;
+			min-width: 300px;
+		}
+		
+		.adjustspace {
+			margin-bottom:0px !important;		
+			
+		}
+		.campaign-bar #cntdwn {
+			color: #ffffff !important;
+		}
+	</style>
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+
+<!-- End Google Tag Manager (noscript) -->
+
+	<div id="greyhead" style="display: block; margin-top:-30px;"><br>
+		<div class="greytext">
+			This Video Went <u>Viral</u>…<br>
+			But it could be taken down at any moment. <br>
+			Please watch while you still can.<br>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<!-- <div class="row fullscreen-headline mt-3 mb-3"> -->
+			<div class="fullscreen-headline mt-3 mb-3">
+
+					<!--Mike P. Lead 2 - Headline 2 - NO HEADLINE -->
+					<!--h2 class="text-blue">Signs That You Have Poisons And Toxins <br class="d-none d-lg-block">In Your Body</h2>-->
+
+					<!--Mike P. Lead 2 - Headline 3-->
+					<!--<h2 class="text-blue">The Ancient Japanese Secret That Vacuums Pain <br class="d-none d-lg-block">And Offers Fast Relief…</h2>-->
+				</div>
+			</div>
+		</div>
+		<!-- Vidalytics Here -->
+	<div id="vidalytics_embed_lx1pCnXU5z2uKk0P" style="width: 100%; position:relative; padding-top: 56.66%;"></div>
+<script type="text/javascript">
+(function (v, i, d, a, l, y, t, c, s) {
+    y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
+    if (!vsl){vsl=function(u,cb){
+        if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
+        if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
+        i.getElementsByTagName("head")[0].appendChild(s);
+    };}
+    vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
+})(window, document, 'Vidalytics', 'vidalytics_embed_lx1pCnXU5z2uKk0P', 'https://fast.vidalytics.com/embeds/h9bkXdXE/lx1pCnXU5z2uKk0P/');
+</script>
+
+					<!-- VSL Video Here -->
+					<!-- FAQ Script Here -->
+
+				<script>
+							window._wq = window._wq || [];
+							_wq.push({
+								id: "",
+								options: {
+									muted: true,
+								}
+							});
+						</script>
+			<script>
+				$(document).ready(function(){
+					var played = false;
+					var browserHeight = window.innerHeight;
+					var browserWidth = window.innerWidth;
+
+					window._wq = window._wq || [];
+					_wq.push({
+						id: "_all",
+						onReady: function(video) {
+							
+							var initialWidth = document.documentElement.clientWidth;
+
+							// $('#wistia-fs').addClass('fullscreen').removeClass('not-fullscreen');
+							location.hash = "#wistia-fs";
+							video.height(browserHeight);
+							let videoWidthAfterResize = video.width();
+							$('#wistia-fs').css({
+								// 'max-width': 'none',
+								'background-color': 'black'
+							});
+
+							// $('#wistia-fs-inner').css({
+							// 	'max-width': video.width()
+							// });
+
+							video.bind("silentplaybackmodechange", function(inSilentPlaybackMode) {
+								if (inSilentPlaybackMode) {
+									$('#tap-to-resume').hide();
+									$('#tap-for-sound').hide();
+								}
+							});
+
+							video.bind("pause", function() {
+								$('#tap-to-resume').show().css({
+									'max-width': '890px',
+									'margin-left': 'auto',
+									'margin-right': 'auto',
+									'right': 0
+								});
+								
+								video.width(890, {
+									constrain: true
+								})
+
+								// $('#wistia-fs').removeClass('fullscreen').addClass('not-fullscreen');
+								location.hash = "";
+								$('#wistia-fs').css({
+									// 'max-width': '890px',
+									'background-color': 'transparent'
+								});
+
+								// $('#wistia-fs-inner').css({
+								// 	'max-width': 'none'
+								// })
+								
+								$('.fullscreen-headline').css({
+									'display': 'block'
+								});
+								
+								$('.fixed-top').css({
+									'display': 'block'
+								});
+													
+								$('.fullscreen-asseenonbar').css({
+									'display': 'block'
+								});
+								$('.greytext').css({
+									'position': 'relative',
+									'z-index':'999'
+								});	
+							});
+
+							video.bind("play", function() {
+								browserHeight = window.innerHeight;
+
+								if (!played) {
+									$('#tap-for-sound').show();
+								}
+								played = true;
+								$('#tap-to-resume').hide().css({
+									'max-width': 'none',
+								});
+
+								location.hash = "#wistia-fs";
+								video.height(browserHeight);
+								video.width(videoWidthAfterResize);
+
+								// $('#wistia-fs').removeClass('not-fullscreen').addClass('fullscreen');
+
+								$('#wistia-fs').css({
+									// 'max-width': 'none',
+									'background-color': 'black'
+								});
+
+								// $('#wistia-fs-inner').css({
+								// 	'max-width': 'none'
+								// });
+								
+								$('.fullscreen-headline').css({
+									'display': 'none'
+								});
+								
+								$('.fixed-top').css({
+									'display': 'none'
+								});
+								
+								$('.fullscreen-asseenonbar').css({
+									'display': 'none'
+								});
+								$('.greytext').css({
+									'position': 'fixed',
+									'z-index':'99999'
+								});
+								
+								document.body.scrollTop = 0;
+								document.documentElement.scrollTop = 0;
+							});
+
+							$(document).on('click touchend', '#tap-for-sound', function(event) {
+								event.preventDefault();
+								video.unmute();
+								$('#tap-for-sound').hide();
+							});
+
+							$(document).on('click touchend', '#tap-to-resume', function(event) {
+								event.preventDefault();
+								if (video.state() === "playing") {
+									video.pause();
+								} else if (video.state() === "paused") {
+									// $('#tap-to-resume').hide();
+
+									// $('#wistia-fs').removeClass('not-fullscreen').addClass('fullscreen');
+									// location.hash = "#wistia-fs";
+
+									// video.height(browserHeight);
+									// $('#wistia-fs-inner').css({
+									// 	'max-width': initialWidth
+									// })
+
+									// $('.fullscreen-headline').css({
+									// 	'display': 'none'
+									// });
+
+									// $('.fixed-top').css({
+									// 	'display': 'none'
+									// });
+									video.play();								
+								}
+							});
+						}
+					});
+
+
+				});
+			</script>			</div>
+		</div>
+	</div>
+	<div id="buylink" style="display:none;">
+		<section id="bottomorder" class="py-4">
+			<div class="container">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12 col-lg-11 mx-auto" id="buy-buttons">
+<div id="buynow" class="mt-product-grid">
+  <!-- 2 Bottles -->
+  <div class="mt-product-card" data-card="2bottle">
+    <div class="mt-product-header">
+      <h3>2 BOTTLES</h3>
+      <p>60 DAY SUPPLY</p>
+    </div>
+    <div class="mt-product-content">
+      <div class="mt-product-image">
+        <img src="../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
+      </div>
+      <div class="mt-product-details">
+        <div class="mt-subscription-toggle">
+          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2s&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">Subscribe & save up to 30%</span>
+            </div>
+          </div>
+          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">One-time purchase</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-product-price">
+          <h4 class="mt-display-price">$79</h4>
+          <div class="mt-price-info"><p>/Bottle</p></div>
+        </div>
+        <div class="mt-savings-badge">YOU SAVE $200!</div>
+        <div class="mt-subscribe-savings">
+          <span class="line1">Congrats!</span>
+          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 2 Bottle for Just <span class="price-highlight">$110+Shipping</span> will start delivering every 2 Months.</span>
+        </div>
+        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../lib/img/buy-now.webp" alt="Buy Now">
+        </a>
+        <p class="mt-shipping-text">+ $19.99 Shipping</p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$260</span> <span class="mt-final-price">$158</span></p>
+        <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6+1 Bottles - BEST VALUE -->
+  <div class="mt-product-card mt-featured" data-card="6bottle">
+    <div class="mt-product-header">
+      <h3>6 + 1 BOTTLES</h3>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+    </div>
+    <div class="mt-product-content">
+      <div class="mt-product-image">
+        <img src="../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles - Best Value">
+        <div class="mt-best-badge">BEST VALUE</div>
+      </div>
+      <div class="mt-product-details">
+        <div class="mt-subscription-toggle">
+          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2s&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">Subscribe & save up to 30%</span>
+            </div>
+          </div>
+          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">One-time purchase</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-product-price">
+          <h4 class="mt-display-price">$49</h4>
+          <div class="mt-price-info"><p>/Bottle</p></div>
+        </div>
+        <div class="mt-savings-badge">YOU SAVE $780!</div>
+        <div class="mt-subscribe-savings">
+          <span class="line1">Congrats!</span>
+          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 7 Bottles for Just <span class="price-highlight">$238</span> will start delivering every 6 Months.</span>
+        </div>
+        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../lib/img/buy-now2.webp" alt="Buy Now">
+        </a>
+        <p class="mt-shipping-text">FREE Shipping</p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
+        <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Bottles -->
+  <div class="mt-product-card" data-card="4bottle">
+    <div class="mt-product-header">
+      <h3>4 BOTTLES</h3>
+      <p>FREE SHIPPING • 120 DAY SUPPLY</p>
+    </div>
+    <div class="mt-product-content">
+      <div class="mt-product-image">
+        <img src="../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
+      </div>
+      <div class="mt-product-details">
+        <div class="mt-subscription-toggle">
+          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2s&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">Subscribe & save up to 30%</span>
+            </div>
+          </div>
+          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">One-time purchase</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-product-price">
+          <h4 class="mt-display-price">$64</h4>
+          <div class="mt-price-info"><p>/Bottle</p></div>
+        </div>
+        <div class="mt-savings-badge">YOU SAVE $450!</div>
+        <div class="mt-subscribe-savings">
+          <span class="line1">Congrats!</span>
+          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 4 Bottles for Just <span class="price-highlight">$196</span> will start delivering every 4 Months.</span>
+        </div>
+        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../lib/img/buy-now.webp" alt="Buy Now">
+        </a>
+        <p class="mt-shipping-text">FREE Shipping</p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
+        <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-subscription-guarantee">
+  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
+  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
+</div>
+
+<style>
+	.atc p, .atc-tab {
+	font-family: 'montserrat';
+}
+
+.atc-tab {
+	display: inline-block;
+    background: #fbc630;
+    padding: 11px 23px;
+    border-radius: 15px 15px 0 0;
+    font-weight: bold;
+	margin: 0;
+	line-height: 1;
+}
+
+.atc {
+	background: url('img/atc-bg.jpg');
+	background-size: cover;
+	background-position: center;
+	padding: 25px 15px;
+	position: relative;
+	border: 4px solid transparent;
+	display: flex;
+	flex-direction: column;
+}
+
+.atc.center {
+	border: 4px solid #fbc630;
+	border-radius: 0px 4px 4px 4px;
+}
+
+.atc-img {
+	max-height: 250px;
+}
+
+.atc-savings {
+	background: #f3bc00;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+    position: absolute;
+    padding: 10px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+
+	top: 25%;
+    left: 95%;
+    transform: translate(-95%, -25%) rotate(15deg);
+}
+
+.atc-guarantee {
+	display: none;
+	position: absolute;
+	width: 50px;
+    top: 95%;
+    left: 90%;
+    transform: translate(-90%, -95%);
+}
+
+.atc-savings p {
+	font-weight: 900;
+    font-size: 30px;
+    line-height: 1em;
+    color: #0a3b6c;
+	margin: 0;
+}
+
+.atc-dollar {
+    font-size: 30px;
+    vertical-align: top;
+    top: 12px;
+    position: relative;
+	margin-right: 3px;
+}
+
+.atc h5 {
+	color: white;
+    font-weight: bold;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.atc-whitetext {
+	font-weight: bold;
+    color: white;
+    letter-spacing: -0.5px;
+    font-size: 16px;
+    font-family: 'Roboto', 'Helvetica' !important;
+	margin: 0;
+	line-height: 1.3;
+}
+
+.atc-yellowtext {
+	font-weight: 900;
+    color: #edba14;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.atc-price {
+	display: inline-block;
+    font-size: 77px;
+    color: #edba14;
+}
+
+.atc-button {
+	background: #f3bc00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    margin: 0 8px;
+}
+
+.atc-button h2 {
+	font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+	padding-right: 10px;
+	max-width: 90%;
+    display: inline-block;
+}
+
+.atc-button img {
+	max-width: 24px !important;
+}
+
+.desktop-width {
+	margin-right: -50px !important; 
+	margin-left: -50px !important;
+}
+
+@media (max-width: 992px) {
+	.atc-tab {
+		padding: 8px 14px;
+		font-size: 16px;
+	}
+	.atc-dollar {
+		font-size: 20px;
+		top: 7px;
+	}
+}
+
+/*IPAD ONLY*/
+@media (min-width: 768px) and (max-width: 992px) {
+	.atc {
+		padding: 15px 5px;
+	}
+
+	.atc-img {
+		max-height: 200px;
+	}
+
+	.atc-savings {
+		width: 80px;
+		height: 80px;
+	}
+
+	.atc-savings p {
+		font-size: 22px;
+	}
+
+	.atc-price {
+		font-size: 45px;
+	}
+
+	.atc h5 {
+		font-size: 15px;
+	}
+
+	.atc-whitetext {
+		font-size: 12px;
+	}
+
+	.atc-button {
+		padding: 10px 0;
+	}
+
+	.atc-button h2 {
+		font-size: 15px;
+	}
+}
+
+/*IPHONE ONLY*/
+@media (max-width: 767px) {
+	.atc {
+		border: 2px solid #fbc630 !important;
+		flex-direction: row;
+		padding: 10px 5px;
+
+		background-color: #153d65;
+		background-position: 0px;
+		background-size: 45%;
+		background-repeat: no-repeat;
+		align-items: center;
+	}
+
+	.atc-section {
+		width: 50%;
+		position: relative;
+	}
+
+	.atc-tab {
+		padding: 5px 14px;
+		font-size: 11px;
+		border-radius: 8px 8px 0 0;
+	}
+	
+	.atc-savings {
+		display: none;
+	}
+
+	.atc-guarantee {
+		display: block;
+	}
+
+	.atc-dollar {
+		font-size: 17px;
+		bottom: 16px;
+    	margin-right: 2px;
+		position: relative;
+	}
+
+	.atc h5 {
+		font-size: 13px;
+	}
+
+	.atc-price {
+		font-size: 40px;
+	}
+
+	.atc-button h2 {
+		font-size: 12px;
+		letter-spacing: 0;
+	}
+
+	.atc-button img {
+		max-width: 15px !important;
+	}
+
+	.atc-button {
+		padding: 10px 0;
+		width: 80%;
+    	margin: auto;
+	}
+
+	.atc-whitetext {
+		font-size: 8.5px;
+	}
+
+	#atc-left {
+		width: 45%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#atc-right {
+		width: 55%;
+		border-left: 2px solid;
+   	 	border-image: linear-gradient( to top, transparent, #ffffff3d, transparent ) 1 100%;
+	}
+
+	.atc-img {
+		max-height: 150px;
+	}
+
+	.shipping-ribbon {
+		position: absolute;
+		z-index: 2;
+		width: 25%;
+		left: -5%;
+		top: 16%;
+		transform: translate(5%, -16%);
+	}
+}
+</style>							
+							<script>
+								var currentFunnel = "frontend33";
+								var currentTiming = "1000";
+								console.log("Current Funnel: " + currentFunnel);
+								console.log("Current Funnel Magic Button Timing: " + currentTiming);
+							</script>
+						</div>
+					</div>
+					
+											<div class="row">
+							<div class="col-12 col-lg-10 mx-auto">						
+								<center>
+	<picture class="img-fluid mt-md-2 mb-3">
+		<source class="" srcset="img/Simpli-promise---As-Seen-On-Bar.webp" media="(min-width: 991px)" type="image/png">
+		<source class="" srcset="img/Simpli-promise---As-Seen-On-Bar-mobile.webp" media="(max-width: 991px)" type="image/png">
+		<img class="img-fluid mt-md-2 mb-3" src="img/Simpli-promise---As-Seen-On-Bar-mobile.png" alt="">
+	</picture>
+</center>	
+							</div>
+						</div>
+											
+					<head>
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather&amp;display=swap" rel="stylesheet">
+</head>
+
+<style>
+	#written p {
+		font-family: 'Merriweather', serif;
+		letter-spacing: 0;
+	}
+	@media (min-width: 320px) {
+		#written p {
+			font-size: 18px;
+		}
+	}
+	@media (min-width: 992px) {
+		#written p {
+			font-size: 20px;
+		}
+	}
+</style>
+
+<section id="" class="mb-md-4 mb-3">
+    <div class="container">
+        <div class="col-12 col-lg-9 mx-auto">
+            <div class="row bg-dark">
+                <div class="col-12 mx-auto mb-3 p-2 p-md-">
+                    <h2 class="text-yellow text-center mt-3">
+                        Here's Why You Should Get Enough Meta Trim BHB for 3 or 6 Months
+                    </h2>
+                </div>
+            </div>
+            <div class="row bg-bright">
+                <div class="col-12 mx-auto">
+                    <!-- WRITTEN TESTIMONIALS -->
+                    <div class="bg-bright mb-3">
+                        <div class="p-md-4 p-2">
+                            <!--<h3 class="text-center mb-3 font-weight-bold text-blue">
+                                You have to remember that Ovuna<sup>&trade;</sup> works.<br class="d-none d-lg-block" /> 
+								But it’s not a miracle pill.
+                            </h3>-->
+							
+							<picture class="img-fluid">
+                                <source class="float-right pl-4 pb-2" width="350px" srcset="../lib/img/3-bottle-buy-btn.png" media="(min-width: 768px)" type="image/png" />
+                                <source class="" srcset="../lib/img/3-bottle-buy-btn.png" media="(max-width: 768px)" type="image/png" />
+                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-4 pb-2" width="350px" src="../lib/img/3-bottle-buy-btn.png" />
+                                <div class="text-center">
+                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2" src="../lib/img/3-bottle-buy-btn.png" />
+                                </div>
+							</picture>
+							
+    						<p>Since we save when shipping bulk orders, we want to pass the <strong>savings (up to $396 off for 6 bottles)</strong> on to you when you order Meta Trim BHB today.</p>
+
+<p>Honestly, there are only limited supplies of Meta Trim BHB left. As you know, global supply chains are disrupted, and you might have noticed it with other items you purchase. With ongoing challenges worldwide, availability may not improve soon.</p>
+
+<p>Plus, the growing popularity of Meta Trim BHB is putting a serious strain on production. Because <strong class="text-highlight">Meta Trim BHB has helped thousands of people support healthy weight loss, boost fat-burning through ketosis, and improve overall energy and metabolism.</strong></p>
+
+<p>It’s also one of the main reasons people have been able to stay on track with their weight loss goals over the past year. No wonder our customers <u>continue reordering and choosing larger Meta Trim BHB packages…</u></p>
+
+<p>This high demand makes it even harder to keep Meta Trim BHB in stock. <u>Temporary out-of-stock situations are common.</u></p>
+
+<p>Beyond the convenience of having a full supply and not worrying about availability, I need to be honest with you…</p>
+
+
+<p>While many of our customers have experienced positive results with Meta Trim BHB, individual results can vary.</p>
+
+<p>Everyone is unique, so some may notice benefits from Meta Trim BHB sooner than others. <u>The fact is, consistent use supports better results over time.</u></p>
+
+<h3 class="text-center mb-3 font-weight-bold text-blue">That is why many health experts recommend using Meta Trim BHB for at least 3 months...</h3>
+
+<h3 class="text-center mb-3 font-weight-bold text-blue">Or 6 months for even better results.</h3>
+
+<p>It takes time for your body to adapt to Meta Trim BHB in order to experience its full weight loss and ketosis-supporting benefits.</p>
+
+<p><em>Anyone promising overnight or instant weight loss results is simply misleading.</em></p>
+
+<p>You already know this. You can and will see results with Meta Trim BHB, but consistency over a few months is key - just like thousands of people who have experienced sustainable fat loss, improved metabolism, and increased energy.</p>
+
+<p>Here's my promise to you:</p>
+
+<h3 class="text-center my-2 d-inline-block w-100">
+Because you either get results with Meta Trim BHB, or you get your money back. No questions asked.
+</h3>
+
+
+
+							
+                            <picture class="img-fluid">
+                                <source class="float-right pl-3 pb-2 mx-auto" width="200px" srcset="img/atc-guarantee.png" media="(min-width: 768px)" type="image/png" />
+                                <source class="" srcset="img/atc-guarantee.png" media="(max-width: 768px)" type="image/png" />
+                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-3 pb-2 mx-auto" width="200px" src="img/atc-guarantee.png" />
+                                <div class="text-center">
+                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2 mx-auto" src="img/atc-guarantee.png" />
+                                </div>
+                            </picture>
+
+                           <<p>You have 60 days - a full two months - to try Meta Trim BHB. If you’re not satisfied for any reason, simply let us know and we’ll refund every single penny you paid (including shipping).</p>
+
+<p>That’s why I recommend getting the 3- or 6-month supply, so you’ll have enough time to experience how Meta Trim BHB can support healthy weight loss, boost fat-burning through ketosis, increase energy levels, and improve overall well-being.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>					
+					<head>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&amp;display=swap" rel="stylesheet">
+</head>
+
+<style>
+#written p {
+	font-family: 'Merriweather', serif;
+    letter-spacing: 0;
+}
+#written img {
+	border: white 3pt solid;
+}
+@media only screen and (max-width: 480px) {
+	#written img {
+	display: block;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 15pt;
+}
+}
+@media (min-width: 320px) {
+	#written p {
+		font-size: 18px;
+	}
+}
+@media (min-width: 992px) {
+	#written p {
+		font-size: 20px;
+	}
+
+
+
+
+</style>
+
+<section id="written" class="mb-md-4">
+	<div class="container">
+	<div class="row">
+			<div class="col-lg-10 mx-auto mb-3">
+	<h2 class="text-blue text-center">See What People Are Saying About Meta Trim BHB and Its Weight Loss Benefits
+</h2>
+
+	</div>
+	</div>
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<!-- WRITTEN TESTIMONIALS -->
+				<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“I’ve used Meta Trim BHB for over a week now, and I already feel lighter.”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t01.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t01.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I’ve been using Meta Trim BHB for 6 months. I’ve lost stubborn weight, my cravings are under control, and my energy levels are much higher throughout the day. Meta Trim BHB really helps me stay active, focused, and motivated.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Bruce Mitchell, Fort Worth</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+				<!-- WRITTEN TESTIMONIALS -->
+				<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“Lighter Mornings Again”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t-3.png" type="image/png">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t-3.png">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“After 6 months of using Meta Trim BHB, my mornings feel completely different. I’ve lost stubborn weight and no longer wake up feeling heavy or bloated. I feel lighter and more motivated every day.”</p>
+
+				<p class="card-text">“I used to struggle with low energy and poor sleep, especially while trying to lose weight. Meta Trim BHB has helped me sleep better, control cravings, and wake up feeling energized and focused. It has truly improved my overall well-being.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Mills (54), Tampa</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+				<!-- WRITTEN TESTIMONIALS -->
+				<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“Better Sleep and Improved Energy”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t03.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t03.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“After consistent 6-month use of Meta Trim BHB, I sleep much better and wake up feeling lighter and more energized. I’ve lost unwanted weight, reduced bloating, and feel more active throughout the day. Meta Trim BHB truly supports my metabolism and overall well-being.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- George McKinney, Houston</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+				<!-- WRITTEN TESTIMONIALS -->
+				<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“I Feel Healthier and More Confident Again”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t-4.png" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t-4.png">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I was struggling with stubborn weight, low energy, and poor sleep. I decided to try Meta Trim BHB as a last resort. I’ve lost weight, my energy levels are up, and I feel healthier and more confident every single day!”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Stefan Brulanski</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+				<!-- WRITTEN TESTIMONIALS -->
+			<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“Nothing Helps My Weight Loss Like Meta Trim BHB”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t05.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t05.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I’ve tried multiple diets and supplements for weight loss, but nothing has helped me like Meta Trim BHB. It has truly helped me burn fat, control cravings, and boost my energy—thank you from the bottom of my heart.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Frank Tellerindo, Massachusetts</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- WRITTEN TESTIMONIALS -->
+<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“I Don’t Even Crave Junk Food Anymore”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t06.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t06.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I was skeptical at first because a friend doubted it would work. But after trying Meta Trim BHB, within two weeks my cravings were under control and I had more energy. I’m also sleeping much better, and I’m glad I kept an open mind.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- John Lizchenzen, Houston</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- WRITTEN TESTIMONIALS -->
+<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“Meta Trim BHB Has Been a Game-Changer for Me”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t07.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t07.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I had tried countless diets and workout plans with no lasting success. I was doubtful, but I took a chance on Meta Trim BHB. It has truly been a game-changer for me, helping me lose weight naturally and feel confident again.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Margaret O'Reilly (68), Florida</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- WRITTEN TESTIMONIALS -->
+<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“I’ve Lost Weight and Feel Amazing”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t11.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t11.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I read online that supplements like this don’t work, but I decided to try Meta Trim BHB because of the full money-back guarantee. I’ve lost a significant amount of weight, my belly fat is shrinking, and I no longer feel tired all the time.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Joe Osterhouse (62), Utah</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- WRITTEN TESTIMONIALS -->
+<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“Giving Me Incredible Fat-Burning Results!”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t08.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t08.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I struggled with low energy and stubborn weight for years. After trying Meta Trim BHB, I’m finally seeing incredible fat-burning results, better sleep, and renewed motivation to stay active.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Richard Tomlinsin (74), Oklahoma</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- WRITTEN TESTIMONIALS -->
+<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“Meta Trim BHB Really Works”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t09.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t09.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I was struggling to lose weight despite trying everything. I decided to try Meta Trim BHB after hearing positive feedback from a trusted friend. It truly works! I’ve lost weight, feel lighter, and have more energy than I’ve had in years.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Ann Barret (63), Nebraska</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+				<!-- WRITTEN TESTIMONIALS -->
+				<div class="card bg-bright mb-3">
+	<div class="card-body">
+		<h3 class="text-center text-blue mb-3 font-weight-bold">“Noticeable Results in Just Weeks”</h3>
+		<div class="row">
+			<div class="col-lg-3">
+				<picture class="">
+					<source class="" srcset="img/Testimonials/t10.jpg" type="image/jpg">
+					<img loading="lazy" class="img-fluid shadow" src="img/Testimonials/t10.jpg">
+				</picture>
+			</div>
+			<div class="col-lg-9">
+				<p class="card-text">“I was very skeptical because I had tried every diet and supplement for weight loss. But after starting Meta Trim BHB, I noticed real results in just a few weeks. I’ve lost stubborn fat, feel lighter, and my energy levels are up. This supplement really works, and anyone looking to support healthy weight loss should try it, especially with the satisfaction guarantee.”<sup>†</sup></p>
+				<h6 class="card-title font-italic font-weight-bold text-blue mb-1">- Lee Singh (81), New York</h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</section>
+					<div class="row">
+						<div class="col-12 col-lg-11 mx-auto">
+<div class="mt-product-grid">
+  <!-- 2 Bottles -->
+  <div class="mt-product-card" data-card="2bottle">
+    <div class="mt-product-header">
+      <h3>2 BOTTLES</h3>
+      <p>60 DAY SUPPLY</p>
+    </div>
+    <div class="mt-product-content">
+      <div class="mt-product-image">
+        <img src="../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
+      </div>
+      <div class="mt-product-details">
+        <div class="mt-subscription-toggle">
+          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2s&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">Subscribe & save up to 30%</span>
+            </div>
+          </div>
+          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">One-time purchase</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-product-price">
+          <h4 class="mt-display-price">$79</h4>
+          <div class="mt-price-info"><p>/Bottle</p></div>
+        </div>
+        <div class="mt-savings-badge">YOU SAVE $200!</div>
+        <div class="mt-subscribe-savings">
+          <span class="line1">Congrats!</span>
+          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 2 Bottle for Just <span class="price-highlight">$110+Shipping</span> will start delivering every 2 Months.</span>
+        </div>
+        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../lib/img/buy-now.webp" alt="Buy Now">
+        </a>
+        <p class="mt-shipping-text">+ $19.99 Shipping</p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$260</span> <span class="mt-final-price">$158</span></p>
+        <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6+1 Bottles - BEST VALUE -->
+  <div class="mt-product-card mt-featured" data-card="6bottle">
+    <div class="mt-product-header">
+      <h3>6 + 1 BOTTLES</h3>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+    </div>
+    <div class="mt-product-content">
+      <div class="mt-product-image">
+        <img src="../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles - Best Value">
+        <div class="mt-best-badge">BEST VALUE</div>
+      </div>
+      <div class="mt-product-details">
+        <div class="mt-subscription-toggle">
+          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2s&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">Subscribe & save up to 30%</span>
+            </div>
+          </div>
+          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">One-time purchase</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-product-price">
+          <h4 class="mt-display-price">$49</h4>
+          <div class="mt-price-info"><p>/Bottle</p></div>
+        </div>
+        <div class="mt-savings-badge">YOU SAVE $780!</div>
+        <div class="mt-subscribe-savings">
+          <span class="line1">Congrats!</span>
+          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 7 Bottles for Just <span class="price-highlight">$238</span> will start delivering every 6 Months.</span>
+        </div>
+        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../lib/img/buy-now2.webp" alt="Buy Now">
+        </a>
+        <p class="mt-shipping-text">FREE Shipping</p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
+        <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Bottles -->
+  <div class="mt-product-card" data-card="4bottle">
+    <div class="mt-product-header">
+      <h3>4 BOTTLES</h3>
+      <p>FREE SHIPPING • 120 DAY SUPPLY</p>
+    </div>
+    <div class="mt-product-content">
+      <div class="mt-product-image">
+        <img src="../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
+      </div>
+      <div class="mt-product-details">
+        <div class="mt-subscription-toggle">
+          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2s&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">Subscribe & save up to 30%</span>
+            </div>
+          </div>
+          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+            <div class="mt-option-left">
+              <div class="mt-radio-dot"></div>
+              <span class="mt-option-label">One-time purchase</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-product-price">
+          <h4 class="mt-display-price">$64</h4>
+          <div class="mt-price-info"><p>/Bottle</p></div>
+        </div>
+        <div class="mt-savings-badge">YOU SAVE $450!</div>
+        <div class="mt-subscribe-savings">
+          <span class="line1">Congrats!</span>
+          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 4 Bottles for Just <span class="price-highlight">$196</span> will start delivering every 4 Months.</span>
+        </div>
+        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../lib/img/buy-now.webp" alt="Buy Now">
+        </a>
+        <p class="mt-shipping-text">FREE Shipping</p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
+        <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-subscription-guarantee">
+  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
+  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
+</div>
+
+<style>
+	.atc p, .atc-tab {
+	font-family: 'montserrat';
+}
+
+.atc-tab {
+	display: inline-block;
+    background: #fbc630;
+    padding: 11px 23px;
+    border-radius: 15px 15px 0 0;
+    font-weight: bold;
+	margin: 0;
+	line-height: 1;
+}
+
+.atc {
+	background: url('img/atc-bg.jpg');
+	background-size: cover;
+	background-position: center;
+	padding: 25px 15px;
+	position: relative;
+	border: 4px solid transparent;
+	display: flex;
+	flex-direction: column;
+}
+
+.atc.center {
+	border: 4px solid #fbc630;
+	border-radius: 0px 4px 4px 4px;
+}
+
+.atc-img {
+	max-height: 250px;
+}
+
+.atc-savings {
+	background: #f3bc00;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+    position: absolute;
+    padding: 10px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+
+	top: 25%;
+    left: 95%;
+    transform: translate(-95%, -25%) rotate(15deg);
+}
+
+.atc-guarantee {
+	display: none;
+	position: absolute;
+	width: 50px;
+    top: 95%;
+    left: 90%;
+    transform: translate(-90%, -95%);
+}
+
+.atc-savings p {
+	font-weight: 900;
+    font-size: 30px;
+    line-height: 1em;
+    color: #0a3b6c;
+	margin: 0;
+}
+
+.atc-dollar {
+    font-size: 30px;
+    vertical-align: top;
+    top: 12px;
+    position: relative;
+	margin-right: 3px;
+}
+
+.atc h5 {
+	color: white;
+    font-weight: bold;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.atc-whitetext {
+	font-weight: bold;
+    color: white;
+    letter-spacing: -0.5px;
+    font-size: 16px;
+    font-family: 'Roboto', 'Helvetica' !important;
+	margin: 0;
+	line-height: 1.3;
+}
+
+.atc-yellowtext {
+	font-weight: 900;
+    color: #edba14;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.atc-price {
+	display: inline-block;
+    font-size: 77px;
+    color: #edba14;
+}
+
+.atc-button {
+	background: #f3bc00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    margin: 0 8px;
+}
+
+.atc-button h2 {
+	font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+	padding-right: 10px;
+	max-width: 90%;
+    display: inline-block;
+}
+
+.atc-button img {
+	max-width: 24px !important;
+}
+
+.desktop-width {
+	margin-right: -50px !important; 
+	margin-left: -50px !important;
+}
+
+@media (max-width: 992px) {
+	.atc-tab {
+		padding: 8px 14px;
+		font-size: 16px;
+	}
+	.atc-dollar {
+		font-size: 20px;
+		top: 7px;
+	}
+}
+
+/*IPAD ONLY*/
+@media (min-width: 768px) and (max-width: 992px) {
+	.atc {
+		padding: 15px 5px;
+	}
+
+	.atc-img {
+		max-height: 200px;
+	}
+
+	.atc-savings {
+		width: 80px;
+		height: 80px;
+	}
+
+	.atc-savings p {
+		font-size: 22px;
+	}
+
+	.atc-price {
+		font-size: 45px;
+	}
+
+	.atc h5 {
+		font-size: 15px;
+	}
+
+	.atc-whitetext {
+		font-size: 12px;
+	}
+
+	.atc-button {
+		padding: 10px 0;
+	}
+
+	.atc-button h2 {
+		font-size: 15px;
+	}
+}
+
+/*IPHONE ONLY*/
+@media (max-width: 767px) {
+	.atc {
+		border: 2px solid #fbc630 !important;
+		flex-direction: row;
+		padding: 10px 5px;
+
+		background-color: #153d65;
+		background-position: 0px;
+		background-size: 45%;
+		background-repeat: no-repeat;
+		align-items: center;
+	}
+
+	.atc-section {
+		width: 50%;
+		position: relative;
+	}
+
+	.atc-tab {
+		padding: 5px 14px;
+		font-size: 11px;
+		border-radius: 8px 8px 0 0;
+	}
+	
+	.atc-savings {
+		display: none;
+	}
+
+	.atc-guarantee {
+		display: block;
+	}
+
+	.atc-dollar {
+		font-size: 17px;
+		bottom: 16px;
+    	margin-right: 2px;
+		position: relative;
+	}
+
+	.atc h5 {
+		font-size: 13px;
+	}
+
+	.atc-price {
+		font-size: 40px;
+	}
+
+	.atc-button h2 {
+		font-size: 12px;
+		letter-spacing: 0;
+	}
+
+	.atc-button img {
+		max-width: 15px !important;
+	}
+
+	.atc-button {
+		padding: 10px 0;
+		width: 80%;
+    	margin: auto;
+	}
+
+	.atc-whitetext {
+		font-size: 8.5px;
+	}
+
+	#atc-left {
+		width: 45%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#atc-right {
+		width: 55%;
+		border-left: 2px solid;
+   	 	border-image: linear-gradient( to top, transparent, #ffffff3d, transparent ) 1 100%;
+	}
+
+	.atc-img {
+		max-height: 150px;
+	}
+
+	.shipping-ribbon {
+		position: absolute;
+		z-index: 2;
+		width: 25%;
+		left: -5%;
+		top: 16%;
+		transform: translate(5%, -16%);
+	}
+}
+</style>						</div>
+					</div>
+											<div class="row">
+							<div class="col-12 col-lg-10 mx-auto">						
+								<center>
+	<picture class="img-fluid mt-md-2 mb-3">
+		<source class="" srcset="img/Simpli-promise---As-Seen-On-Bar.webp" media="(min-width: 991px)" type="image/png">
+		<source class="" srcset="img/Simpli-promise---As-Seen-On-Bar-mobile.webp" media="(max-width: 991px)" type="image/png">
+		<img class="img-fluid mt-md-2 mb-3" src="img/Simpli-promise---As-Seen-On-Bar-mobile.png" alt="">
+	</picture>
+</center>	
+							</div>
+						</div>
+											<head>
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather&amp;display=swap" rel="stylesheet">
+</head>
+
+<style>
+	#written p {
+		font-family: 'Merriweather', serif;
+		letter-spacing: 0;
+	}
+	@media (min-width: 320px) {
+		#written p {
+			font-size: 18px;
+		}
+	}
+	@media (min-width: 992px) {
+		#written p {
+			font-size: 20px;
+		}
+	}
+</style>
+
+<section id="" class="mb-md-4 mb-3">
+    <div class="container">
+        <div class="col-12 col-lg-9 mx-auto">
+            <div class="row bg-dark">
+                <div class="col-12 mx-auto mb-3 p-2 p-md-">
+                    <h2 class="text-yellow text-center mt-3">
+                        Here's Why You Should Get Enough For 3 Or 6 Months
+                    </h2>
+                </div>
+            </div>
+            <div class="row bg-bright">
+                <div class="col-12 mx-auto">
+                    <!-- WRITTEN TESTIMONIALS -->
+                    <div class="bg-bright mb-3">
+                        <div class="p-md-4 p-2">
+                            <!--<h3 class="text-center mb-3 font-weight-bold text-blue">
+                                You have to remember that Ovuna<sup>&trade;</sup> works.<br class="d-none d-lg-block" /> 
+								But it’s not a miracle pill.
+                            </h3>-->
+							
+							<picture class="img-fluid">
+                                <source class="float-right pl-4 pb-2" width="350px" srcset="../lib/img/3-bottle-buy-btn.png" media="(min-width: 768px)" type="image/png" />
+                                <source class="" srcset="../lib/img/3-bottle-buy-btn.png" media="(max-width: 768px)" type="image/png" />
+                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-4 pb-2" width="350px" src="../lib/img/3-bottle-buy-btn.png" />
+                                <div class="text-center">
+                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2" src="../lib/img/3-bottle-buy-btn.png" />
+                                </div>
+							</picture>
+							
+    						<p>Since we save when shipping bulk orders, we want to pass the <strong>savings (up to $396 off for 6 bottles)</strong> on to you when you order Meta Trim BHB today.</p>
+
+<p>Honestly, there are only limited supplies of Meta Trim BHB left. As you know, global supply chains are disrupted, and you might have noticed it with other items you purchase. With ongoing challenges worldwide, availability may not improve soon.</p>
+
+<p>Plus, the growing popularity of Meta Trim BHB is putting a serious strain on production. Because <strong class="text-highlight">Meta Trim BHB has helped thousands of people support healthy weight loss, boost fat-burning through ketosis, and improve overall energy and metabolism.</strong></p>
+
+<p>It’s also one of the main reasons people have been able to stay on track with their weight loss goals over the past year. No wonder our customers <u>continue reordering and choosing larger Meta Trim BHB packages…</u></p>
+
+<p>This high demand makes it even harder to keep Meta Trim BHB in stock. <u>Temporary out-of-stock situations are common.</u></p>
+
+<p>Beyond the convenience of having a full supply and not worrying about availability, I need to be honest with you…</p>
+
+<p>While many of our customers have experienced positive results with Meta Trim BHB, individual results can vary.</p>
+
+<p>Everyone is unique, so some may notice benefits from Meta Trim BHB sooner than others. <u>The fact is, consistent use supports better results over time.</u></p>
+
+<h3 class="text-center mb-3 font-weight-bold text-blue">That is why many health experts recommend using Meta Trim BHB for at least 3 months...</h3>
+
+<h3 class="text-center mb-3 font-weight-bold text-blue">Or 6 months for even better results.</h3>
+
+<p>It takes time for your body to adapt to Meta Trim BHB in order to experience its full weight loss and metabolism-boosting benefits.</p>
+
+<p><em>Anyone promising overnight or instant weight loss results is simply misleading.</em></p>
+
+<p>You already know this. You can and will see results with Meta Trim BHB, but consistency over a few months is key - just like thousands of people who have experienced sustainable fat loss, increased energy, and improved overall well-being.</p>
+
+<p>Here's my promise to you:</p>
+
+<h3 class="text-center my-2 d-inline-block w-100">
+Because you either get results with Meta Trim BHB, or you get your money back. No questions asked.
+</h3>
+
+</h3>
+
+
+							
+                            <picture class="img-fluid">
+                                <source class="float-right pl-3 pb-2 mx-auto" width="200px" srcset="img/atc-guarantee.png" media="(min-width: 768px)" type="image/png" />
+                                <source class="" srcset="img/atc-guarantee.png" media="(max-width: 768px)" type="image/png" />
+                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-3 pb-2 mx-auto" width="200px" src="img/atc-guarantee.png" />
+                                <div class="text-center">
+                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2 mx-auto" src="img/atc-guarantee.png" />
+                                </div>
+                            </picture>
+
+                          <p>You have 60 days - a full two months - to try Meta Trim BHB. If you’re not satisfied for any reason, simply let us know and we’ll refund every single penny you paid (including shipping).</p>
+
+<p>That’s why I recommend getting the 3- or 6-month supply, so you’ll have enough time to experience how Meta Trim BHB can help support healthy weight loss, boost fat-burning through ketosis, increase energy, and enhance overall well-being.</p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>				</div>
+			</div>
+		</section>
+	</div>
+	
+	<style>
+	a:hover {
+		text-decoration: none;
+	}
+	
+	.modal-content {
+		background: #ffffff;
+	}
+
+	.modal-dialog {
+		top: 80px;
+	}
+	
+	.modal-footer h6 {
+		font-size: 12px;
+		opacity: 0.4;
+	}
+	
+	#exitpop1 .text-danger {
+		color: #ffffff !important;
+	}
+	
+	#exitpop1 .modal-header {
+		border-bottom: none;
+		background-color: #e01200;
+		padding-top:30px !important;
+		padding-bottom:22px !important;
+	}
+
+	#exitpop1 .modal-header .modal-exclamation {
+		background: #a73434;
+		padding: 10px;
+		border-radius: 50%;
+		margin-top: -20px;
+	}
+
+	#exitpop1 .close {
+		color: #ffffff;
+		position: absolute;
+		right: 10px;
+		top: 5px;
+		font-size: 25px;
+	}
+
+	#exitpop1 .modal-header h1 {
+		font-size: 38px;
+		font-weight: 900;
+		text-align: center;
+		text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);
+	}
+	
+	#exitpop1 .modal-header h2 {
+		font-size: 32px;
+		font-weight: 600;
+		width: 70%;
+		margin: 0 auto;
+	}
+
+	#exitpop1 .modal-body{
+		padding-bottom:0px;
+		padding-top:20px;
+	}
+
+	#exitpop1 .modal-body h2 {
+		font-size:26px;
+		margin-bottom:10px !important;
+	}
+	
+	#exitpop1 .modal-body p {
+		line-height: 1.3;
+		font-size:18px;
+	}
+	
+	#exitpop1 .modal-body ul li {
+		font-size: 23px; 
+	}
+
+	#exitpop1 .modal-footer {
+		border-top: none;
+		padding: 0;
+		margin: 0 15px 5px 15px;
+	}
+
+	#exitpop1 .modal-buttons{
+		text-align:center;
+		margin-bottom:20px;
+	}
+
+	#exitpop1 .modal-buttons a{
+		display: inline-block;
+		padding: 20px 10px;
+		background: #888888;
+		line-height: 1.3em;
+		text-align: center;
+		font-size: 26px;
+		color: white;
+		font-weight:bold;
+		text-decoration: none;
+		max-width: 320px;
+		width: 100%;
+		margin-top: 20px;
+		margin-right: 12px;
+		-webkit-transition: all .25s ease;
+		-moz-transition: all .25s ease;
+		-ms-transition: all .25s ease;
+		-o-transition: all .25s ease;
+		transition: all .25s ease;
+		-webkit-box-shadow: 0 2px 5px 2px rgb(0 0 0 / 40%);
+		-moz-box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.4);
+		box-shadow: 0 2px 5px 2px rgb(0 0 0 / 40%);
+		text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);
+	}
+
+	#exitpop1 .modal-buttons a:hover span{
+		text-decoration:underline;
+		transform: scale(1.1);
+	}
+
+	#exitpop1 .modal-buttons a span{
+		display: block;
+		-webkit-transition: all .25s ease;
+		-moz-transition: all .25s ease;
+		-ms-transition: all .25s ease;
+		-o-transition: all .25s ease;
+		transition: all .25s ease;
+	}
+
+	#exitpop1 .keep-reading{
+		background: #008800 !important;
+		-webkit-box-shadow: 0 2px 5px 2px rgb(0 0 0 / 40%);
+		-moz-box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.4);
+		box-shadow: 0 2px 5px 2px rgb(0 0 0 / 40%);
+		text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);
+		margin-right: 0;
+		margin-left: 12px;
+	}
+	
+	.modal-footer .btn-primary {
+		border-radius: 0;
+		color: #000;
+		font-size: 18px;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 900;
+		max-width: 500px;
+		margin: 0 auto;
+		padding: 10px;
+		width: 100%;
+		text-transform: uppercase;
+	}
+
+	.modal-footer .btn-primary {
+		border: 1px solid #F9B737; 
+		background: #F9B737; 
+		margin-bottom: 10px;
+		text-shadow: none;
+	}
+	
+	.modal-footer .btn-primary:hover, 
+	.modal-footer .btn-primary:active, 
+	.modal-footer .btn-primary:focus {
+		border: 1px solid #d48f36;
+		background: #d48f36;
+	}
+
+	@media (max-width: 480px) {
+		.modal-footer .btn-primary {
+			font-size: 16px;
+		}
+		#exitpop1 .modal-header .modal-spinner {
+			margin-top: -6px;
+		}
+		#exitpop1 .modal-header h1 {
+			font-size: 27px;
+			line-height: 1;
+		}
+		#exitpop1 .modal-header h2 {
+			font-size: 23px;
+			width: 100%;
+		}
+		#exitpop1 .modal-body p {
+			font-size: 20px;
+		}
+		#exitpop1 .modal-header .modal-exclamation {
+			margin-top: -9px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.modal-dialog{
+			max-width: 800px;
+		}
+
+		.modal-footer .btn-primary{
+			max-width: 700px;
+		}
+	}
+</style>
+
+<div class="modal fade p-0 mt-3 mt-lg-4" id="exitpop1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!--<div class="modal-header align-items-center p-0">
+				<div class="text-center mx-auto modal-exclamation text-danger"><i class="fas fa-exclamation-triangle fa-2x"></i></div>
+			</div>-->
+			<div class="modal-header align-items-center py-0" style="border-radius:0;">
+				<h1 class="w-100 text-center text-danger"><i class="fa_prepended fas fa-exclamation-circle"></i> WAIT! Don't Leave Yet...</h1>
+				<button class="close" id="exit-popup-close" data-dismiss="modal"><span id="exit-popup-close-icon">&times;</span></button>
+			</div>
+			
+			
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).bind("mouseleave", function (e) {
+		if (shouldShowPopup() && e.pageY - $(window).scrollTop() <= 1) {
+			$('#exitpop1').modal('show');
+			sessionStorage.setItem("popupShown", "true");
+		}
+	});
+	$('.watch-video').on('click touchstart',function(){
+	//your code
+		// var modal = document.getElementById('exitpop1');
+		// modal.style.display = "none";
+		$('#exitpop1').modal('hide');
+	});
+	$('.next-step').on('click touchstart',function(){
+	//your code
+		// var modal = document.getElementById('exitpop1');
+		// modal.style.display = "none";
+		$('#exitpop1').modal('hide');
+	});
+	$('.keep-reading').on('click touchstart',function(){
+	//your code
+		// var modal = document.getElementById('exitpop1');
+		// modal.style.display = "none";
+		$('#exitpop1').modal('hide');
+	});
+
+	function closeModal(){
+		// var modal = document.getElementById('exitpop1');
+		// modal.style.display = "none";
+		$('#exitpop1').modal('hide');
+	}
+
+	function shouldShowPopup() {
+		return !document.cookie.includes("popupShown=true");
+	}
+
+	function mobileExitPopup() {
+      // Get the modal
+    //   var modal = document.getElementById('exitpop1');
+      // Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+      // When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		//   modal.style.display = "none";
+			$('#exitpop1').modal('hide');
+		} 
+      // When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+			//   modal.style.display = "none";
+				$('#exitpop1').modal('hide');
+			}
+		}
+
+		document.addEventListener("visibilitychange", function() {
+			if( document.visibilityState == 'hidden' ){
+		//   modal.style.display = "block";
+				$('#exitpop1').modal('show')
+			}
+			else{
+		//   modal.style.display = "block";
+				$('#exitpop1').modal('show')
+				return false;
+			}
+		});
+	}
+	testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+		'BlackBerry|Windows Phone|'  +
+		'Opera Mini|IEMobile|Mobile' ,
+		'i');
+
+	if (testExp.test(navigator.userAgent)){
+		mobileExitPopup();
+	}
+</script>	
+	<style>
+	
+	.bodyCit{
+		color: #A9A9A9;
+	}
+#footnote p {
+	
+	margin: 0 auto;
+	line-height: 20px;
+	font-size: 13px;
+	font-weight: 500 !important;
+	width:100% !important;
+	padding: 5px;
+	text-align: justify left;
+	  word-break: break-all;
+	text-indent: 0px !important;
+
+}
+	@media screen and (max-width: 768px) {
+		#footnote {
+	
+	margin: 0 auto;
+	line-height: 20px;
+	font-size: 13px;
+	font-weight: 500;
+	width:100%;
+	padding: 20px;
+	text-align: justify left;
+	  word-break: break-all;
+				text-indent: 0px!important;
+
+}
+	}
+	
+</style>
+
+<section id="footnote" class="pb-lg-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-7 mx-auto">
+				<!--
+				Sample footnote here
+
+				<div>
+					<p>[<span class="footerCit"></span>] https://www.cambridge.org/core/journals/british-journal-of-nutrition/article/effect-of-lactobacillus-rhamnosus-cgmcc13724-supplementation-on-weight-loss-and-maintenance-in-obese-men-and-women/7C9810D79528C4ADC77A22EE45F9CA8E</p>
+				</div>
+
+				-->
+				<p><strong>Reference:</strong></p>
+				<p>https://pubmed.ncbi.nlm.nih.gov/35380602/</p>
+				<p>https://pubmed.ncbi.nlm.nih.gov/37121721/
+</p>
+				<p>https://pmc.ncbi.nlm.nih.gov/articles/PMC7042179/
+</p>
+				<p>https://pmc.ncbi.nlm.nih.gov/articles/PMC9243231/
+</p>
+				<p>https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1485280/full
+</p>
+				<p>https://pubmed.ncbi.nlm.nih.gov/26554757/
+</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	var bodyCitations = document.getElementsByClassName('bodyCit');
+	var counter = 1;
+	for (var key in bodyCitations)
+		bodyCitations[key].innerHTML = counter++;
+
+	var footerCitations = document.getElementsByClassName('footerCit');
+	var counter = 30;
+	for (var key in footerCitations)
+		footerCitations[key].innerHTML = counter++;
+</script>	
+			<footer id="main-footer" class="text-white py-5">
+	<div class="container">
+		<div class="row">
+			
+			
+			
+		</div>
+		<div class="row" style="padding-bottom: 20px">
+			<div class="col-md-12">
+				<ul>
+					<li style="display:inline-block; margin-right:15px;"><a href="../contact.html">Contact</a></li>
+      <li style="display:inline-block; margin-right:15px;"><a href="../Privacy%20policy.html">Privacy</a></li>
+      <li style="display:inline-block; margin-right:15px;"><a href="../Terms%20&%20Conditions.html">Terms</a></li>
+      <li style="display:inline-block; margin-right:15px;"><a href="../Return%20Policy.html">Return Policy</a></li>
+     
+				</ul>
+			</div>
+			<div class="col-md-12 mb-md-4">
+				<p class="text-center text-uppercase mb-5">Copyright &copy; 2019 &#8211; 2025 Meta Trim BHB. ALL RIGHTS RESERVED.</p>
+			</div>
+		</div>
+	</div>
+    <span id=disclaimer></span>
+    <span id=disclaimer></span>
+    <script src="https://display.buygoods.com/v1/disclaimer?id=disclaimer&account_id=11943"></script>
+</footer>
+
+<!-- DO NOT DELETE THIS SCRIPTS -->
+<script src="js/jquery.min.js?v=2.0.1"></script>
+<script src="js/skeleton.bundle.min.js?v=2.0.1"></script>
+<script src="js/slidereveal.js?v=2.0.1"></script>
+<script>
+	$(function() {
+		var slider = $("#menu-bar").slideReveal({
+			// width: 100,
+			push: false,
+			position: "right",
+			// speed: 600,
+			trigger: $(".handle"),
+			// autoEscape: false,
+		});
+	});
+</script>
+<!-- Additional Javascripts Goes Here -->		
+
+		<script type="text/javascript">
+			function showRedBarTimer() {
+				document.getElementById("RedBarTimer").style.display = "block";
+			}
+			
+			// adjust this as needed, 1 sec = 1000
+			setTimeout("showRedBarTimer()", 1000);
+		</script>
+
+		<script type="text/javascript">
+			function showScarcityBar() {
+				document.getElementById("ScarcityBar").style.display = "block";
+			}
+
+		// adjust this as needed, 1 sec = 1000
+			setTimeout("showScarcityBar()", 1000);
+		</script>
+
+		<script>
+			var bodyCitations = document.getElementsByClassName('bodyCit');
+			var counter = 1;
+			for (var key in bodyCitations)
+				bodyCitations[key].innerHTML = counter++;
+
+			var footerCitations = document.getElementsByClassName('footerCit');
+			var counter = 30;
+			for (var key in footerCitations)
+				footerCitations[key].innerHTML = counter++;
+		</script>
+
+		<script language="javascript">
+			(function() {
+				setTimeout(function() {
+				var __redirect_to = '#'; //
+				var _tags = ['button', 'input', 'a'],
+				_els, _i, _i2;
+				for (_i in _tags) {
+					_els = document.getElementsByTagName(_tags[_i]);
+					for (_i2 in _els) {
+						if ((_tags[_i] == 'input' && _els[_i2].type != 'button' && _els[_i2].type != 'submit' && _els[_i2].type != 'image') || _els[_i2].target == '_blank') continue;
+						_els[_i2].onclick = function() {
+							window.onbeforeunload = function() {};
+						}
+					}
+				}
+
+				$('input').click(function() {
+					window.onbeforeunload = function() {
+						null
+					};;
+				});
+
+				window.onbeforeunload = function() {
+					setTimeout(function() {
+						window.onbeforeunload = function() {};
+						setTimeout(function() {
+							document.location.href = __redirect_to;
+						}, 500);
+					}, 5);
+					return '*\n\n W A I T   B E F O R E   Y O U   G O !\n\n  CLICK THE *CANCEL* BUTTON RIGHT NOW\n     TO STAY ON THE CURRENT PAGE.\n\n I HAVE SOMETHING VERY SPECIAL FOR YOU!\n\n*';
+				}
+			}, 500);
+			})();
+		</script>
+
+		<script>
+			var vslVideoCode = 'vidalytics_embed_lx1pCnXU5z2uKk0P';
+			var faqVideoCode = 'vidalytics_embed_lx1pCnXU5z2uKk0P';
+			var vidalyticsPlayerAPI = null;
+			var faqPlayer = null;
+
+			function initializePlayerAPI() {
+		// console.log('initializePlayerAPI()');
+				var player = getPlayer(vslVideoCode);
+
+				if (player._player) {
+					vidalyticsPlayerAPI = player;
+					onPlayerAPIAvailableCallback();
+					return;
+				}
+
+				setTimeout(initializePlayerAPI, 100);
+			}
+			initializePlayerAPI();
+
+			function initializeSecondPlayerAPI() {
+				console.log('initializeSecondPlayerAPI()');
+				var player = getPlayer(faqVideoCode);
+
+				if (player._player) {
+					vidalyticsPlayerAPI = player;
+					onPlayerAPIAvailableCallback();
+					return;
+				}
+
+				setTimeout(initializeSecondPlayerAPI, 100);
+			}
+
+			function getPlayer(embedCode) {
+		// console.log('getPlayer()');
+				var embeds = (_vidalytics || {}).embeds || {};
+				if (embeds[embedCode]) {
+					return embeds[embedCode].player || {};
+				}
+				return {};
+			}
+
+			var videoContainer = document.querySelector('#wistia-fs');
+			var title = document.querySelector('.fullscreen-headline');
+			var cbtb = document.querySelector('.fixed-top');
+			var viralheader = document.querySelector('.greytext');
+	//var mainBox = document.querySelector('.main-wrapper');
+
+			function onPlayerAPIAvailableCallback() {
+				console.log("onPlayerAPIAvailableCallback()");
+				document.querySelector('#wistia-fs-inner').classList.add('vida-vh');
+
+		// do something related to current video playback time
+				vidalyticsPlayerAPI._player.addEventHandler('onPaused', function () {
+					console.log('onPaused event');
+					videoContainer.style.cssText = 'width: 100%; max-width: 900px;padding: 0;margin-left: auto;margin-right: auto;';
+			//vidalyticsPlayerAPI.seekTo(2690);
+					title.style.cssText = 'display: block;';
+					cbtb.style.cssText = 'display: block;';
+					viralheader.style.cssText = 'position: relative;';
+					document.querySelector('#wistia-fs-inner').classList.remove('vida-vh');
+			//mainBox.style.cssText = 'margin-top: 0px;';
+
+
+			// document.querySelector('video').style.cssText = 'max-height:405px;';
+				});
+
+				vidalyticsPlayerAPI._player.addEventHandler('onPlay', function () {
+					console.log('onPlay event');
+					videoContainer.style.cssText = 'width: 100%; max-width: 100%; padding: 0;';
+					document.querySelector('video').style.cssText = 'max-height:none;';
+					title.style.cssText = 'display: none;';
+					cbtb.style.cssText = 'display: none;';
+					viralheader.style.cssText = 'position: absolute;';
+            document.querySelector('#wistia-fs-inner').classList.add('vida-vh');			//mainBox.style.cssText = 'margin-top: -48px;';
+
+
+			/*   if (window.innerWidth < 768) {
+					mainBox.style.cssText = 'margin-top: 0px;';
+				};
+				 if (window.innerWidth > 769) {
+					mainBox.style.cssText = 'margin-top: -48px;';
+				}
+			 */
+
+        });
+				vidalyticsPlayerAPI._player.addEventHandler('onPlaybackFinished', function () {
+					document.getElementById(vslVideoCode + '-div').style.display = "none";
+					document.getElementById(faqVideoCode + '-div').style.display = "block";
+
+			  // load js for faq vsl
+					(function (v, i, d, a, l, y, t, c, s) {
+						y = '_' + d.toLowerCase(); c = d + 'L'; if (!v[d]) { v[d] = {}; } if (!v[c]) { v[c] = {}; } if (!v[y]) { v[y] = {}; } var vl = 'Loader', vli = v[y][vl], vsl = v[c][vl + 'Script'], vlf = v[c][vl + 'Loaded'], ve = 'Embed';
+						if (!vsl) {
+							vsl = function (u, cb) {
+								if (t) { cb(); return; } s = i.createElement("script"); s.type = "text/javascript"; s.async = 1; s.src = u;
+								if (s.readyState) { s.onreadystatechange = function () { if (s.readyState === "loaded" || s.readyState == "complete") { s.onreadystatechange = null; vlf = 1; cb(); } }; } else { s.onload = function () { vlf = 1; cb(); }; }
+								i.getElementsByTagName("head")[0].appendChild(s);
+							};
+						}
+						vsl(l + 'loader.min.js', function () { if (!vli) { var vlc = v[c][vl]; vli = new vlc(); } vli.loadScript(l + 'player.min.js', function () { var vec = v[d][ve]; t = new vec(); t.run(a); }); });
+					})(window, document, 'Vidalytics', 'vidalytics_embed_lx1pCnXU5z2uKk0P', 'https://fast.vidalytics.com/embeds/h9bkXdXE/lx1pCnXU5z2uKk0P/');
+
+			//faqPlayer = getPlayer(faqVideoCode);
+			//if (faqPlayer._player) {
+			//	console.log("faqPlayer");
+			//	faqPlayer.play();
+			//}
+
+					initializeSecondPlayerAPI();
+				});
+				vidalyticsPlayerAPI._player.addEventHandler('onTimeChanged', function () {
+					if (vidalyticsPlayerAPI.getCurrentVideoTime() > 5) {
+				// do something after 5s of playback
+					}
+				});
+		//do something when viewer enters or exits fullscreen mode "onFullscreenEnter" and "onFullscreenExit"
+				vidalyticsPlayerAPI._player.addEventHandler('onFullscreenEnter', function () {
+			// console.log('onFullscreenEnter event');
+				});
+
+		// the other available methods are:
+		// vidalyticsPlayerAPI.play()
+		// vidalyticsPlayerAPI.pause()
+		// vidalyticsPlayerAPI.seekTo(timeInSeconds) ie. seekTo(205) would jump to the 3:25 (180s=3m + 25s)
+			}
+		</script>
+
+		<script>
+// Preserve URL parameters across page navigation
+(function() {
+  // Get all URL parameters from current page
+  var urlParams = new URLSearchParams(window.location.search);
+  var paramString = urlParams.toString();
+
+  if (paramString) {
+    // Find all internal links (excluding external links, anchors, and special protocols)
+    var links = document.querySelectorAll('a[href]');
+
+    links.forEach(function(link) {
+      var href = link.getAttribute('href');
+
+      // Skip if it's an external link, anchor, mailto, tel, javascript, or #
+      if (!href ||
+          href.startsWith('http://') ||
+          href.startsWith('https://') ||
+          href.startsWith('mailto:') ||
+          href.startsWith('tel:') ||
+          href.startsWith('javascript:') ||
+          href.startsWith('#')) {
+        return;
+      }
+
+      // Add parameters to the link
+      var separator = href.includes('?') ? '&' : '?';
+      link.setAttribute('href', href + separator + paramString);
+    });
+  }
+})();
+</script>
+<script>
+// Preserve ALL URL parameters on checkout/buy buttons (with redirect parameter support)
+(function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var paramString = urlParams.toString();
+
+  if (!paramString) return; // Exit if no parameters
+
+  function appendParams(url) {
+    if (!url) return url;
+
+    try {
+      var urlObj = new URL(url);
+      var redirectParam = urlObj.searchParams.get('redirect');
+
+      // If there's a redirect parameter, decode and add params to it
+      if (redirectParam) {
+        try {
+          // Decode base64 redirect URL
+          var decodedRedirect = atob(redirectParam);
+
+          // Add parameters to decoded redirect URL
+          var separator = decodedRedirect.includes('?') ? '&' : '?';
+          var updatedRedirect = decodedRedirect + separator + paramString;
+
+          // Re-encode and update the redirect parameter
+          urlObj.searchParams.set('redirect', btoa(updatedRedirect));
+        } catch (e) {
+          // If decode fails, redirect might not be base64, append params directly
+          var separator = redirectParam.includes('?') ? '&' : '?';
+          urlObj.searchParams.set('redirect', redirectParam + separator + paramString);
+        }
+      }
+
+      // Also add parameters to the main URL
+      paramString.split('&').forEach(function(param) {
+        var parts = param.split('=');
+        if (parts[0] && parts[1]) {
+          urlObj.searchParams.set(parts[0], parts[1]);
+        }
+      });
+
+      return urlObj.toString();
+    } catch (e) {
+      // Fallback: simple append if URL parsing fails
+      var separator = url.includes('?') ? '&' : '?';
+      return url + separator + paramString;
+    }
+  }
+
+  function updateAllLinks() {
+    // Update all external checkout links (href attribute)
+    var externalLinks = document.querySelectorAll('a[href^="http"], a[href^="https"]');
+    externalLinks.forEach(function(link) {
+      var href = link.getAttribute('href');
+      link.setAttribute('href', appendParams(href));
+    });
+
+    // Update data-url attributes (used by subscription toggle)
+    var dataUrlElements = document.querySelectorAll('[data-url^="http"], [data-url^="https"]');
+    dataUrlElements.forEach(function(element) {
+      var dataUrl = element.getAttribute('data-url');
+      element.setAttribute('data-url', appendParams(dataUrl));
+    });
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateAllLinks);
+  } else {
+    updateAllLinks();
+  }
+})();
+</script>
+
+<!-- Subscription Toggle Script for New Product Cards -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Store original buy button images
+  document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
+    img.dataset.originalSrc = img.src;
+  });
+
+  const subscriptionOptions = document.querySelectorAll('.mt-subscription-option');
+
+  subscriptionOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const card = this.closest('.mt-product-card');
+      const toggle = this.closest('.mt-subscription-toggle');
+      const savingsText = card.querySelector('.mt-subscribe-savings');
+      const buyButton = card.querySelector('.mt-buy-now-btn');
+
+      // Remove active from all options in this toggle
+      toggle.querySelectorAll('.mt-subscription-option').forEach(opt => opt.classList.remove('active'));
+
+      // Add active to clicked option
+      this.classList.add('active');
+
+      // Update price display
+      const price = this.dataset.price;
+      const total = this.dataset.total;
+      const save = this.dataset.save;
+      const type = this.dataset.type;
+      const url = this.dataset.url;
+
+      card.querySelector('.mt-display-price').textContent = '$' + price;
+      card.querySelector('.mt-final-price').textContent = '$' + total;
+
+      // Update savings badge text based on type
+      if (type === 'subscribe') {
+        card.querySelector('.mt-savings-badge').innerHTML = 'YOU SAVE 10% EXTRA ON THIS ORDER<br>($' + save + ' Saved)!';
+      } else {
+        card.querySelector('.mt-savings-badge').textContent = 'YOU SAVE $' + save + '!';
+      }
+
+      // Update Buy button URL based on selected option
+      if (buyButton && url) {
+        buyButton.href = url;
+      }
+
+      // Swap buy button image based on selection type
+      const btnImg = buyButton ? buyButton.querySelector('img') : null;
+      if (btnImg) {
+        if (type === 'subscribe') {
+          btnImg.src = '../lib/img/subscribe.webp';
+          btnImg.alt = 'Subscribe Now';
+        } else {
+          btnImg.src = btnImg.dataset.originalSrc;
+          btnImg.alt = 'Buy Now';
+        }
+      }
+
+      // Show/hide savings text and cancel notice
+      const cancelNotice = card.querySelector('.mt-cancel-notice');
+      if (type === 'subscribe') {
+        if (savingsText) savingsText.classList.add('show');
+        if (cancelNotice) cancelNotice.classList.add('show');
+      } else {
+        if (savingsText) savingsText.classList.remove('show');
+        if (cancelNotice) cancelNotice.classList.remove('show');
+      }
+    });
+  });
+});
+</script>
+	</body>
+
+	</html>
+	
+	
+	<!-- popup start -->
+<link href="../popup/css/style1.css?v=2.0.1" type="text/css" rel="stylesheet">
+<section class="custom-social-proof">
+    <div class="custom-notification">
+        <div class="custom-notification-container">
+            <div class="custom-notification-image-wrapper">
+                <img src="../popup/img/img/1bottle.png">
+            </div>
+            <div class="custom-notification-content-wrapper">
+                <p class="custom-notification-content">
+                    <span id="notify-customer">Eli H</span> - <span id="notify-state">TX</span><br> Purchased <strong><span id="notify-quantity">7</span></strong> Bottle(s) of <b>Meta Trim BHB</b> <small><span id="notify-ago">9 minutes ago</span></small>
+                </p>
+            </div>
+        </div>
+        <div class="custom-close"></div>
+    </div>
+</section>
+
+<div class="popup-loading-wrapper" style="display:none;">
+    <div class="popup">
+        <figure class="product-image"></figure>
+        <p>Reserving Your Pack Of</p>
+        <h2>Meta Trim BHB</h2>
+        <img src="../images/icon-loading.png" alt="" class="loading-image">
+    </div>
+</div>
+
+<p id="loading-indicator" style="display:none;">Processing...</p>
+<p id="crm-response-container" style="display:none;">Limelight messages will appear here...</p>
+
+<script type="text/javascript" src="../popup/js/jquery-3.5.1.min.js?v=2.0.1"></script>
+<script type="text/javascript" src="../popup/js/slick.min.js?v=2.0.1"></script>
+<script>window.socialProofBase='../';</script>
+<script type="text/javascript" src="../popup/js/social-proof.js?v=2.0.1"></script>
+<script type="text/javascript" src="../popup/js/scripts.js?v=2.0.1"></script>
+<script type="text/javascript" src="../popup/js/jquery.mask.min5e1f.js?v=2"></script>	
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#fields_phone').mask('000-000-0000');
+	
+  	$('.single-item').slick({
+		arrows: false,
+		dots: true,
+		autoplay: true,
+		autoplaySpeed: 2600,
+  	});
+  
+	/*$('.loading-btn').click(function(e) {
+		$('.popup-loading-wrapper').show();
+		setTimeout(function() {
+		  $('#lpFrm').submit();
+		}, 2000);
+		return false
+	});*/
+});
+</script>
+<script type="text/javascript" src="popup/bmf/assets/popup/js/jquery.autocomplete.min.js?v=2.0.1"></script>
+<script>
+var smtKey = '';
+var smtAuto = 0;
+var smtVerify = 0;
+var smartUrl = "https://us-autocomplete-pro.api.smartystreets.com/lookup?key=" + smtKey + "&prefer_geolocation=city";
+var lastAddress1 = '';
+var lastAddress2 = '';
+
+if(typeof smtKey !== "undefined" && smtKey != '') {
+	function submitAddress2() {
+		if(lastAddress1 == '') {
+			lastAddress1 = $('input[name="fields_address1"]').val();
+			lastAddress1.replace('"', '');
+		}
+		lastAddress2 = $('input[name="fields_address2"]').val();
+		lastAddress2.replace('"', '');
+		var combAddr = lastAddress1 + ', ' + lastAddress2;
+		$('input[name="fields_address1"]').val(combAddr);
+		$('#app_common_modal').remove();
+		$('#theForm').trigger('submit');
+		return false;
+	}
+
+	var utils2 = (function () {
+		return {
+			escapeRegExChars: function (value) {
+				return value.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+			},
+			createNode: function (containerClass) {
+				var div = document.createElement('div');
+				div.className = containerClass;
+				div.style.position = 'absolute';
+				div.style.display = 'none';
+				return div;
+			}
+		};
+	}());
+
+	$(document).ready(function(ee) {
+		if(typeof smtAuto !== "undefined" && smtAuto == 1) {
+			$('#fields_address1').autocomplete({
+				serviceUrl: smartUrl,
+				paramName: "search",
+				ajaxSettings: {},
+				minChars: 2,
+				deferRequestBy: 400,
+				transformResult: function(response) {
+					if (typeof response === "undefined") { 
+						return {
+							"suggestions": []
+						};
+					} else if (typeof response == "string") { 
+						respJson = JSON.parse(response); 
+					} else {
+						respJson = response;
+					}
+					if(!(respJson) || typeof respJson.suggestions === "undefined" || respJson.suggestions == null) {
+						return {
+							"suggestions": []
+						};
+					}
+					
+					return {
+						suggestions: $.map(respJson.suggestions, function(dataItem) {
+							return { value: dataItem.street_line + (dataItem.secondary != '' && dataItem.entries == 1 ? (', ' + dataItem.secondary) : '') , data: dataItem};
+						})
+					};
+				},
+				formatResult: function (suggestion, currentValue) {
+					if(typeof suggestion.data === "undefined") {
+						return "";
+					} else {
+						if (!currentValue) {
+							return suggestion.data.text;
+						}
+				
+						var pattern = '(' + utils2.escapeRegExChars(currentValue) + ')';
+						
+						var addrfull = suggestion.data.street_line + (
+							suggestion.data.secondary != '' ? ( 
+								suggestion.data.entries > 1 ? (', ' + suggestion.data.secondary + ' (' + suggestion.data.entries + ' entries)') : (', ' + suggestion.data.secondary) 
+							) : '') + ', ' + suggestion.data.city + ' ' + suggestion.data.state + ' ' + suggestion.data.zipcode;  
+				
+						return addrfull
+							.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>')
+							.replace(/&/g, '&amp;')
+							.replace(/</g, '&lt;')
+							.replace(/>/g, '&gt;')
+							.replace(/"/g, '&quot;')
+							.replace(/&lt;(\/?strong)&gt;/g, '<$1>');
+					}
+				},
+				onSelect: function (suggestion) {
+					if($('#fields_city').length == 1 && (suggestion.data.city)) {
+						$('#fields_city').val(suggestion.data.city);
+					}
+					if($('#fields_state').length == 1 && (suggestion.data.state)) {
+						$('#fields_state').val(suggestion.data.state);
+					}
+					if($('#fields_zip').length == 1 && (suggestion.data.zipcode)) {
+						$('#fields_zip').val(suggestion.data.zipcode);
+					}
+								
+				}
+			});
+		}
+	});
+
+}
+
+
+$('form.form123').find('#fields_email').on('change keyup', function() {
+	var emailReg2 = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	if ( !emailReg2.test($('#fields_email').val()) ) {
+		$(this).addClass('has-error');
+		$(this).removeClass('no-error');
+	}
+});
+
+$('form.form123').find('#fields_zip').on('change keyup', function() {
+	var zip = $('#fields_zip').val();
+	if ((zip.length)< 5 ){
+		$(this).addClass('has-error');
+		$(this).removeClass('no-error');
+	}
+});
+
+$('form#theForm').find('input, select, textarea').on('change keyup', function() {
+	$('form#theForm').find('input, select').each(function() {
+		if($(this).val()==''){
+			$(this).addClass('has-error');
+			$(this).removeClass('no-error');
+		}else{
+			$(this).removeClass('has-error');
+			$(this).addClass('no-error');	
+		}
+	});
+});
+
+
+function validate_optin_form(){
+	ShowExitPopup = false;
+	internal = 1;
+	isExit=false;
+
+	var errors = new Array();
+	var phonefilter = /^([0-9\-\+\(\)]{8,22})+$/ ;
+	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	//var is_terms_condtion_cheked = $('#agree_terms').prop('checked'); 
+	//console.log($('#fields_fname').val().replace(/^\s+|\s+$/g,"")==''));
+
+	$("input").removeClass("has-error");
+	
+	if ($('#fields_fname').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your first name');
+		$('#fields_fname').addClass("has-error");
+	}
+	if ($('#fields_lname').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your last name');
+		$('#fields_lname').addClass("has-error");
+	}
+	if ($('#fields_address1').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please select your address');
+		$('#fields_address1').addClass("has-error");
+	}
+	if ($('#fields_city').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your city');
+		$('#fields_city').addClass("has-error");
+	}
+	if ($('#country').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your country');
+		$('#country').addClass("has-error");
+	}
+	if ($('#fields_state').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your State');
+		$('#fields_state').addClass("has-error");
+	}
+	if ($('#fields_zip').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your Zip Code');
+		$('#fields_zip').addClass("has-error");
+	}
+	if ($('#fields_phone').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your phone number');
+		$('#fields_phone').addClass("has-error");
+	}
+	if ($('#fields_email').val().replace(/^\s+|\s+$/g,"")=='') {
+		errors.push('Please enter your email address');
+		$('#fields_email').addClass("has-error");
+	} else if ( !emailReg.test($('#fields_email').val()) ) {
+		errors.push('Please enter valid email address');
+		$('#fields_email').addClass("has-error");
+	}
+	
+	/*if($('#agree_terms:checked').length == 0) {
+	errors.push('Please accept our terms and condition');
+	}*/
+	
+	
+	if(typeof smtKey !== "undefined" && smtKey != '' && typeof smtVerify !== "undefined" && smtVerify == 1) {
+		if (errors.length == 0 ) {
+			var addr = $('input[name="fields_address1"]').val() + ', ' + $('input[name="fields_city"]').val() + ' ' + $('select[name="fields_state"]').val() + ' ' + $('input[name="fields_zip"]').val() ;
+			var errmsg = "";
+			var vcode = "";
+			var apiUrl = "https://us-street.api.smartystreets.com/street-address"
+				+ "?street=" + encodeURI(addr)
+				+ "&key=" + smtKey;
+			$.ajax({
+			  url: apiUrl,
+			  method: "get",
+			  async: false,
+			  beforeSend: function( xhr ) {
+			  }
+			})
+			.done(function(resData) {
+				var errmsg = "";
+				if(!(resData) || !(resData[0]) || !(resData[0].analysis) || !(resData[0].analysis.dpv_match_code)) {
+					vcode = "";
+				} else {
+					vcode = resData[0].analysis.dpv_match_code;
+				}
+				
+				if(vcode != '' && vcode != 'N' && vcode != 'D') {
+					if(typeof resData[0].delivery_line_1 !== "undefined" && resData[0].delivery_line_1 != "") {
+						$('input[name="fields_address1"]').val(resData[0].delivery_line_1);
+						lastAddress1 = $('input[name="fields_address1"]').val();
+					}
+					
+					if(typeof resData[0].components !== "undefined") {
+						if(typeof resData[0].components.city_name !== "undefined" && resData[0].components.city_name != "") {
+							$('input[name="fields_city"]').val(resData[0].components.city_name);
+						}
+						if(typeof resData[0].components.zipcode !== "undefined" && resData[0].components.zipcode != "") {
+							$('input[name="fields_zip"]').val(resData[0].components.zipcode);
+						}
+						if(typeof resData[0].components.state_abbreviation !== "undefined" && resData[0].components.state_abbreviation != "") {
+							$('select[name="fields_state"]').val(resData[0].components.state_abbreviation);
+						}
+					}
+					
+				}
+			})
+			.fail(function() {
+			})
+			.always(function() {
+			});
+			
+			
+			if(vcode == '') {
+				errors.push('Address could not be found');
+			} else if(vcode == 'N') {
+				errors.push('Address does not seem to be deliverable');
+			} else if(vcode == 'D') {
+				
+				var html = '';
+				html += '<div id="app_common_modal">';
+				html += '<div class="app_modal_body" style="text-align:center;min-height:150px;"><a href="javascript:void(0);" id="app_common_modal_close">X</a>';
+	
+				html += '<div>'
+					+ '<form method="get" action="" onSubmit="return submitAddress2();">'
+					+ '<h4>' + "Please enter your Apartment/Suite/Unit # to proceed" + '</h4>'
+					+ '<input type="text" name="fields_address2" id="fields_address2" placeholder="" autocomplete="off" required style="width:80%;line-height:22px;margin:10px;padding:5px" maxlength="50" value="'+ (lastAddress2 != '' ? lastAddress2 : '') +'" data-error-message="Please enter your address!" />'
+					+ '<button type="submit" style="width:40%;height:30px;line-height:22px;cursor:pointer;">OK</button>'
+					+ '</form>';
+					+ '</div>';
+	
+				html += '</div>';
+				html += '</div>';
+				
+				if (!$('#app_common_modal').length) {
+					$('body').append(html);
+				}
+				$('#app_common_modal').fadeIn(500);
+				return false;
+				
+			}
+			
+		}
+	}
+	
+	
+	if (errors.length == 0 ) {
+		$('.popup-loading-wrapper').show();
+		$('#fields_phone').unmask();
+		document.getElementById('theForm').submit();
+		return false;
+	} else {
+		var li = '';
+		$.each(errors, function(key, value) {
+			li += '<li>' + value + '</li>';
+		});
+	
+		var html = '';
+		html += '<div id="error_handler_overlay">';
+		html += '<div class="error_handler_body"><a href="javascript:void(0);" id="error_handler_overlay_close">X</a><ul>' + li + '</ul></div>';
+		html += '</div>';
+	
+		$('body').append(html);
+	
+		$('#error_handler_overlay').fadeIn(500);
+		return false;
+	}
+}
+
+
+$(function() {
+	$(window).keydown(function(e) {
+		if (e.which === 27 && $('#error_handler_overlay').length) {
+			$('#error_handler_overlay').remove();
+		}
+	});
+	
+	$(document).off('click', '#error_handler_overlay');
+	$(document).on('click', '#error_handler_overlay', function() {
+		$(this).remove();
+	});
+
+	$(document).off('click', '#error_handler_overlay_close');
+	$(document).on('click', '#error_handler_overlay_close', function() {
+		$('#error_handler_overlay').remove();
+	});
+
+	$(document).on('click', '#app_common_modal_close', function() {
+		//     alert('close');
+		$('#app_common_modal').remove();
+	});	
+});
+
+</script> 
+<script>
+function onlyNumbers(e,type)
+{
+	var keynum;
+	var keychar;
+	var numcheck;
+	if(window.event) // IE
+	{
+		keynum = e.keyCode;
+	}
+	else if(e.which) // Netscape/Firefox/Opera
+	{
+		keynum = e.which;
+	}
+	keychar = String.fromCharCode(keynum);
+	numcheck = /\d/;
+	
+	switch (keynum){
+		case 8:    //backspace
+		case 9:    //tab
+		case 35:   //end
+		case 36:   //home
+		case 37:   //left arrow
+		case 38:   //right arrow
+		case 39:   //insert
+		case 45:   //delete
+		case 46:   //0
+		case 48:   //1
+		case 49:   //2
+		case 50:   //3
+		case 51:   //4
+		case 52:   //5
+		case 54:   //6
+		case 55:   //7
+		case 56:   //8
+		case 57:   //9
+		case 96:   //0
+		case 97:   //1
+		case 98:   //2
+		case 99:   //3
+		case 100:  //4
+		case 101:  //5
+		case 102:  //6
+		case 103:  //7
+		case 104:  //8
+		case 105:  //9
+			result2 = true;
+			break;
+		case 109: // dash -
+			if (type == 'phone'){
+				result2 = true;
+			} else {
+				result2 = false;
+			}
+			break;
+		default:
+			result2 = numcheck.test(keychar);
+			break;
+	}
+	
+	return result2;
+}
+
+function openNewWindow(page_url, type, window_name, width, height, top, left, features) {
+    if (!type) {
+        type = 'popup';
+    }
+
+    if (!width) {
+        width = 480;
+    }
+
+    if (!height) {
+        height = 480;
+    }
+
+    if (!top) {
+        top = 50;
+    }
+
+    if (!left) {
+        left = 50;
+    }
+
+    if (!features) {
+        features = 'resizable,scrollbars';
+    }
+
+    if (type == 'popup') {
+        var settings = 'height=' + height + ',';
+        settings += 'width=' + width + ',';
+        settings += 'top=' + top + ',';
+        settings += 'left=' + left + ',';
+        settings += features;
+
+        win = window.open(page_url, window_name, settings);
+        win.window.focus();
+    } else if (type == 'modal') {
+        var html = '';
+        html += '<div id="app_common_modal">';
+        html += '<div class="app_modal_body"><a href="javascript:void(0);" id="app_common_modal_close">X</a><iframe src="' + page_url + '" frameborder="0"></iframe></div>';
+        html += '</div>';
+
+        if (!$('#app_common_modal').length) {
+
+            $('body').append(html);
+        }
+        $('#app_common_modal').fadeIn();
+    }
+
+}
+
+
+

@@ -1,0 +1,22 @@
+HTTrack3.49-2+htsswf+htsjava launched on Fri, 14 Nov 2025 20:38:58 at https://prostaprime.trustednutraproduct.com/v1/Thankyou.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://prostaprime.trustednutraproduct.com/v1/Thankyou.html -O1 "C:\Users\SADAQAT ALI NESTER\Desktop\ThankYou\Thankyou" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+20:42:10	Warning: 	Retry after error -2 (Receive Time Out) at link https://prostaprime.trustednutraproduct.com/v1/lib/img/6-bottles.png (from https://prostaprime.trustednutraproduct.com/v1/index.html)
+20:42:10	Warning: 	Retry after error -4 (Incorrect length (393216 Bytes, 842408 expected)) at link https://prostaprime.trustednutraproduct.com/v1/lib/img/3-bottle-buy-btn.png (from https://prostaprime.trustednutraproduct.com/v1/index.html)
+20:42:10	Warning: 	Retry after error -4 (Incorrect length (147456 Bytes, 469822 expected)) at link https://prostaprime.trustednutraproduct.com/v1/lib/img/bottle_img.png (from https://prostaprime.trustednutraproduct.com/v1/index.html)
+20:42:10	Error: 	"Not Found" (404) at link https://prostaprime.trustednutraproduct.com/v1/Contact.html (from https://prostaprime.trustednutraproduct.com/v1/index.html)
+20:42:15	Error: 	"Not Found" (404) at link https://prostaprime.trustednutraproduct.com/v1/images/icon-loading.png (from https://prostaprime.trustednutraproduct.com/v1/index.html)
+20:43:16	Warning: 	Retry after error -4 (Incorrect length (655360 Bytes, 842408 expected)) at link https://prostaprime.trustednutraproduct.com/v1/lib/img/3-bottle-buy-btn.png (from https://prostaprime.trustednutraproduct.com/v1/index.html)
+20:43:17	Error: 	"Not Found" (404) at link https://prostaprime.trustednutraproduct.com/v1/popup/images/model.jpg (from https://prostaprime.trustednutraproduct.com/v1/popup/css/style1.css)
+20:43:17	Error: 	"Not Found" (404) at link https://prostaprime.trustednutraproduct.com/v1/popup/images/sprite1.png (from https://prostaprime.trustednutraproduct.com/v1/popup/css/style1.css)
+20:43:17	Error: 	"Not Found" (404) at link https://prostaprime.trustednutraproduct.com/v1/popup/images/BHB.png (from https://prostaprime.trustednutraproduct.com/v1/popup/css/style1.css)
+20:43:17	Error: 	"Not Found" (404) at link https://prostaprime.trustednutraproduct.com/v1/popup/images/arrow-btn.png (from https://prostaprime.trustednutraproduct.com/v1/popup/css/style1.css)
+20:43:17	Error: 	"Not Found" (404) at link https://prostaprime.trustednutraproduct.com/v1/popup/images/product.png (from https://prostaprime.trustednutraproduct.com/v1/popup/css/style1.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 4 minutes 21 seconds : 64 links scanned, 52 files written (6809547 bytes overall) [6596239 bytes received at 25272 bytes/sec], 341596 bytes transferred using HTTP compression in 15 files, ratio 26%, 4.0 requests per connection
+(7 errors, 4 warnings, 0 messages)

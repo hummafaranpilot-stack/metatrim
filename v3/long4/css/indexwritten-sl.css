@@ -1,0 +1,489 @@
+.font-normal{font-weight:normal!important;}
+.text-red{
+    color: #ad231b !important;}
+	.bg-lightgrey {
+	background: #fef7ed !important;
+	border: 1px  solid #163f68;
+	margin-top: -10px;
+}
+.btn-primary {
+	color: #111111;
+    background-color: #F9B738;
+    border-color: #F9B738;
+	border-radius: 0;
+	border-style: none;
+	font-size: 17px;
+	font-family: 'Montserrat', Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	font-weight: 800;
+	margin-bottom: 25px;
+	padding: 10px 25px;
+	text-align: center;
+	-webkit-box-shadow: 0px 2px 10px -4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 2px 10px -4px rgba(0,0,0,0.75);
+	box-shadow: 0px 2px 10px -4px rgba(0,0,0,0.75);
+	width: 100%;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    color: #111111;
+    background-color: #E29213 !important;
+    border: none;
+    text-decoration: none;
+}
+
+img.right-pic {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: right;
+    clear: both;
+	max-width:300px;
+	max-height:400px;
+}
+img.left-pic {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: left;
+    clear: both;
+	max-width:300px;
+}
+sup {
+    vertical-align: super;
+	color: #A9A9A9;
+	font-weight:normal !important;
+}
+.bodyCit {
+    color: #A9A9A9;
+    vertical-align: super;
+}
+
+p.card-text {
+	font-family: 'Merriweather', serif !important;
+	letter-spacing: 0;
+}
+p .bodyCit {
+	font-size: 40% !important;
+	top:-5px!important;
+}
+p sup, .check-list li sup {font-size: 40% !important;
+	top:-5px!important;
+}
+
+h3 sup {
+	vertical-align:super;
+	top:0px !important;
+}
+
+h3 {font-size:30px;}
+
+h5{
+	font-size: 19px !important;
+}
+.bg-lightgrey {
+    background: #fef7ed !important;
+    border: 1px solid #163f68;
+    margin-top: -10px;
+}
+
+
+#accordion p {
+	margin-left: 5px;
+	text-indent: 0;
+	max-width: 100%;
+}
+
+#accordion .btn-link {
+	width: 100%;
+    text-align: left;
+    position: relative;
+	padding: 16px 30px;
+	font-size: 23px;
+	color: #000;
+	border-radius: 15px 15px 0px 0px !important;
+	background-color: #e6e6e6;
+	color: #163f68;
+	border-color: #163f68;
+	border-bottom: 0px !important;
+	border: 1px solid;
+	margin-bottom: 10px;
+}
+.border-blue{
+	border: 2px dashed #0A3B6C !important;
+}
+.text-black{
+	color: black;
+}
+
+#accordion .btn-link.focus, #accordion .btn-link:focus {
+	text-decoration: none !important;
+	color: #0A3B6C;
+}
+
+#accordion .btn-link:hover {
+	color: #163f68;
+    text-decoration: none;
+}
+
+#accordion .btn-link:first-child {
+	border-top: none;
+}
+
+#accordion .btn-link span {
+	max-width: 100%;
+	display: inline-flex;
+}
+
+
+[data-toggle="collapse"] .fa:before {
+	content: url("https://cdn.truegcloud.com/metabolicflora/accordion-arrow-before.svg");
+	position: absolute;
+	right: 16px;
+	margin-top: -20px;
+	width: 13px;
+}
+
+[data-toggle="collapse"].collapsed .fa:before {
+  	content: url("https://cdn.truegcloud.com/metabolicflora/accordion-arrow-after.svg");
+	width: 25px;
+	height: 21px;
+}
+@media (min-width: 768px) {
+
+	#main-footer .col-lg-2 img {
+		width: 100%;
+	}
+	p,
+	.check-list li,
+	#accordion .btn-link {
+		font-size: 23px;
+		letter-spacing: -0.25px;
+		text-indent: 0px;
+		
+	}
+	p sup,
+	.check-list li sup {
+		font-size: 50%;
+	}
+	.signature {
+	max-width: 40%;
+}
+/* shop now floating button */
+.shop-now {
+	display: block;
+	padding: 20px 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+}
+.shop-now-align {
+	float: right;
+	width: 220px;
+}
+.shop-now-align > p {
+	text-align: center;
+	text-indent: 0px;
+	margin-bottom: 10px;
+}
+.shop-now a.action {
+	
+	background: #163f68;
+	color: #f9b738 !important;
+	padding: 10px 15px 8px 15px;
+	display: inline-block;
+	font-weight:700 !important;
+	font-family: 'Montserrat', sans-serif;
+font-size: 18px;
+	margin-left: auto;
+	margin-right: auto;
+	float: none;
+	box-shadow:1px 2px 22px rgba(0,0,0,0.2);
+	border-radius: 0px;
+	text-decoration: none;
+	
+}
+.shop-now a.action:hover {
+
+	background: #d48f36;
+	
+}
+
+}
+@media (min-width: 1200px) {
+	h1 {
+		font-size: 60px;
+	}
+	h1 sup,
+	h2 sup {
+		vertical-align:super;
+	}
+	h2 {
+		font-size: 45px;
+	}
+		.h2blue {
+		font-size: 38px;
+		line-height: 1.2;
+	}
+	.upsell-option li {
+		font-size: 14px;
+		padding: 12px 20px;
+	}
+}
+
+@media (max-width: 991px) {
+	.headline {
+		font-size: 50px;
+	}
+}
+@media (max-width: 600px) {
+.center-align {
+    margin-top: 10px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 10px !important;
+    float: none !important;
+    display: block !important;
+    text-align: center;
+}
+}
+@media (max-width: 480px) {
+	.btn-primary {
+	font-size: 14px !important;
+	margin-bottom: 25px;
+	padding: 10px 25px;
+	
+}
+	.headline {
+		font-size: 27px;
+	}
+	.shop-now {
+	position: fixed;
+	top: calc(100% - 50px);
+	top: -o-calc(100% - 50px); /* opera */
+	top: -webkit-calc(100% - 50px); /* google, safari */
+	top: -moz-calc(100% - 50px); /* firefox */
+	left: 0;
+	bottom: 0 !important;
+	background: rgba(255,255,255,.9);
+		width: 100%;
+		z-index: 999;
+}
+
+
+	
+.shop-now a.action {
+	float: none;
+	position: absolute;
+	left: 50%;
+	top: 25px;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	padding: 12px;
+	font-size: 15px;
+	margin: 0 auto;
+			background: #f9b738;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	line-height: 20px;
+	
+}
+img.right-pic {
+    margin-left: 0px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: right;
+    clear: both;
+    width: 100%;
+	max-height:none;
+}
+img.left-pic {
+    margin-left: 0px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: left;
+    clear: both;
+    width: 100%;
+	max-height:none;
+}
+h3 {font-size:24px;}
+
+p, .check-list li, #accordion .btn-link {
+    font-size: 19px;
+}
+}
+
+@media (min-width: 1200px){
+h2 {
+    font-size:41px;
+}
+
+h1 sup, h2 sup {
+    vertical-align: super;
+}
+h1 sup{
+    top: -12px;
+}
+
+
+h2 sup {
+    top: -7px;
+}
+}
+/* For Ipad */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+	  	#accordion .btn-link span {
+	max-width: 80%;
+	display: inline-flex;
+}
+	.btn-primary {
+	font-size: 13px !important;
+	margin-bottom: 25px;
+	padding: 10px 25px;
+	
+}
+	h2{ font-size: 30px;
+}
+.headline {
+    font-size: 40px;
+}
+h2 sup {
+    vertical-align: super;
+}
+h1 sup, h2 sup {
+    top:0;
+}
+}
+/* For Ipad pro */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+	  	#accordion .btn-link span {
+	max-width: 80%;
+	display: inline-flex;
+}
+	  		.btn-primary {
+	font-size: 13px !important;
+	margin-bottom: 25px;
+	padding: 10px 25px;
+	
+}
+h2{ font-size: 38px;
+}
+
+.headline {
+    font-size: 44px;
+}
+
+h2 sup {
+    vertical-align: super;
+	color: #A9A9A9;
+	top:-8px;
+}
+}
+
+
+/* For Iphone 5,5s */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {
+	h5{
+	font-size: 16px !important;
+}
+	#accordion .btn-link span {
+	max-width: 80%;
+	display: inline-flex;
+}
+		.btn-primary {
+	font-size: 14px !important;
+	margin-bottom: 25px;
+	padding: 10px 25px;
+	
+}
+h2{
+    font-size: 24px;
+}
+.headline {
+    font-size: 37px;
+}
+
+h2 sup {
+    vertical-align: super;
+}
+h3 {font-size:20px;}
+}
+
+
+/* For Iphone 6,7,8 */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) {
+		h5{
+	font-size: 16px !important;
+}
+	h2 {
+    font-size: 25px;
+}
+
+.headline {
+    font-size: 40px;
+}
+h1 sup, h2 sup {
+    top: -5px;
+	vertical-align:super;
+}
+h3 {font-size:24px;}
+}
+
+/* For Iphone X */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3) {
+		h5{
+	font-size: 16px !important;
+}
+h2 {
+    font-size: 25px;
+	line-height:1;
+}
+
+.headline {
+    font-size:40px;
+}
+
+h2 sup {
+    vertical-align: super;
+	top:-5px;
+}
+h3 {font-size:24px;}
+}
+
+/* For Iphone 6,7,8 plus*/
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) {
+		h5{
+	font-size: 16px !important;
+}
+	h2 {
+    font-size: 28px;
+
+}
+
+.headline {
+    font-size: 43px;
+}
+h2 sup {
+    vertical-align: super;
+}
+h3 {font-size:26px;}
+}
+

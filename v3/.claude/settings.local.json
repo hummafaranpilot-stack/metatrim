@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"\" \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v3\\\\ClickBank Structure\\\\index.html\")",
+      "Bash(npm install:*)",
+      "Bash(start \"\" \"D:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v3\\\\short\\\\go\\\\index.html\")",
+      "Bash(python -m http.server:*)",
+      "Bash(start \"\" \"http://localhost:8080/short/go/index.html\")",
+      "Bash(node --version:*)",
+      "Bash(npx http-server:*)",
+      "Bash(timeout /t 3:*)",
+      "Bash(start:*)",
+      "Bash(npx serve -p 3000)",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell:*)",
+      "Bash(del \"D:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v3\\\\upsell4.html\")"
+    ]
+  }
+}

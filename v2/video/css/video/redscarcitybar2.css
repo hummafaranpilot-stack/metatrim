@@ -1,0 +1,222 @@
+.campaign-bar {
+    background: #BC0028;
+	position: fixed;
+	padding: 10px 15px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+	text-align: center !important;
+}
+
+.campaign-bar h3 {
+	color: #FAF566;
+	font-size: 28px !important; 
+}
+.campaign-bar h5 {
+	display: inline;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.campaign-bar h5 sup {
+	font-size: 40%;
+	top: -9px;
+}
+
+.campaign-bar .btn {
+	background: #053878;
+    border-radius: 0;
+    border: 2px solid #053878;
+	color: #fff;
+	font-size: 16px;
+	margin: 10px;
+	padding: 3px 15px;
+	text-decoration: none;	
+}
+
+.campaign-bar .btn-primary:hover {
+    color: #053878;
+    background-color: transparent;
+    border: 2px solid #053878;
+	font-weight: 700;
+}
+
+.campaign-bar #cntdwn {
+	background: #BC0028 !important;
+	color: #FAF566 !important;
+	font-size: 22px;
+	font-weight: 800;
+	letter-spacing: 0;
+}
+
+.text-content sup {
+	font-size: 50%;
+	top: -8px;
+}
+
+.countdown-section{
+	position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+  margin-top: 20px;
+  left: 0;
+}
+
+.countdown-ATCbutton-wrap{
+	position: fixed;
+    left: 78%;
+    transform: translate(0, -50%);
+    top: 92%;
+    z-index: 1031;
+    }
+.countdown-mat-wrap{
+	position: fixed;
+    left: 2%;
+    transform: translate(0, -50%);
+    top: 89%;
+    z-index: 1031;
+    }
+
+#timer{
+  position: absolute;
+  left: 0;
+  margin: 0 auto;
+  right: 0;
+  top: 66%;
+  transform: translate(0, -25%);
+}
+
+.freegift-disclaimer {
+    font-size: 14px;
+    font-weight: bold;
+    background: #BC0028;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+    line-height: 1.2em;
+}
+
+@media only screen (min-width: 1920px){
+	h3 {
+    font-size: 32px;
+}
+.campaign-bar h5 {
+    display: inline;
+    font-size: 30px;
+    font-weight: 600;
+}
+.campaign-bar #cntdwn {
+    background: #BC0028 !important;
+    color: #FAF566 !important;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+	.countdown-addtocart-wrap{
+	position: fixed;
+    left: 80%;
+    transform: translate(0, -50%);
+    top: 93%;
+    z-index: 1031;
+    }
+.countdown-watch-wrap{
+	position: fixed;
+    left: 2%;
+    transform: translate(0, -50%);
+    top: 92%;
+    z-index: 1031;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 376px) 
+  and (max-device-width: 667px) {
+	.campaign-bar h5 {
+		font-size: 18px !important;
+		font-weight: 600 !important;
+	}
+	.campaign-bar {
+    background: #BC0028;
+    padding: 0px;
+	}
+	.text-content {
+		float: none;
+		margin-top: 20px;
+		padding-left: 0;
+		font-size: 15px;
+		font-weight: 600;
+		line-height: 1.1;
+	}
+	
+	.campaign-bar #cntdwn {
+		font-size: 18px;
+	}
+		.campaign-bar h3 {
+		font-size: 21px !important;
+	}
+}
+
+
+@media (max-width: 575px) {
+	.text-content {
+		float: none;
+		margin-top: 20px;
+		padding-left: 0;
+		font-size: 15px;
+		font-weight: 600;
+		line-height: 1.1;
+	}
+	.campaign-bar #cntdwn {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 991px) {
+	.campaign-bar h5 {
+		margin: 10px 0 0 0;
+	}
+}
+
+@media only screen 
+  and (min-device-width: 280px) 
+  and (max-device-width: 375px) {
+	.campaign-bar h5 {
+		font-size: 17px !important;
+		font-weight: 600 !important;
+	}
+	.campaign-bar {
+    background: #BC0028;
+    padding: 5px;
+	}
+	.text-content {
+		float: none;
+		margin-top: 20px;
+		padding-left: 0;
+		font-size: 15px;
+		font-weight: 600;
+		line-height: 1.1;
+	}
+	
+	.campaign-bar #cntdwn {
+		font-size: 17px;
+	}
+		.campaign-bar h3 {
+		font-size: 21px !important;
+	}
+}
+
+@media (max-width: 991px) {
+.campaign-bar h5 sup {
+	font-size: 40%;
+	top: -3px;
+	color: #FAF566 !important;
+}
+}
+
+@media (max-width: 991px) {
+.campaign-bar h3 sup {
+	color: #FAF566 !important;
+}
+}

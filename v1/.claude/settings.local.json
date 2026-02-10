@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"\" \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v1\\\\best\\\\go\\\\go.html\")"
+    ]
+  }
+}
