@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyGoods Webhook Data Fields</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: white; text-align: center; margin-bottom: 10px; font-size: 2.5rem; }
+        .subtitle { color: rgba(255,255,255,0.8); text-align: center; margin-bottom: 40px; }
+
+        .section { margin-bottom: 30px; }
+        .section-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .section-icon.order { background: #10b981; }
+        .section-icon.customer { background: #3b82f6; }
+        .section-icon.affiliate { background: #8b5cf6; }
+        .section-icon.payment { background: #f59e0b; }
+
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .field-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .field-card:hover { transform: translateY(-3px); }
+        .field-name {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        .field-key {
+            font-family: monospace;
+            background: #f1f5f9;
+            color: #6366f1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .field-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .field-example {
+            margin-top: 8px;
+            padding: 8px;
+            background: #f8fafc;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        .badge.yes { background: #d1fae5; color: #059669; }
+        .badge.maybe { background: #fef3c7; color: #d97706; }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: white;
+            color: #1e3a5f;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .back-btn:hover { background: #f1f5f9; }
+
+        .note-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            margin-top: 30px;
+        }
+        .note-box h3 { margin-bottom: 10px; }
+        .note-box ul { margin-left: 20px; margin-top: 10px; }
+        .note-box li { margin-bottom: 5px; opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Dashboard</a>
+
+        <h1>BuyGoods Webhook Data</h1>
+        <p class="subtitle">All the information BuyGoods sends when an order is placed</p>
+
+        <!-- Order Information -->
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon order">📦</span>
+                Order Information
+            </div>
+            <div class="fields-grid">
+                <div class="field-card">
+                    <div class="field-name">Order ID <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">orderId</div>
+                    <div class="field-desc">Unique identifier for the order</div>
+                    <div class="field-example">Example: "BG-123456789"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Transaction ID <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">transactionId</div>
+                    <div class="field-desc">Payment transaction reference</div>
+                    <div class="field-example">Example: "TXN-987654321"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Product ID <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">productId</div>
+                    <div class="field-desc">Your product ID in BuyGoods</div>
+                    <div class="field-example">Example: "12345"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Product Name <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">productName</div>
+                    <div class="field-desc">Name of the purchased product</div>
+                    <div class="field-example">Example: "MetaTrim Weight Loss"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Product Price <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">productPrice</div>
+                    <div class="field-desc">Price of the product</div>
+                    <div class="field-example">Example: 69.99</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Quantity <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">quantity</div>
+                    <div class="field-desc">Number of items purchased</div>
+                    <div class="field-example">Example: 1</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Currency <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">currency</div>
+                    <div class="field-desc">Currency of the transaction</div>
+                    <div class="field-example">Example: "USD"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Information -->
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon customer">👤</span>
+                Customer Information
+            </div>
+            <div class="fields-grid">
+                <div class="field-card">
+                    <div class="field-name">Customer Email <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">email</div>
+                    <div class="field-desc">Customer's email address</div>
+                    <div class="field-example">Example: "john@example.com"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Customer Name <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">customerName</div>
+                    <div class="field-desc">Customer's full name</div>
+                    <div class="field-example">Example: "John Doe"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">First Name <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">firstName</div>
+                    <div class="field-desc">Customer's first name</div>
+                    <div class="field-example">Example: "John"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Last Name <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">lastName</div>
+                    <div class="field-desc">Customer's last name</div>
+                    <div class="field-example">Example: "Doe"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Phone Number <span class="badge maybe">If Provided</span></div>
+                    <div class="field-key">phone</div>
+                    <div class="field-desc">Customer's phone number</div>
+                    <div class="field-example">Example: "+1-555-123-4567"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Country <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">country</div>
+                    <div class="field-desc">Customer's country</div>
+                    <div class="field-example">Example: "United States"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">State <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">state</div>
+                    <div class="field-desc">Customer's state/region</div>
+                    <div class="field-example">Example: "California"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">City <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">city</div>
+                    <div class="field-desc">Customer's city</div>
+                    <div class="field-example">Example: "Los Angeles"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Address <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">address</div>
+                    <div class="field-desc">Customer's street address</div>
+                    <div class="field-example">Example: "123 Main Street"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">ZIP Code <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">zip</div>
+                    <div class="field-desc">Customer's postal code</div>
+                    <div class="field-example">Example: "90001"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Customer IP <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">customerIp</div>
+                    <div class="field-desc">Customer's IP address</div>
+                    <div class="field-example">Example: "192.168.1.1"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Affiliate Information -->
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon affiliate">🤝</span>
+                Affiliate Information
+            </div>
+            <div class="fields-grid">
+                <div class="field-card">
+                    <div class="field-name">Affiliate ID <span class="badge maybe">If Enabled</span></div>
+                    <div class="field-key">affiliateId</div>
+                    <div class="field-desc">Unique ID of the affiliate</div>
+                    <div class="field-example">Example: "AFF-12345"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Affiliate Name <span class="badge maybe">If Enabled</span></div>
+                    <div class="field-key">affiliateName</div>
+                    <div class="field-desc">Name of the affiliate</div>
+                    <div class="field-example">Example: "John's Marketing"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Commission <span class="badge maybe">If Enabled</span></div>
+                    <div class="field-key">commission</div>
+                    <div class="field-desc">Affiliate commission amount</div>
+                    <div class="field-example">Example: 25.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Information -->
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon payment">💳</span>
+                Payment Information
+            </div>
+            <div class="fields-grid">
+                <div class="field-card">
+                    <div class="field-name">Payment Method <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">paymentMethod</div>
+                    <div class="field-desc">How the customer paid</div>
+                    <div class="field-example">Example: "credit_card"</div>
+                </div>
+                <div class="field-card">
+                    <div class="field-name">Total Amount <span class="badge yes">Always Sent</span></div>
+                    <div class="field-key">amount</div>
+                    <div class="field-desc">Total order amount</div>
+                    <div class="field-example">Example: 69.99</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note-box">
+            <h3>📝 Important Notes</h3>
+            <ul>
+                <li><strong>Affiliate data:</strong> Only sent if "Add Affiliate Stats" is enabled in BuyGoods Global IPNs settings</li>
+                <li><strong>Phone number:</strong> Only included if the customer provides it during checkout</li>
+                <li><strong>Test webhooks:</strong> BuyGoods test data may have placeholder values like "John Doe" and "TestProd"</li>
+                <li><strong>Real orders:</strong> Will contain actual customer and product information</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

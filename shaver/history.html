@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Session History - Shaving Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #34495e;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .nav-section {
+            padding: 15px 0;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .nav-section-title {
+            padding: 10px 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            background: #34495e;
+            padding-left: 25px;
+        }
+
+        .nav-item.active {
+            background: #3498db;
+            border-left: 4px solid #2980b9;
+        }
+
+        .nav-item i {
+            width: 25px;
+            margin-right: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        /* Period Filters */
+        .filters {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .filter-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid;
+        }
+
+        .stat-card.blue { border-top-color: #3498db; }
+        .stat-card.green { border-top-color: #27ae60; }
+        .stat-card.orange { border-top-color: #f39c12; }
+        .stat-card.purple { border-top-color: #9b59b6; }
+
+        .stat-title {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        /* History Table */
+        .table-card {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-header h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 12px 10px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2c3e50;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge.yes {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge.no {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge.completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .btn-icon {
+            padding: 6px 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn-icon:hover {
+            background: #2980b9;
+        }
+
+        .btn-refresh {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .btn-refresh:hover {
+            background: #2980b9;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
+            padding: 10px 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .sidebar.mobile-open {
+            transform: translateX(0) !important;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-250px);
+                transition: transform 0.3s ease;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 70px 15px 15px 15px;
+                width: 100%;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.4rem;
+            }
+
+            .filters {
+                padding: 15px;
+                gap: 8px;
+                justify-content: center;
+            }
+
+            .filter-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                flex: 1 1 auto;
+                min-width: 70px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .table-card {
+                padding: 15px;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .btn-refresh {
+                width: 100%;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                min-width: 1000px;
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 8px 6px;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 70px 10px 10px 10px;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-chart-line"></i> Analytics</h2>
+            <p>Trusted Nutra Products</p>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Main</div>
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Dashboard Home</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Shaving Analytics</div>
+            <a href="shaving-analytics-complete.html" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Traffic Analytics</span>
+            </a>
+            <a href="sessions.html" class="nav-item">
+                <i class="fas fa-scissors"></i>
+                <span>Active Sessions</span>
+            </a>
+            <a href="history.html" class="nav-item active">
+                <i class="fas fa-history"></i>
+                <span>Session History</span>
+            </a>
+            <a href="create-session.html" class="nav-item">
+                <i class="fas fa-plus-circle"></i>
+                <span>Create Session</span>
+            </a>
+            <a href="embed-code.html" class="nav-item">
+                <i class="fas fa-code"></i>
+                <span>Embed Code</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">BuyGoods Analytics</div>
+            <a href="https://metatrim.trustednutraproduct.com/analytics/index.html" class="nav-item" target="_blank">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Orders & Revenue</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-history"></i> Session History</h1>
+            <p>View historical shaving session data and analytics</p>
+        </div>
+
+        <!-- Period Filters -->
+        <div class="filters">
+            <button class="filter-btn active" data-period="today">Today</button>
+            <button class="filter-btn" data-period="yesterday">Yesterday</button>
+            <button class="filter-btn" data-period="thisweek">This Week</button>
+            <button class="filter-btn" data-period="lastweek">Last Week</button>
+            <button class="filter-btn" data-period="thismonth">This Month</button>
+            <button class="filter-btn" data-period="all">All Time</button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card blue">
+                <div class="stat-title">Total Sessions</div>
+                <div class="stat-value" id="statTotalSessions">0</div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-title">Shaved Sessions</div>
+                <div class="stat-value" id="statShavedSessions">0</div>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-title">Avg Duration</div>
+                <div class="stat-value" id="statAvgDuration">0s</div>
+            </div>
+            <div class="stat-card purple">
+                <div class="stat-title">Unique Affiliates</div>
+                <div class="stat-value" id="statUniqueAffiliates">0</div>
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3><i class="fas fa-table"></i> Session History</h3>
+                <button class="btn-refresh" onclick="refreshHistory()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Session ID</th>
+                            <th>Affiliate ID</th>
+                            <th>IP Address</th>
+                            <th>Country</th>
+                            <th>Device</th>
+                            <th>Duration</th>
+                            <th>Scroll %</th>
+                            <th>Clicks</th>
+                            <th>Shaved</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <tr>
+                            <td colspan="11" class="loading">
+                                <i class="fas fa-spinner"></i> Loading session history...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'api.php';
+        let currentPeriod = 'today';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFilterButtons();
+            loadHistory();
+            setInterval(loadHistory, 30000); // Auto-refresh every 30s
+        });
+
+        // Setup filter buttons
+        function setupFilterButtons() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentPeriod = this.dataset.period;
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    loadHistory();
+                });
+            });
+        }
+
+        // Load session history
+        async function loadHistory() {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'getTrafficLog',
+                        period: currentPeriod,
+                        limit: 100
+                    })
+                });
+
+                const result = await response.json();
+                const tbody = document.getElementById('historyTableBody');
+
+                if (result.success && result.traffic && result.traffic.length > 0) {
+                    tbody.innerHTML = result.traffic.map(session => {
+                        const shaved = session.was_shaved ? '<span class="badge yes">YES</span>' : '<span class="badge no">NO</span>';
+                        const scrollPercent = Math.round((session.scroll_depth || 0) * 100);
+                        const duration = formatDuration(session.duration || 0);
+
+                        return `
+                            <tr>
+                                <td>${formatDateTime(session.timestamp)}</td>
+                                <td><code style="font-size: 0.8rem;">${session.id || 'N/A'}</code></td>
+                                <td><strong>${session.aff_name || session.aff_id || 'Direct'}</strong></td>
+                                <td><code style="font-size: 0.8rem;">${session.ip || 'N/A'}</code></td>
+                                <td>${session.country || 'Unknown'}</td>
+                                <td>${session.device || 'Desktop'}</td>
+                                <td>${duration}</td>
+                                <td>${scrollPercent}%</td>
+                                <td>${session.clicks || 0}</td>
+                                <td>${shaved}</td>
+                                <td>
+                                    <button class="btn-icon" onclick="viewDetails('${session.id}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+
+                    // Update stats
+                    updateStats(result.traffic);
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="11" class="loading">No session history for this period</td></tr>';
+                    updateStats([]);
+                }
+            } catch (error) {
+                console.error('Error loading history:', error);
+                document.getElementById('historyTableBody').innerHTML =
+                    '<tr><td colspan="11" style="color: #e74c3c; text-align: center; padding: 20px;">Error loading history</td></tr>';
+            }
+        }
+
+        function updateStats(sessions) {
+            const totalSessions = sessions.length;
+            const shavedSessions = sessions.filter(s => s.was_shaved).length;
+            const avgDuration = sessions.length > 0
+                ? sessions.reduce((sum, s) => sum + (s.duration || 0), 0) / sessions.length
+                : 0;
+            const uniqueAffiliates = new Set(sessions.map(s => s.aff_id)).size;
+
+            document.getElementById('statTotalSessions').textContent = totalSessions;
+            document.getElementById('statShavedSessions').textContent = shavedSessions;
+            document.getElementById('statAvgDuration').textContent = formatDuration(avgDuration);
+            document.getElementById('statUniqueAffiliates').textContent = uniqueAffiliates;
+        }
+
+        function refreshHistory() {
+            loadHistory();
+        }
+
+        function viewDetails(sessionId) {
+            alert('View details for session: ' + sessionId);
+            // Implement session details modal
+        }
+
+        function formatDuration(seconds) {
+            if (seconds < 60) return seconds + 's';
+            if (seconds < 3600) return Math.floor(seconds / 60) + 'm';
+            return Math.floor(seconds / 3600) + 'h';
+        }
+
+        function formatDateTime(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking a nav item
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', closeMobileMenu);
+            });
+        });
+    </script>
+</body>
+</html>

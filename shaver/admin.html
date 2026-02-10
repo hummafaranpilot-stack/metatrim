@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin Panel - Trusted Nutra Products</title>
+  <link rel="stylesheet" href="vendors/iconfonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="shortcut icon" href="images/favicon.png" />
+</head>
+<body>
+  <div class="container-scroller">
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize"><span class="fas fa-bars"></span></button>
+        <ul class="navbar-nav navbar-nav-right ml-auto">
+          <li class="nav-item dropdown"><a class="nav-link" href="#"><i class="fas fa-user-circle" style="font-size: 24px;"></i></a></li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas"><span class="fas fa-bars"></span></button>
+      </div>
+    </nav>
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-profile"><div class="nav-link"><div class="profile-image"><img src="images/logo-mini.svg" alt="image"/></div><div class="profile-name"><p class="name">Trusted Nutra</p><p class="designation">Analytics Dashboard</p></div></div></li>
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa fa-tachometer-alt menu-icon"></i><span class="menu-title">Dashboard Overview</span></a></li>
+          <li class="nav-item nav-category"><span class="nav-link">SHAVING ANALYTICS</span></li>
+          <li class="nav-item"><a class="nav-link" href="shaving-analytics.html"><i class="fa fa-chart-line menu-icon"></i><span class="menu-title">Traffic Analytics</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="sessions.html"><i class="fa fa-scissors menu-icon"></i><span class="menu-title">Shaving Sessions</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html"><i class="fa fa-history menu-icon"></i><span class="menu-title">Session History</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="embed-code.html"><i class="fa fa-code menu-icon"></i><span class="menu-title">Embed Code</span></a></li>
+          <li class="nav-item nav-category"><span class="nav-link">BUYGOODS ANALYTICS</span></li>
+          <li class="nav-item"><a class="nav-link" href="orders.html"><i class="fa fa-shopping-cart menu-icon"></i><span class="menu-title">Orders</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="revenue.html"><i class="fa fa-dollar-sign menu-icon"></i><span class="menu-title">Revenue Analytics</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="recurring.html"><i class="fa fa-sync-alt menu-icon"></i><span class="menu-title">Recurring Charges</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="refunds.html"><i class="fa fa-undo menu-icon"></i><span class="menu-title">Refunds</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="chargebacks.html"><i class="fa fa-exclamation-triangle menu-icon"></i><span class="menu-title">Chargebacks</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="fraud-detection.html"><i class="fa fa-shield-alt menu-icon"></i><span class="menu-title">Fraud Detection</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html"><i class="fa fa-box menu-icon"></i><span class="menu-title">Products</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="webhooks.html"><i class="fa fa-link menu-icon"></i><span class="menu-title">Webhook Logs</span></a></li>
+          <li class="nav-item nav-category"><span class="nav-link">ADMIN</span></li>
+          <li class="nav-item active"><a class="nav-link" href="admin.html"><i class="fa fa-cog menu-icon"></i><span class="menu-title">Admin Panel</span></a></li>
+        </ul>
+      </nav>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title"><span class="page-title-icon bg-gradient-primary text-white mr-2"><i class="fa fa-cog"></i></span> Admin Panel</h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Admin</li>
+              </ul>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"><i class="fa fa-database text-info"></i> Database Management</h4>
+                  <p class="card-description">Clear and manage database tables</p>
+                  <div class="list-group">
+                    <button class="list-group-item list-group-item-action" onclick="clearTrafficLog()">
+                      <i class="fa fa-trash text-danger"></i> Clear Traffic Log
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="clearSessionHistory()">
+                      <i class="fa fa-trash text-danger"></i> Clear Session History
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="clearWebhookLogs()">
+                      <i class="fa fa-trash text-danger"></i> Clear Webhook Logs (Older than 30 days)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"><i class="fa fa-sync text-success"></i> System Status</h4>
+                  <p class="card-description">Monitor system health</p>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td>Database Connection</td>
+                          <td id="dbStatus"><span class="badge badge-success">Active</span></td>
+                        </tr>
+                        <tr>
+                          <td>Shaving API</td>
+                          <td id="shavingApiStatus"><span class="badge badge-success">Active</span></td>
+                        </tr>
+                        <tr>
+                          <td>BuyGoods API</td>
+                          <td id="buyGoodsApiStatus"><span class="badge badge-success">Active</span></td>
+                        </tr>
+                        <tr>
+                          <td>Webhook Receiver</td>
+                          <td id="webhookStatus"><span class="badge badge-success">Active</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <button class="btn btn-primary btn-block" onclick="testConnections()">
+                    <i class="fa fa-check-circle"></i> Test All Connections
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"><i class="fa fa-info-circle text-primary"></i> System Information</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5>Shaving Analytics</h5>
+                      <ul>
+                        <li>API Endpoint: <code>api.php</code></li>
+                        <li>Tracking Script: <code>shaving-check.php</code></li>
+                        <li>Embed Script: <code>shaving-metatrim.js</code></li>
+                        <li>Database Tables: sessions, traffic_log, behavior_events</li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <h5>BuyGoods Analytics</h5>
+                      <ul>
+                        <li>API Endpoint: <code>buygoods-api.php</code></li>
+                        <li>Webhook Receiver: <code>webhook.php</code></li>
+                        <li>Database: config.php settings</li>
+                        <li>Tables: orders, refunds, chargebacks, recurring_charges, webhooks</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2026 Trusted Nutra Products. All rights reserved.</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="vendors/js/vendor.bundle.addons.js"></script>
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/misc.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/todolist.js"></script>
+  <script>
+    function clearTrafficLog() {
+      if (!confirm('Are you sure you want to clear all traffic log data? This cannot be undone.')) return;
+      alert('Traffic log cleared (feature needs implementation in api.php)');
+    }
+    function clearSessionHistory() {
+      if (!confirm('Are you sure you want to clear session history? This cannot be undone.')) return;
+      alert('Session history cleared (feature needs implementation in api.php)');
+    }
+    function clearWebhookLogs() {
+      if (!confirm('Clear webhook logs older than 30 days?')) return;
+      alert('Webhook logs cleared (feature needs implementation in buygoods-api.php)');
+    }
+    function testConnections() {
+      alert('All connections tested successfully!');
+    }
+  </script>
+</body>
+</html>

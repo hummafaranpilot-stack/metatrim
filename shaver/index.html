@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Analytics Dashboard - Trusted Nutra Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .dashboard-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+        }
+
+        .option-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .option-card.analytics .option-icon {
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+        }
+
+        .option-card.shaver .option-icon {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .option-card h2 {
+            font-size: 2rem;
+            color: #111827;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .option-card p {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            text-align: left;
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .features-list li {
+            color: #4b5563;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .features-list i {
+            color: #10b981;
+            margin-right: 8px;
+        }
+
+        .btn-enter {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-enter:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
+        }
+
+        .option-card.analytics .btn-enter {
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+        }
+
+        .option-card.shaver .btn-enter {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .header p { font-size: 1rem; }
+            .dashboard-options { grid-template-columns: 1fr; gap: 20px; }
+            .option-card { padding: 30px 25px; }
+            .option-card h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Trusted Nutra Analytics</h1>
+            <p>Choose your analytics dashboard</p>
+        </div>
+
+        <div class="dashboard-options">
+            <!-- BuyGoods Analytics Card -->
+            <a href="https://metatrim.trustednutraproduct.com/analytics/index.html" class="option-card analytics" target="_blank">
+                <div class="option-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2>BuyGoods Analytics</h2>
+                <p>Complete analytics for your BuyGoods orders, revenue, and financial data</p>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Order tracking & management</li>
+                    <li><i class="fas fa-check-circle"></i> Revenue analytics & charts</li>
+                    <li><i class="fas fa-check-circle"></i> Refunds & chargebacks</li>
+                    <li><i class="fas fa-check-circle"></i> Recurring subscriptions</li>
+                    <li><i class="fas fa-check-circle"></i> Fraud detection</li>
+                    <li><i class="fas fa-check-circle"></i> Webhook logs</li>
+                </ul>
+                <button class="btn-enter">Enter Analytics Dashboard</button>
+            </a>
+
+            <!-- Shaving Analytics Card -->
+            <a href="shaving-analytics-complete.html" class="option-card shaver">
+                <div class="option-icon">
+                    <i class="fas fa-scissors"></i>
+                </div>
+                <h2>Shaving Analytics</h2>
+                <p>Traffic shaving control panel with affiliate tracking and behavior monitoring</p>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Traffic analytics & monitoring</li>
+                    <li><i class="fas fa-check-circle"></i> Active shaving sessions</li>
+                    <li><i class="fas fa-check-circle"></i> Session history & logs</li>
+                    <li><i class="fas fa-check-circle"></i> Affiliate tracking</li>
+                    <li><i class="fas fa-check-circle"></i> Behavior events</li>
+                    <li><i class="fas fa-check-circle"></i> Embed code generator</li>
+                </ul>
+                <button class="btn-enter">Enter Shaver Dashboard</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

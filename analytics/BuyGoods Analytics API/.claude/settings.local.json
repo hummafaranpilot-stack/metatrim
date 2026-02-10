@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(npm install:*)",
+      "Bash(powershell -Command \"\\(Get-Content ''D:/TrustedNutraProducts/FullStack Invoices/OrdersReportTill24_01-29-2026_31_11943.csv''\\).Count\")",
+      "WebFetch(domain:www.ipqualityscore.com)",
+      "Bash(copy \"D:\\\\TrustedNutraProducts\\\\BuyGoods Analytics API\\\\a7b48f75-5cb7-5c2b-8e9b-ca07baaffe1a.jpg\" \"D:\\\\TrustedNutraProducts\\\\BuyGoods Analytics API\\\\favicon.jpg\")",
+      "Bash(powershell -Command \"Import-Csv ''OrdersReportTill31-JanProsta_01-31-2026_7_11940.csv'' | Select-Object State, Taxes, ''Total collected \\(Transaction Amount\\)'', ''Product Names'' | Format-Table -AutoSize\")",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell:*)",
+      "Bash(ls:*)",
+      "Bash(dir:*)"
+    ]
+  }
+}

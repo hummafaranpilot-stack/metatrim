@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyGoods Analytics</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* PIN Protection Overlay */
+        .pin-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 10000; display: flex; align-items: center; justify-content: center;
+        }
+        .pin-overlay.hidden { display: none; }
+        .pin-box {
+            background: #ffffff; border-radius: 24px; padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); text-align: center;
+            max-width: 400px; width: 90%;
+        }
+        .pin-logo { font-size: 3rem; margin-bottom: 1rem; }
+        .pin-title { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+        .pin-subtitle { font-size: 0.9rem; color: #64748b; margin-bottom: 2rem; }
+        .pin-input-wrapper { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+        .pin-digit {
+            width: 48px; height: 56px; border: 2px solid #e2e8f0; border-radius: 12px;
+            font-size: 1.5rem; font-weight: 700; text-align: center; outline: none;
+            transition: all 0.2s;
+        }
+        .pin-digit:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+        .pin-digit.error { border-color: #ef4444; background: #fef2f2; animation: shake 0.5s; }
+        .pin-digit.success { border-color: #10b981; background: #ecfdf5; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .pin-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 1rem; display: none; }
+        .pin-error.show { display: block; }
+        .pin-btn {
+            width: 100%; padding: 1rem; background: linear-gradient(135deg, #4f46e5, #4338ca);
+            color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .pin-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(79,70,229,0.4); }
+        .pin-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        :root {
+            --primary: #4f46e5; --primary-light: #6366f1; --primary-dark: #4338ca;
+            --success: #10b981; --success-light: #34d399;
+            --warning: #f59e0b; --danger: #ef4444;
+            --bg: #f8fafc; --bg-dark: #f1f5f9;
+            --card: #ffffff; --text: #0f172a; --text-muted: #64748b; --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 1.5rem 2rem;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+        }
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .header-time { font-size: 0.85rem; opacity: 0.9; text-align: right; line-height: 1.4; }
+        .header-time .pkt { opacity: 0.75; font-size: 0.8rem; }
+
+        /* Navigation */
+        .nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 72px; z-index: 99; }
+        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; padding: 0 1rem; }
+        .nav-item {
+            padding: 1rem 1.5rem; cursor: pointer; font-weight: 500; font-size: 0.9rem;
+            color: var(--text-muted); border-bottom: 3px solid transparent; transition: all 0.2s;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .nav-item:hover { color: var(--primary); background: var(--bg); }
+        .nav-item.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .nav-icon { font-size: 1.1rem; }
+
+        /* Container */
+        .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
+
+        /* Quick Filters */
+        .quick-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .filter-chip {
+            padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;
+            cursor: pointer; transition: all 0.2s; border: 1px solid var(--border); background: var(--card);
+            color: var(--text-muted);
+        }
+        .filter-chip:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Product Filter */
+        .product-filter {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .product-filter label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .product-select {
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            background: var(--card);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            min-width: 160px;
+        }
+        .product-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+        }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card {
+            background: var(--card); border-radius: 16px; padding: 1.5rem;
+            box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s;
+            position: relative; overflow: hidden;
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .stat-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        }
+        .stat-card.green::before { background: linear-gradient(90deg, #10b981, #34d399); }
+        .stat-card.blue::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .stat-card.purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+        .stat-card.yellow::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .stat-card.red::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+        .stat-icon {
+            width: 48px; height: 48px; border-radius: 12px; display: flex;
+            align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1rem;
+        }
+        .stat-card.green .stat-icon { background: rgba(16,185,129,0.1); }
+        .stat-card.blue .stat-icon { background: rgba(59,130,246,0.1); }
+        .stat-card.purple .stat-icon { background: rgba(139,92,246,0.1); }
+        .stat-card.yellow .stat-icon { background: rgba(245,158,11,0.1); }
+        .stat-card.red .stat-icon { background: rgba(239,68,68,0.1); }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; }
+        .stat-card.green .stat-value { color: #059669; }
+        .stat-card.blue .stat-value { color: #2563eb; }
+        .stat-card.purple .stat-value { color: #7c3aed; }
+
+        /* Cards */
+        .card { background: var(--card); border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 1.5rem; overflow: hidden; }
+        .card-header {
+            padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+            background: linear-gradient(to bottom, var(--card), var(--bg));
+        }
+        .card-title { font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+        .card-title-icon { font-size: 1.2rem; }
+        .card-body { padding: 1.5rem; }
+
+        /* Filters */
+        .filters { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+        .filter-group { display: flex; align-items: center; gap: 0.5rem; }
+        .filter-label { font-size: 0.8rem; color: var(--text-muted); }
+        .filter-input {
+            padding: 0.5rem 0.75rem; border: 1px solid var(--border); border-radius: 8px;
+            font-size: 0.85rem; background: var(--card); transition: all 0.2s;
+        }
+        .filter-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+        .btn {
+            padding: 0.5rem 1rem; border: none; border-radius: 8px; cursor: pointer;
+            font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-secondary { background: var(--bg-dark); color: var(--text); }
+        .btn-secondary:hover { background: var(--border); }
+
+        /* Tables */
+        .table-container { overflow-x: auto; }
+        .table-container.scrollable { max-height: 400px; overflow-y: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th { padding: 0.875rem 1rem; text-align: left; font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); background: var(--bg); border-bottom: 1px solid var(--border); }
+        td { padding: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:last-child td { border-bottom: none; }
+        tr.clickable { cursor: pointer; transition: background 0.2s; }
+        tr.clickable:hover { background: linear-gradient(to right, rgba(79,70,229,0.05), transparent); }
+
+        /* Badges */
+        .badge { display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .badge.green { background: rgba(16,185,129,0.1); color: #059669; }
+        .badge.red { background: rgba(239,68,68,0.1); color: #dc2626; }
+        .badge.yellow { background: rgba(245,158,11,0.1); color: #d97706; }
+        .badge.gray { background: rgba(107,114,128,0.1); color: #4b5563; }
+        .badge.blue { background: rgba(59,130,246,0.1); color: #2563eb; }
+
+        /* Pages */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: var(--card); border-radius: 20px; max-width: 900px; width: 100%; max-height: 90vh; overflow: hidden; box-shadow: var(--shadow-lg); }
+        .modal-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--card), var(--bg)); }
+        .modal-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+        .modal-close { width: 36px; height: 36px; border: none; background: var(--bg-dark); border-radius: 10px; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .modal-close:hover { background: var(--danger); color: white; }
+        .modal-body { padding: 1.5rem; max-height: calc(90vh - 80px); overflow-y: auto; }
+
+        /* Detail Sections */
+        .detail-section { margin-bottom: 1.5rem; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .detail-section-header { padding: 0.875rem 1rem; background: var(--bg); font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
+        .detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+        .detail-item { padding: 1rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
+        .detail-item:last-child { border-right: none; }
+        .detail-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 0.25rem; }
+        .detail-value { font-weight: 600; font-size: 0.95rem; word-break: break-all; overflow-wrap: break-word; }
+        .detail-value code { font-size: 0.75rem; background: var(--bg); padding: 2px 6px; border-radius: 4px; word-break: break-all; }
+        .detail-value.empty { color: #cbd5e1; font-weight: 400; font-style: italic; }
+        .detail-value.highlight { color: var(--success); font-size: 1.1rem; }
+
+        /* Search */
+        .search-box { position: relative; }
+        .search-box input { padding-left: 2.5rem; min-width: 280px; }
+        .search-icon { position: absolute; left: 0.875rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+
+        /* Empty State */
+        .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
+        .empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.3; }
+        .empty-text { font-size: 1rem; }
+
+        /* Order History */
+        .order-history-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.75rem; transition: all 0.2s; }
+        .order-history-item:hover { border-color: var(--primary); background: rgba(79,70,229,0.02); }
+
+        /* Top Affiliates */
+        .affiliate-rank { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--border); }
+        .affiliate-rank:last-child { border-bottom: none; }
+        .rank-number { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+        .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
+        .rank-2 { background: linear-gradient(135deg, #9ca3af, #6b7280); color: white; }
+        .rank-3 { background: linear-gradient(135deg, #d97706, #b45309); color: white; }
+        .rank-other { background: var(--bg-dark); color: var(--text-muted); }
+
+        /* Grid Layout */
+        .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+        @media (max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card { animation: fadeIn 0.3s ease-out; }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .filter-chip.loading, .filter-input.loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .card-body { position: relative; }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 1024px) {
+            .charts-grid { grid-template-columns: 1fr; }
+        }
+        .chart-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .chart-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .chart-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 0.25rem;
+        }
+        .chart-change {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        .chart-change.positive { background: #dcfce7; color: #16a34a; }
+        .chart-change.negative { background: #fee2e2; color: #dc2626; }
+        .chart-container { height: 180px; position: relative; }
+        .chart-legend {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--text-muted);
+        }
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- PIN Protection Overlay -->
+    <div class="pin-overlay" id="pinOverlay">
+        <div class="pin-box">
+            <div class="pin-logo">🔐</div>
+            <h1 class="pin-title">BuyGoods Analytics</h1>
+            <p class="pin-subtitle" id="pinSubtitle">Enter your 6-digit PIN to continue</p>
+
+            <!-- PIN Entry Section -->
+            <div id="pinEntrySection">
+                <div class="pin-input-wrapper">
+                    <input type="password" class="pin-digit" maxlength="1" data-index="0" inputmode="numeric">
+                    <input type="password" class="pin-digit" maxlength="1" data-index="1" inputmode="numeric">
+                    <input type="password" class="pin-digit" maxlength="1" data-index="2" inputmode="numeric">
+                    <input type="password" class="pin-digit" maxlength="1" data-index="3" inputmode="numeric">
+                    <input type="password" class="pin-digit" maxlength="1" data-index="4" inputmode="numeric">
+                    <input type="password" class="pin-digit" maxlength="1" data-index="5" inputmode="numeric">
+                </div>
+                <p class="pin-error" id="pinError">Incorrect PIN. Please try again.</p>
+                <button class="pin-btn" id="pinSubmit" onclick="verifyPin()">Unlock Dashboard</button>
+            </div>
+
+            <!-- Windows Hello Button (shown if credentials saved) -->
+            <div id="biometricSection" style="display:none; margin-top: 1rem;">
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+                    <div style="flex:1;height:1px;background:#e2e8f0;"></div>
+                    <span style="font-size:0.8rem;color:#64748b;">or</span>
+                    <div style="flex:1;height:1px;background:#e2e8f0;"></div>
+                </div>
+                <button class="pin-btn" style="background:linear-gradient(135deg, #0ea5e9, #0284c7);" onclick="loginWithBiometric()">
+                    🪟 Use Windows Hello
+                </button>
+            </div>
+
+            <!-- Save Credentials Prompt (shown after successful PIN) -->
+            <div id="saveCredentialsSection" style="display:none;">
+                <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
+                <h2 style="color:#0f172a;margin-bottom:0.5rem;">Login Successful!</h2>
+                <p style="color:#64748b;font-size:0.9rem;margin-bottom:1.5rem;">Would you like to use Windows Hello (fingerprint, face, or PIN) for faster login next time?</p>
+                <div style="display:flex;gap:0.75rem;">
+                    <button class="pin-btn" style="flex:1;background:#10b981;" onclick="setupBiometric()">Yes, Enable</button>
+                    <button class="pin-btn" style="flex:1;background:#64748b;" onclick="skipBiometric()">No, Thanks</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📊</div>
+                <span>BuyGoods Analytics</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:1.5rem;">
+                <div id="ipqsUsage" style="font-size:0.75rem;opacity:0.9;text-align:right;"></div>
+                <div class="header-time" id="currentTime"></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-item active" onclick="showPage('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
+            <div class="nav-item" onclick="showPage('orders')"><span class="nav-icon">📦</span> Orders</div>
+            <div class="nav-item" onclick="showPage('customers')"><span class="nav-icon">👥</span> Customers</div>
+            <div class="nav-item" onclick="showPage('affiliates')"><span class="nav-icon">🤝</span> Affiliates</div>
+            <a href="admin.html" class="nav-item" style="margin-left:auto;text-decoration:none;"><span class="nav-icon">⚙️</span> Admin</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- DASHBOARD -->
+        <div id="page-dashboard" class="page active">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+                <div style="display:flex;align-items:center;gap:1.5rem;">
+                    <h2 style="font-size:1.25rem;font-weight:600;">Overview</h2>
+                    <div class="product-filter">
+                        <label>Product:</label>
+                        <select id="productFilter" class="product-select" onchange="setProductFilter(this.value)">
+                            <option value="">All Products</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="quick-filters">
+                    <div class="filter-chip active" onclick="setDashboardFilter('all', this)">All Time</div>
+                    <div class="filter-chip" onclick="setDashboardFilter('today', this)">Today</div>
+                    <div class="filter-chip" onclick="setDashboardFilter('yesterday', this)">Yesterday</div>
+                    <div class="filter-chip" onclick="setDashboardFilter('week', this)">This Week</div>
+                    <div class="filter-chip" onclick="setDashboardFilter('month', this)">This Month</div>
+                    <div class="filter-chip" onclick="toggleDatePicker()" id="customDateChip">Custom</div>
+                </div>
+                <div id="customDatePicker" style="display:none;margin-top:0.5rem;gap:0.5rem;align-items:center;">
+                    <input type="date" id="filterDateFrom" class="filter-input" style="width:auto;padding:6px 10px;font-size:0.8rem;">
+                    <span style="color:var(--text-muted);">to</span>
+                    <input type="date" id="filterDateTo" class="filter-input" style="width:auto;padding:6px 10px;font-size:0.8rem;">
+                    <button onclick="applyCustomDateFilter()" style="padding:6px 12px;background:var(--primary);color:white;border:none;border-radius:6px;cursor:pointer;font-size:0.8rem;">Apply</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card green"><div class="stat-icon">💰</div><div class="stat-label">Total Revenue</div><div class="stat-value" id="statRevenue">$0</div></div>
+                <div class="stat-card blue"><div class="stat-icon">📦</div><div class="stat-label">Total Orders</div><div class="stat-value" id="statOrders">0</div></div>
+                <div class="stat-card purple"><div class="stat-icon">👥</div><div class="stat-label">Customers</div><div class="stat-value" id="statCustomers">0</div></div>
+                <div class="stat-card yellow"><div class="stat-icon">↩️</div><div class="stat-label">Refunds</div><div class="stat-value" id="statRefunds">0</div></div>
+                <div class="stat-card red"><div class="stat-icon">⚠️</div><div class="stat-label">Chargebacks</div><div class="stat-value" id="statChargebacks">0</div></div>
+                <div class="stat-card blue"><div class="stat-icon">📅</div><div class="stat-label" id="todayLabel">Today</div><div class="stat-value" id="statToday">0</div></div>
+                <div class="stat-card purple"><div class="stat-icon">📆</div><div class="stat-label" id="yesterdayLabel">Yesterday</div><div class="stat-value" id="statYesterday">0</div></div>
+            </div>
+
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <!-- Total Sales Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Total Sales</div>
+                            <div class="chart-value" id="chartTotalSales">$0.00</div>
+                        </div>
+                        <div class="chart-change" id="salesChange">--</div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="totalSalesChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Sales Breakdown (Donut) -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Sales</div>
+                            <div class="chart-value" id="chartSalesCount">0</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="salesDonutChart"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div> New Sales <span id="newSalesCount">0</span></div>
+                        <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div> Recurring <span id="recurringSalesCount">0</span></div>
+                    </div>
+                </div>
+
+                <!-- Customers Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Customers</div>
+                            <div class="chart-value" id="chartCustomers">0</div>
+                        </div>
+                        <div class="chart-change" id="customersChange">--</div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="customersChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">📦</span> Recent Orders <span id="recentOrdersCount" style="font-size:0.75rem;color:var(--text-muted);font-weight:400;"></span></div>
+                        <button class="btn btn-secondary" onclick="showPage('orders')">View All →</button>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div class="loading-overlay" id="recentOrdersLoader"><div class="spinner"></div></div>
+                        <div class="table-container scrollable" style="max-height:500px;">
+                            <table>
+                                <thead style="position:sticky;top:0;z-index:1;"><tr><th>Order</th><th>Customer</th><th>Affiliate</th><th>Revenue</th><th>Risk</th><th>Status</th></tr></thead>
+                                <tbody id="recentOrdersTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="loadMoreContainer" style="display:none;padding:12px;text-align:center;border-top:1px solid var(--border);">
+                            <button class="btn btn-secondary" onclick="loadMoreRecentOrders()" id="loadMoreBtn">Load More Orders</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">🏆</span> Top Affiliates</div>
+                        <div id="topAffiliatesEarnings" style="font-size:0.8rem;color:var(--text-muted);"></div>
+                    </div>
+                    <div class="card-body" style="padding:0;"><div id="topAffiliatesList"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profit Calculator -->
+        <div class="card" style="margin-top:1.5rem;">
+            <div class="card-header">
+                <div class="card-title"><span class="card-title-icon">🧮</span> Profit Calculator</div>
+            </div>
+            <div class="card-body">
+                <div style="display:flex;gap:1rem;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;">
+                    <div style="flex:1;min-width:200px;">
+                        <label style="display:block;font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem;">Custom CPA ($)</label>
+                        <input type="number" id="calcCPA" value="120" min="0" step="0.01" class="filter-input" style="width:100%;padding:10px;font-size:1rem;">
+                    </div>
+                    <button onclick="calculateProfit()" class="btn btn-primary" style="padding:10px 24px;">Calculate</button>
+                </div>
+
+                <h4 style="margin-bottom:1rem;color:var(--text);font-size:0.9rem;display:flex;align-items:center;gap:0.5rem;">
+                    <span style="color:#10b981;">🛒</span> One-Time Purchase Products
+                </h4>
+                <div class="table-container">
+                    <table id="profitCalcTable">
+                        <thead>
+                            <tr>
+                                <th>Package</th>
+                                <th>Base Price</th>
+                                <th>BG Fee (10%)</th>
+                                <th>BG Hold (10%)</th>
+                                <th>CPA</th>
+                                <th>Fullstack</th>
+                                <th style="color:#10b981;">Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="profitCalcBody">
+                            <tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:2rem;">Click "Calculate" to see profit breakdown</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="profitNotes" style="margin-top:1rem;padding:12px;background:var(--bg-dark);border-radius:8px;display:none;">
+                    <div style="font-size:0.75rem;color:var(--text-muted);line-height:1.6;">
+                        <strong style="color:var(--text);">Formula:</strong> Profit = Base Price - BG Fee (10%) - BG Hold (10%) - CPA - Fullstack ($6.05/bottle)<br>
+                        <strong style="color:var(--text);">Note:</strong> BG Hold is returned after 6 months (minus refunds/chargebacks)
+                    </div>
+                </div>
+
+                <!-- Subscription Products Table -->
+                <h4 style="margin-top:2rem;margin-bottom:1rem;color:var(--text);font-size:0.9rem;display:flex;align-items:center;gap:0.5rem;">
+                    <span style="color:#a78bfa;">📅</span> Subscription Products
+                    <span style="font-size:0.75rem;color:var(--text-muted);font-weight:400;">(Initial vs Recurring)</span>
+                </h4>
+                <div class="table-container">
+                    <table id="subProfitCalcTable">
+                        <thead>
+                            <tr>
+                                <th>Package</th>
+                                <th>Initial Price</th>
+                                <th>Recurring Price</th>
+                                <th>BG Fee (10%)</th>
+                                <th>BG Hold (10%)</th>
+                                <th>CPA</th>
+                                <th>Fullstack</th>
+                                <th style="color:#a78bfa;">Initial Profit</th>
+                                <th style="color:#10b981;">Recurring Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subProfitCalcBody">
+                            <tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:2rem;">Click "Calculate" to see subscription profit breakdown</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="subProfitNotes" style="margin-top:1rem;padding:12px;background:var(--bg-dark);border-radius:8px;display:none;">
+                    <div style="font-size:0.75rem;color:var(--text-muted);line-height:1.6;">
+                        <strong style="color:var(--text);">Initial:</strong> Profit = Initial Price - BG Fee - BG Hold - CPA - Fullstack<br>
+                        <strong style="color:var(--text);">Recurring:</strong> Profit = Recurring Price - BG Fee - BG Hold - Fullstack <span style="color:#10b981;">(NO CPA)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- ORDERS -->
+        <div id="page-orders" class="page">
+            <div class="card">
+                <div class="card-header" style="flex-wrap:wrap;">
+                    <div class="card-title"><span class="card-title-icon">📦</span> All Orders</div>
+                    <div class="filters" style="flex-wrap:wrap;gap:0.5rem;">
+                        <div class="quick-filters">
+                            <div class="filter-chip active" onclick="setOrderFilter('all', this)">All</div>
+                            <div class="filter-chip" onclick="setOrderFilter('today', this)">Today</div>
+                            <div class="filter-chip" onclick="setOrderFilter('yesterday', this)">Yesterday</div>
+                            <div class="filter-chip" onclick="setOrderFilter('week', this)">This Week</div>
+                        </div>
+                        <select id="orderStatus" class="filter-input" onchange="applyOrderFilters()">
+                            <option value="">All Status</option>
+                            <option value="completed">Completed</option>
+                            <option value="refunded">Refunded</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="chargeback">Chargeback</option>
+                        </select>
+                        <select id="orderTrackedProduct" class="filter-input" onchange="applyOrderFilters()">
+                            <option value="">All Products</option>
+                        </select>
+                        <select id="orderAffiliate" class="filter-input" onchange="applyOrderFilters()">
+                            <option value="">All Affiliates</option>
+                        </select>
+                        <div class="filter-group">
+                            <input type="date" id="orderDateFrom" class="filter-input" onchange="applyOrderFilters()" title="From Date">
+                            <span style="color:var(--text-muted);">to</span>
+                            <input type="date" id="orderDateTo" class="filter-input" onchange="applyOrderFilters()" title="To Date">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="loading-overlay" id="ordersLoader"><div class="spinner"></div></div>
+                    <div class="table-container">
+                        <table><thead><tr><th>Order ID</th><th>Product</th><th>Customer</th><th>Amount</th><th>Affiliate</th><th>Status</th><th>Date</th></tr></thead>
+                        <tbody id="allOrdersTable"></tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CUSTOMERS -->
+        <div id="page-customers" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span class="card-title-icon">👥</span> Customer Database</div>
+                    <div class="filters">
+                        <select id="customerTrackedProduct" class="filter-input" onchange="searchCustomers()">
+                            <option value="">All Products</option>
+                        </select>
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="customerSearch" class="filter-input" placeholder="Search name, email, phone..." onkeyup="searchCustomers()">
+                        </div>
+                        <select id="customerCountry" class="filter-input" onchange="searchCustomers()">
+                            <option value="">All Countries</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="loading-overlay" id="customersLoader"><div class="spinner"></div></div>
+                    <div class="table-container">
+                        <table><thead><tr><th>Customer</th><th>Email</th><th>Phone</th><th>Country</th><th>Orders</th><th>Total Spent</th><th>Last Order</th></tr></thead>
+                        <tbody id="customersTable"></tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AFFILIATES -->
+        <div id="page-affiliates" class="page">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+                <h2 style="font-size:1.25rem;font-weight:600;">Affiliate Performance</h2>
+                <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+                    <select id="affiliateTrackedProduct" class="filter-input" onchange="loadAffiliates()" style="width:auto;">
+                        <option value="">All Products</option>
+                    </select>
+                    <div class="quick-filters">
+                        <div class="filter-chip active" onclick="setAffiliateFilter('all', this)">All Time</div>
+                        <div class="filter-chip" onclick="setAffiliateFilter('today', this)">Today</div>
+                        <div class="filter-chip" onclick="setAffiliateFilter('yesterday', this)">Yesterday</div>
+                        <div class="filter-chip" onclick="setAffiliateFilter('week', this)">This Week</div>
+                        <div class="filter-chip" onclick="setAffiliateFilter('month', this)">This Month</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span class="card-title-icon">📊</span> Affiliate Rankings</div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="loading-overlay" id="affiliatesLoader"><div class="spinner"></div></div>
+                    <div class="table-container">
+                        <table><thead><tr><th>#</th><th>Affiliate</th><th>Orders</th><th>Risk Score</th></tr></thead>
+                        <tbody id="affiliatesTable"></tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal-overlay" id="orderModal" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title">📦 Order Details</div>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="orderDetails"></div>
+        </div>
+    </div>
+
+    <!-- Customer Modal -->
+    <div class="modal-overlay" id="customerModal" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title">👤 Customer Details</div>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="customerDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== PIN & BIOMETRIC PROTECTION ====================
+        const VALID_PIN = '786547';
+        const CREDENTIAL_KEY = 'buygoods_webauthn_credential';
+        const APP_ID = 'buygoods-analytics-dashboard';
+
+        // Check if WebAuthn is supported
+        const webAuthnSupported = window.PublicKeyCredential !== undefined;
+
+        // Initialize on page load
+        (async function initAuth() {
+            document.getElementById('pinOverlay').classList.remove('hidden');
+
+            // Check if biometric credentials are saved - auto-start verification
+            if (webAuthnSupported && localStorage.getItem(CREDENTIAL_KEY)) {
+                // Show verifying message and hide PIN entry temporarily
+                document.getElementById('pinSubtitle').textContent = 'Verifying with Windows Hello...';
+                document.getElementById('pinEntrySection').style.display = 'none';
+
+                try {
+                    const credentialId = localStorage.getItem(CREDENTIAL_KEY);
+                    const rawId = Uint8Array.from(atob(credentialId), c => c.charCodeAt(0));
+
+                    const getOptions = {
+                        publicKey: {
+                            challenge: new Uint8Array(32),
+                            allowCredentials: [{ type: "public-key", id: rawId, transports: ["internal"] }],
+                            userVerification: "required",
+                            timeout: 60000
+                        }
+                    };
+
+                    await navigator.credentials.get(getOptions);
+                    // Success - unlock dashboard
+                    document.getElementById('pinOverlay').classList.add('hidden');
+                    return; // Exit early on success
+                } catch (error) {
+                    console.log('Auto biometric verification cancelled or failed, showing options');
+                    // Show fallback: PIN entry + Windows Hello button
+                    document.getElementById('pinEntrySection').style.display = 'block';
+                    document.getElementById('biometricSection').style.display = 'block';
+                    document.getElementById('pinSubtitle').textContent = 'Enter PIN or use Windows Hello';
+                }
+            }
+
+            // Focus first PIN input
+            setTimeout(() => document.querySelector('.pin-digit').focus(), 100);
+        })();
+
+        // PIN input handling
+        const pinDigits = document.querySelectorAll('.pin-digit');
+        pinDigits.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
+                if (value && index < 5) {
+                    pinDigits[index + 1].focus();
+                }
+                // Auto-submit when all digits filled
+                const fullPin = Array.from(pinDigits).map(d => d.value).join('');
+                if (fullPin.length === 6) {
+                    verifyPin();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    pinDigits[index - 1].focus();
+                }
+                if (e.key === 'Enter') {
+                    verifyPin();
+                }
+            });
+        });
+
+        function verifyPin() {
+            const enteredPin = Array.from(pinDigits).map(d => d.value).join('');
+            const errorEl = document.getElementById('pinError');
+
+            if (enteredPin === VALID_PIN) {
+                // Success - check if we should offer biometric setup
+                pinDigits.forEach(d => d.classList.add('success'));
+
+                if (webAuthnSupported && !localStorage.getItem(CREDENTIAL_KEY)) {
+                    // Show save credentials prompt
+                    setTimeout(() => {
+                        document.getElementById('pinEntrySection').style.display = 'none';
+                        document.getElementById('biometricSection').style.display = 'none';
+                        document.getElementById('saveCredentialsSection').style.display = 'block';
+                        document.getElementById('pinSubtitle').style.display = 'none';
+                    }, 300);
+                } else {
+                    // Just unlock
+                    setTimeout(() => {
+                        document.getElementById('pinOverlay').classList.add('hidden');
+                    }, 300);
+                }
+            } else {
+                // Error
+                pinDigits.forEach(d => {
+                    d.classList.add('error');
+                    d.value = '';
+                });
+                errorEl.classList.add('show');
+                pinDigits[0].focus();
+                setTimeout(() => {
+                    pinDigits.forEach(d => d.classList.remove('error'));
+                }, 500);
+            }
+        }
+
+        // Setup biometric credentials (Windows Hello)
+        async function setupBiometric() {
+            try {
+                // Generate a random user ID
+                const userId = new Uint8Array(16);
+                window.crypto.getRandomValues(userId);
+
+                // Create credential options
+                const createOptions = {
+                    publicKey: {
+                        challenge: new Uint8Array(32),
+                        rp: {
+                            name: "BuyGoods Analytics",
+                            id: window.location.hostname
+                        },
+                        user: {
+                            id: userId,
+                            name: "analytics_user",
+                            displayName: "Analytics User"
+                        },
+                        pubKeyCredParams: [
+                            { type: "public-key", alg: -7 },  // ES256
+                            { type: "public-key", alg: -257 } // RS256
+                        ],
+                        authenticatorSelection: {
+                            authenticatorAttachment: "platform",
+                            userVerification: "required"
+                        },
+                        timeout: 60000
+                    }
+                };
+
+                // Create the credential
+                const credential = await navigator.credentials.create(createOptions);
+
+                // Store credential ID for future authentication
+                const credentialId = btoa(String.fromCharCode(...new Uint8Array(credential.rawId)));
+                localStorage.setItem(CREDENTIAL_KEY, credentialId);
+
+                // Success - unlock dashboard
+                document.getElementById('pinOverlay').classList.add('hidden');
+            } catch (error) {
+                console.error('Biometric setup failed:', error);
+                alert('Could not set up Windows Hello. You can try again later from settings.');
+                skipBiometric();
+            }
+        }
+
+        // Skip biometric setup
+        function skipBiometric() {
+            document.getElementById('pinOverlay').classList.add('hidden');
+        }
+
+        // Login with biometric (Windows Hello)
+        async function loginWithBiometric() {
+            try {
+                const credentialId = localStorage.getItem(CREDENTIAL_KEY);
+                if (!credentialId) {
+                    alert('No saved credentials found. Please use PIN.');
+                    return;
+                }
+
+                // Convert stored credential ID back to ArrayBuffer
+                const rawId = Uint8Array.from(atob(credentialId), c => c.charCodeAt(0));
+
+                const getOptions = {
+                    publicKey: {
+                        challenge: new Uint8Array(32),
+                        allowCredentials: [{
+                            type: "public-key",
+                            id: rawId,
+                            transports: ["internal"]
+                        }],
+                        userVerification: "required",
+                        timeout: 60000
+                    }
+                };
+
+                // Authenticate
+                await navigator.credentials.get(getOptions);
+
+                // Success - unlock dashboard
+                document.getElementById('pinOverlay').classList.add('hidden');
+            } catch (error) {
+                console.error('Biometric login failed:', error);
+                // Don't show error for user cancellation
+                if (error.name !== 'NotAllowedError') {
+                    alert('Windows Hello authentication failed. Please use PIN.');
+                }
+            }
+        }
+        // ==================== END PIN & BIOMETRIC PROTECTION ====================
+
+        const API = './api.php';
+        let allOrders = [], allCustomers = [], currentOrderFilter = 'all', currentDashboardFilter = 'all', currentAffiliateFilter = 'all';
+        let recentOrdersData = [], recentOrdersDisplayed = 0;
+        const RECENT_ORDERS_PAGE_SIZE = 15;
+        let currentProductFilter = ''; // Empty means all products
+        let trackedProducts = [];
+
+        // Chart instances
+        let totalSalesChart = null;
+        let salesDonutChart = null;
+        let customersChart = null;
+
+        // Utilities
+        const $ = id => document.getElementById(id);
+        const formatCurrency = amt => new Intl.NumberFormat('en-US', {style:'currency',currency:'USD'}).format(amt||0);
+        const formatDate = d => d ? new Date(d).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) : '-';
+        const formatDateTime = d => d ? new Date(d).toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '-';
+        const formatDateTimePKT = d => {
+            if (!d) return '-';
+            const date = new Date(d);
+            const usa = date.toLocaleString('en-US', {timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+            const pkt = date.toLocaleString('en-US', {timeZone:'Asia/Karachi',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+            return `${usa} (EST)<br><small style="color:var(--text-muted)">PKT: ${pkt}</small>`;
+        };
+        const formatDatePKT = d => {
+            if (!d) return '-';
+            const date = new Date(d);
+            const usa = date.toLocaleString('en-US', {timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric'});
+            const pkt = date.toLocaleString('en-US', {timeZone:'Asia/Karachi',month:'short',day:'numeric',year:'numeric'});
+            return `${usa} (EST)<br><small style="color:var(--text-muted)">PKT: ${pkt}</small>`;
+        };
+        const displayVal = v => (!v || v==='null') ? '<span class="detail-value empty">Not provided</span>' : v;
+        const statusBadge = s => `<span class="badge ${s==='completed'?'green':s==='refunded'||s==='chargeback'?'red':s==='cancelled'?'gray':'blue'}">${s}</span>`;
+        const getFraudScoreBadge = score => {
+            const s = parseInt(score) || 0;
+            if (s >= 90) return `<span class="badge red" style="font-size:1rem;padding:6px 12px;">${s} - HIGH RISK</span>`;
+            if (s >= 85) return `<span class="badge" style="background:rgba(234,88,12,0.1);color:#c2410c;font-size:1rem;padding:6px 12px;">${s} - Risky</span>`;
+            if (s >= 75) return `<span class="badge yellow" style="font-size:1rem;padding:6px 12px;">${s} - Suspicious</span>`;
+            return `<span class="badge green" style="font-size:1rem;padding:6px 12px;">${s} - Low Risk</span>`;
+        };
+
+        // Custom Fraud Analysis
+        const isAllCaps = str => str && str.length > 2 && str === str.toUpperCase() && /[A-Z]/.test(str);
+        const hasMiddleName = name => name && name.trim().split(/\s+/).length >= 3;
+        const getCustomFraudAnalysis = order => {
+            const flags = [];
+            let riskScore = 0;
+
+            // Check name for ALL CAPS
+            if (isAllCaps(order.customer_name)) {
+                flags.push({ label: 'Name in ALL CAPS', risk: 'high', desc: 'Copy-paste behavior detected' });
+                riskScore += 30;
+            }
+
+            // Check address for ALL CAPS
+            if (isAllCaps(order.customer_address)) {
+                flags.push({ label: 'Address in ALL CAPS', risk: 'high', desc: 'Copy-paste behavior detected' });
+                riskScore += 25;
+            }
+
+            // Check city for ALL CAPS
+            if (isAllCaps(order.customer_city)) {
+                flags.push({ label: 'City in ALL CAPS', risk: 'medium', desc: 'Unusual formatting' });
+                riskScore += 15;
+            }
+
+            // Check email local part for ALL CAPS
+            if (order.customer_email) {
+                const emailLocal = order.customer_email.split('@')[0];
+                if (isAllCaps(emailLocal)) {
+                    flags.push({ label: 'Email in ALL CAPS', risk: 'high', desc: 'Copy-paste behavior detected' });
+                    riskScore += 20;
+                }
+            }
+
+            // Check for middle name (lower risk indicator)
+            if (hasMiddleName(order.customer_name)) {
+                flags.push({ label: 'Has Middle Name', risk: 'low', desc: 'Slightly unusual, could be legitimate' });
+                riskScore += 5;
+            }
+
+            // Overall risk level
+            let overallRisk = 'low';
+            let riskBadge = '<span class="badge green">Low Risk</span>';
+            if (riskScore >= 50) {
+                overallRisk = 'high';
+                riskBadge = '<span class="badge red">High Risk</span>';
+            } else if (riskScore >= 25) {
+                overallRisk = 'medium';
+                riskBadge = '<span class="badge yellow">Medium Risk</span>';
+            }
+
+            if (flags.length === 0) {
+                return `
+                <div class="detail-section">
+                    <div class="detail-section-header">🔍 Our Fraud Analysis</div>
+                    <div style="padding:1.5rem;text-align:center;">
+                        <span class="badge green" style="font-size:1rem;padding:8px 16px;">✓ No suspicious patterns detected</span>
+                    </div>
+                </div>`;
+            }
+
+            return `
+                <div class="detail-section">
+                    <div class="detail-section-header">🔍 Our Fraud Analysis</div>
+                    <div style="padding:1rem;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+                            <span style="font-weight:600;">Overall Assessment:</span>
+                            ${riskBadge}
+                        </div>
+                        <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">Detected Patterns:</div>
+                        ${flags.map(f => `
+                            <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:${f.risk==='high'?'rgba(239,68,68,0.05)':f.risk==='medium'?'rgba(245,158,11,0.05)':'rgba(16,185,129,0.05)'};border-radius:8px;margin-bottom:0.5rem;">
+                                <span class="badge ${f.risk==='high'?'red':f.risk==='medium'?'yellow':'green'}" style="min-width:70px;text-align:center;">${f.risk.toUpperCase()}</span>
+                                <div>
+                                    <div style="font-weight:500;">${f.label}</div>
+                                    <div style="font-size:0.8rem;color:var(--text-muted);">${f.desc}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>`;
+        };
+        const getRiskIndicator = o => {
+            if (!o.ip_analyzed) return '<span class="badge gray" title="Not analyzed">-</span>';
+            const s = parseInt(o.ip_fraud_score) || 0;
+            const flags = [];
+            if (o.ip_proxy) flags.push('P');
+            if (o.ip_tor) flags.push('T');
+            const flagStr = flags.length ? ` <small>(${flags.join(',')})</small>` : '';
+            if (s >= 90) return `<span class="badge red" title="Fraud Score: ${s}">${s}${flagStr}</span>`;
+            if (s >= 85) return `<span class="badge" style="background:rgba(234,88,12,0.1);color:#c2410c;" title="Fraud Score: ${s}">${s}${flagStr}</span>`;
+            if (s >= 75) return `<span class="badge yellow" title="Fraud Score: ${s}">${s}${flagStr}</span>`;
+            return `<span class="badge green" title="Fraud Score: ${s}">${s}</span>`;
+        };
+
+        // Get order risk score for order history display
+        // This only checks OUR custom patterns (CAPS detection, middle names)
+        // Proxy/TOR are already shown in the IPQS score box
+        const getOrderRiskScore = order => {
+            let riskScore = 0;
+            const flags = [];
+
+            // Custom fraud pattern analysis (our detection only)
+            if (isAllCaps(order.customer_name)) { flags.push('CAPS Name'); riskScore += 35; }
+            if (isAllCaps(order.customer_address)) { flags.push('CAPS Addr'); riskScore += 25; }
+            if (isAllCaps(order.customer_city)) { flags.push('CAPS City'); riskScore += 15; }
+            if (order.customer_email) {
+                const emailLocal = order.customer_email.split('@')[0];
+                if (isAllCaps(emailLocal)) { flags.push('CAPS Email'); riskScore += 20; }
+            }
+            if (hasMiddleName(order.customer_name)) { flags.push('Middle Name'); riskScore += 10; }
+
+            // Determine badge
+            let badge = '<span class="badge green" title="Low risk">✓</span>';
+            const title = flags.length ? flags.join(', ') : 'No issues detected';
+            if (riskScore >= 70) {
+                badge = `<span class="badge red" title="${title}">⚠ High</span>`;
+            } else if (riskScore >= 40) {
+                badge = `<span class="badge yellow" title="${title}">⚡ Med</span>`;
+            } else if (riskScore > 0 && flags.length) {
+                badge = `<span class="badge green" title="${title}">✓</span>`;
+            }
+
+            return { score: riskScore, flags, badge };
+        };
+
+        // Date helpers - using PKT (Pakistan Time) timezone
+        function getPKTDate(date = new Date()) {
+            // Convert to PKT timezone string and parse back
+            const pktStr = date.toLocaleString('en-US', { timeZone: 'Asia/Karachi' });
+            return new Date(pktStr);
+        }
+
+        function getDateRange(filter) {
+            // Get current time in PKT
+            const pktNow = getPKTDate();
+            const today = new Date(pktNow.getFullYear(), pktNow.getMonth(), pktNow.getDate());
+            const yesterday = new Date(today); yesterday.setDate(yesterday.getDate() - 1);
+            const weekStart = new Date(today); weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+            const monthStart = new Date(pktNow.getFullYear(), pktNow.getMonth(), 1);
+
+            switch(filter) {
+                case 'today': return { start: today, end: pktNow };
+                case 'yesterday': return { start: yesterday, end: today };
+                case 'week': return { start: weekStart, end: pktNow };
+                case 'month': return { start: monthStart, end: pktNow };
+                case 'custom': return customDateFrom && customDateTo ? { start: customDateFrom, end: customDateTo } : null;
+                default: return null;
+            }
+        }
+
+        function filterByDate(data, filter) {
+            if (filter === 'all') return data;
+            const range = getDateRange(filter);
+            if (!range) return data;
+            return data.filter(item => {
+                // Convert order date to PKT for comparison
+                const orderDate = getPKTDate(new Date(item.created_at));
+                return orderDate >= range.start && orderDate <= range.end;
+            });
+        }
+
+        // Update time with seconds (ticking clock) - US Eastern & PKT
+        function updateTime() {
+            const now = new Date();
+            const usaDateStr = now.toLocaleDateString('en-US', {timeZone:'America/New_York', weekday:'long', year:'numeric', month:'long', day:'numeric'});
+            const usaTimeStr = now.toLocaleTimeString('en-US', {timeZone:'America/New_York', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true});
+            const pktTime = now.toLocaleString('en-US', {timeZone:'Asia/Karachi', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true});
+            $('currentTime').innerHTML = `${usaDateStr} at ${usaTimeStr} (EST)<br><span class="pkt">PKT: ${pktTime}</span>`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Navigation
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            $('page-'+page).classList.add('active');
+            document.querySelector(`.nav-item[onclick="showPage('${page}')"]`).classList.add('active');
+            if(page==='orders') loadAllOrders();
+            if(page==='customers') loadCustomers();
+            if(page==='affiliates') loadAffiliates();
+        }
+
+        // Show/hide loader
+        const showLoader = id => $(id)?.classList.add('active');
+        const hideLoader = id => $(id)?.classList.remove('active');
+
+        // Dashboard Filter
+        function setDashboardFilter(filter, el) {
+            currentDashboardFilter = filter;
+            el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            // Hide custom date picker when selecting other filters
+            $('customDatePicker').style.display = 'none';
+            showLoader('recentOrdersLoader');
+            loadDashboard();
+        }
+
+        // Custom date range variables
+        let customDateFrom = null;
+        let customDateTo = null;
+
+        function toggleDatePicker() {
+            const picker = $('customDatePicker');
+            const chip = $('customDateChip');
+            if (picker.style.display === 'none' || picker.style.display === '') {
+                picker.style.display = 'flex';
+                // Set default dates (today)
+                const today = new Date().toISOString().split('T')[0];
+                if (!$('filterDateFrom').value) $('filterDateFrom').value = today;
+                if (!$('filterDateTo').value) $('filterDateTo').value = today;
+            } else {
+                picker.style.display = 'none';
+            }
+        }
+
+        function applyCustomDateFilter() {
+            const fromDate = $('filterDateFrom').value;
+            const toDate = $('filterDateTo').value;
+
+            if (!fromDate || !toDate) {
+                alert('Please select both From and To dates');
+                return;
+            }
+
+            customDateFrom = new Date(fromDate);
+            customDateTo = new Date(toDate);
+            customDateTo.setHours(23, 59, 59, 999); // Include entire day
+
+            // Set custom filter active
+            currentDashboardFilter = 'custom';
+            document.querySelectorAll('.quick-filters .filter-chip').forEach(c => c.classList.remove('active'));
+            $('customDateChip').classList.add('active');
+
+            showLoader('recentOrdersLoader');
+            loadDashboard();
+        }
+
+        // Order Filter
+        function setOrderFilter(filter, el) {
+            currentOrderFilter = filter;
+            el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            applyOrderFilters();
+        }
+
+        function applyOrderFilters() {
+            showLoader('ordersLoader');
+            // Small delay to show loader
+            setTimeout(() => {
+            let filtered = filterByDate(allOrders, currentOrderFilter);
+
+            // Status filter
+            const status = $('orderStatus').value;
+            if (status) filtered = filtered.filter(o => o.status === status);
+
+            // Tracked Product filter
+            const trackedProduct = $('orderTrackedProduct').value;
+            if (trackedProduct) filtered = filtered.filter(o => String(o.tracked_product_id) === trackedProduct);
+
+            // Affiliate filter
+            const affiliate = $('orderAffiliate').value;
+            if (affiliate) filtered = filtered.filter(o => o.affiliate_id === affiliate);
+
+            // Date range filter
+            const dateFrom = $('orderDateFrom').value;
+            const dateTo = $('orderDateTo').value;
+            if (dateFrom) {
+                const fromDate = new Date(dateFrom);
+                filtered = filtered.filter(o => new Date(o.created_at) >= fromDate);
+            }
+            if (dateTo) {
+                const toDate = new Date(dateTo);
+                toDate.setHours(23, 59, 59, 999);
+                filtered = filtered.filter(o => new Date(o.created_at) <= toDate);
+            }
+
+            renderAllOrdersTable(filtered);
+            hideLoader('ordersLoader');
+            }, 100);
+        }
+
+        // Affiliate Filter
+        function setAffiliateFilter(filter, el) {
+            currentAffiliateFilter = filter;
+            el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            showLoader('affiliatesLoader');
+            loadAffiliates();
+        }
+
+        // Load Products for filter dropdowns
+        async function loadProducts() {
+            try {
+                const res = await fetch(API+'?action=tracked_products').then(r=>r.json());
+                if (res.success && res.data) {
+                    trackedProducts = res.data;
+                    const options = '<option value="">All Products</option>' +
+                        trackedProducts.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+                    // Populate all product filter dropdowns
+                    ['productFilter', 'orderTrackedProduct', 'customerTrackedProduct', 'affiliateTrackedProduct'].forEach(id => {
+                        const el = $(id);
+                        if (el) el.innerHTML = options;
+                    });
+
+                    // Set MetaTrim as default selected product for dashboard
+                    const metaTrim = trackedProducts.find(p => p.name.toLowerCase().includes('metatrim') || p.name.toLowerCase().includes('meta trim'));
+                    if (metaTrim) {
+                        $('productFilter').value = metaTrim.id;
+                        currentProductFilter = metaTrim.id;
+                    }
+                }
+            } catch(e) { console.error('Error loading products:', e); }
+        }
+
+        // Set product filter (dashboard only)
+        function setProductFilter(productId) {
+            currentProductFilter = productId;
+            loadDashboard();
+        }
+
+        // Calculate order financials on the fly (used by Dashboard and Orders table)
+        function calculateOrderFinancials(order) {
+            const collected = parseFloat(order.product_price||0) * parseFloat(order.quantity||1);
+
+            // Base price lookup table by bottle count
+            // Format: { product_bottles: base_price_with_shipping }
+            const basePriceByBottles = {
+                'metatrim_1': 68.99,
+                'metatrim_2': 177.99,   // $158 + $19.99 shipping
+                'metatrim_3': 177.00,
+                'metatrim_6': 234.00,
+                'prostaprime_1': 68.99,
+                'prostaprime_2': 177.99,
+                'prostaprime_3': 177.00,
+                'prostaprime_6': 234.00
+            };
+
+            // Extract bottle count from product_name (e.g., "Meta Trim BHB 2 Bottle")
+            let bottles = 1;
+            let productType = 'metatrim'; // default
+            const productName = (order.product_name || '').toLowerCase();
+
+            // Determine product type
+            if (productName.includes('prostaprime') || productName.includes('prosta prime')) {
+                productType = 'prostaprime';
+            }
+
+            // Extract bottle count
+            const bottleMatch = productName.match(/(\d+)\s*bottle/i);
+            if (bottleMatch) {
+                bottles = parseInt(bottleMatch[1]);
+            }
+
+            // Build lookup key and get base price
+            const lookupKey = `${productType}_${bottles}`;
+            const basePrice = basePriceByBottles[lookupKey] || null;
+
+            // Calculate taxes: Collected - Base Price
+            const taxes = basePrice ? Math.max(0, collected - basePrice) : 0;
+
+            // BuyGoods fees (10% each)
+            const bgFee = collected * 0.10;
+            const bgHold = collected * 0.10;
+
+            // CPA (affiliate commission) - check multiple possible field names
+            const cpa = parseFloat(order.commission || order.affiliate_commission || 0);
+
+            // Net Amount: Collected - Taxes - Fees - CPA
+            const netAmount = collected - taxes - bgFee - bgHold - cpa;
+
+            // Total bottles (for Fullstack calculation)
+            const totalBottles = bottles * (parseInt(order.quantity) || 1);
+
+            return { collected, taxes, bgFee, bgHold, cpa, netAmount, bottles: totalBottles };
+        }
+
+        // Load Dashboard
+        async function loadDashboard() {
+            try {
+                let url = API+'?action=orders&limit=1000';
+                if (currentProductFilter) url += '&tracked_product_id=' + currentProductFilter;
+                const res = await fetch(url).then(r=>r.json());
+                if (!res.success) return;
+
+                let orders = res.data;
+                let filtered = filterByDate(orders, currentDashboardFilter);
+
+                // Calculate stats using calculateOrderFinancials function
+                let revenue = 0, refunds = 0, chargebacks = 0;
+                let totalTaxes = 0, totalProcessingFee = 0, totalAllowance = 0, totalAffiliateCPA = 0;
+                let totalBottles = 0;
+
+                filtered.forEach(o => {
+                    if (o.status === 'completed') {
+                        // Use the same calculation function as Orders table
+                        const fin = calculateOrderFinancials(o);
+
+                        revenue += fin.collected;
+                        totalTaxes += fin.taxes;
+                        totalProcessingFee += fin.bgFee;
+                        totalAllowance += fin.bgHold;
+                        totalAffiliateCPA += fin.cpa;
+                        totalBottles += fin.bottles;
+                    }
+                    if (o.status === 'refunded') refunds++;
+                    if (o.status === 'chargeback') chargebacks++;
+                });
+
+                // Calculate Net Amount: Collected - Taxes - Processing Fee - Allowance - CPA
+                const netAmount = revenue - totalTaxes - totalProcessingFee - totalAllowance - totalAffiliateCPA;
+
+                const uniqueCustomers = [...new Set(filtered.map(o=>o.customer_email).filter(e=>e))];
+
+                // Calculate today/yesterday orders (PKT - Pakistan Time)
+                const pktNow = getPKTDate();
+                const pktToday = new Date(pktNow.getFullYear(), pktNow.getMonth(), pktNow.getDate());
+                const pktYesterday = new Date(pktToday); pktYesterday.setDate(pktYesterday.getDate() - 1);
+                const pktTomorrow = new Date(pktToday); pktTomorrow.setDate(pktTomorrow.getDate() + 1);
+
+                let todayOrders = 0, yesterdayOrders = 0;
+                orders.forEach(o => {
+                    const orderDate = getPKTDate(new Date(o.created_at));
+                    if (orderDate >= pktToday && orderDate < pktTomorrow) todayOrders++;
+                    else if (orderDate >= pktYesterday && orderDate < pktToday) yesterdayOrders++;
+                });
+
+                // Format dates for labels
+                const todayStr = pktToday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                const yesterdayStr = pktYesterday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+                $('statRevenue').textContent = formatCurrency(revenue - totalProcessingFee);
+                $('statOrders').textContent = filtered.length;
+                $('statCustomers').textContent = uniqueCustomers.length;
+                $('statRefunds').textContent = refunds;
+                $('statChargebacks').textContent = chargebacks;
+                $('todayLabel').textContent = `Today (${todayStr})`;
+                $('statToday').textContent = todayOrders;
+                $('yesterdayLabel').textContent = `Yesterday (${yesterdayStr})`;
+                $('statYesterday').textContent = yesterdayOrders;
+
+                // Fetch withdrawals for the current filter period
+                let totalWithdrawn = 0;
+                try {
+                    const wRes = await fetch(API+'?action=withdrawals').then(r=>r.json());
+                    if (wRes.success && wRes.data) {
+                        // Filter withdrawals by current date filter and product filter
+                        let filteredWithdrawals = wRes.data;
+                        if (currentProductFilter) {
+                            filteredWithdrawals = filteredWithdrawals.filter(w => String(w.product_id) === String(currentProductFilter));
+                        }
+                        // Sum up withdrawn amounts
+                        filteredWithdrawals.forEach(w => {
+                            totalWithdrawn += parseFloat(w.amount || 0);
+                        });
+                    }
+                } catch(e) { console.log('Withdrawals not available yet'); }
+
+                // Recent orders (use filtered data based on time filter)
+                recentOrdersData = filtered;
+                recentOrdersDisplayed = 0;
+                renderRecentOrders(true); // true = reset
+                // Top affiliates
+                renderTopAffiliates(filtered);
+
+                // Update charts (pass revenue minus BG fee to match Total Revenue stat)
+                updateCharts(filtered, revenue - totalProcessingFee, uniqueCustomers.length);
+
+                allOrders = orders;
+                hideLoader('recentOrdersLoader');
+            } catch(e) { console.error(e); hideLoader('recentOrdersLoader'); }
+        }
+
+        // ==================== CHART FUNCTIONS ====================
+        function updateCharts(orders, totalRevenue, totalCustomers) {
+            // Group orders by date for line charts
+            const ordersByDate = {};
+            const customersByDate = {};
+            let newSales = 0, recurringSales = 0;
+
+            orders.forEach(o => {
+                const date = new Date(o.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+                // Count orders by date for Total Sales chart
+                if (!ordersByDate[date]) ordersByDate[date] = 0;
+                if (o.status === 'completed') {
+                    ordersByDate[date] += parseFloat(o.product_price || 0) * parseFloat(o.quantity || 1);
+                }
+
+                // Count unique customers by date
+                if (!customersByDate[date]) customersByDate[date] = new Set();
+                if (o.customer_email) customersByDate[date].add(o.customer_email);
+
+                // Count new vs recurring for donut chart
+                if (o.status === 'completed') {
+                    // Check if this is a recurring charge based on product name or order type
+                    // For simplicity, count all as new sales (recurring would come from recurring_charges table)
+                    newSales++;
+                }
+            });
+
+            // Get last 7 dates for labels
+            const dates = Object.keys(ordersByDate).slice(-7);
+            const salesData = dates.map(d => ordersByDate[d] || 0);
+            const customersData = dates.map(d => customersByDate[d] ? customersByDate[d].size : 0);
+
+            // Update chart header values
+            $('chartTotalSales').textContent = formatCurrency(totalRevenue);
+            $('chartSalesCount').textContent = orders.filter(o => o.status === 'completed').length;
+            $('chartCustomers').textContent = totalCustomers;
+
+            // Total Sales Line Chart
+            const salesCtx = $('totalSalesChart');
+            if (salesCtx) {
+                if (totalSalesChart) totalSalesChart.destroy();
+                totalSalesChart = new Chart(salesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: dates.length ? dates : ['No data'],
+                        datasets: [{
+                            label: 'Revenue',
+                            data: salesData.length ? salesData : [0],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#10b981'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { display: true, grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+                            y: { display: true, grid: { color: '#334155' }, ticks: { color: '#94a3b8', font: { size: 10 }, callback: v => '$' + v } }
+                        }
+                    }
+                });
+            }
+
+            // Sales Donut Chart (New vs Recurring)
+            const donutCtx = $('salesDonutChart');
+            if (donutCtx) {
+                if (salesDonutChart) salesDonutChart.destroy();
+                // For now, show all as "New" since recurring data comes from separate table
+                const completedOrders = orders.filter(o => o.status === 'completed').length;
+                salesDonutChart = new Chart(donutCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['New', 'Recurring'],
+                        datasets: [{
+                            data: [completedOrders, 0], // Update when recurring data is available
+                            backgroundColor: ['#10b981', '#3b82f6'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: { legend: { display: false } }
+                    }
+                });
+                // Update legend text
+                const newSpan = document.querySelector('.chart-legend span:first-child');
+                const recSpan = document.querySelector('.chart-legend span:last-child');
+                if (newSpan) newSpan.innerHTML = `<span style="width:8px;height:8px;background:#10b981;border-radius:50%;display:inline-block;margin-right:4px"></span> New: ${completedOrders}`;
+                if (recSpan) recSpan.innerHTML = `<span style="width:8px;height:8px;background:#3b82f6;border-radius:50%;display:inline-block;margin-right:4px"></span> Recurring: 0`;
+            }
+
+            // Customers Line Chart
+            const customersCtx = $('customersChart');
+            if (customersCtx) {
+                if (customersChart) customersChart.destroy();
+                customersChart = new Chart(customersCtx, {
+                    type: 'line',
+                    data: {
+                        labels: dates.length ? dates : ['No data'],
+                        datasets: [{
+                            label: 'Customers',
+                            data: customersData.length ? customersData : [0],
+                            borderColor: '#8b5cf6',
+                            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#8b5cf6'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { display: true, grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+                            y: { display: true, grid: { color: '#334155' }, ticks: { color: '#94a3b8', font: { size: 10 } } }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Affiliate color mapping
+        const affiliateColors = {};
+        const colorPalette = [
+            { bg: '#dbeafe', text: '#1e40af' },  // Blue
+            { bg: '#dcfce7', text: '#166534' },  // Green
+            { bg: '#fef3c7', text: '#92400e' },  // Amber
+            { bg: '#fce7f3', text: '#9d174d' },  // Pink
+            { bg: '#e0e7ff', text: '#3730a3' },  // Indigo
+            { bg: '#fed7aa', text: '#c2410c' },  // Orange
+            { bg: '#d1fae5', text: '#065f46' },  // Emerald
+            { bg: '#ede9fe', text: '#5b21b6' },  // Violet
+        ];
+        let colorIndex = 0;
+
+        const getAffiliateColor = (affId) => {
+            if (!affId || affId === '0') return { bg: '#f1f5f9', text: '#64748b' };
+            if (!affiliateColors[affId]) {
+                affiliateColors[affId] = colorPalette[colorIndex % colorPalette.length];
+                colorIndex++;
+            }
+            return affiliateColors[affId];
+        };
+
+        // Risk box colors
+        const getRiskBg = (score) => {
+            if (score >= 75) return { bg: '#fee2e2', text: '#dc2626' };  // Red
+            if (score >= 50) return { bg: '#fef3c7', text: '#d97706' };  // Yellow
+            return { bg: '#d1fae5', text: '#059669' };  // Green
+        };
+
+        function renderRecentOrders(reset = false) {
+            const tbody = $('recentOrdersTable');
+            const loadMoreContainer = $('loadMoreContainer');
+            const countEl = $('recentOrdersCount');
+
+            if (!recentOrdersData.length) {
+                tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📦</div><div class="empty-text">No orders found</div></div></td></tr>';
+                loadMoreContainer.style.display = 'none';
+                countEl.textContent = '';
+                return;
+            }
+
+            // Reset or append
+            if (reset) {
+                recentOrdersDisplayed = 0;
+                tbody.innerHTML = '';
+            }
+
+            // Get next batch
+            const start = recentOrdersDisplayed;
+            const end = Math.min(start + RECENT_ORDERS_PAGE_SIZE, recentOrdersData.length);
+            const ordersToRender = recentOrdersData.slice(start, end);
+
+            const html = ordersToRender.map(o => {
+                const d = new Date(o.created_at);
+                const usaTime = d.toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                const pktTime = d.toLocaleString('en-US', { timeZone: 'Asia/Karachi', hour: '2-digit', minute: '2-digit' });
+
+                // Affiliate capsule
+                const affName = o.affiliate_name || o.affiliate_id || '-';
+                const affColor = getAffiliateColor(o.affiliate_id);
+                const affCapsule = affName !== '-'
+                    ? `<span style="display:inline-block;padding:4px 10px;border-radius:20px;font-size:0.7rem;font-weight:600;background:${affColor.bg};color:${affColor.text};">${affName}</span>`
+                    : '<span style="color:var(--text-muted);">-</span>';
+
+                // Get IPQS score
+                const ipqsScore = o.ip_analyzed ? (parseInt(o.ip_fraud_score) || 0) : null;
+                const ipqsRisk = ipqsScore !== null ? getRiskBg(ipqsScore) : { bg: '#f1f5f9', text: '#64748b' };
+                const ipqsBox = `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:4px 8px;border-radius:6px;font-size:0.7rem;font-weight:700;background:${ipqsRisk.bg};color:${ipqsRisk.text};" title="IPQS Score: ${ipqsScore !== null ? ipqsScore : 'N/A'}">${ipqsScore !== null ? ipqsScore : '-'}</span>`;
+
+                // Get custom fraud score
+                const customRisk = getOrderRiskScore(o);
+                const customScore = Math.round(customRisk.score);
+                const customBg = getRiskBg(customScore);
+                const customBox = `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:28px;padding:4px 8px;border-radius:6px;font-size:0.7rem;font-weight:700;background:${customBg.bg};color:${customBg.text};" title="Our Analysis: ${customRisk.flags.join(', ') || 'Clean'}">${customScore}</span>`;
+
+                // Calculate Revenue = Collected - BuyGoods Fee (10%)
+                const fin = calculateOrderFinancials(o);
+                const revenueAmt = fin.collected - fin.bgFee;
+
+                return `
+                <tr class="clickable" onclick="showOrderDetail('${o.order_id}')">
+                    <td><strong>${o.order_id||'-'}</strong><br><small style="color:var(--text-muted)">${o.product_name||''}</small></td>
+                    <td>${o.customer_name||'-'}<br><small style="color:var(--text-muted)">${usaTime} | PKT ${pktTime}</small></td>
+                    <td>${affCapsule}</td>
+                    <td><strong style="color:var(--success)">${formatCurrency(revenueAmt)}</strong></td>
+                    <td style="white-space:nowrap;">
+                        <div style="display:flex;gap:4px;align-items:center;">
+                            ${ipqsBox}
+                            ${customBox}
+                        </div>
+                    </td>
+                    <td>${statusBadge(o.status)}</td>
+                </tr>
+            `}).join('');
+
+            tbody.innerHTML += html;
+            recentOrdersDisplayed = end;
+
+            // Update count and show/hide load more
+            countEl.textContent = `(${recentOrdersDisplayed} of ${recentOrdersData.length})`;
+            const remaining = recentOrdersData.length - recentOrdersDisplayed;
+            if (remaining > 0) {
+                loadMoreContainer.style.display = 'block';
+                $('loadMoreBtn').textContent = `Load More (${remaining} remaining)`;
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        }
+
+        function loadMoreRecentOrders() {
+            renderRecentOrders(false);
+        }
+
+        function renderTopAffiliates(orders) {
+            const affMap = {};
+            let totalAffiliateEarnings = 0;
+            orders.forEach(o => {
+                if (!o.affiliate_id || o.affiliate_id === '0' || o.affiliate_id === 0) return;
+                if (!affMap[o.affiliate_id]) affMap[o.affiliate_id] = { name: o.affiliate_name||o.affiliate_id, revenue: 0, orders: 0, commission: 0, fraudScores: [], proxyCount: 0, torCount: 0 };
+                affMap[o.affiliate_id].orders++;
+                if (o.status === 'completed') affMap[o.affiliate_id].revenue += parseFloat(o.product_price||0) * parseFloat(o.quantity||1);
+                // Track commission (affiliate earnings)
+                const comm = parseFloat(o.commission) || 0;
+                affMap[o.affiliate_id].commission += comm;
+                totalAffiliateEarnings += comm;
+                // Track fraud scores
+                if (o.ip_analyzed && o.ip_fraud_score !== null) {
+                    affMap[o.affiliate_id].fraudScores.push(parseInt(o.ip_fraud_score) || 0);
+                    if (o.ip_proxy) affMap[o.affiliate_id].proxyCount++;
+                    if (o.ip_tor) affMap[o.affiliate_id].torCount++;
+                }
+            });
+            const top = Object.values(affMap).sort((a,b) => b.revenue - a.revenue).slice(0, 5);
+
+            // Hide earnings header
+            $('topAffiliatesEarnings').innerHTML = '';
+
+            if (!top.length) {
+                $('topAffiliatesList').innerHTML = '<div class="empty-state" style="padding:2rem;"><div class="empty-text">No affiliate data yet</div></div>';
+                return;
+            }
+
+            $('topAffiliatesList').innerHTML = top.map((a, i) => {
+                // Calculate average fraud score
+                const avgScore = a.fraudScores.length ? Math.round(a.fraudScores.reduce((s,v) => s+v, 0) / a.fraudScores.length) : null;
+                const riskBg = avgScore !== null ? getRiskBg(avgScore) : { bg: '#f1f5f9', text: '#64748b' };
+                const riskBadge = `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:32px;padding:4px 8px;border-radius:6px;font-size:0.7rem;font-weight:700;background:${riskBg.bg};color:${riskBg.text};">${avgScore !== null ? avgScore : 'N/A'}</span>`;
+
+                // Get affiliate color
+                const affColor = getAffiliateColor(a.id || a.name);
+                return `
+                <div class="affiliate-rank">
+                    <div class="rank-number ${i<3?'rank-'+(i+1):'rank-other'}">${i+1}</div>
+                    <div style="flex:1;">
+                        <span style="display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;background:${affColor.bg};color:${affColor.text};">${a.name}</span>
+                        <br><small style="color:var(--text-muted)">${a.orders} orders</small>
+                    </div>
+                    <div style="text-align:right;">${riskBadge}</div>
+                </div>
+            `}).join('');
+        }
+
+        // ==================== PROFIT CALCULATOR ====================
+        let pricingData = [];
+
+        async function loadPricingForCalculator() {
+            try {
+                const res = await fetch(API.replace('api.php', 'admin-api.php') + '?action=get_pricing');
+                const data = await res.json();
+                if (data.success) {
+                    pricingData = data.data.filter(p => p.is_active == 1 || p.is_active === true);
+                }
+            } catch(e) {
+                console.error('Error loading pricing:', e);
+            }
+        }
+
+        async function calculateProfit() {
+            const cpa = parseFloat($('calcCPA').value) || 0;
+            const tbody = $('profitCalcBody');
+            const notes = $('profitNotes');
+            const subTbody = $('subProfitCalcBody');
+            const subNotes = $('subProfitNotes');
+
+            // Load pricing if not loaded
+            if (pricingData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-muted);">Loading pricing...</td></tr>';
+                subTbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--text-muted);">Loading pricing...</td></tr>';
+                await loadPricingForCalculator();
+            }
+
+            // === ONE-TIME PRODUCTS ===
+            const allowedSkus = ['met2v2', 'met4', 'met7'];
+            const packages = pricingData
+                .filter(p => allowedSkus.includes(p.sku_pattern))
+                .map(p => ({
+                    bottles: parseInt(p.bottle_count) || 1,
+                    price: parseFloat(p.base_price) || 0,
+                    shipping: parseFloat(p.shipping) || 0,
+                    label: p.product_name || `${p.bottle_count} Bottles`,
+                    sku: p.sku_pattern
+                }))
+                .sort((a, b) => a.bottles - b.bottles);
+
+            if (packages.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#f87171;">No pricing data found. Add pricing in Admin panel.</td></tr>';
+            } else {
+                let html = '';
+                packages.forEach(pkg => {
+                    const basePrice = pkg.price + pkg.shipping;
+                    const bgFee = basePrice * 0.10;
+                    const bgHold = basePrice * 0.10;
+                    const fullstack = 6.05 * pkg.bottles;
+                    const profit = basePrice - bgFee - bgHold - cpa - fullstack;
+                    const profitColor = profit >= 0 ? '#10b981' : '#f87171';
+
+                    html += `
+                        <tr>
+                            <td><strong>${pkg.label}</strong><br><small style="color:var(--text-muted)">${pkg.sku || ''}</small></td>
+                            <td style="color:#3b82f6;">$${basePrice.toFixed(2)}<br><small style="color:var(--text-muted)">($${pkg.price.toFixed(2)} + $${pkg.shipping.toFixed(2)})</small></td>
+                            <td style="color:#f87171;">-$${bgFee.toFixed(2)}</td>
+                            <td style="color:#fbbf24;">-$${bgHold.toFixed(2)}</td>
+                            <td style="color:#f87171;">-$${cpa.toFixed(2)}</td>
+                            <td style="color:#f87171;">-$${fullstack.toFixed(2)}<br><small style="color:var(--text-muted)">($6.05 x ${pkg.bottles})</small></td>
+                            <td style="color:${profitColor};font-weight:700;font-size:1rem;">$${(profit - 4).toFixed(2)} ~ $${profit.toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+                notes.style.display = 'block';
+            }
+
+            // === SUBSCRIPTION PRODUCTS ===
+            const subSkus = ['met2sub', 'met4sub', 'met7sub'];
+            const subPackages = pricingData
+                .filter(p => subSkus.includes(p.sku_pattern))
+                .map(p => ({
+                    bottles: parseInt(p.bottle_count) || 1,
+                    initialPrice: parseFloat(p.base_price) || 0,
+                    recurringPrice: parseFloat(p.recurring_price) || 0,
+                    shipping: parseFloat(p.shipping) || 0,
+                    label: p.product_name || `${p.bottle_count} Bottles Sub`,
+                    sku: p.sku_pattern
+                }))
+                .sort((a, b) => a.bottles - b.bottles);
+
+            if (subPackages.length === 0) {
+                subTbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#f87171;">No subscription pricing found. Add subscription products in Admin panel.</td></tr>';
+            } else {
+                let subHtml = '';
+                subPackages.forEach(pkg => {
+                    const initialBase = pkg.initialPrice + pkg.shipping;
+                    const recurringBase = pkg.recurringPrice + pkg.shipping;
+
+                    // Initial: BG Fee & Hold based on initial price
+                    const initialBgFee = initialBase * 0.10;
+                    const initialBgHold = initialBase * 0.10;
+                    const fullstack = 6.05 * pkg.bottles;
+                    const initialProfit = initialBase - initialBgFee - initialBgHold - cpa - fullstack;
+
+                    // Recurring: BG Fee & Hold based on recurring price, NO CPA
+                    const recurringBgFee = recurringBase * 0.10;
+                    const recurringBgHold = recurringBase * 0.10;
+                    const recurringProfit = recurringBase - recurringBgFee - recurringBgHold - fullstack;
+
+                    const initialProfitColor = initialProfit >= 0 ? '#a78bfa' : '#f87171';
+                    const recurringProfitColor = recurringProfit >= 0 ? '#10b981' : '#f87171';
+
+                    subHtml += `
+                        <tr>
+                            <td><strong>${pkg.label}</strong><br><small style="color:var(--text-muted)">${pkg.sku || ''}</small></td>
+                            <td style="color:#3b82f6;">$${initialBase.toFixed(2)}<br><small style="color:var(--text-muted)">($${pkg.initialPrice.toFixed(2)} + $${pkg.shipping.toFixed(2)})</small></td>
+                            <td style="color:#8b5cf6;">$${recurringBase.toFixed(2)}<br><small style="color:var(--text-muted)">($${pkg.recurringPrice.toFixed(2)} + $${pkg.shipping.toFixed(2)})</small></td>
+                            <td style="color:#f87171;">-$${initialBgFee.toFixed(2)} / $${recurringBgFee.toFixed(2)}</td>
+                            <td style="color:#fbbf24;">-$${initialBgHold.toFixed(2)} / $${recurringBgHold.toFixed(2)}</td>
+                            <td style="color:#f87171;">-$${cpa.toFixed(2)} / <span style="color:#10b981;">$0</span></td>
+                            <td style="color:#f87171;">-$${fullstack.toFixed(2)}<br><small style="color:var(--text-muted)">($6.05 x ${pkg.bottles})</small></td>
+                            <td style="color:${initialProfitColor};font-weight:700;">$${(initialProfit - 4).toFixed(2)} ~ $${initialProfit.toFixed(2)}</td>
+                            <td style="color:${recurringProfitColor};font-weight:700;font-size:1rem;">$${(recurringProfit - 4).toFixed(2)} ~ $${recurringProfit.toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+                subTbody.innerHTML = subHtml;
+                subNotes.style.display = 'block';
+            }
+        }
+
+        // All Orders
+        async function loadAllOrders() {
+            showLoader('ordersLoader');
+            try {
+                // Fetch all orders - filtering is done client-side
+                let url = API+'?action=orders&limit=1000';
+                const res = await fetch(url).then(r=>r.json());
+                if (res.success) {
+                    allOrders = res.data;
+                    // Populate affiliate dropdown
+                    const affiliates = {};
+                    allOrders.forEach(o => {
+                        if (o.affiliate_id && o.affiliate_id !== '0' && o.affiliate_id !== 0) {
+                            affiliates[o.affiliate_id] = o.affiliate_name || o.affiliate_id;
+                        }
+                    });
+                    const affSelect = $('orderAffiliate');
+                    affSelect.innerHTML = '<option value="">All Affiliates</option>' +
+                        Object.entries(affiliates).map(([id, name]) => `<option value="${id}">${name}</option>`).join('');
+                    applyOrderFilters();
+                }
+            } catch(e) { console.error(e); hideLoader('ordersLoader'); }
+        }
+
+        // Calculate order financials on the fly
+        function renderAllOrdersTable(orders) {
+            const tbody = $('allOrdersTable');
+            if (!orders.length) {
+                tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📦</div><div class="empty-text">No orders found</div></div></td></tr>';
+                return;
+            }
+            tbody.innerHTML = orders.map(o => {
+                // Calculate financials for this order
+                const fin = calculateOrderFinancials(o);
+
+                // Affiliate capsule
+                const affName = o.affiliate_name || o.affiliate_id || '-';
+                const affColor = getAffiliateColor(o.affiliate_id);
+                const affCapsule = affName !== '-'
+                    ? `<span style="display:inline-block;padding:3px 8px;border-radius:20px;font-size:0.65rem;font-weight:600;background:${affColor.bg};color:${affColor.text};">${affName}</span>`
+                    : '<span style="color:var(--text-muted);">-</span>';
+
+                return `
+                <tr class="clickable" onclick="showOrderDetail('${o.order_id}')">
+                    <td><strong style="font-size:0.7rem;">${o.order_id||'-'}</strong></td>
+                    <td><small>${o.product_name||'-'}</small></td>
+                    <td>${o.customer_name||'-'}</td>
+                    <td><strong style="color:#10b981;">${formatCurrency(fin.collected)}</strong></td>
+                    <td>${affCapsule}</td>
+                    <td>${statusBadge(o.status)}</td>
+                    <td><small>${formatDatePKT(o.created_at)}</small></td>
+                </tr>
+            `}).join('');
+        }
+
+        // Customers
+        async function loadCustomers() {
+            showLoader('customersLoader');
+            try {
+                // Fetch all orders to build customer database
+                let url = API+'?action=orders&limit=1000';
+                const res = await fetch(url).then(r=>r.json());
+                if (!res.success) { hideLoader('customersLoader'); return; }
+
+                const customerMap = {};
+                res.data.forEach(o => {
+                    const email = o.customer_email;
+                    if (!email) return;
+                    if (!customerMap[email]) {
+                        customerMap[email] = { email, name: o.customer_name, phone: o.customer_phone, country: o.customer_country, state: o.customer_state, city: o.customer_city, address: o.customer_address, zip: o.customer_zip, orders: [], totalSpent: 0 };
+                    }
+                    customerMap[email].orders.push(o);
+                    if (o.status === 'completed') customerMap[email].totalSpent += parseFloat(o.product_price||0) * parseFloat(o.quantity||1);
+                });
+                allCustomers = Object.values(customerMap);
+
+                const countries = [...new Set(allCustomers.map(c=>c.country).filter(c=>c))].sort();
+                $('customerCountry').innerHTML = '<option value="">All Countries</option>' + countries.map(c=>`<option value="${c}">${c}</option>`).join('');
+
+                // Apply current filters
+                searchCustomers();
+                hideLoader('customersLoader');
+            } catch(e) { console.error(e); hideLoader('customersLoader'); }
+        }
+
+        function renderCustomersTable(customers) {
+            const tbody = $('customersTable');
+            if (!customers.length) {
+                tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No customers found</div></div></td></tr>';
+                return;
+            }
+            tbody.innerHTML = customers.map(c => `
+                <tr class="clickable" onclick="showCustomerDetail('${c.email}')">
+                    <td><strong>${c.name||'-'}</strong></td>
+                    <td><small>${c.email}</small></td>
+                    <td><small>${c.phone||'-'}</small></td>
+                    <td>${c.country||'-'}</td>
+                    <td>${c.orders.length}</td>
+                    <td><strong style="color:var(--success)">${formatCurrency(c.totalSpent)}</strong></td>
+                    <td><small>${formatDatePKT(c.orders[0]?.created_at)}</small></td>
+                </tr>
+            `).join('');
+        }
+
+        function searchCustomers() {
+            const search = $('customerSearch').value.toLowerCase();
+            const country = $('customerCountry').value;
+            const trackedProduct = $('customerTrackedProduct').value;
+            let filtered = allCustomers;
+            // Product filter - filter customers who have orders for this product
+            if (trackedProduct) {
+                filtered = filtered.filter(c => c.orders.some(o => String(o.tracked_product_id) === trackedProduct));
+            }
+            if (search) filtered = filtered.filter(c => (c.name||'').toLowerCase().includes(search) || (c.email||'').toLowerCase().includes(search) || (c.phone||'').includes(search));
+            if (country) filtered = filtered.filter(c => c.country === country);
+            renderCustomersTable(filtered);
+        }
+
+        // Affiliates
+        async function loadAffiliates() {
+            try {
+                // Use affiliates tab's own product filter
+                const affiliateProduct = $('affiliateTrackedProduct')?.value || '';
+                let url = API+'?action=orders&limit=1000';
+                if (affiliateProduct) url += '&tracked_product_id=' + affiliateProduct;
+                const res = await fetch(url).then(r=>r.json());
+                if (!res.success) return;
+
+                let orders = filterByDate(res.data, currentAffiliateFilter);
+
+                const affMap = {};
+                let totalRev = 0, totalOrders = 0, totalComm = 0;
+
+                orders.forEach(o => {
+                    const affId = o.affiliate_id;
+                    if (!affId || affId === '0' || affId === 0) return;
+                    if (!affMap[affId]) affMap[affId] = { id: affId, name: o.affiliate_name||affId, orders: 0, revenue: 0, commission: 0, fraudScores: [], proxyCount: 0, torCount: 0 };
+                    affMap[affId].orders++;
+                    totalOrders++;
+                    if (o.status === 'completed') {
+                        const amt = parseFloat(o.product_price||0) * parseFloat(o.quantity||1);
+                        affMap[affId].revenue += amt;
+                        totalRev += amt;
+                    }
+                    const comm = parseFloat(o.commission) || 0;
+                    affMap[affId].commission += comm;
+                    totalComm += comm;
+                    // Track fraud scores
+                    if (o.ip_analyzed && o.ip_fraud_score !== null) {
+                        affMap[affId].fraudScores.push(parseInt(o.ip_fraud_score) || 0);
+                        if (o.ip_proxy) affMap[affId].proxyCount++;
+                        if (o.ip_tor) affMap[affId].torCount++;
+                    }
+                });
+
+                const affiliates = Object.values(affMap).sort((a,b) => b.revenue - a.revenue);
+
+                renderAffiliatesTable(affiliates);
+                hideLoader('affiliatesLoader');
+            } catch(e) { console.error(e); hideLoader('affiliatesLoader'); }
+        }
+
+        function renderAffiliatesTable(affiliates) {
+            const tbody = $('affiliatesTable');
+            if (!affiliates.length) {
+                tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🤝</div><div class="empty-text">No affiliates found</div></div></td></tr>';
+                return;
+            }
+            tbody.innerHTML = affiliates.map((a, i) => {
+                // Calculate average fraud score
+                const avgScore = a.fraudScores.length ? Math.round(a.fraudScores.reduce((s,v) => s+v, 0) / a.fraudScores.length) : null;
+                const flags = [];
+                if (a.proxyCount > 0) flags.push(`${a.proxyCount}P`);
+                if (a.torCount > 0) flags.push(`${a.torCount}T`);
+                const flagStr = flags.length ? ` <small style="opacity:0.7">(${flags.join(',')})</small>` : '';
+
+                let riskBadge = '<span class="badge gray">N/A</span>';
+                if (avgScore !== null) {
+                    if (avgScore >= 75) riskBadge = `<span class="badge red">${avgScore}${flagStr}</span>`;
+                    else if (avgScore >= 50) riskBadge = `<span class="badge yellow">${avgScore}${flagStr}</span>`;
+                    else riskBadge = `<span class="badge green">${avgScore}${flagStr}</span>`;
+                }
+
+                return `
+                <tr>
+                    <td><span class="rank-number ${i<3?'rank-'+(i+1):'rank-other'}" style="font-size:0.75rem;">${i+1}</span></td>
+                    <td><strong>${a.name}</strong><br><small style="color:var(--text-muted)">${a.id}</small></td>
+                    <td>${a.orders}</td>
+                    <td>${riskBadge}</td>
+                </tr>
+            `}).join('');
+        }
+
+        // Modals
+        function showOrderDetail(orderId) {
+            const order = allOrders.find(o => o.order_id === orderId || o.order_id == orderId);
+            if (!order) return;
+
+            $('orderDetails').innerHTML = `
+                <div class="detail-section">
+                    <div class="detail-section-header">📦 Order Information</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Order ID</div><div class="detail-value">${displayVal(order.order_id)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Transaction ID</div><div class="detail-value">${displayVal(order.transaction_id)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Product</div><div class="detail-value">${displayVal(order.product_name)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Price</div><div class="detail-value">${formatCurrency(order.product_price)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Quantity</div><div class="detail-value">${order.quantity||1}</div></div>
+                        <div class="detail-item"><div class="detail-label">Total</div><div class="detail-value highlight">${formatCurrency(parseFloat(order.product_price||0)*parseFloat(order.quantity||1))}</div></div>
+                        <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value">${statusBadge(order.status)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Date</div><div class="detail-value">${formatDateTimePKT(order.created_at)}</div></div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-section-header">👤 Customer Information</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Name</div><div class="detail-value">${displayVal(order.customer_name)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Email</div><div class="detail-value">${displayVal(order.customer_email)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Phone</div><div class="detail-value">${displayVal(order.customer_phone)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Country</div><div class="detail-value">${displayVal(order.customer_country)}</div></div>
+                        <div class="detail-item"><div class="detail-label">State</div><div class="detail-value">${displayVal(order.customer_state)}</div></div>
+                        <div class="detail-item"><div class="detail-label">City</div><div class="detail-value">${displayVal(order.customer_city)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Address</div><div class="detail-value">${displayVal(order.customer_address)}</div></div>
+                        <div class="detail-item"><div class="detail-label">ZIP</div><div class="detail-value">${displayVal(order.customer_zip)}</div></div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-section-header">🤝 Affiliate Information</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Affiliate ID</div><div class="detail-value">${displayVal(order.affiliate_id)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Name</div><div class="detail-value">${displayVal(order.affiliate_name)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Commission</div><div class="detail-value">${order.commission ? formatCurrency(order.commission) : '<span class="empty">Not provided</span>'}</div></div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-section-header">💳 Payment Information</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Method</div><div class="detail-value">${displayVal(order.payment_method)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Currency</div><div class="detail-value">${displayVal(order.currency)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Amount Charged</div><div class="detail-value highlight">${formatCurrency(parseFloat(order.product_price||0)*parseFloat(order.quantity||1))}</div></div>
+                    </div>
+                </div>
+                ${order.net_amount ? `
+                <div class="detail-section">
+                    <div class="detail-section-header">💵 Financial Breakdown</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Base Price</div><div class="detail-value">${formatCurrency(order.base_price)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Taxes (Estimated)</div><div class="detail-value" style="color:#f59e0b;">-${formatCurrency(order.taxes)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Processing Fee (10%)</div><div class="detail-value" style="color:#ef4444;">-${formatCurrency(order.processing_fee)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Allowance Hold (10%)</div><div class="detail-value" style="color:#ef4444;">-${formatCurrency(order.allowance_hold)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Net Profit</div><div class="detail-value" style="color:#10b981;font-size:1.2rem;font-weight:700;">${formatCurrency(order.net_amount)}</div></div>
+                    </div>
+                </div>
+                ` : ''}
+                <div class="detail-section">
+                    <div class="detail-section-header">🛡️ IP Fraud Analysis</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">IP Address</div><div class="detail-value"><code>${displayVal(order.ip_address)}</code></div></div>
+                        <div class="detail-item"><div class="detail-label">Country (IP)</div><div class="detail-value">${displayVal(order.ip_country)}</div></div>
+                        <div class="detail-item"><div class="detail-label">City (IP)</div><div class="detail-value">${displayVal(order.ip_city)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Region (IP)</div><div class="detail-value">${displayVal(order.ip_region)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Proxy Status</div><div class="detail-value">${order.ip_analyzed ? (order.ip_proxy ? '<span class="badge red">PROXY DETECTED</span>' : '<span class="badge green">Clean</span>') : '<span class="badge gray">Not Analyzed</span>'}</div></div>
+                        <div class="detail-item"><div class="detail-label">TOR Status</div><div class="detail-value">${order.ip_analyzed ? (order.ip_tor ? '<span class="badge red">TOR DETECTED</span>' : '<span class="badge green">Clean</span>') : '<span class="badge gray">Not Analyzed</span>'}</div></div>
+                        <div class="detail-item"><div class="detail-label">Fraud Score</div><div class="detail-value">${order.ip_analyzed ? getFraudScoreBadge(order.ip_fraud_score) : '<span class="badge gray">Not Analyzed</span>'}</div></div>
+                    </div>
+                </div>
+                ${getCustomFraudAnalysis(order)}
+            `;
+            $('orderModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showCustomerDetail(email) {
+            const customer = allCustomers.find(c => c.email === email);
+            if (!customer) return;
+
+            $('customerDetails').innerHTML = `
+                <div class="detail-section">
+                    <div class="detail-section-header">👤 Customer Information</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Name</div><div class="detail-value">${displayVal(customer.name)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Email</div><div class="detail-value">${displayVal(customer.email)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Phone</div><div class="detail-value">${displayVal(customer.phone)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Country</div><div class="detail-value">${displayVal(customer.country)}</div></div>
+                        <div class="detail-item"><div class="detail-label">City</div><div class="detail-value">${displayVal(customer.city)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Address</div><div class="detail-value">${displayVal(customer.address)}</div></div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-section-header">📊 Statistics</div>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Total Orders</div><div class="detail-value">${customer.orders.length}</div></div>
+                        <div class="detail-item"><div class="detail-label">Total Spent</div><div class="detail-value highlight">${formatCurrency(customer.totalSpent)}</div></div>
+                        <div class="detail-item"><div class="detail-label">Avg Order</div><div class="detail-value">${formatCurrency(customer.totalSpent/customer.orders.length)}</div></div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-section-header">📦 Order History (${customer.orders.length})</div>
+                    <div style="padding:1rem;">
+                        ${customer.orders.map(o => {
+                            const orderRisk = getOrderRiskScore(o);
+                            return `
+                            <div class="order-history-item" style="cursor:pointer;" onclick="closeModal();setTimeout(()=>showOrderDetail('${o.order_id}'),100);">
+                                <div>
+                                    <strong>${o.order_id}</strong> - ${o.product_name||'Product'}
+                                    <br><small style="color:var(--text-muted)">${formatDateTimePKT(o.created_at)}</small>
+                                </div>
+                                <div style="text-align:right;display:flex;align-items:center;gap:0.5rem;">
+                                    ${orderRisk.badge}
+                                    <div>
+                                        <strong>${formatCurrency(parseFloat(o.product_price||0)*parseFloat(o.quantity||1))}</strong><br>${statusBadge(o.status)}
+                                    </div>
+                                </div>
+                            </div>
+                        `}).join('')}
+                    </div>
+                </div>
+            `;
+            $('customerModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        // Load IPQS Usage
+        async function loadIPQSUsage() {
+            try {
+                const res = await fetch('./ipqs-usage.php');
+                const text = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch(e) {
+                    console.log('IPQS parse error:', text);
+                    showIPQSFallback();
+                    return;
+                }
+                if (data.success) {
+                    const d = data.data;
+                    const a1 = d.account1;
+                    const a2 = d.account2;
+
+                    // Helper to render account usage
+                    const renderAccount = (acc, label) => {
+                        if (!acc) return '';
+                        const dailyPct = Math.round((acc.requests_today / acc.daily_limit) * 100);
+                        const dailyRemain = acc.daily_limit - acc.requests_today;
+                        const isLow = dailyRemain <= 5;
+                        return `
+                            <div title="${label}: ${acc.requests_today}/${acc.daily_limit} today" style="display:flex;align-items:center;gap:0.5rem;">
+                                <span style="font-size:0.65rem;opacity:0.7;">${label}:</span>
+                                <strong style="color:${isLow ? '#fbbf24' : '#fff'}">${dailyRemain}</strong>
+                                <div style="width:30px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;">
+                                    <div style="width:${Math.min(dailyPct, 100)}%;height:100%;background:${dailyPct > 80 ? '#ef4444' : '#10b981'};border-radius:2px;"></div>
+                                </div>
+                            </div>
+                        `;
+                    };
+
+                    $('ipqsUsage').innerHTML = `
+                        <div style="display:flex;flex-direction:column;gap:0.25rem;">
+                            <div style="font-size:0.6rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">IP Credits Left</div>
+                            <div style="display:flex;gap:0.75rem;">
+                                ${renderAccount(a1, 'A1')}
+                                ${renderAccount(a2, 'A2')}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    showIPQSFallback();
+                }
+            } catch(e) {
+                console.log('IPQS usage fetch failed:', e);
+                showIPQSFallback();
+            }
+        }
+
+        function showIPQSFallback() {
+            // Count analyzed IPs from loaded orders as fallback
+            const analyzed = allOrders.filter(o => o.ip_analyzed).length;
+            $('ipqsUsage').innerHTML = `
+                <div style="display:flex;flex-direction:column;gap:0.25rem;">
+                    <div style="font-size:0.65rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">IP Lookups</div>
+                    <div style="display:flex;gap:1rem;">
+                        <div title="Analyzed IPs">
+                            <span style="opacity:0.7;">Analyzed:</span>
+                            <strong>${analyzed}</strong>
+                        </div>
+                        <div title="Daily Limit">
+                            <span style="opacity:0.7;">Limit:</span>
+                            <strong>35/day × 2</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Show loading state for IPQS
+            $('ipqsUsage').innerHTML = '<div style="font-size:0.7rem;opacity:0.7;">Loading...</div>';
+
+            // Load products for filter dropdown
+            await loadProducts();
+
+            // Load dashboard first (populates allOrders)
+            await loadDashboard();
+
+            // Then load IPQS usage (can use allOrders for fallback)
+            loadIPQSUsage();
+
+            setInterval(loadDashboard, 30000);
+            setInterval(loadIPQSUsage, 60000); // Update usage every minute
+        });
+    </script>
+</body>
+</html>

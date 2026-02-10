@@ -1,0 +1,116 @@
+// Add this case in the switch statement (around line 100):
+
+        case 'getBreakdowns':
+            getBreakdowns($pdo);
+            break;
+
+// Add this function at the end of the file (before ?>):
+
+function getBreakdowns($pdo) {
+    $postData = json_decode(file_get_contents('php://input'), true);
+    $period = $postData['period'] ?? $_GET['period'] ?? 'today';
+    
+    $whereClause = getPeriodWhereClause($period);
+    
+    // Top Landing Pages
+    $stmt = $pdo->prepare("
+        SELECT landing_page as label, COUNT(*) as value
+        FROM affiliate_traffic
+        WHERE $whereClause
+        GROUP BY landing_page
+        ORDER BY value DESC
+        LIMIT 5
+    ");
+    $stmt->execute();
+    $landingPages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Top Countries
+    $stmt = $pdo->prepare("
+        SELECT country as label, COUNT(*) as value
+        FROM affiliate_traffic
+        WHERE $whereClause
+        GROUP BY country
+        ORDER BY value DESC
+        LIMIT 5
+    ");
+    $stmt->execute();
+    $countries = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Device Breakdown
+    $stmt = $pdo->prepare("
+        SELECT device as label, COUNT(*) as value
+        FROM affiliate_traffic
+        WHERE $whereClause
+        GROUP BY device
+        ORDER BY value DESC
+    ");
+    $stmt->execute();
+    $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Browser Breakdown
+    $stmt = $pdo->prepare("
+        SELECT browser as label, COUNT(*) as value
+        FROM affiliate_traffic
+        WHERE $whereClause
+        GROUP BY browser
+        ORDER BY value DESC
+        LIMIT 5
+    ");
+    $stmt->execute();
+    $browsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Top Traffic Sources
+    $stmt = $pdo->prepare("
+        SELECT COALESCE(source, 'Direct') as label, COUNT(*) as value
+        FROM affiliate_traffic
+        WHERE $whereClause
+        GROUP BY source
+        ORDER BY value DESC
+        LIMIT 5
+    ");
+    $stmt->execute();
+    $sources = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Top Affiliates
+    $stmt = $pdo->prepare("
+        SELECT aff_id as label, 
+               COUNT(*) as value,
+               SUM(was_shaved) as shaved,
+               COUNT(DISTINCT session_id) as sessions
+        FROM affiliate_traffic
+        WHERE $whereClause AND aff_id IS NOT NULL
+        GROUP BY aff_id
+        ORDER BY value DESC
+        LIMIT 10
+    ");
+    $stmt->execute();
+    $affiliates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    echo json_encode([
+        'success' => true,
+        'landingPages' => $landingPages,
+        'countries' => $countries,
+        'devices' => $devices,
+        'browsers' => $browsers,
+        'sources' => $sources,
+        'affiliates' => $affiliates
+    ]);
+}
+
+function getPeriodWhereClause($period) {
+    switch ($period) {
+        case 'today':
+            return "DATE(timestamp) = CURDATE()";
+        case 'yesterday':
+            return "DATE(timestamp) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
+        case 'thisweek':
+            return "YEARWEEK(timestamp, 1) = YEARWEEK(CURDATE(), 1)";
+        case 'lastweek':
+            return "YEARWEEK(timestamp, 1) = YEARWEEK(DATE_SUB(CURDATE(), INTERVAL 1 WEEK), 1)";
+        case 'thismonth':
+            return "YEAR(timestamp) = YEAR(CURDATE()) AND MONTH(timestamp) = MONTH(CURDATE())";
+        case 'all':
+        default:
+            return "1=1";
+    }
+}

@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - BuyGoods Analytics</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1e293b;
+        }
+        .header h1 { font-size: 24px; color: #f8fafc; }
+        .header-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.2s;
+        }
+        .header-links a:hover { color: #3b82f6; }
+
+        /* Cards */
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+
+        /* Form */
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-group { flex: 1; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-size: 14px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* Table */
+        .table-container { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        th {
+            background: #0f172a;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        td { color: #e2e8f0; }
+        tr:hover { background: #0f172a40; }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .status-active { background: #065f46; color: #6ee7b7; }
+        .status-inactive { background: #7f1d1d; color: #fca5a5; }
+
+        /* Actions */
+        .actions { display: flex; gap: 8px; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 24px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal h3 {
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Webhook URLs */
+        .webhook-url {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        .webhook-url label {
+            width: 140px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+        .webhook-url input {
+            flex: 1;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #e2e8f0;
+            font-size: 12px;
+            font-family: monospace;
+        }
+        .webhook-url button {
+            padding: 10px 14px;
+            background: #334155;
+            border: none;
+            border-radius: 6px;
+            color: #e2e8f0;
+            cursor: pointer;
+        }
+        .webhook-url button:hover { background: #475569; }
+
+        /* Alert */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .alert-success { background: #065f46; color: #6ee7b7; display: block; }
+        .alert-error { background: #7f1d1d; color: #fca5a5; display: block; }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        /* PIN Overlay Styles */
+        .pin-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pin-overlay.hidden { display: none; }
+        .pin-container {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+        .pin-container h2 {
+            color: #f8fafc;
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+        .pin-container p {
+            color: #94a3b8;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        .pin-inputs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .pin-digit {
+            width: 48px;
+            height: 56px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            background: #0f172a;
+            color: #f8fafc;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .pin-digit:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        .pin-digit.error {
+            border-color: #ef4444;
+            animation: shake 0.5s;
+        }
+        .pin-digit.success {
+            border-color: #22c55e;
+            background: #0f172a;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .pin-error {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- PIN Protection Overlay -->
+    <div id="pinOverlay" class="pin-overlay">
+        <div class="pin-container">
+            <h2>🔒 Admin Access</h2>
+            <p id="pinSubtitle">Enter 6-digit PIN to access admin panel</p>
+
+            <!-- PIN Entry Section -->
+            <div id="pinEntrySection">
+                <div class="pin-inputs">
+                    <input type="password" class="pin-digit" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" class="pin-digit" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" class="pin-digit" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" class="pin-digit" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" class="pin-digit" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" class="pin-digit" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                </div>
+                <div class="pin-error" id="pinError">Incorrect PIN. Please try again.</div>
+            </div>
+
+            <!-- Windows Hello Button -->
+            <div id="biometricSection" style="display:none; margin-top: 16px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                    <div style="flex:1;height:1px;background:#334155;"></div>
+                    <span style="font-size:12px;color:#64748b;">or</span>
+                    <div style="flex:1;height:1px;background:#334155;"></div>
+                </div>
+                <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="loginWithBiometric()">
+                    🪟 Use Windows Hello
+                </button>
+            </div>
+
+            <!-- Save Credentials Prompt -->
+            <div id="saveCredentialsSection" style="display:none; text-align:center;">
+                <div style="font-size:2.5rem;margin-bottom:12px;">🎉</div>
+                <h3 style="margin-bottom:8px;">Login Successful!</h3>
+                <p style="color:#94a3b8;font-size:13px;margin-bottom:16px;">Enable Windows Hello for faster login next time?</p>
+                <div style="display:flex;gap:10px;">
+                    <button class="btn" style="flex:1;background:#10b981;" onclick="setupBiometric()">Yes, Enable</button>
+                    <button class="btn" style="flex:1;background:#64748b;" onclick="skipBiometric()">No Thanks</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>⚙️ Admin Panel</h1>
+            <div class="header-links">
+                <a href="index.html">📊 Dashboard</a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert"></div>
+
+        <!-- Add Product Card -->
+        <div class="card">
+            <h2>➕ Add New Product</h2>
+            <form id="addProductForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productName">Product Name *</label>
+                        <input type="text" id="productName" placeholder="e.g., Meta Trim" required>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 16px;">
+                    <label for="addProductCsvFile">Import Historical Data (Optional)</label>
+                    <p style="font-size: 12px; color: #64748b; margin-bottom: 8px;">Upload BuyGoods CSV export to import orders up to today (<span id="todayDate"></span>)</p>
+                    <input type="file" id="addProductCsvFile" accept=".csv" style="padding: 10px; background: #0f172a; border: 1px dashed #334155; border-radius: 8px; width: 100%;">
+                    <div style="margin-top: 12px; padding: 12px; background: #0f172a; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;"><strong style="color: #e2e8f0;">CSV File Instructions:</strong></p>
+                        <ul style="font-size: 11px; color: #64748b; padding-left: 16px; line-height: 1.6;">
+                            <li>Go to BuyGoods Dashboard → Orders</li>
+                            <li>Click "Export" button to download orders CSV</li>
+                            <li>Upload the downloaded .csv file here</li>
+                            <li>Required columns: Order ID, Amount, Customer Email</li>
+                        </ul>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 16px;">Create Product</button>
+            </form>
+        </div>
+
+        <!-- Products List -->
+        <div class="card">
+            <h2>📦 Your Products</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Orders</th>
+                            <th>Revenue</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsBody">
+                        <tr>
+                            <td colspan="5" class="empty-state">Loading products...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Product Pricing Management -->
+        <div class="card">
+            <h2>💰 Product Pricing</h2>
+            <p style="color: #94a3b8; margin-bottom: 16px; font-size: 14px;">
+                Manage base prices for tax calculations. These prices are used to calculate taxes from total collected amounts.
+            </p>
+            <div style="margin-bottom: 16px;">
+                <button class="btn btn-primary" onclick="showAddPricingModal()">➕ Add New Pricing</button>
+            </div>
+
+            <!-- MetaTrim Pricing -->
+            <div style="margin-bottom: 32px;">
+                <h3 style="color: #f97316; font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <span style="background: #f97316; width: 14px; height: 14px; border-radius: 3px;"></span>
+                    MetaTrim Pricing
+                </h3>
+                <div id="pricingContainerMetatrim">Loading...</div>
+            </div>
+
+            <!-- ProstaPrime Pricing -->
+            <div>
+                <h3 style="color: #3b82f6; font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <span style="background: #3b82f6; width: 14px; height: 14px; border-radius: 3px;"></span>
+                    ProstaPrime Pricing
+                </h3>
+                <div id="pricingContainerProstaprime">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="card">
+            <h2>🛠️ Tools</h2>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="analyze-ips.php" class="btn btn-primary" style="text-decoration: none;">
+                    🔍 Analyze IPs (IPQS)
+                </a>
+                <a href="ipqs-usage.php" class="btn" style="text-decoration: none; background: #334155;">
+                    📊 IPQS Usage Stats
+                </a>
+                <a href="index.html" class="btn" style="text-decoration: none; background: #059669;">
+                    📈 View Dashboard
+                </a>
+            </div>
+            <p style="margin-top: 16px; font-size: 12px; color: #64748b;">
+                Click "Analyze IPs" to scan new orders for fraud indicators using IPQualityScore API.
+            </p>
+        </div>
+
+        <!-- CSV Import Section -->
+        <div class="card">
+            <h2>📥 Import Orders from BuyGoods CSV</h2>
+            <p style="color: #94a3b8; margin-bottom: 16px; font-size: 14px;">
+                Upload orders CSV exported from BuyGoods to sync missed orders (e.g., during webhook downtime).
+                New orders will be automatically added and IPQS analysis will run on them.
+            </p>
+
+            <div style="background: #0f172a; padding: 20px; border-radius: 12px;">
+                <form id="csvUploadForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="csvProduct">Product *</label>
+                            <select id="csvProduct" required>
+                                <option value="">Select Product</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="csvFile">BuyGoods Orders CSV *</label>
+                            <input type="file" id="csvFile" accept=".csv" required style="background:#1e293b;padding:10px;border-radius:8px;width:100%;">
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:12px;align-items:center;margin-top:16px;">
+                        <button type="submit" class="btn btn-primary" id="csvUploadBtn">
+                            📤 Upload & Import Orders
+                        </button>
+                        <span id="csvUploadStatus" style="color:#94a3b8;font-size:13px;"></span>
+                    </div>
+                </form>
+
+                <!-- Import Results -->
+                <div id="csvImportResults" style="display:none;margin-top:20px;padding:16px;background:#1e293b;border-radius:8px;">
+                    <h4 style="color:#10b981;margin-bottom:12px;">📊 Import Results</h4>
+                    <div id="csvResultsContent"></div>
+                </div>
+            </div>
+
+            <div style="margin-top:16px;padding:12px;background:#1e293b;border-radius:8px;">
+                <h4 style="color:#f8fafc;margin-bottom:8px;font-size:14px;">📋 How to Export from BuyGoods:</h4>
+                <ol style="color:#94a3b8;font-size:13px;margin-left:20px;line-height:1.8;">
+                    <li>Login to your BuyGoods vendor dashboard</li>
+                    <li>Go to <strong>Orders</strong> tab</li>
+                    <li>Set your date range filter</li>
+                    <li>Click <strong>Export</strong> → Select <strong>All Columns</strong></li>
+                    <li>Download the CSV file and upload it here</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Withdrawals Management -->
+        <div class="card">
+            <h2>💸 Withdrawals</h2>
+            <p style="color: #94a3b8; margin-bottom: 16px; font-size: 14px;">
+                Record withdrawals when BuyGoods pays you. This tracks your Balance on the dashboard.
+            </p>
+
+            <!-- Add Withdrawal Form -->
+            <div style="background: #0f172a; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                <h4 style="color: #10b981; margin-bottom: 16px;">➕ Record New Withdrawal</h4>
+                <form id="addWithdrawalForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="withdrawProduct">Product *</label>
+                            <select id="withdrawProduct" required style="width:100%;padding:12px;background:#1e293b;border:1px solid #334155;border-radius:8px;color:#e2e8f0;">
+                                <option value="">Select Product</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawAmount">Amount ($) *</label>
+                            <input type="number" id="withdrawAmount" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawDate">Withdrawal Date *</label>
+                            <input type="date" id="withdrawDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 12px;">
+                        <label for="withdrawNote">Note (Optional)</label>
+                        <input type="text" id="withdrawNote" placeholder="e.g., BuyGoods payout for January">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 16px;">💰 Record Withdrawal</button>
+                </form>
+            </div>
+
+            <!-- Withdrawals List -->
+            <h4 style="color: #f8fafc; margin-bottom: 12px;">📋 Withdrawal History</h4>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Note</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="withdrawalsBody">
+                        <tr>
+                            <td colspan="5" class="empty-state">Loading withdrawals...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 16px; padding: 16px; background: #0f172a; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #94a3b8;">Total Withdrawn:</span>
+                <span style="font-size: 1.5rem; font-weight: 700; color: #10b981;" id="totalWithdrawnAmount">$0.00</span>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="card">
+            <h2>📖 How to Use</h2>
+            <ol style="padding-left: 20px; color: #94a3b8; line-height: 1.8;">
+                <li>Add your product above with a name</li>
+                <li>Click "Webhook URLs" button to see the URLs</li>
+                <li>Copy each URL to your BuyGoods product's webhook settings</li>
+                <li>Orders will automatically be tracked per product</li>
+                <li>Run "Analyze IPs" to get fraud scores for imported orders</li>
+                <li>View filtered analytics in the Dashboard</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Webhook URLs Modal -->
+    <div class="modal-overlay" id="webhookModal">
+        <div class="modal">
+            <h3>🔗 Webhook URLs for <span id="modalProductName"></span></h3>
+            <p style="color: #94a3b8; margin-bottom: 20px; font-size: 14px;">
+                Copy these URLs to your BuyGoods product webhook settings:
+            </p>
+            <div id="webhookUrls"></div>
+            <div style="margin-top: 20px; text-align: right;">
+                <button class="btn btn-primary" onclick="closeWebhookModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <h3>✏️ Edit Product</h3>
+            <form id="editProductForm">
+                <input type="hidden" id="editProductId">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="editProductName">Product Name *</label>
+                    <input type="text" id="editProductName" required>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                    <button type="button" class="btn" style="background: #334155;" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Pricing Modal -->
+    <div class="modal-overlay" id="pricingModal">
+        <div class="modal" style="max-width: 700px;">
+            <h3 id="pricingModalTitle">➕ Add New Pricing</h3>
+            <form id="pricingForm">
+                <input type="hidden" id="pricingId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pricingProductType">Product Type *</label>
+                        <select id="pricingProductType" required style="width:100%;padding:12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;">
+                            <option value="metatrim">MetaTrim</option>
+                            <option value="prostaprime">ProstaPrime</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pricingSku">SKU Pattern *</label>
+                        <input type="text" id="pricingSku" placeholder="e.g., met3, pro6, met1u" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pricingName">Product Name *</label>
+                        <input type="text" id="pricingName" placeholder="e.g., Meta Trim BHB 3 Bottles" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pricingBottles">Bottle Count *</label>
+                        <input type="number" id="pricingBottles" placeholder="3" min="1" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pricingBasePrice">Initial Price ($) *</label>
+                        <input type="number" id="pricingBasePrice" placeholder="177.00" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pricingRecurringPrice">Recurring Price ($) <span style="color:#64748b;font-size:11px;">(Subscriptions only)</span></label>
+                        <input type="number" id="pricingRecurringPrice" placeholder="110.00" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pricingShipping">Shipping ($)</label>
+                        <input type="number" id="pricingShipping" placeholder="0.00" step="0.01" min="0" value="0">
+                    </div>
+                    <div class="form-group"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pricingDateFrom">Date From</label>
+                        <input type="date" id="pricingDateFrom">
+                    </div>
+                    <div class="form-group">
+                        <label for="pricingDateTo">Date To</label>
+                        <input type="date" id="pricingDateTo">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="pricingIsUpsell" style="width: auto;">
+                            <span>Backend Upsell</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="pricingIsSubscription" style="width: auto;">
+                            <span>Subscription</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pricingNotes">Notes</label>
+                    <input type="text" id="pricingNotes" placeholder="e.g., 3 Bottles (Free shipping)">
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
+                    <button type="button" class="btn" style="background: #334155;" onclick="closePricingModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Pricing</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Import CSV Modal -->
+    <div class="modal-overlay" id="importModal">
+        <div class="modal">
+            <h3>📥 Import CSV for <span id="importProductName"></span></h3>
+            <p style="color: #94a3b8; margin-bottom: 20px; font-size: 14px;">
+                Upload a BuyGoods orders CSV export to import historical data for this product.
+            </p>
+            <input type="hidden" id="importProductId">
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label>Select CSV File</label>
+                <input type="file" id="importCsvFile" accept=".csv" style="padding: 12px; background: #0f172a; border: 1px dashed #334155; border-radius: 8px; width: 100%; margin-top: 8px;">
+            </div>
+            <div style="margin-bottom: 20px; padding: 12px; background: #0f172a; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;"><strong style="color: #e2e8f0;">How to get CSV:</strong></p>
+                <ul style="font-size: 11px; color: #64748b; padding-left: 16px; line-height: 1.6;">
+                    <li>BuyGoods Dashboard → Orders → Export</li>
+                    <li>Only .csv files are accepted</li>
+                    <li>Duplicate orders will be skipped</li>
+                </ul>
+            </div>
+            <div id="importProgress" style="display: none; margin-bottom: 20px;">
+                <div style="background: #0f172a; border-radius: 8px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Importing orders...</span>
+                        <span id="importCount">0/0</span>
+                    </div>
+                    <div style="background: #334155; border-radius: 4px; height: 8px; overflow: hidden;">
+                        <div id="importBar" style="background: #3b82f6; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                <button type="button" class="btn" style="background: #334155;" onclick="closeImportModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="startImport()">Start Import</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'admin-api.php';
+
+        // Load products on page load
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${API_URL}?action=get_products`);
+                const result = await response.json();
+
+                if (result.success) {
+                    renderProducts(result.data);
+                    // Now load withdrawals after products are ready
+                    loadWithdrawals();
+                    // Populate CSV import product dropdown
+                    populateCsvProductDropdown(result.data);
+                } else {
+                    showAlert('Error loading products: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error loading products: ' + error.message, 'error');
+            }
+        }
+
+        function renderProducts(products) {
+            // Store products globally for withdrawal dropdown
+            allProducts = products;
+
+            const tbody = document.getElementById('productsBody');
+
+            if (products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No products yet. Add your first product above.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = products.map(p => `
+                <tr>
+                    <td>
+                        <strong>${escapeHtml(p.name)}</strong>
+                        <div style="font-size: 12px; color: #64748b;">${p.slug}</div>
+                    </td>
+                    <td>${p.order_count || 0}</td>
+                    <td>$${parseFloat(p.total_revenue || 0).toFixed(2)}</td>
+                    <td>
+                        <span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn btn-sm btn-primary" onclick="showWebhookUrls(${p.id}, '${escapeHtml(p.name)}')">URLs</button>
+                            <button class="btn btn-sm" style="background: #059669;" onclick="showImportModal(${p.id}, '${escapeHtml(p.name)}')">Import CSV</button>
+                            <button class="btn btn-sm" style="background: #334155;" onclick="editProduct(${p.id}, '${escapeHtml(p.name)}')">Edit</button>
+                            <button class="btn btn-sm" style="background: ${p.status === 'active' ? '#f59e0b' : '#10b981'};" onclick="toggleStatus(${p.id})">${p.status === 'active' ? 'Disable' : 'Enable'}</button>
+                            ${p.order_count == 0 ? `<button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id}, '${escapeHtml(p.name)}')">Delete</button>` : ''}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Add product
+        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('productName').value.trim();
+            const csvFileInput = document.getElementById('addProductCsvFile');
+            const csvFile = csvFileInput.files[0];
+
+            if (!name) {
+                showAlert('Product name is required', 'error');
+                return;
+            }
+
+            try {
+                // First create the product
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'create_product',
+                        name: name
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const productId = result.data.id;
+
+                    // If CSV file is provided, import it
+                    if (csvFile) {
+                        showAlert('Product created! Importing CSV...', 'success');
+                        await importCSVForProduct(productId, csvFile);
+                    } else {
+                        showAlert('Product created successfully!', 'success');
+                    }
+
+                    document.getElementById('addProductForm').reset();
+                    loadProducts();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        });
+
+        // Import CSV for a product (used by both form and modal)
+        async function importCSVForProduct(productId, file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+
+                reader.onload = async function(e) {
+                    const csv = e.target.result;
+                    const lines = csv.split('\n');
+                    // Use parseCSVLine for headers too (handles quoted headers with commas)
+                    const headers = parseCSVLine(lines[0]);
+
+                    let imported = 0;
+                    let skipped = 0;
+                    let total = 0;
+
+                    // Count valid lines
+                    for (let i = 1; i < lines.length; i++) {
+                        if (lines[i].trim()) total++;
+                    }
+
+                    for (let i = 1; i < lines.length; i++) {
+                        if (!lines[i].trim()) continue;
+
+                        const values = parseCSVLine(lines[i]);
+                        const row = {};
+                        headers.forEach((h, idx) => row[h] = values[idx] || '');
+
+                        try {
+                            const resp = await fetch(API_URL, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    action: 'import_order',
+                                    product_id: productId,
+                                    order_data: row
+                                })
+                            });
+                            const result = await resp.json();
+                            if (result.success) {
+                                imported++;
+                            } else {
+                                skipped++;
+                                console.log('Skipped:', result.error);
+                            }
+                        } catch (err) {
+                            console.error('Error importing row:', err);
+                            skipped++;
+                        }
+                    }
+
+                    showAlert(`Imported ${imported} of ${total} orders!`, 'success');
+                    // Reload products after import completes
+                    loadProducts();
+                    resolve(imported);
+                };
+
+                reader.readAsText(file);
+            });
+        }
+
+        // Show webhook URLs modal
+        async function showWebhookUrls(productId, productName) {
+            document.getElementById('modalProductName').textContent = productName;
+
+            try {
+                const response = await fetch(`${API_URL}?action=get_webhook_urls&product_id=${productId}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const urls = result.data;
+                    document.getElementById('webhookUrls').innerHTML = `
+                        <div class="webhook-url">
+                            <label>New Order:</label>
+                            <input type="text" readonly value="${urls.new_order}" id="url_new_order">
+                            <button onclick="copyUrl('url_new_order')">📋</button>
+                        </div>
+                        <div class="webhook-url">
+                            <label>Recurring:</label>
+                            <input type="text" readonly value="${urls.recurring}" id="url_recurring">
+                            <button onclick="copyUrl('url_recurring')">📋</button>
+                        </div>
+                        <div class="webhook-url">
+                            <label>Refund:</label>
+                            <input type="text" readonly value="${urls.refund}" id="url_refund">
+                            <button onclick="copyUrl('url_refund')">📋</button>
+                        </div>
+                        <div class="webhook-url">
+                            <label>Cancel:</label>
+                            <input type="text" readonly value="${urls.cancel}" id="url_cancel">
+                            <button onclick="copyUrl('url_cancel')">📋</button>
+                        </div>
+                        <div class="webhook-url">
+                            <label>Chargeback:</label>
+                            <input type="text" readonly value="${urls.chargeback}" id="url_chargeback">
+                            <button onclick="copyUrl('url_chargeback')">📋</button>
+                        </div>
+                        <div class="webhook-url">
+                            <label>Fulfilled:</label>
+                            <input type="text" readonly value="${urls.fulfilled}" id="url_fulfilled">
+                            <button onclick="copyUrl('url_fulfilled')">📋</button>
+                        </div>
+                    `;
+                    document.getElementById('webhookModal').classList.add('active');
+                }
+            } catch (error) {
+                showAlert('Error loading webhook URLs: ' + error.message, 'error');
+            }
+        }
+
+        function closeWebhookModal() {
+            document.getElementById('webhookModal').classList.remove('active');
+        }
+
+        function copyUrl(inputId) {
+            const input = document.getElementById(inputId);
+            input.select();
+            document.execCommand('copy');
+            showAlert('URL copied to clipboard!', 'success');
+        }
+
+        // Edit product
+        function editProduct(id, name) {
+            document.getElementById('editProductId').value = id;
+            document.getElementById('editProductName').value = name;
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        document.getElementById('editProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('editProductId').value;
+            const name = document.getElementById('editProductName').value.trim();
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'update_product',
+                        id: id,
+                        name: name
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Product updated successfully!', 'success');
+                    closeEditModal();
+                    loadProducts();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        });
+
+        // Import CSV functions
+        function showImportModal(productId, productName) {
+            document.getElementById('importProductId').value = productId;
+            document.getElementById('importProductName').textContent = productName;
+            document.getElementById('importCsvFile').value = '';
+            document.getElementById('importProgress').style.display = 'none';
+            document.getElementById('importModal').classList.add('active');
+        }
+
+        function closeImportModal() {
+            document.getElementById('importModal').classList.remove('active');
+        }
+
+        async function startImport() {
+            const productId = document.getElementById('importProductId').value;
+            const fileInput = document.getElementById('importCsvFile');
+
+            if (!fileInput.files.length) {
+                showAlert('Please select a CSV file', 'error');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = async function(e) {
+                const csv = e.target.result;
+                const lines = csv.split('\n');
+                // Parse headers properly - remove surrounding quotes
+                const headers = parseCSVLine(lines[0]);
+
+                document.getElementById('importProgress').style.display = 'block';
+
+                let imported = 0;
+                let skipped = 0;
+                let total = 0;
+
+                // Count valid lines first
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i].trim()) total++;
+                }
+
+                document.getElementById('importCount').textContent = `0/${total}`;
+
+                for (let i = 1; i < lines.length; i++) {
+                    if (!lines[i].trim()) continue;
+
+                    const values = parseCSVLine(lines[i]);
+                    const row = {};
+                    headers.forEach((h, idx) => row[h] = values[idx] || '');
+
+                    try {
+                        const resp = await fetch(API_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                action: 'import_order',
+                                product_id: productId,
+                                order_data: row
+                            })
+                        });
+                        const result = await resp.json();
+                        if (result.success) {
+                            imported++;
+                        } else {
+                            skipped++;
+                        }
+                    } catch (err) {
+                        console.error('Error importing row:', err);
+                        skipped++;
+                    }
+
+                    document.getElementById('importCount').textContent = `${imported}/${total}`;
+                    document.getElementById('importBar').style.width = `${((imported + skipped) / total) * 100}%`;
+                }
+
+                showAlert(`Imported ${imported} orders! (${skipped} skipped)`, 'success');
+                closeImportModal();
+                loadProducts();
+            };
+
+            reader.readAsText(file);
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
+        // Set today's date
+        document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric', month: 'short', day: 'numeric'
+        });
+
+        // Toggle status
+        async function toggleStatus(id) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'toggle_status',
+                        id: id
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Status updated!', 'success');
+                    loadProducts();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        }
+
+        // Delete product
+        async function deleteProduct(id, name) {
+            if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'delete_product',
+                        id: id
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Product deleted!', 'success');
+                    loadProducts();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        }
+
+        // Alert
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = 'alert alert-' + type;
+            setTimeout(() => {
+                alert.className = 'alert';
+            }, 4000);
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, (m) => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+        }
+
+        // Close modals on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+
+        // ==================== PRICING MANAGEMENT ====================
+
+        async function loadPricing() {
+            try {
+                const response = await fetch(`${API_URL}?action=get_pricing`);
+                const result = await response.json();
+
+                if (result.success) {
+                    renderPricing(result.data);
+                } else {
+                    console.error('Error loading pricing:', result.error);
+                }
+            } catch (error) {
+                console.error('Error loading pricing:', error);
+            }
+        }
+
+        function renderPricing(pricing) {
+            const containerMetatrim = document.getElementById('pricingContainerMetatrim');
+            const containerProstaprime = document.getElementById('pricingContainerProstaprime');
+
+            if (!pricing || pricing.length === 0) {
+                containerMetatrim.innerHTML = '<div class="empty-state">No pricing data. Run migrate-pricing.php to seed initial data.</div>';
+                containerProstaprime.innerHTML = '<div class="empty-state">No pricing data. Run migrate-pricing.php to seed initial data.</div>';
+                return;
+            }
+
+            // Split by product type
+            const metatrimPricing = pricing.filter(p => p.product_type === 'metatrim');
+            const prostaprimePricing = pricing.filter(p => p.product_type === 'prostaprime');
+
+            // Render each product container with categorized sections
+            containerMetatrim.innerHTML = renderPricingSections(metatrimPricing, 'metatrim');
+            containerProstaprime.innerHTML = renderPricingSections(prostaprimePricing, 'prostaprime');
+        }
+
+        function renderPricingSections(pricingList, productType) {
+            if (pricingList.length === 0) {
+                return '<div class="empty-state">No pricing data for this product.</div>';
+            }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Categorize entries
+            const simpleProducts = pricingList.filter(p => p.is_active == 1 && p.is_upsell != 1 && p.is_subscription != 1);
+            const subscriptions = pricingList.filter(p => p.is_active == 1 && p.is_subscription == 1);
+            const upsells = pricingList.filter(p => p.is_active == 1 && p.is_upsell == 1);
+            const disabled = pricingList.filter(p => p.is_active != 1);
+
+            // Sort by date_from DESC (newest first), null dates last
+            const sortByDate = (a, b) => {
+                const dateA = a.date_from ? new Date(a.date_from) : new Date('1900-01-01');
+                const dateB = b.date_from ? new Date(b.date_from) : new Date('1900-01-01');
+                return dateB - dateA;
+            };
+
+            simpleProducts.sort(sortByDate);
+            subscriptions.sort(sortByDate);
+            upsells.sort(sortByDate);
+            disabled.sort(sortByDate);
+
+            let html = '';
+
+            // Simple Products Section
+            if (simpleProducts.length > 0) {
+                html += renderSection('Simple Products', simpleProducts, '#334155', false);
+            }
+
+            // Subscriptions Section
+            if (subscriptions.length > 0) {
+                html += renderSection('Subscriptions', subscriptions, '#0891b2', true);
+            }
+
+            // Upsells Section
+            if (upsells.length > 0) {
+                html += renderSection('Upsells', upsells, '#7c3aed', false);
+            }
+
+            // Disabled Section
+            if (disabled.length > 0) {
+                html += renderSection('Disabled', disabled, '#64748b', false, true);
+            }
+
+            return html;
+        }
+
+        function renderSection(title, items, color, showRecurring, isDisabled = false) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            let html = `
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: ${color}; font-size: 13px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">
+                        ${title} (${items.length})
+                    </h4>
+                    <div class="table-container" style="max-height: 250px; overflow-y: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>SKU</th>
+                                    <th>Product Name</th>
+                                    <th>Bottles</th>
+                                    <th>${showRecurring ? 'Initial' : 'Price'}</th>
+                                    ${showRecurring ? '<th>Recurring</th>' : ''}
+                                    <th>Shipping</th>
+                                    <th>Date Range</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+            items.forEach(p => {
+                const dateRange = formatDateRange(p.date_from, p.date_to);
+                const isExpired = p.date_to && new Date(p.date_to) < today;
+                const rowStyle = (isExpired || isDisabled) ? 'opacity: 0.6;' : '';
+
+                html += `
+                    <tr style="${rowStyle}">
+                        <td><code style="background:#0f172a;padding:2px 6px;border-radius:4px;font-size:12px;">${escapeHtml(p.sku_pattern)}</code></td>
+                        <td style="font-size: 13px;">${escapeHtml(p.product_name)}</td>
+                        <td>${p.bottle_count}</td>
+                        <td style="color: #10b981; font-weight: 600;">$${parseFloat(p.base_price).toFixed(2)}</td>
+                        ${showRecurring ? `<td style="color: #f59e0b; font-weight: 600;">${p.recurring_price ? '$' + parseFloat(p.recurring_price).toFixed(2) : '-'}</td>` : ''}
+                        <td>${parseFloat(p.shipping) > 0 ? '$' + parseFloat(p.shipping).toFixed(2) : 'Free'}</td>
+                        <td style="font-size: 11px;">${dateRange}${isExpired ? ' <span style="color:#ef4444;font-size:9px;">(OLD)</span>' : ''}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn btn-sm" style="background: #334155;" onclick="editPricing(${p.id})">Edit</button>
+                                <button class="btn btn-sm" style="background: ${p.is_active == 1 ? '#f59e0b' : '#10b981'};" onclick="togglePricingStatus(${p.id})">
+                                    ${p.is_active == 1 ? 'Disable' : 'Enable'}
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deletePricing(${p.id})">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+
+            return html;
+        }
+
+        function formatDateRange(dateFrom, dateTo) {
+            if (!dateFrom && !dateTo) return 'Always';
+            if (!dateFrom) return 'Until ' + formatDate(dateTo);
+            if (!dateTo) return 'From ' + formatDate(dateFrom);
+            return formatDate(dateFrom) + ' - ' + formatDate(dateTo);
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+        }
+
+        function showAddPricingModal() {
+            document.getElementById('pricingModalTitle').textContent = '➕ Add New Pricing';
+            document.getElementById('pricingForm').reset();
+            document.getElementById('pricingId').value = '';
+            document.getElementById('pricingRecurringPrice').value = '';
+            document.getElementById('pricingModal').classList.add('active');
+        }
+
+        function closePricingModal() {
+            document.getElementById('pricingModal').classList.remove('active');
+        }
+
+        async function editPricing(id) {
+            try {
+                const response = await fetch(`${API_URL}?action=get_pricing_by_id&id=${id}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const p = result.data;
+                    document.getElementById('pricingModalTitle').textContent = '✏️ Edit Pricing';
+                    document.getElementById('pricingId').value = p.id;
+                    document.getElementById('pricingProductType').value = p.product_type;
+                    document.getElementById('pricingSku').value = p.sku_pattern;
+                    document.getElementById('pricingName').value = p.product_name;
+                    document.getElementById('pricingBottles').value = p.bottle_count;
+                    document.getElementById('pricingBasePrice').value = p.base_price;
+                    document.getElementById('pricingRecurringPrice').value = p.recurring_price || '';
+                    document.getElementById('pricingShipping').value = p.shipping || 0;
+                    document.getElementById('pricingDateFrom').value = p.date_from || '';
+                    document.getElementById('pricingDateTo').value = p.date_to || '';
+                    document.getElementById('pricingIsUpsell').checked = p.is_upsell == 1;
+                    document.getElementById('pricingIsSubscription').checked = p.is_subscription == 1;
+                    document.getElementById('pricingNotes').value = p.notes || '';
+                    document.getElementById('pricingModal').classList.add('active');
+                } else {
+                    showAlert('Error loading pricing: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        }
+
+        document.getElementById('pricingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('pricingId').value;
+            const recurringPriceVal = document.getElementById('pricingRecurringPrice').value;
+            const data = {
+                action: id ? 'update_pricing' : 'create_pricing',
+                id: id || undefined,
+                product_type: document.getElementById('pricingProductType').value,
+                sku_pattern: document.getElementById('pricingSku').value.trim(),
+                product_name: document.getElementById('pricingName').value.trim(),
+                bottle_count: document.getElementById('pricingBottles').value,
+                base_price: document.getElementById('pricingBasePrice').value,
+                recurring_price: recurringPriceVal || null,
+                shipping: document.getElementById('pricingShipping').value || 0,
+                date_from: document.getElementById('pricingDateFrom').value || null,
+                date_to: document.getElementById('pricingDateTo').value || null,
+                is_upsell: document.getElementById('pricingIsUpsell').checked ? 1 : 0,
+                is_subscription: document.getElementById('pricingIsSubscription').checked ? 1 : 0,
+                notes: document.getElementById('pricingNotes').value.trim(),
+                is_active: 1
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert(id ? 'Pricing updated!' : 'Pricing created!', 'success');
+                    closePricingModal();
+                    loadPricing();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        });
+
+        async function togglePricingStatus(id) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'toggle_pricing_status', id: id })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Pricing status updated!', 'success');
+                    loadPricing();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        }
+
+        async function deletePricing(id) {
+            if (!confirm('Are you sure you want to delete this pricing?')) return;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'delete_pricing', id: id })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Pricing deleted!', 'success');
+                    loadPricing();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        }
+
+        // ==================== END PRICING MANAGEMENT ====================
+
+        // PIN & Biometric Protection
+        const VALID_PIN = '786547';
+        const CREDENTIAL_KEY = 'buygoods_webauthn_credential';
+        const webAuthnSupported = window.PublicKeyCredential !== undefined;
+
+        (async function initAuth() {
+            const pinDigits = document.querySelectorAll('.pin-digit');
+            const pinError = document.getElementById('pinError');
+
+            document.getElementById('pinOverlay').classList.remove('hidden');
+
+            // Check if biometric credentials are saved - auto-start verification
+            if (webAuthnSupported && localStorage.getItem(CREDENTIAL_KEY)) {
+                // Show verifying message and hide PIN entry temporarily
+                document.getElementById('pinSubtitle').textContent = 'Verifying with Windows Hello...';
+                document.getElementById('pinEntrySection').style.display = 'none';
+
+                try {
+                    const credentialId = localStorage.getItem(CREDENTIAL_KEY);
+                    const rawId = Uint8Array.from(atob(credentialId), c => c.charCodeAt(0));
+
+                    const getOptions = {
+                        publicKey: {
+                            challenge: new Uint8Array(32),
+                            allowCredentials: [{ type: "public-key", id: rawId, transports: ["internal"] }],
+                            userVerification: "required",
+                            timeout: 60000
+                        }
+                    };
+
+                    await navigator.credentials.get(getOptions);
+                    // Success - unlock and load products & pricing
+                    document.getElementById('pinOverlay').classList.add('hidden');
+                    loadProducts();
+                    loadPricing();
+                    return; // Exit early on success
+                } catch (error) {
+                    console.log('Auto biometric verification cancelled or failed, showing options');
+                    // Show fallback: PIN entry + Windows Hello button
+                    document.getElementById('pinEntrySection').style.display = 'block';
+                    document.getElementById('biometricSection').style.display = 'block';
+                    document.getElementById('pinSubtitle').textContent = 'Enter PIN or use Windows Hello';
+                }
+            }
+
+            // Setup PIN input handlers
+            pinDigits.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    e.target.value = value;
+
+                    if (value && index < pinDigits.length - 1) {
+                        pinDigits[index + 1].focus();
+                    }
+
+                    const enteredPin = Array.from(pinDigits).map(d => d.value).join('');
+                    if (enteredPin.length === 6) {
+                        verifyPin(enteredPin);
+                    }
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        pinDigits[index - 1].focus();
+                    }
+                });
+
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pastedData = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+                    pastedData.split('').forEach((char, i) => {
+                        if (pinDigits[i]) pinDigits[i].value = char;
+                    });
+                    if (pastedData.length === 6) verifyPin(pastedData);
+                });
+
+                if (index === 0) {
+                    setTimeout(() => input.focus(), 100);
+                }
+            });
+
+            function verifyPin(enteredPin) {
+                if (enteredPin === VALID_PIN) {
+                    pinDigits.forEach(d => d.classList.add('success'));
+
+                    if (webAuthnSupported && !localStorage.getItem(CREDENTIAL_KEY)) {
+                        // Show save credentials prompt
+                        setTimeout(() => {
+                            document.getElementById('pinEntrySection').style.display = 'none';
+                            document.getElementById('biometricSection').style.display = 'none';
+                            document.getElementById('saveCredentialsSection').style.display = 'block';
+                            document.getElementById('pinSubtitle').style.display = 'none';
+                        }, 300);
+                    } else {
+                        setTimeout(() => {
+                            document.getElementById('pinOverlay').classList.add('hidden');
+                            loadProducts();
+                            loadPricing();
+                        }, 300);
+                    }
+                } else {
+                    pinDigits.forEach(d => {
+                        d.classList.add('error');
+                        d.value = '';
+                    });
+                    pinError.style.display = 'block';
+                    pinDigits[0].focus();
+
+                    setTimeout(() => {
+                        pinDigits.forEach(d => d.classList.remove('error'));
+                        pinError.style.display = 'none';
+                    }, 2000);
+                }
+            }
+        })();
+
+        // Setup biometric credentials (Windows Hello)
+        async function setupBiometric() {
+            try {
+                const userId = new Uint8Array(16);
+                window.crypto.getRandomValues(userId);
+
+                const createOptions = {
+                    publicKey: {
+                        challenge: new Uint8Array(32),
+                        rp: { name: "BuyGoods Analytics", id: window.location.hostname },
+                        user: { id: userId, name: "admin_user", displayName: "Admin User" },
+                        pubKeyCredParams: [
+                            { type: "public-key", alg: -7 },
+                            { type: "public-key", alg: -257 }
+                        ],
+                        authenticatorSelection: {
+                            authenticatorAttachment: "platform",
+                            userVerification: "required"
+                        },
+                        timeout: 60000
+                    }
+                };
+
+                const credential = await navigator.credentials.create(createOptions);
+                const credentialId = btoa(String.fromCharCode(...new Uint8Array(credential.rawId)));
+                localStorage.setItem(CREDENTIAL_KEY, credentialId);
+
+                document.getElementById('pinOverlay').classList.add('hidden');
+                loadProducts();
+                loadPricing();
+            } catch (error) {
+                console.error('Biometric setup failed:', error);
+                alert('Could not set up Windows Hello. Please try again later.');
+                skipBiometric();
+            }
+        }
+
+        function skipBiometric() {
+            document.getElementById('pinOverlay').classList.add('hidden');
+            loadProducts();
+            loadPricing();
+        }
+
+        async function loginWithBiometric() {
+            try {
+                const credentialId = localStorage.getItem(CREDENTIAL_KEY);
+                if (!credentialId) {
+                    alert('No saved credentials found. Please use PIN.');
+                    return;
+                }
+
+                const rawId = Uint8Array.from(atob(credentialId), c => c.charCodeAt(0));
+
+                const getOptions = {
+                    publicKey: {
+                        challenge: new Uint8Array(32),
+                        allowCredentials: [{ type: "public-key", id: rawId, transports: ["internal"] }],
+                        userVerification: "required",
+                        timeout: 60000
+                    }
+                };
+
+                await navigator.credentials.get(getOptions);
+                document.getElementById('pinOverlay').classList.add('hidden');
+                loadProducts();
+                loadPricing();
+            } catch (error) {
+                console.error('Biometric login failed:', error);
+                if (error.name !== 'NotAllowedError') {
+                    alert('Windows Hello authentication failed. Please use PIN.');
+                }
+            }
+        }
+
+        // ==================== WITHDRAWALS MANAGEMENT ====================
+
+        // Store products globally for withdrawal dropdown
+        let allProducts = [];
+
+        async function loadWithdrawals() {
+            try {
+                // Populate products dropdown from already loaded products
+                const select = document.getElementById('withdrawProduct');
+                if (allProducts.length > 0) {
+                    select.innerHTML = '<option value="">All Products</option>' +
+                        allProducts.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                } else {
+                    // If products not loaded yet, fetch them
+                    const prodRes = await fetch(`${API_URL}?action=get_products`);
+                    const prodResult = await prodRes.json();
+                    if (prodResult.success && prodResult.data) {
+                        allProducts = prodResult.data;
+                        select.innerHTML = '<option value="">All Products</option>' +
+                            allProducts.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+                    }
+                }
+
+                // Load withdrawals
+                const response = await fetch(`${API_URL}?action=get_withdrawals`);
+                const result = await response.json();
+
+                if (result.success) {
+                    renderWithdrawals(result.data);
+                } else {
+                    console.error('Error loading withdrawals:', result.error);
+                    renderWithdrawals([]);
+                }
+            } catch (error) {
+                console.error('Error loading withdrawals:', error);
+                renderWithdrawals([]);
+            }
+
+            // Set default date to today
+            document.getElementById('withdrawDate').value = new Date().toISOString().split('T')[0];
+        }
+
+        function renderWithdrawals(withdrawals) {
+            const tbody = document.getElementById('withdrawalsBody');
+            const totalEl = document.getElementById('totalWithdrawnAmount');
+
+            if (!withdrawals || withdrawals.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No withdrawals recorded yet.</td></tr>';
+                totalEl.textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            tbody.innerHTML = withdrawals.map(w => {
+                total += parseFloat(w.amount || 0);
+                const date = new Date(w.withdrawal_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                return `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${escapeHtml(w.product_name || 'All Products')}</td>
+                        <td><strong style="color: #10b981;">$${parseFloat(w.amount).toFixed(2)}</strong></td>
+                        <td style="color: #94a3b8;">${escapeHtml(w.note || '-')}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="deleteWithdrawal(${w.id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            totalEl.textContent = '$' + total.toFixed(2);
+        }
+
+        // Add withdrawal form submit
+        document.getElementById('addWithdrawalForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const productId = document.getElementById('withdrawProduct').value;
+            const amount = document.getElementById('withdrawAmount').value;
+            const date = document.getElementById('withdrawDate').value;
+            const note = document.getElementById('withdrawNote').value;
+
+            if (!amount || parseFloat(amount) <= 0) {
+                showAlert('Please enter a valid amount', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}?action=add_withdrawal`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        product_id: productId || null,
+                        amount: parseFloat(amount),
+                        withdrawal_date: date,
+                        note: note
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Withdrawal recorded successfully!', 'success');
+                    document.getElementById('addWithdrawalForm').reset();
+                    document.getElementById('withdrawDate').value = new Date().toISOString().split('T')[0];
+                    loadWithdrawals();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error recording withdrawal: ' + error.message, 'error');
+            }
+        });
+
+        async function deleteWithdrawal(id) {
+            if (!confirm('Are you sure you want to delete this withdrawal record?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}?action=delete_withdrawal&id=${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Withdrawal deleted', 'success');
+                    loadWithdrawals();
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error deleting withdrawal: ' + error.message, 'error');
+            }
+        }
+
+        // ==================== CSV IMPORT ====================
+
+        function populateCsvProductDropdown(products) {
+            const select = document.getElementById('csvProduct');
+            select.innerHTML = '<option value="">Select Product</option>' +
+                products.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+        }
+
+        // CSV Upload Form Submit
+        document.getElementById('csvUploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const productId = document.getElementById('csvProduct').value;
+            const fileInput = document.getElementById('csvFile');
+            const statusEl = document.getElementById('csvUploadStatus');
+            const resultsDiv = document.getElementById('csvImportResults');
+            const resultsContent = document.getElementById('csvResultsContent');
+            const btn = document.getElementById('csvUploadBtn');
+
+            if (!productId) {
+                showAlert('Please select a product', 'error');
+                return;
+            }
+
+            if (!fileInput.files.length) {
+                showAlert('Please select a CSV file', 'error');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            if (!file.name.endsWith('.csv')) {
+                showAlert('Please upload a CSV file', 'error');
+                return;
+            }
+
+            // Show loading state
+            btn.disabled = true;
+            btn.textContent = '⏳ Uploading...';
+            statusEl.textContent = 'Reading CSV file...';
+            resultsDiv.style.display = 'none';
+
+            try {
+                // Create FormData
+                const formData = new FormData();
+                formData.append('csv_file', file);
+                formData.append('product_id', productId);
+
+                statusEl.textContent = 'Uploading and processing...';
+
+                const response = await fetch(`${API_URL}?action=import_csv_orders`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert(`Import complete! ${result.data.new_orders} new orders added.`, 'success');
+
+                    // Show detailed results
+                    resultsDiv.style.display = 'block';
+                    resultsContent.innerHTML = `
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;">
+                            <div style="background:#0f172a;padding:12px;border-radius:8px;text-align:center;">
+                                <div style="font-size:24px;font-weight:700;color:#3b82f6;">${result.data.total_in_csv}</div>
+                                <div style="font-size:12px;color:#94a3b8;">Orders in CSV</div>
+                            </div>
+                            <div style="background:#0f172a;padding:12px;border-radius:8px;text-align:center;">
+                                <div style="font-size:24px;font-weight:700;color:#10b981;">${result.data.new_orders}</div>
+                                <div style="font-size:12px;color:#94a3b8;">New Orders Added</div>
+                            </div>
+                            <div style="background:#0f172a;padding:12px;border-radius:8px;text-align:center;">
+                                <div style="font-size:24px;font-weight:700;color:#f59e0b;">${result.data.existing_orders}</div>
+                                <div style="font-size:12px;color:#94a3b8;">Already Existed</div>
+                            </div>
+                            <div style="background:#0f172a;padding:12px;border-radius:8px;text-align:center;">
+                                <div style="font-size:24px;font-weight:700;color:#8b5cf6;">${result.data.ipqs_analyzed || 0}</div>
+                                <div style="font-size:12px;color:#94a3b8;">IPQS Analyzed</div>
+                            </div>
+                        </div>
+                        ${result.data.new_order_ids && result.data.new_order_ids.length > 0 ? `
+                            <div style="margin-top:12px;">
+                                <strong style="color:#10b981;">New Order IDs:</strong>
+                                <span style="color:#94a3b8;font-size:13px;">${result.data.new_order_ids.join(', ')}</span>
+                            </div>
+                        ` : ''}
+                        ${result.data.errors && result.data.errors.length > 0 ? `
+                            <div style="margin-top:12px;color:#f87171;">
+                                <strong>Errors:</strong> ${result.data.errors.join(', ')}
+                            </div>
+                        ` : ''}
+                    `;
+
+                    // Reset form
+                    document.getElementById('csvUploadForm').reset();
+                    statusEl.textContent = '';
+                } else {
+                    showAlert('Import failed: ' + result.error, 'error');
+                    statusEl.textContent = 'Import failed';
+                }
+            } catch (error) {
+                showAlert('Error importing CSV: ' + error.message, 'error');
+                statusEl.textContent = 'Error occurred';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📤 Upload & Import Orders';
+            }
+        });
+    </script>
+</body>
+</html>

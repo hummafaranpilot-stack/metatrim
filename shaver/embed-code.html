@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Embed Code Generator - Trusted Nutra Products</title>
+  <link rel="stylesheet" href="vendors/iconfonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="shortcut icon" href="images/favicon.png" />
+</head>
+<body>
+  <div class="container-scroller">
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize"><span class="fas fa-bars"></span></button>
+        <ul class="navbar-nav navbar-nav-right ml-auto">
+          <li class="nav-item dropdown"><a class="nav-link" href="#"><i class="fas fa-user-circle" style="font-size: 24px;"></i></a></li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas"><span class="fas fa-bars"></span></button>
+      </div>
+    </nav>
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-profile"><div class="nav-link"><div class="profile-image"><img src="images/logo-mini.svg" alt="image"/></div><div class="profile-name"><p class="name">Trusted Nutra</p><p class="designation">Analytics Dashboard</p></div></div></li>
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa fa-tachometer-alt menu-icon"></i><span class="menu-title">Dashboard Overview</span></a></li>
+          <li class="nav-item nav-category"><span class="nav-link">SHAVING ANALYTICS</span></li>
+          <li class="nav-item"><a class="nav-link" href="shaving-analytics.html"><i class="fa fa-chart-line menu-icon"></i><span class="menu-title">Traffic Analytics</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="sessions.html"><i class="fa fa-scissors menu-icon"></i><span class="menu-title">Shaving Sessions</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html"><i class="fa fa-history menu-icon"></i><span class="menu-title">Session History</span></a></li>
+          <li class="nav-item active"><a class="nav-link" href="embed-code.html"><i class="fa fa-code menu-icon"></i><span class="menu-title">Embed Code</span></a></li>
+          <li class="nav-item nav-category"><span class="nav-link">BUYGOODS ANALYTICS</span></li>
+          <li class="nav-item"><a class="nav-link" href="orders.html"><i class="fa fa-shopping-cart menu-icon"></i><span class="menu-title">Orders</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="revenue.html"><i class="fa fa-dollar-sign menu-icon"></i><span class="menu-title">Revenue Analytics</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="recurring.html"><i class="fa fa-sync-alt menu-icon"></i><span class="menu-title">Recurring Charges</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="refunds.html"><i class="fa fa-undo menu-icon"></i><span class="menu-title">Refunds</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="chargebacks.html"><i class="fa fa-exclamation-triangle menu-icon"></i><span class="menu-title">Chargebacks</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="fraud-detection.html"><i class="fa fa-shield-alt menu-icon"></i><span class="menu-title">Fraud Detection</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html"><i class="fa fa-box menu-icon"></i><span class="menu-title">Products</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="webhooks.html"><i class="fa fa-link menu-icon"></i><span class="menu-title">Webhook Logs</span></a></li>
+          <li class="nav-item nav-category"><span class="nav-link">ADMIN</span></li>
+          <li class="nav-item"><a class="nav-link" href="admin.html"><i class="fa fa-cog menu-icon"></i><span class="menu-title">Admin Panel</span></a></li>
+        </ul>
+      </nav>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title"><span class="page-title-icon bg-gradient-primary text-white mr-2"><i class="fa fa-code"></i></span> Embed Code Generator</h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Embed Code</li>
+              </ul>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 mx-auto grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"><i class="fa fa-magic text-success"></i> Generate Shaving Embed Code</h4>
+                  <p class="card-description">Paste your BuyGoods tracking script to generate a shaving-enabled version</p>
+                  <div class="form-group">
+                    <label for="bgScript">BuyGoods Tracking Script</label>
+                    <textarea class="form-control" id="bgScript" rows="8" placeholder="Paste your BuyGoods tracking script here...&#10;&#10;Example:&#10;<script>&#10;var mysrc = &quot;https://tracking.buygoods.com/track/?a=11943&firstcookie=0&quot;+&quot;&tracking_redirect=&referrer=&quot;+encodeURIComponent(document.referrer)+...&#10;</script>"></textarea>
+                  </div>
+                  <button class="btn btn-gradient-primary btn-block" onclick="generateEmbedCode()"><i class="fa fa-cog fa-spin" id="generateSpinner" style="display:none;"></i> <i class="fa fa-code" id="generateIcon"></i> Generate Embed Code</button>
+                  <div id="embedOutput" style="display:none;" class="mt-4">
+                    <hr>
+                    <div class="alert alert-success"><i class="fa fa-check-circle"></i> Embed code generated successfully!</div>
+                    <h5 class="mb-3">Your Generated Embed Code</h5>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="generatedCode" readonly>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary" onclick="copyCode()"><i class="fa fa-copy"></i> Copy</button>
+                      </div>
+                    </div>
+                    <div class="card bg-light">
+                      <div class="card-body">
+                        <h5 class="card-title"><i class="fa fa-info-circle text-info"></i> Installation Instructions</h5>
+                        <ol>
+                          <li>Copy the generated embed code above</li>
+                          <li>Remove your old BuyGoods tracking script from your landing page</li>
+                          <li>Paste the new code at the top of your <code>&lt;head&gt;</code> section</li>
+                          <li>Save and upload to your server</li>
+                          <li>Test by creating a session and visiting your page with affiliate parameters</li>
+                        </ol>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2026 Trusted Nutra Products. All rights reserved.</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="vendors/js/vendor.bundle.addons.js"></script>
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/misc.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/todolist.js"></script>
+  <script>
+    function generateEmbedCode() {
+      const bgScript = document.getElementById('bgScript').value.trim();
+      if (!bgScript) {
+        alert('Please paste your BuyGoods tracking script');
+        return;
+      }
+      document.getElementById('generateIcon').style.display = 'none';
+      document.getElementById('generateSpinner').style.display = 'inline';
+      setTimeout(() => {
+        const shavingDomain = window.location.origin;
+        const embedCode = `<script>var SHAVING_DOMAIN='${shavingDomain}';</script><script src="${shavingDomain}/shaving-check.php"></script>${bgScript}`;
+        document.getElementById('generatedCode').value = embedCode;
+        document.getElementById('embedOutput').style.display = 'block';
+        document.getElementById('generateIcon').style.display = 'inline';
+        document.getElementById('generateSpinner').style.display = 'none';
+      }, 500);
+    }
+    function copyCode() {
+      const codeInput = document.getElementById('generatedCode');
+      codeInput.select();
+      document.execCommand('copy');
+      alert('Code copied to clipboard!');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyGoods Analytics Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #6366f1;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-card.revenue .icon { background: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+        .stat-card.orders .icon { background: rgba(37, 99, 235, 0.1); color: var(--primary-color); }
+        .stat-card.refunds .icon { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+        .stat-card.chargebacks .icon { background: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+        .stat-card.recurring .icon { background: rgba(99, 102, 241, 0.1); color: var(--info-color); }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-card .change {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-card .change.positive { color: var(--success-color); }
+        .stat-card .change.negative { color: var(--danger-color); }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--bg-color);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        td {
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background: var(--bg-color);
+        }
+
+        /* Status Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge.completed { background: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+        .badge.pending { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+        .badge.refunded { background: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+        .badge.cancelled { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+        .badge.chargeback { background: rgba(239, 68, 68, 0.15); color: var(--danger-color); }
+        .badge.fulfilled { background: rgba(37, 99, 235, 0.1); color: var(--primary-color); }
+
+        /* Activity Item */
+        .activity-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .activity-icon.order { background: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+        .activity-icon.refund { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+        .activity-icon.chargeback { background: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+        .activity-icon.recurring { background: rgba(99, 102, 241, 0.1); color: var(--info-color); }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-content .title {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .activity-content .description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-amount {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .activity-amount.positive { color: var(--success-color); }
+        .activity-amount.negative { color: var(--danger-color); }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: var(--primary-color);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Refresh Button */
+        .refresh-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .refresh-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Date Filter */
+        .date-filter {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .date-filter input {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* Connection Status */
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-dot.connected { background: var(--success-color); }
+        .status-dot.disconnected { background: var(--danger-color); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1>BuyGoods Analytics Dashboard</h1>
+                <p>Real-time sales and order tracking</p>
+            </div>
+            <div class="connection-status">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Checking...</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card revenue">
+                <div class="icon">💰</div>
+                <div class="label">Total Revenue</div>
+                <div class="value" id="totalRevenue">$0.00</div>
+            </div>
+            <div class="stat-card orders">
+                <div class="icon">📦</div>
+                <div class="label">Total Orders</div>
+                <div class="value" id="totalOrders">0</div>
+            </div>
+            <div class="stat-card refunds">
+                <div class="icon">↩️</div>
+                <div class="label">Refunds</div>
+                <div class="value" id="totalRefunds">0</div>
+            </div>
+            <div class="stat-card chargebacks">
+                <div class="icon">⚠️</div>
+                <div class="label">Chargebacks</div>
+                <div class="value" id="totalChargebacks">0</div>
+            </div>
+            <div class="stat-card recurring">
+                <div class="icon">🔄</div>
+                <div class="label">Net Revenue</div>
+                <div class="value" id="netRevenue">$0.00</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Main Content -->
+            <div>
+                <!-- Orders Card -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <h2>Recent Orders</h2>
+                        <button class="refresh-btn" onclick="loadOrders()">Refresh</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tabs">
+                            <button class="tab active" data-status="all" onclick="filterOrders('all', this)">All</button>
+                            <button class="tab" data-status="completed" onclick="filterOrders('completed', this)">Completed</button>
+                            <button class="tab" data-status="refunded" onclick="filterOrders('refunded', this)">Refunded</button>
+                            <button class="tab" data-status="cancelled" onclick="filterOrders('cancelled', this)">Cancelled</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Product</th>
+                                        <th>Customer</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordersTable">
+                                    <tr>
+                                        <td colspan="6">
+                                            <div class="loading">
+                                                <div class="spinner"></div>
+                                                Loading orders...
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webhook Logs Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Webhook Logs</h2>
+                        <button class="refresh-btn" onclick="loadLogs()">Refresh</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Event Type</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="logsTable">
+                                    <tr>
+                                        <td colspan="3">
+                                            <div class="loading">
+                                                <div class="spinner"></div>
+                                                Loading logs...
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <!-- Recent Activity Card -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list" id="activityList">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                Loading activity...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Products Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Top Products</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="topProducts">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                Loading products...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>BuyGoods Analytics Dashboard &copy; 2024 | Auto-refreshes every 30 seconds</p>
+    </footer>
+
+    <script>
+        // API Base URL - Change this to match your hosting
+        const API_BASE = '..';  // Parent directory where api.php is located
+
+        // Global state
+        let allOrders = [];
+        let currentFilter = 'all';
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(amount || 0);
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Format relative time
+        function timeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
+
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+            if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+            return `${Math.floor(seconds / 86400)}d ago`;
+        }
+
+        // Check server connection
+        async function checkConnection() {
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+
+            try {
+                const response = await fetch(`${API_BASE}/api.php?action=health`);
+                const data = await response.json();
+
+                if (data.status === 'healthy') {
+                    statusDot.className = 'status-dot connected';
+                    statusText.textContent = 'Connected';
+                } else {
+                    statusDot.className = 'status-dot disconnected';
+                    statusText.textContent = 'DB Disconnected';
+                }
+            } catch (error) {
+                statusDot.className = 'status-dot disconnected';
+                statusText.textContent = 'Server Offline';
+            }
+        }
+
+        // Load dashboard stats
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_BASE}/api.php?action=stats`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const stats = result.data;
+
+                    document.getElementById('totalRevenue').textContent = formatCurrency(stats.summary.total_revenue);
+                    document.getElementById('totalOrders').textContent = stats.orders.total_orders;
+                    document.getElementById('totalRefunds').textContent = stats.refunds.total_refunds;
+                    document.getElementById('totalChargebacks').textContent = stats.chargebacks.total_chargebacks;
+                    document.getElementById('netRevenue').textContent = formatCurrency(stats.summary.net_revenue);
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // Load orders
+        async function loadOrders() {
+            try {
+                const response = await fetch(`${API_BASE}/api.php?action=orders&limit=50`);
+                const result = await response.json();
+
+                if (result.success) {
+                    allOrders = result.data;
+                    renderOrders();
+                }
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('ordersTable').innerHTML = `
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <div class="icon">❌</div>
+                                <p>Error loading orders</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Filter orders
+        function filterOrders(status, btn) {
+            currentFilter = status;
+
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+
+            renderOrders();
+        }
+
+        // Render orders table
+        function renderOrders() {
+            const tbody = document.getElementById('ordersTable');
+            let filteredOrders = allOrders;
+
+            if (currentFilter !== 'all') {
+                filteredOrders = allOrders.filter(o => o.status === currentFilter);
+            }
+
+            if (filteredOrders.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <div class="icon">📦</div>
+                                <p>No orders found</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = filteredOrders.map(order => `
+                <tr>
+                    <td><strong>${order.order_id || '-'}</strong></td>
+                    <td>${order.product_name || 'Unknown Product'}</td>
+                    <td>${order.customer_name || order.customer_email || '-'}</td>
+                    <td><strong>${formatCurrency(order.product_price * (order.quantity || 1))}</strong></td>
+                    <td><span class="badge ${order.status}">${order.status}</span></td>
+                    <td>${formatDate(order.created_at)}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Load recent activity
+        async function loadActivity() {
+            try {
+                const response = await fetch(`${API_BASE}/api.php?action=activity&limit=15`);
+                const result = await response.json();
+
+                const container = document.getElementById('activityList');
+
+                if (result.success && result.data.length > 0) {
+                    container.innerHTML = result.data.map(item => {
+                        const iconClass = item.type === 'order' ? 'order' :
+                                         item.type === 'refund' ? 'refund' :
+                                         item.type === 'chargeback' ? 'chargeback' : 'recurring';
+                        const icon = item.type === 'order' ? '📦' :
+                                    item.type === 'refund' ? '↩️' :
+                                    item.type === 'chargeback' ? '⚠️' : '🔄';
+                        const amountClass = item.type === 'order' || item.type === 'recurring' ? 'positive' : 'negative';
+                        const prefix = item.type === 'order' || item.type === 'recurring' ? '+' : '-';
+
+                        return `
+                            <div class="activity-item">
+                                <div class="activity-icon ${iconClass}">${icon}</div>
+                                <div class="activity-content">
+                                    <div class="title">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</div>
+                                    <div class="description">${item.description || item.id}</div>
+                                </div>
+                                <div class="activity-amount ${amountClass}">${prefix}${formatCurrency(item.amount)}</div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">📊</div>
+                            <p>No recent activity</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading activity:', error);
+            }
+        }
+
+        // Load top products
+        async function loadTopProducts() {
+            try {
+                const response = await fetch(`${API_BASE}/api.php?action=products&limit=5`);
+                const result = await response.json();
+
+                const container = document.getElementById('topProducts');
+
+                if (result.success && result.data.length > 0) {
+                    container.innerHTML = result.data.map((product, index) => `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);">
+                            <div>
+                                <div style="font-weight: 500; font-size: 0.9rem;">#${index + 1} ${product.product_name || 'Unknown'}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">${product.total_orders} orders</div>
+                            </div>
+                            <div style="font-weight: 600; color: var(--success-color);">${formatCurrency(product.total_revenue)}</div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">📊</div>
+                            <p>No product data yet</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading top products:', error);
+            }
+        }
+
+        // Load webhook logs
+        async function loadLogs() {
+            try {
+                const response = await fetch(`${API_BASE}/api.php?action=logs&limit=20`);
+                const result = await response.json();
+
+                const tbody = document.getElementById('logsTable');
+
+                if (result.success && result.data.length > 0) {
+                    tbody.innerHTML = result.data.map(log => `
+                        <tr>
+                            <td><strong>${log.event_type}</strong></td>
+                            <td><span class="badge ${log.processed ? 'completed' : 'refunded'}">${log.processed ? 'Success' : 'Failed'}</span></td>
+                            <td>${timeAgo(log.created_at)}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="3">
+                                <div class="empty-state">
+                                    <div class="icon">📋</div>
+                                    <p>No webhook logs yet</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading logs:', error);
+            }
+        }
+
+        // Load all data
+        async function loadAllData() {
+            await Promise.all([
+                checkConnection(),
+                loadStats(),
+                loadOrders(),
+                loadActivity(),
+                loadTopProducts(),
+                loadLogs()
+            ]);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAllData();
+
+            // Auto-refresh every 30 seconds
+            setInterval(loadAllData, 30000);
+        });
+    </script>
+</body>
+</html>
