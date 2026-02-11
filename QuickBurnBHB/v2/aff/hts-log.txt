@@ -1,0 +1,32 @@
+HTTrack3.49-2+htsswf+htsjava launched on Mon, 26 Jan 2026 12:05:05 at https://cb.venoplus8.com/aff/afftools.php +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://cb.venoplus8.com/aff/afftools.php -O1 "C:\My Web Sites\affiliate" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+12:06:49	Error: 	"Forbidden" (403) at link https://cb.venoplus8.com/aff/ (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:50	Error: 	"Bad Request" (400) at link https://www.googletagmanager.com/gtm.js?id= (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:54	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/css/fontawesome.min.css (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:54	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/css/regular.min.css (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:54	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/css/solid.min.css (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:54	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/css/brands.min.css (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/POST (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:56	Error: 	"Method Not Allowed" (405) at link https://cb.venoplus8.com/aff/process-hoplink-users.php (from https://cb.venoplus8.com/aff/afftools.php)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/signals/config/ (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/t (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/e (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/signals/plugins/ (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/schema.org/ (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/t.resolvedLink (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/o (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/signals/iwl.js (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/signals/iwl.js?pixel_id= (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/r.dl (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/aff/r.rl (from https://connect.facebook.net/en_US/fbevents.js)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/images/back-light.png (from https://cb.venoplus8.com/css/affstyle.css)
+12:06:56	Error: 	"Not Found" (404) at link https://cb.venoplus8.com/images/VivaSlim-1Bottle.png (from https://cb.venoplus8.com/css/affstyle.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 1 minutes 51 seconds : 64 links scanned, 42 files written (42244485 bytes overall) [41180211 bytes received at 370992 bytes/sec], 1451389 bytes transferred using HTTP compression in 40 files, ratio 23%, 2.0 requests per connection
+(21 errors, 0 warnings, 0 messages)

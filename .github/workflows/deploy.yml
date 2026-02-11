@@ -1,0 +1,34 @@
+name: Deploy Meta Trim to Hosting
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'meta trim/New Funnel/**'  # Only trigger when files in this folder change
+  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  deploy:
+    name: Deploy to metatrim.trustednutraproduct.com
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Meta Trim Funnel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./meta trim/New Funnel/
+          server-dir: /home/jojofwjv/domains/metatrim.trustednutraproduct.com/public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/Thumbs.db
+            **/*.md

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickBank Structure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: transparent;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .grid-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .grid-item h3 {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grid-item p {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .grid-item .package-list {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+
+        .grid-item .package-list li {
+            padding: 5px 0;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .grid-item .package-list li::before {
+            content: "•";
+            color: #e94560;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* ============================================
+           PRICING CARDS - EXACT STYLES
+        ============================================ */
+        .mt-product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 2rem 1rem;
+            background-color: transparent;
+            font-family: "Montserrat", sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .mt-product-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 340px;
+            width: calc(33.333% - 0.75rem);
+            min-width: 280px;
+            flex: 1 1 auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            font-family: "Montserrat", sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mt-product-content {
+            position: relative;
+            overflow: visible;
+        }
+
+        .mt-hanging-tag {
+            position: absolute;
+            top: 11px;
+            right: -13%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .mt-product-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .mt-product-card.mt-featured {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #ffc107;
+        }
+
+        .mt-product-header {
+            background: linear-gradient(135deg, #1a237e 0%, #303f9f 100%);
+            text-align: center;
+            padding: 0.6rem 1rem;
+            color: white;
+        }
+
+        .mt-product-card.mt-featured .mt-product-header {
+            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+        }
+
+        .mt-product-header h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .mt-product-header p {
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        .mt-product-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .mt-product-image {
+            width: 100%;
+            position: relative;
+            text-align: center;
+            padding: 0.6rem;
+            border: 2px solid #bbdefb;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            margin-bottom: 0.5rem;
+        }
+
+        .mt-product-image img {
+            width: 100%;
+            max-width: 252px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .mt-best-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #1a237e, #303f9f);
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+        }
+
+        .mt-product-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            width: 100%;
+        }
+
+        .mt-product-price {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .mt-product-price h4, .mt-display-price {
+            font-size: 4.5rem;
+            color: #1565c0;
+            font-weight: 800;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .mt-price-info p {
+            font-size: 1.3rem;
+            color: #1565c0;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .mt-subscription-toggle {
+            width: 100%;
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .mt-subscription-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .mt-subscription-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mt-subscription-option.active {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mt-option-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mt-radio-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #666;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .mt-subscription-option.active .mt-radio-dot {
+            border-color: #fff;
+            background: #fff;
+        }
+
+        .mt-radio-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            opacity: 0;
+        }
+
+        .mt-subscription-option.active .mt-radio-dot::after {
+            opacity: 1;
+        }
+
+        .mt-option-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Subscribe Checkbox Styles */
+        .mt-subscribe-checkbox {
+            width: 100%;
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .mt-subscribe-checkbox:hover {
+            background: #252542;
+        }
+
+        .mt-subscribe-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1565c0;
+            cursor: pointer;
+        }
+
+        .mt-subscribe-checkbox label {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Subscription Info Section */
+        .mt-subscription-info {
+            display: none;
+            text-align: center;
+            margin: 4px 0;
+            background: rgba(26, 26, 46, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(26, 26, 46, 0.15);
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+
+        .mt-subscription-info.show {
+            display: block;
+            animation: borderFlicker 2.5s ease-in-out infinite;
+        }
+
+        @keyframes borderFlicker {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #000; }
+        }
+
+        .mt-subscription-info .congrats {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1565c0;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .mt-subscription-info p {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #333;
+            display: block;
+            line-height: 1.3;
+            margin: 0 0 4px 0;
+        }
+
+        .mt-subscription-info .highlight {
+            font-weight: 700;
+            color: #1565c0;
+        }
+
+        .mt-cancel-badge {
+            display: block;
+            text-align: center;
+            margin: 4px 0 0 0;
+            padding: 6px 10px;
+            background: #28a745;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .mt-savings-badge {
+            background: none;
+            color: #000;
+            padding: 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 8px 0 0 0;
+            display: block;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .mt-buy-now-btn {
+            display: block;
+            margin-top: 2px;
+            width: 100%;
+            max-width: 220px;
+        }
+
+        .mt-buy-now-btn img {
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .mt-buy-now-btn:hover img {
+            transform: scale(1.05);
+        }
+
+        .mt-shipping-text {
+            color: #000;
+            font-size: 1rem;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .mt-shipping-text.free {
+            color: #1565c0;
+        }
+
+        .mt-total-line {
+            font-size: 1.1rem;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .mt-strikethrough {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 0.5rem;
+        }
+
+        .mt-final-price {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .mt-payment-icons {
+            margin: 0.4rem 0;
+            padding: 0;
+        }
+
+        .mt-payment-icons img {
+            width: 100%;
+            max-width: 200px;
+            padding: 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .mt-product-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .mt-product-card {
+                max-width: 400px;
+                width: 100%;
+            }
+
+            .mt-product-card.mt-featured {
+                order: -1;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mt-product-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .mt-product-header p {
+                font-size: 0.9rem;
+            }
+
+            .mt-product-price h4, .mt-display-price {
+                font-size: 3.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                padding: 0 15px;
+            }
+        }
+
+        /* Label Image Section */
+        .label-section {
+            text-align: center;
+            padding: 2rem 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .label-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section Description */
+        .section-description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .section-tagline {
+            text-align: center;
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 600;
+            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+            padding: 12px 25px;
+            border-radius: 8px;
+            margin: 15px auto 35px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(21, 101, 192, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>MainPage Structure (FrontEnd)</h1>
+
+    <div class="product-grid">
+        <div class="grid-item">
+            <h3>Product Name</h3>
+            <p>MetaTrim BHB</p>
+        </div>
+        <div class="grid-item">
+            <h3>Package Options</h3>
+            <ul class="package-list">
+                <li>2 Bottles</li>
+                <li>4 Bottles</li>
+                <li>6+1 Bottles (Buy 6, Get 1 Free)</li>
+            </ul>
+        </div>
+        <div class="grid-item">
+            <h3>Supplement</h3>
+            <p>Weight Loss Niche</p>
+        </div>
+    </div>
+
+    <!-- PRICING CARDS SECTION -->
+    <div class="mt-product-grid">
+        <!-- 2 Bottles -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>2 BOTTLES</h3>
+                <p>60 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <div class="mt-product-image">
+                    <img src="../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$79</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $200!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$260</span> <span class="mt-final-price">$158</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6+1 Bottles - BEST VALUE -->
+        <div class="mt-product-card mt-featured">
+            <div class="mt-product-header">
+                <h3>6 + 1 BOTTLES</h3>
+                <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <div class="mt-product-image">
+                    <img src="../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles - Best Value">
+                    <div class="mt-best-badge">BEST VALUE</div>
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$49</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $780!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now2.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Bottles -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>4 BOTTLES</h3>
+                <p>FREE SHIPPING • 120 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <div class="mt-product-image">
+                    <img src="../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$64</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $450!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Label Image Section -->
+    <div class="label-section">
+        <img src="label1.jpg" alt="Label">
+    </div>
+
+    <!-- Upsell-1 Section -->
+    <h1>Upsell-1</h1>
+
+    <div class="product-grid">
+        <div class="grid-item">
+            <h3>Product Name</h3>
+            <p>MetaTrim BHB</p>
+        </div>
+        <div class="grid-item">
+            <h3>Package Options</h3>
+            <ul class="package-list">
+                <li>1 Bottle</li>
+                <li>3 Bottles</li>
+                <li>6 Bottles</li>
+            </ul>
+        </div>
+        <div class="grid-item">
+            <h3>Supplement</h3>
+            <p>Weight Loss Niche</p>
+        </div>
+    </div>
+
+    <p class="section-description">Same Products but with discounted pricing</p>
+    <p class="section-tagline">These are the cards user will see when visits by default</p>
+
+    <!-- UPSELL PRICING CARDS SECTION -->
+    <div class="mt-product-grid">
+        <!-- 1 Bottle -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>1 BOTTLE</h3>
+                <p>30 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="1x.png" alt="MetaTrim 1 Bottle">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-1bottle">
+                        <label for="subscribe-1bottle">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$69</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span class="highlight">$69+Shipping</span> will start delivering <span class="highlight">every Month</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $110!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$69</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6 Bottles - BEST VALUE -->
+        <div class="mt-product-card mt-featured">
+            <div class="mt-product-header">
+                <h3>6 BOTTLES</h3>
+                <p>180 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="6x.png" alt="MetaTrim 6 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-6bottle">
+                        <label for="subscribe-6bottle">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$39</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">180 Days</span>, 6 Bottles for <span class="highlight">$234+Free Shipping</span> will start delivering <span class="highlight">every 6 Months</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $840!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now2.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$234</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Bottles -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>3 BOTTLES</h3>
+                <p>90 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="3x.png" alt="MetaTrim 3 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-3bottle">
+                        <label for="subscribe-3bottle">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$54</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">90 Days</span>, 3 Bottles for <span class="highlight">$162+Free Shipping</span> will start delivering <span class="highlight">every 3 Months</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $375!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span class="mt-final-price">$162</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPSELL CARDS WITH SUBSCRIPTION CHECKED -->
+    <p class="section-tagline" style="margin-top: 50px;">These are the cards when user checks the Subscribe checkbox</p>
+
+    <div class="mt-product-grid">
+        <!-- 1 Bottle - Subscribed -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>1 BOTTLE</h3>
+                <p>30 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="1x.png" alt="MetaTrim 1 Bottle">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-1bottle-sub" checked>
+                        <label for="subscribe-1bottle-sub">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$69</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info show">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span class="highlight">$69+Shipping</span> will start delivering <span class="highlight">every Month</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $110!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/subscribe.webp" alt="Subscribe Now">
+                    </a>
+                    <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$69</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6 Bottles - Subscribed -->
+        <div class="mt-product-card mt-featured">
+            <div class="mt-product-header">
+                <h3>6 BOTTLES</h3>
+                <p>180 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="6x.png" alt="MetaTrim 6 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-6bottle-sub" checked>
+                        <label for="subscribe-6bottle-sub">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$39</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info show">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">180 Days</span>, 6 Bottles for <span class="highlight">$234+Free Shipping</span> will start delivering <span class="highlight">every 6 Months</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $840!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/subscribe.webp" alt="Subscribe Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$234</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Bottles - Subscribed -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>3 BOTTLES</h3>
+                <p>90 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="3x.png" alt="MetaTrim 3 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-3bottle-sub" checked>
+                        <label for="subscribe-3bottle-sub">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$54</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info show">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">90 Days</span>, 3 Bottles for <span class="highlight">$162+Free Shipping</span> will start delivering <span class="highlight">every 3 Months</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $375!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/subscribe.webp" alt="Subscribe Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span class="mt-final-price">$162</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upsell-2 Section -->
+    <h1 style="margin-top: 80px;">Upsell-2 (Daily Use Product)</h1>
+
+    <div class="product-grid">
+        <div class="grid-item">
+            <h3>Product Name</h3>
+            <p>Orabiome Pro</p>
+        </div>
+        <div class="grid-item">
+            <h3>Package Options</h3>
+            <ul class="package-list">
+                <li>1 Bottle</li>
+                <li>3 Bottles</li>
+                <li>6 Bottles</li>
+            </ul>
+        </div>
+        <div class="grid-item">
+            <h3>Supplement</h3>
+            <p>Daily Use Product for Teeth Whitening</p>
+        </div>
+    </div>
+
+    <!-- UPSELL-2 PRICING CARDS SECTION -->
+    <div class="mt-product-grid">
+        <!-- 1 Bottle -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>1 BOTTLE</h3>
+                <p>30 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="1-orabiome.png" alt="Orabiome Pro 1 Bottle">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$69</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $110!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$69</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6 Bottles - BEST VALUE -->
+        <div class="mt-product-card mt-featured">
+            <div class="mt-product-header">
+                <h3>6 BOTTLES</h3>
+                <p>180 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="6-orabiome.png" alt="Orabiome Pro 6 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$39</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $840!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now2.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$234</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Bottles -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>3 BOTTLES</h3>
+                <p>90 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="3-orabiome.png" alt="Orabiome Pro 3 Bottles">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$54</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $375!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text free">FREE Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span class="mt-final-price">$162</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orabiome Label Image Section -->
+    <div class="label-section">
+        <img src="orabiome_label.jpg" alt="Orabiome Pro Label">
+    </div>
+
+    <!-- Upsell-3 Section -->
+    <h1 style="margin-top: 80px;">Upsell-3 (Trial Product, Daily Use Item)</h1>
+
+    <div class="product-grid">
+        <div class="grid-item">
+            <h3>Product Name</h3>
+            <p>Gutalia Prime</p>
+        </div>
+        <div class="grid-item">
+            <h3>Package Options</h3>
+            <ul class="package-list">
+                <li>1 Bottle (One time & Trial)</li>
+            </ul>
+        </div>
+        <div class="grid-item">
+            <h3>Supplement</h3>
+            <p>Hair, Nail, Skin, Gut Health (General)</p>
+        </div>
+    </div>
+
+    <p class="section-tagline">These are the cards user will see when visits by default</p>
+
+    <!-- UPSELL-3 PRICING CARDS SECTION - DEFAULT -->
+    <div class="mt-product-grid">
+        <!-- 1 Bottle Trial -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>1 BOTTLE</h3>
+                <p>TRIAL • 30 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag-100.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="1-gutalia.png" alt="Gutalia Prime 1 Bottle">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-gutalia">
+                        <label for="subscribe-gutalia">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$0</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span class="highlight">$69+Shipping</span> will start delivering <span class="highlight">every Month</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $159!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/buy-now.webp" alt="Buy Now">
+                    </a>
+                    <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$19.99</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="section-tagline" style="margin-top: 50px;">These are the cards when user checks the Subscribe checkbox</p>
+
+    <!-- UPSELL-3 PRICING CARDS SECTION - SUBSCRIBED -->
+    <div class="mt-product-grid">
+        <!-- 1 Bottle Trial - Subscribed -->
+        <div class="mt-product-card">
+            <div class="mt-product-header">
+                <h3>1 BOTTLE</h3>
+                <p>TRIAL • 30 DAY SUPPLY</p>
+            </div>
+            <div class="mt-product-content">
+                <img src="tag-100.png" class="mt-hanging-tag" alt="Tag">
+                <div class="mt-product-image">
+                    <img src="1-gutalia.png" alt="Gutalia Prime 1 Bottle">
+                </div>
+                <div class="mt-product-details">
+                    <div class="mt-subscribe-checkbox">
+                        <input type="checkbox" id="subscribe-gutalia-sub" checked>
+                        <label for="subscribe-gutalia-sub">Subscribe & Go Hassle Free</label>
+                    </div>
+                    <div class="mt-product-price">
+                        <h4 class="mt-display-price">$0</h4>
+                        <div class="mt-price-info"><p>/Bottle</p></div>
+                    </div>
+                    <div class="mt-subscription-info show">
+                        <div class="congrats">Congrats!</div>
+                        <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span class="highlight">$69+Shipping</span> will start delivering <span class="highlight">every Month</span>.</p>
+                        <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                    </div>
+                    <div class="mt-savings-badge">YOU SAVE $159!</div>
+                    <a href="#" class="mt-buy-now-btn">
+                        <img src="../lib/img/subscribe.webp" alt="Subscribe Now">
+                    </a>
+                    <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                    <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$19.99</span></p>
+                    <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gutalia Prime Label Image Section -->
+    <div class="label-section">
+        <img src="Gutalia_Prime_Label.jpg" alt="Gutalia Prime Label">
+    </div>
+
+<!-- Subscription Checkbox JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Store original buy button images
+  document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
+    img.dataset.originalSrc = img.src;
+  });
+
+  // Handle checkbox subscribe functionality
+  const subscribeCheckboxes = document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]');
+
+  subscribeCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const card = this.closest('.mt-product-card');
+      const isSubscribe = this.checked;
+
+      // Only swap buy button image - no price or text changes
+      const buyButton = card.querySelector('.mt-buy-now-btn');
+      const btnImg = buyButton ? buyButton.querySelector('img') : null;
+      if (btnImg) {
+        if (isSubscribe) {
+          btnImg.src = '../lib/img/subscribe.webp';
+          btnImg.alt = 'Subscribe Now';
+        } else {
+          btnImg.src = btnImg.dataset.originalSrc;
+          btnImg.alt = 'Buy Now';
+        }
+      }
+
+      // Show/hide subscription info with flicker animation
+      const subscriptionInfo = card.querySelector('.mt-subscription-info');
+      if (subscriptionInfo) {
+        if (isSubscribe) {
+          subscriptionInfo.classList.add('show');
+          // Re-trigger animation
+          subscriptionInfo.style.animation = 'none';
+          subscriptionInfo.offsetHeight; // Trigger reflow
+          subscriptionInfo.style.animation = 'flicker 0.5s ease-in-out';
+        } else {
+          subscriptionInfo.classList.remove('show');
+        }
+      }
+    });
+  });
+
+  // Make entire checkbox wrapper clickable
+  document.querySelectorAll('.mt-subscribe-checkbox').forEach(wrapper => {
+    wrapper.addEventListener('click', function(e) {
+      if (e.target.tagName !== 'INPUT') {
+        const checkbox = this.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

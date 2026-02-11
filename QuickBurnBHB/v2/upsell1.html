@@ -1,0 +1,1698 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="icon" href="lib/img/logo_qb_black.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Upgrade Offer - QuickBurn BHB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #222;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Success Header Banner */
+        .success-header {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            color: #fff;
+            padding: 20px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .success-header .checkmark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 50%;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+
+        .success-header .checkmark svg {
+            width: 24px;
+            height: 24px;
+            fill: #28a745;
+        }
+
+        .success-header p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
+            color: #fff;
+            display: inline;
+            vertical-align: middle;
+        }
+
+        /* Timer Section */
+        .timer-section {
+            background: linear-gradient(135deg, #021a38 0%, #043b77 100%);
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .timer-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .timer-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .timer-display {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 10px 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .timer-display span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: #FFD700;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #043b77 0%, #065ba8 100%);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .wait-badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #021a38;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 8px 25px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-title .gold {
+            color: #FFD700;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 10px;
+        }
+
+        /* Offer Section */
+        .offer-section {
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+        }
+
+        .offer-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .offer-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #021a38;
+            margin-bottom: 10px;
+        }
+
+        .offer-header p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* ============================================
+           PRICING CARDS - EXACT STYLES FROM CLICKBANK STRUCTURE
+        ============================================ */
+        .mt-product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 2rem 1rem;
+            background-color: transparent;
+            font-family: "Montserrat", sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .mt-product-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 340px;
+            width: calc(33.333% - 0.75rem);
+            min-width: 280px;
+            flex: 1 1 auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            font-family: "Montserrat", sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mt-product-content {
+            position: relative;
+            overflow: visible;
+        }
+
+        .mt-hanging-tag {
+            position: absolute;
+            top: 11px;
+            right: -13%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .mt-product-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .mt-product-card.mt-featured {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #ffc107;
+        }
+
+        .mt-product-header {
+            background: linear-gradient(135deg, #1a237e 0%, #303f9f 100%);
+            text-align: center;
+            padding: 0.6rem 1rem;
+            color: white;
+        }
+
+        .mt-product-card.mt-featured .mt-product-header {
+            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+        }
+
+        .mt-product-header h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+            color: #fff;
+        }
+
+        .mt-product-header p {
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .mt-product-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .mt-product-image {
+            width: 100%;
+            position: relative;
+            text-align: center;
+            padding: 0.6rem;
+            border: 2px solid #bbdefb;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            margin-bottom: 0.5rem;
+        }
+
+        .mt-product-image img {
+            width: 100%;
+            max-width: 252px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .mt-best-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #1a237e, #303f9f);
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+        }
+
+        .mt-product-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            width: 100%;
+        }
+
+        .mt-product-price {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .mt-product-price h4, .mt-display-price {
+            font-size: 4.5rem;
+            color: #1565c0;
+            font-weight: 800;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .mt-price-info p {
+            font-size: 1.3rem;
+            color: #1565c0;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Subscribe Checkbox Styles */
+        .mt-subscribe-checkbox {
+            width: 100%;
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .mt-subscribe-checkbox:hover {
+            background: #252542;
+        }
+
+        .mt-subscribe-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1565c0;
+            cursor: pointer;
+        }
+
+        .mt-subscribe-checkbox label {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Subscription Info Section */
+        .mt-subscription-info {
+            display: none;
+            text-align: center;
+            margin: 4px 0;
+            background: rgba(26, 26, 46, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(26, 26, 46, 0.15);
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+
+        .mt-subscription-info.show {
+            display: block;
+            animation: borderFlicker 2.5s ease-in-out infinite;
+        }
+
+        @keyframes borderFlicker {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #000; }
+        }
+
+        .mt-subscription-info .congrats {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1565c0;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .mt-subscription-info p {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #333;
+            display: block;
+            line-height: 1.3;
+            margin: 0 0 4px 0;
+        }
+
+        .mt-subscription-info .highlight {
+            font-weight: 700;
+            color: #1565c0;
+        }
+
+        .mt-cancel-badge {
+            display: block;
+            text-align: center;
+            margin: 4px 0 0 0;
+            padding: 6px 10px;
+            background: #28a745;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .mt-savings-badge {
+            background: none;
+            color: #000;
+            padding: 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 8px 0 0 0;
+            display: block;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .mt-buy-now-btn {
+            display: block;
+            margin-top: 2px;
+            width: 100%;
+            max-width: 220px;
+        }
+
+        .mt-buy-now-btn img {
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .mt-buy-now-btn:hover img {
+            transform: scale(1.05);
+        }
+
+        .mt-shipping-text {
+            color: #000;
+            font-size: 1rem;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .mt-shipping-text.free {
+            color: #1565c0;
+        }
+
+        .mt-total-line {
+            font-size: 1.1rem;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .mt-strikethrough {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 0.5rem;
+        }
+
+        .mt-final-price {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .mt-payment-icons {
+            margin: 0.4rem 0;
+            padding: 0;
+        }
+
+        .mt-payment-icons img {
+            width: 100%;
+            max-width: 200px;
+            padding: 0;
+        }
+
+        /* No Thanks Link */
+        .no-thanks-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .no-thanks-link:hover {
+            color: #555;
+        }
+
+        /* Benefits Strip */
+        .benefits-strip {
+            background: linear-gradient(135deg, #021a38 0%, #043b77 100%);
+            padding: 40px 20px;
+        }
+
+        .benefits-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            text-align: center;
+            flex: 1 1 150px;
+            max-width: 180px;
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .benefit-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #FFD700;
+        }
+
+        .benefit-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .benefit-item p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 60px 20px;
+            background: #fff;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .reviews-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #021a38;
+            margin-bottom: 10px;
+        }
+
+        .reviews-header .stars {
+            color: #FFD700;
+            font-size: 24px;
+            letter-spacing: 3px;
+        }
+
+        .reviews-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            flex: 1 1 280px;
+            max-width: 320px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-stars {
+            color: #FFD700;
+            font-size: 16px;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #021a38;
+        }
+
+        .verified-badge {
+            font-size: 11px;
+            color: #28a745;
+            font-weight: 600;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* Bottom CTA Banner */
+        .bottom-cta {
+            background: linear-gradient(135deg, #043b77 0%, #021a38 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .bottom-cta p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .bottom-cta .highlight {
+            color: #FFD700;
+        }
+
+        .bottom-cta .no-thanks-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .bottom-cta .no-thanks-link:hover {
+            color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #021a38 0%, #0a2a4d 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #FFD700;
+        }
+
+        .footer-disclaimer {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .mt-product-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .mt-product-card {
+                max-width: 400px;
+                width: 100%;
+            }
+
+            .mt-product-card.mt-featured {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .success-header p {
+                font-size: 14px;
+            }
+
+            .success-header .checkmark {
+                width: 30px;
+                height: 30px;
+                margin-right: 8px;
+            }
+
+            .success-header .checkmark svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .timer-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .timer-label {
+                font-size: 14px;
+            }
+
+            .timer-display span {
+                font-size: 24px;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .hero-subtitle {
+                font-size: 15px;
+            }
+
+            .offer-header h2 {
+                font-size: 22px;
+            }
+
+            .benefits-grid {
+                gap: 25px;
+            }
+
+            .benefit-item {
+                flex: 1 1 120px;
+            }
+
+            .reviews-header h2 {
+                font-size: 22px;
+            }
+
+            .review-card {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+
+            .bottom-cta p {
+                font-size: 15px;
+            }
+
+            .footer-links {
+                gap: 15px;
+            }
+
+            .footer-links a {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mt-product-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .mt-product-header p {
+                font-size: 0.9rem;
+            }
+
+            .mt-product-price h4, .mt-display-price {
+                font-size: 3.5rem;
+            }
+
+            .mt-hanging-tag {
+                width: 90px;
+                right: -10%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-header p {
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            .success-header .checkmark {
+                width: 26px;
+                height: 26px;
+                margin-right: 6px;
+            }
+
+            .success-header .checkmark svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .wait-badge {
+                font-size: 11px;
+                padding: 6px 15px;
+            }
+
+            .hero-title {
+                font-size: 20px;
+                line-height: 1.3;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+            .hero-section {
+                padding: 35px 15px;
+            }
+
+            .offer-section {
+                padding: 40px 10px;
+            }
+
+            .offer-header h2 {
+                font-size: 18px;
+            }
+
+            .offer-header p {
+                font-size: 14px;
+            }
+
+            .mt-product-grid {
+                padding: 1rem 0.5rem;
+            }
+
+            .mt-product-card {
+                min-width: 260px;
+            }
+
+            .mt-product-header {
+                padding: 0.5rem 0.8rem;
+            }
+
+            .mt-product-header h3 {
+                font-size: 1.3rem;
+            }
+
+            .mt-product-header p {
+                font-size: 0.8rem;
+            }
+
+            .mt-product-content {
+                padding: 0.8rem;
+            }
+
+            .mt-product-image {
+                padding: 0.4rem;
+            }
+
+            .mt-product-image img {
+                max-width: 200px;
+            }
+
+            .mt-product-price h4, .mt-display-price {
+                font-size: 3rem;
+            }
+
+            .mt-price-info p {
+                font-size: 1.1rem;
+            }
+
+            .mt-subscribe-checkbox {
+                padding: 10px 12px;
+            }
+
+            .mt-subscribe-checkbox label {
+                font-size: 0.85rem;
+            }
+
+            .mt-savings-badge {
+                font-size: 0.8rem;
+            }
+
+            .mt-buy-now-btn {
+                max-width: 200px;
+            }
+
+            .mt-shipping-text {
+                font-size: 0.9rem;
+            }
+
+            .mt-total-line {
+                font-size: 1rem;
+            }
+
+            .mt-payment-icons img {
+                max-width: 180px;
+            }
+
+            .no-thanks-link {
+                font-size: 12px;
+            }
+
+            .mt-hanging-tag {
+                width: 80px;
+                right: -8%;
+                top: 8px;
+            }
+
+            /* Benefits Section Mobile */
+            .benefits-strip {
+                padding: 30px 15px;
+            }
+
+            .benefits-grid {
+                gap: 20px;
+            }
+
+            .benefit-item {
+                flex: 1 1 45%;
+                max-width: 45%;
+            }
+
+            .benefit-icon {
+                width: 55px;
+                height: 55px;
+            }
+
+            .benefit-icon svg {
+                width: 26px;
+                height: 26px;
+            }
+
+            .benefit-item h4 {
+                font-size: 12px;
+            }
+
+            .benefit-item p {
+                font-size: 11px;
+            }
+
+            /* Reviews Mobile */
+            .reviews-section {
+                padding: 40px 15px;
+            }
+
+            .reviews-header h2 {
+                font-size: 18px;
+            }
+
+            .reviews-header .stars {
+                font-size: 20px;
+            }
+
+            .reviews-grid {
+                gap: 15px;
+            }
+
+            .review-card {
+                padding: 20px 15px;
+            }
+
+            .review-stars {
+                font-size: 14px;
+            }
+
+            .review-text {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .review-author {
+                font-size: 13px;
+            }
+
+            /* Bottom CTA Mobile */
+            .bottom-cta {
+                padding: 25px 15px;
+            }
+
+            .bottom-cta p {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            /* Footer Mobile */
+            .footer {
+                padding: 30px 15px;
+            }
+
+            .footer-links {
+                gap: 10px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-links a {
+                font-size: 12px;
+            }
+
+            .footer-disclaimer {
+                font-size: 10px;
+            }
+        }
+
+        /* Extra Small Screens */
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 18px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+
+            .mt-product-price h4, .mt-display-price {
+                font-size: 2.5rem;
+            }
+
+            .mt-product-header h3 {
+                font-size: 1.2rem;
+            }
+
+            .benefit-item {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+
+            .benefits-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .benefit-item {
+                max-width: 200px;
+            }
+        }
+
+        /* Custom Social Proof Notification Styles */
+        .custom-social-proof {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+        }
+
+        .custom-notification {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            max-width: 350px;
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: all 0.4s ease;
+            border-left: 4px solid #28a745;
+        }
+
+        .custom-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .custom-notification-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .custom-notification-image-wrapper {
+            flex-shrink: 0;
+        }
+
+        .custom-notification-image-wrapper img {
+            width: 60px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .custom-notification-content-wrapper {
+            flex: 1;
+        }
+
+        .custom-notification-content {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .custom-notification-content b {
+            color: #1565c0;
+        }
+
+        .custom-notification-content small {
+            color: #888;
+            font-size: 11px;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .custom-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .custom-close:hover {
+            opacity: 1;
+        }
+
+        .custom-close::before,
+        .custom-close::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 2px;
+            background: #666;
+        }
+
+        .custom-close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .custom-close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        @media (max-width: 480px) {
+            .custom-social-proof {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .custom-notification {
+                max-width: 100%;
+                padding: 12px;
+            }
+
+            .custom-notification-image-wrapper img {
+                width: 50px;
+            }
+
+            .custom-notification-content {
+                font-size: 12px;
+            }
+        }
+        /* Page Indicator Badge - In Header */
+        .page-indicator {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-left: 15px;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Success Header Banner -->
+    <div class="success-header">
+        <span class="checkmark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+        </span>
+        <p>Your Order Is Complete!</p>
+        <span class="page-indicator">Upsell-1</span>
+    </div>
+
+    <!-- Timer Section -->
+    <div class="timer-section">
+        <div class="timer-container">
+            <span class="timer-label">Special Offer Expires In:</span>
+            <div class="timer-display">
+                <span id="countdown">05:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content container">
+            <span class="wait-badge">Wait! Exclusive Offer Below</span>
+            <h1 class="hero-title">Get The Same Package With Up To <span class="gold">25% OFF!</span></h1>
+            <p class="hero-subtitle">Maximize your results with additional QuickBurn BHB at an exclusive discounted price - only available right now!</p>
+        </div>
+    </section>
+
+    <!-- Offer Section -->
+    <section class="offer-section">
+        <div class="container">
+            <div class="offer-header">
+                <h2>Choose Your Upgrade Package</h2>
+                <p>Lock in these special prices before they expire!</p>
+            </div>
+
+            <!-- PRICING CARDS FROM CLICKBANK STRUCTURE -->
+            <div class="mt-product-grid">
+                <!-- 1 Bottle -->
+                <div class="mt-product-card">
+                    <div class="mt-product-header">
+                        <h3>1 BOTTLE</h3>
+                        <p>30 DAY SUPPLY</p>
+                    </div>
+                    <div class="mt-product-content">
+                        <img src="Clickbank Structure/tag.png" class="mt-hanging-tag" alt="Tag">
+                        <div class="mt-product-image">
+                            <img src="lib/img/2-bottles-qb.webp" alt="QuickBurn BHB 1 Bottle">
+                        </div>
+                        <div class="mt-product-details">
+                            <div class="mt-subscribe-checkbox">
+                                <input type="checkbox" id="subscribe-1bottle">
+                                <label for="subscribe-1bottle">Subscribe & Go Hassle Free</label>
+                            </div>
+                            <div class="mt-product-price">
+                                <h4 class="mt-display-price">$69</h4>
+                                <div class="mt-price-info"><p>/Bottle</p></div>
+                            </div>
+                            <div class="mt-subscription-info" id="sub-info-1">
+                                <div class="congrats">Congrats!</div>
+                                <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span class="highlight">$69+Shipping</span> will start delivering <span class="highlight">every Month</span>.</p>
+                                <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                            </div>
+                            <div class="mt-savings-badge">YOU SAVE $110!</div>
+                            <a href="#" class="mt-buy-now-btn" id="buy-btn-1">
+                                <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-1">
+                            </a>
+                            <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$69</span></p>
+                            <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
+                            <a href="upsell2.html" class="no-thanks-link">No thanks, continue</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6 Bottles - BEST VALUE -->
+                <div class="mt-product-card mt-featured">
+                    <div class="mt-product-header">
+                        <h3>6 BOTTLES</h3>
+                        <p>180 DAY SUPPLY</p>
+                    </div>
+                    <div class="mt-product-content">
+                        <img src="Clickbank Structure/tag.png" class="mt-hanging-tag" alt="Tag">
+                        <div class="mt-product-image">
+                            <img src="lib/img/7-bottles-qb.webp" alt="QuickBurn BHB 6 Bottles">
+                        </div>
+                        <div class="mt-product-details">
+                            <div class="mt-product-price">
+                                <h4 class="mt-display-price">$39</h4>
+                                <div class="mt-price-info"><p>/Bottle</p></div>
+                            </div>
+                            <div class="mt-savings-badge">YOU SAVE $840!</div>
+                            <a href="#" class="mt-buy-now-btn" id="buy-btn-6">
+                                <img src="lib/img/buy-now2.webp" alt="Buy Now" id="buy-img-6">
+                            </a>
+                            <p class="mt-shipping-text free">FREE Shipping</p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$234</span></p>
+                            <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
+                            <a href="upsell2.html" class="no-thanks-link">No thanks, continue</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 Bottles -->
+                <div class="mt-product-card">
+                    <div class="mt-product-header">
+                        <h3>3 BOTTLES</h3>
+                        <p>90 DAY SUPPLY</p>
+                    </div>
+                    <div class="mt-product-content">
+                        <img src="Clickbank Structure/tag.png" class="mt-hanging-tag" alt="Tag">
+                        <div class="mt-product-image">
+                            <img src="lib/img/3-bottles-qb.webp" alt="QuickBurn BHB 3 Bottles">
+                        </div>
+                        <div class="mt-product-details">
+                            <div class="mt-product-price">
+                                <h4 class="mt-display-price">$54</h4>
+                                <div class="mt-price-info"><p>/Bottle</p></div>
+                            </div>
+                            <div class="mt-savings-badge">YOU SAVE $375!</div>
+                            <a href="#" class="mt-buy-now-btn" id="buy-btn-3">
+                                <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-3">
+                            </a>
+                            <p class="mt-shipping-text free">FREE Shipping</p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span class="mt-final-price">$162</span></p>
+                            <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
+                            <a href="upsell2.html" class="no-thanks-link">No thanks, continue</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Benefits Strip -->
+    <section class="benefits-strip">
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 23c-1.1 0-1.99-.89-1.99-1.99h3.98c0 1.1-.89 1.99-1.99 1.99zm7-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v1.68C8.63 6.36 7 8.92 7 12v5l-2 2v1h14v-1l-2-2zm-4.5-9.17c.78.36 1.35.97 1.67 1.67.17.35.33.77.33 1.5v5h-9v-5c0-.73.16-1.15.33-1.5.32-.7.89-1.31 1.67-1.67V6.5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1.33z"/></svg>
+                </div>
+                <h4>Burns Fat Fast</h4>
+                <p>Accelerates natural ketosis</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg>
+                </div>
+                <h4>Boosts Energy</h4>
+                <p>All-day sustained power</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.20-1.10-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/></svg>
+                </div>
+                <h4>Curbs Cravings</h4>
+                <p>Reduces hunger naturally</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/></svg>
+                </div>
+                <h4>Supports Metabolism</h4>
+                <p>Optimizes fat burning</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="reviews-header">
+                <h2>What Our Customers Say</h2>
+                <div class="stars">★★★★★</div>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Before QuickBurn BHB, my blood sugar was unstable and I felt low on energy. After 6 weeks, my A1C improved and I feel more energetic than ever!"</p>
+                    <span class="review-author">- Aisha R.</span>
+                    <span class="verified-badge">✓ Verified Buyer</span>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"I used to struggle with sugar spikes and cravings. QuickBurn BHB stabilized my glucose levels - now I feel in control and healthier."</p>
+                    <span class="review-author">- David K.</span>
+                    <span class="verified-badge">✓ Verified Buyer</span>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Before taking this, my energy would drop mid-day. After a month with QuickBurn BHB, my energy is steady and I feel lighter and active."</p>
+                    <span class="review-author">- Maria L.</span>
+                    <span class="verified-badge">✓ Verified Buyer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA Banner -->
+    <div class="bottom-cta">
+        <p>Don't miss this <span class="highlight">exclusive offer</span>! Save up to <span class="highlight">$840</span> on your QuickBurn BHB upgrade!</p>
+        <a href="upsell2.html" class="no-thanks-link">No thanks, I'll pass on this exclusive offer</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="Terms & Conditions.html" target="_blank">Terms & Conditions</a>
+            <a href="Privacy policy.html" target="_blank">Privacy Policy</a>
+            <a href="Return Policy.html" target="_blank">Return Policy</a>
+            <a href="contact.html" target="_blank">Contact Us</a>
+        </div>
+        <p class="footer-disclaimer">
+            BuyGoods is the retailer of products on this site. BuyGoods is a registered trademark of BuyGoods Inc. BuyGoods' role as retailer does not constitute an endorsement, approval or review of these products or any claim, statement or opinion used in promotion of these products.
+        </p>
+        <p class="footer-disclaimer">
+            Statements on this website have not been evaluated by the Food and Drug Administration. Products are not intended to diagnose, treat, cure or prevent any disease. If you are pregnant, nursing, taking medication, or have a medical condition, consult your physician before using our products.
+        </p>
+        <p class="footer-disclaimer">
+            Testimonials, case studies, and examples found on this page are results that have been forwarded to us by users of QuickBurn BHB products and related products are not intended to represent or guarantee that anyone will achieve the same or similar results.
+        </p>
+    </footer>
+
+
+    <!-- Timer Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let t = 300; // 5 minutes in seconds
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                let minutes = String(Math.floor(t / 60)).padStart(2, '0');
+                let seconds = String(t % 60).padStart(2, '0');
+                countdownEl.textContent = `${minutes}:${seconds}`;
+                if(t > 0) t--;
+                else clearInterval(timerInterval);
+            }, 1000);
+        });
+    </script>
+
+    <!-- Subscription Checkbox JavaScript -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Store original buy button images
+        document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
+            img.dataset.originalSrc = img.src;
+        });
+
+        // Handle checkbox subscribe functionality
+        const subscribeCheckboxes = document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]');
+
+        subscribeCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const card = this.closest('.mt-product-card');
+                const isSubscribe = this.checked;
+
+                // Only swap buy button image - no price or text changes
+                const buyButton = card.querySelector('.mt-buy-now-btn');
+                const btnImg = buyButton ? buyButton.querySelector('img') : null;
+                if (btnImg) {
+                    if (isSubscribe) {
+                        btnImg.src = 'lib/img/subscribe.webp';
+                        btnImg.alt = 'Subscribe Now';
+                    } else {
+                        btnImg.src = btnImg.dataset.originalSrc;
+                        btnImg.alt = 'Buy Now';
+                    }
+                }
+
+                // Show/hide subscription info with flicker animation
+                const subscriptionInfo = card.querySelector('.mt-subscription-info');
+                if (subscriptionInfo) {
+                    if (isSubscribe) {
+                        subscriptionInfo.classList.add('show');
+                        // Re-trigger animation
+                        subscriptionInfo.style.animation = 'none';
+                        subscriptionInfo.offsetHeight; // Trigger reflow
+                        subscriptionInfo.style.animation = 'borderFlicker 2.5s ease-in-out infinite';
+                    } else {
+                        subscriptionInfo.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+        // Make entire checkbox wrapper clickable
+        document.querySelectorAll('.mt-subscribe-checkbox').forEach(wrapper => {
+            wrapper.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+    });
+    </script>
+
+    <!-- Social Proof Popup -->
+    <link href="popup/css/style1.css" type="text/css" rel="stylesheet">
+    <section class="custom-social-proof">
+        <div class="custom-notification">
+            <div class="custom-notification-container">
+                <div class="custom-notification-image-wrapper">
+                    <img src="lib/img/2-bottles-qb.webp" id="notify-image" alt="Product">
+                </div>
+                <div class="custom-notification-content-wrapper">
+                    <p class="custom-notification-content">
+                        <span id="notify-customer">Eli H</span> - <span id="notify-state">TX</span><br> Purchased <strong><span id="notify-quantity">1</span></strong> Bottle(s) of <b>QuickBurn BHB</b> <small><span id="notify-ago">9 minutes ago</span></small>
+                    </p>
+                </div>
+            </div>
+            <div class="custom-close"></div>
+        </div>
+    </section>
+
+    <!-- Custom Social Proof Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const notifications = [
+            { name: 'Sarah M', state: 'CA', qty: 6, img: 'lib/img/7-bottles-qb.webp', ago: '2 minutes ago' },
+            { name: 'Michael R', state: 'TX', qty: 3, img: 'lib/img/3-bottles-qb.webp', ago: '5 minutes ago' },
+            { name: 'Jennifer L', state: 'FL', qty: 1, img: 'lib/img/2-bottles-qb.webp', ago: '8 minutes ago' },
+            { name: 'David K', state: 'NY', qty: 6, img: 'lib/img/7-bottles-qb.webp', ago: '12 minutes ago' },
+            { name: 'Emily W', state: 'OH', qty: 3, img: 'lib/img/3-bottles-qb.webp', ago: '15 minutes ago' },
+            { name: 'James T', state: 'WA', qty: 1, img: 'lib/img/2-bottles-qb.webp', ago: '18 minutes ago' },
+            { name: 'Amanda B', state: 'AZ', qty: 6, img: 'lib/img/7-bottles-qb.webp', ago: '22 minutes ago' },
+            { name: 'Robert H', state: 'IL', qty: 3, img: 'lib/img/3-bottles-qb.webp', ago: '25 minutes ago' },
+            { name: 'Lisa P', state: 'GA', qty: 1, img: 'lib/img/2-bottles-qb.webp', ago: '28 minutes ago' },
+            { name: 'Chris D', state: 'NC', qty: 6, img: 'lib/img/7-bottles-qb.webp', ago: '32 minutes ago' }
+        ];
+
+        let currentIndex = 0;
+        const popup = document.querySelector('.custom-social-proof');
+        const notification = document.querySelector('.custom-notification');
+
+        function showNotification() {
+            const data = notifications[currentIndex];
+
+            document.getElementById('notify-customer').textContent = data.name;
+            document.getElementById('notify-state').textContent = data.state;
+            document.getElementById('notify-quantity').textContent = data.qty;
+            document.getElementById('notify-ago').textContent = data.ago;
+            document.getElementById('notify-image').src = data.img;
+
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                currentIndex = (currentIndex + 1) % notifications.length;
+            }, 5000);
+        }
+
+        // Initial delay then show first notification
+        setTimeout(() => {
+            showNotification();
+            // Then show every 12 seconds
+            setInterval(showNotification, 12000);
+        }, 3000);
+
+        // Close button
+        document.querySelector('.custom-close').addEventListener('click', function() {
+            notification.classList.remove('show');
+        });
+    });
+    </script>
+
+    <div class="popup-loading-wrapper" style="display:none;">
+        <div class="popup">
+            <figure class="product-image"></figure>
+            <p>Reserving Your Bottle Of</p>
+            <h2>QuickBurn BHB</h2>
+            <img src="images/icon-loading.png" alt="" class="loading-image">
+        </div>
+    </div>
+
+    <p id="loading-indicator" style="display:none;">Processing...</p>
+    <p id="crm-response-container" style="display:none;">Limelight messages will appear here...</p>
+
+    <script type="text/javascript" src="popup/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="popup/js/slick.min.js"></script>
+    <script type="text/javascript" src="popup/js/social-proof.js"></script>
+    <script type="text/javascript" src="popup/js/scripts.js"></script>
+
+    <!-- URL Parameter Preservation Scripts -->
+    <script>
+    // Preserve URL parameters across page navigation
+    (function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var paramString = urlParams.toString();
+
+      if (paramString) {
+        var links = document.querySelectorAll('a[href]');
+
+        links.forEach(function(link) {
+          var href = link.getAttribute('href');
+
+          if (!href ||
+              href.startsWith('http://') ||
+              href.startsWith('https://') ||
+              href.startsWith('mailto:') ||
+              href.startsWith('tel:') ||
+              href.startsWith('javascript:') ||
+              href.startsWith('#')) {
+            return;
+          }
+
+          var separator = href.includes('?') ? '&' : '?';
+          link.setAttribute('href', href + separator + paramString);
+        });
+      }
+    })();
+    </script>
+    <script>
+    // Preserve ALL URL parameters on checkout/buy buttons (with redirect parameter support)
+    (function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var paramString = urlParams.toString();
+
+      if (!paramString) return;
+
+      function appendParams(url) {
+        if (!url) return url;
+
+        try {
+          var urlObj = new URL(url);
+          var redirectParam = urlObj.searchParams.get('redirect');
+
+          if (redirectParam) {
+            try {
+              var decodedRedirect = atob(redirectParam);
+              var separator = decodedRedirect.includes('?') ? '&' : '?';
+              var updatedRedirect = decodedRedirect + separator + paramString;
+              urlObj.searchParams.set('redirect', btoa(updatedRedirect));
+            } catch (e) {
+              var separator = redirectParam.includes('?') ? '&' : '?';
+              urlObj.searchParams.set('redirect', redirectParam + separator + paramString);
+            }
+          }
+
+          paramString.split('&').forEach(function(param) {
+            var parts = param.split('=');
+            if (parts[0] && parts[1]) {
+              urlObj.searchParams.set(parts[0], parts[1]);
+            }
+          });
+
+          return urlObj.toString();
+        } catch (e) {
+          var separator = url.includes('?') ? '&' : '?';
+          return url + separator + paramString;
+        }
+      }
+
+      function updateAllLinks() {
+        var externalLinks = document.querySelectorAll('a[href^="http"], a[href^="https"]');
+        externalLinks.forEach(function(link) {
+          var href = link.getAttribute('href');
+          link.setAttribute('href', appendParams(href));
+        });
+
+        var dataUrlElements = document.querySelectorAll('[data-url^="http"], [data-url^="https"]');
+        dataUrlElements.forEach(function(element) {
+          var dataUrl = element.getAttribute('data-url');
+          element.setAttribute('data-url', appendParams(dataUrl));
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateAllLinks);
+      } else {
+        updateAllLinks();
+      }
+    })();
+    </script>
+
+</body>
+</html>

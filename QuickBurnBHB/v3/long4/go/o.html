@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /cb/go/o was not found on this server.</p>
+<hr>
+<address>Apache/2.4.25 (Debian) Server at getvivaslim.com Port 80</address>
+
+<!-- Social Proof Notification -->
+<link href="../../popup/css/style1.css" type="text/css" rel="stylesheet">
+<section class="custom-social-proof">
+    <div class="custom-notification">
+        <div class="custom-notification-container">
+            <div class="custom-notification-image-wrapper">
+                <img src="../../popup/img/img/1bottle.png">
+            </div>
+            <div class="custom-notification-content-wrapper">
+                <p class="custom-notification-content">
+                    <span id="notify-customer">Eli H</span> - <span id="notify-state">TX</span><br> Purchased <strong><span id="notify-quantity">7</span></strong> Bottle(s) of <b>QuickBurn BHB</b> <small><span id="notify-ago">9 minutes ago</span></small>
+                </p>
+            </div>
+        </div>
+        <div class="custom-close"></div>
+    </div>
+</section>
+<script>window.socialProofBase='../../';</script>
+<script type="text/javascript" src="../../popup/js/social-proof.js"></script>
+<script>
+// Preserve URL parameters across page navigation
+(function() {
+  // Get all URL parameters from current page
+  var urlParams = new URLSearchParams(window.location.search);
+  var paramString = urlParams.toString();
+
+  if (paramString) {
+    // Find all internal links (excluding external links, anchors, and special protocols)
+    var links = document.querySelectorAll('a[href]');
+
+    links.forEach(function(link) {
+      var href = link.getAttribute('href');
+
+      // Skip if it's an external link, anchor, mailto, tel, javascript, or #
+      if (!href ||
+          href.startsWith('http://') ||
+          href.startsWith('https://') ||
+          href.startsWith('mailto:') ||
+          href.startsWith('tel:') ||
+          href.startsWith('javascript:') ||
+          href.startsWith('#')) {
+        return;
+      }
+
+      // Add parameters to the link
+      var separator = href.includes('?') ? '&' : '?';
+      link.setAttribute('href', href + separator + paramString);
+    });
+  }
+})();
+</script>
+</body></html>

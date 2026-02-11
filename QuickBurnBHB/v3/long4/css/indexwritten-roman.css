@@ -1,0 +1,79 @@
+.headline{
+	line-height: 60px;
+}
+
+.table-bordered td, .table-bordered th{
+	border: solid 1px #163f68 !important;
+}
+.table td {
+	font-size: 20px !important;
+}
+.fa-shopping-cart{
+	content: "\f07a";
+	position: inherit;
+}
+.fa-arrowdown {
+	content: url("https://cdn.truegcloud.com/metabolicflora/accordion-arrow-after.svg");
+	width: 25px;
+	height: 21px;
+	position: absolute;
+	right: 35px;
+	top: 25px;
+}
+.benefits-section .col-md-6 {
+	margin: 0 0 20px 0;
+}
+
+.benefits-section .card {
+	background: #F7ECDD !important;
+}
+
+.benefits-section .card-title {
+	color: #ad231b;
+	font-size: 22px;
+	z-index: 3;
+	position: relative;
+}
+
+.benefits-section .card-text {
+	font-size: 23px;
+	font-family: 'Lato', Gotham, "Helvetica Neue", Helvetica, Arial, "Sans-serif" !important;
+	z-index: 3;
+	position: relative;
+	max-width: 80%;
+}
+
+.benefits-section img {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	max-width: 150px;
+}
+@media (max-width: 991px){
+	
+	.headline{
+	line-height: 38px;
+}
+	.benefits-section img {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	max-width: 120px;
+}
+	.benefits-section .card-text {
+	font-size: 19px;
+	font-family: 'Lato', Gotham, "Helvetica Neue", Helvetica, Arial, "Sans-serif" !important;
+	z-index: 3;
+	position: relative;
+	max-width: 80%;
+}
+}
+
+@media (max-width: 360px){
+		.benefits-section img {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	max-width: 100px;
+}
+}

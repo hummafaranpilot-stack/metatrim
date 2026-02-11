@@ -1,0 +1,58 @@
+button[disabled],
+html input[disabled],
+.disabled,
+.disabled:hover,
+.disabled:active {
+    cursor: not-allowed !important;
+    /* pointer-events: none !important; */
+}
+
+.loader-wrap {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 999;
+}
+
+.loader {
+    display: block;
+    border: 3px solid #333;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    vertical-align: top;
+    margin-left: 10px;
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.loader-container {
+    width: 100%;
+    position: relative;
+}
+
+.submit-order-btn {
+    display: block;
+    margin-bottom: 0;
+}
+
+.p-relative {
+    position: relative;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
