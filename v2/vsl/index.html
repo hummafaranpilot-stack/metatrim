@@ -133,10 +133,49 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-<!-- ============ SHAVING + BUYGOODS (ALL-IN-ONE) ============ -->
-<!-- This single script handles: shaving check, URL cleanup, and BuyGoods tracking -->
-<script src="https://metatrim.trustednutraproduct.com/shaver/shaving-check.php?v=2.1"></script>
-<!-- ============ END SHAVING + BUYGOODS ============ -->
+<!-- ============ BUYGOODS TRACKING ============ -->
+<script>
+function ReadCookie(name){
+  name += '=';
+  var parts = document.cookie.split(/;\s*/);
+  for (var i = 0; i < parts.length; i++) {
+    var part = parts[i];
+    if (part.indexOf(name) == 0) return part.substring(name.length)
+  }
+  return '';
+}
+</script>
+<script type="text/javascript" src="https://tracking.buygoods.com/track/?a=11943&firstcookie=0&tracking_redirect=&referrer=&sessid2=&product=met2v2,met3v2,met6v2,met2v2s,met6v2s,met3v2s&vid1=&vid2=&vid3=&caller_url="></script>
+<script>
+(function() {
+  function updateLinks() {
+    var pageParams = new URLSearchParams(window.location.search);
+    var sessid2 = ReadCookie('sessid2');
+    var links = document.querySelectorAll("a[href]");
+    links.forEach(function(link) {
+      try {
+        if (!link.href.startsWith("http")) return;
+        var url = new URL(link.href);
+        pageParams.forEach(function(value, key) {
+          url.searchParams.set(key, value);
+        });
+        if (sessid2) {
+          url.searchParams.set("sessid2", sessid2);
+        }
+        link.href = url.toString();
+      } catch(e){}
+    });
+  }
+  document.addEventListener("DOMContentLoaded", updateLinks);
+  var observer = new MutationObserver(updateLinks);
+  observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("click", function(e){
+    var a = e.target.closest("a");
+    if (a) updateLinks();
+  });
+})();
+</script>
+<!-- ============ END BUYGOODS TRACKING ============ -->
     <script>
         var protocol = ((document.location.protocol=='https:')?'https://':'http://');
     	var uri = encodeURIComponent(window.location.hostname+window.location.pathname+window.location.search);
