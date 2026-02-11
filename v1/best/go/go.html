@@ -91,8 +91,8 @@
 
 <!-- MetaTrim New Pricing Cards Styles -->
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+/* NEW PRICING CARDS CSS */
 .mt-product-grid {
   display: flex;
   flex-wrap: nowrap;
@@ -107,7 +107,7 @@
 
 .mt-product-card {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   max-width: 340px;
   width: calc(33.333% - 0.75rem);
@@ -118,6 +118,7 @@
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #1976d2;
 }
 
 .mt-product-card:hover {
@@ -126,8 +127,8 @@
 }
 
 .mt-product-card.mt-featured {
-  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-  border: 2px solid #ffc107;
+  background: #fff;
+  border: 2px solid #1976d2;
 }
 
 .mt-product-header {
@@ -135,6 +136,7 @@
   text-align: center;
   padding: 0.6rem 1rem;
   color: white;
+  border-radius: 18px 18px 0 0;
 }
 
 .mt-product-card.mt-featured .mt-product-header {
@@ -151,7 +153,8 @@
 
 .mt-product-header p {
   font-size: 1.1rem;
-  margin-top: 0.3rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
   font-weight: 500;
 }
 
@@ -166,7 +169,7 @@
   width: 100%;
   position: relative;
   text-align: center;
-  padding: 1rem;
+  padding: 0.6rem;
   border: 2px solid #bbdefb;
   border-radius: 12px;
   background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
@@ -198,7 +201,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 1.5rem;
+  padding: 0;
   width: 100%;
 }
 
@@ -255,7 +258,7 @@
 .mt-option-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .mt-radio-dot {
@@ -290,15 +293,16 @@
 }
 
 .mt-option-label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
 }
 
 .mt-option-price {
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #fff;
+  white-space: nowrap;
 }
 
 .mt-option-price span {
@@ -325,11 +329,80 @@
   color: #000;
   padding: 0;
   font-size: 0.85rem;
-  line-height: 1.3;
-  font-weight: 700;
+  font-weight: 600;
   margin: 8px 0 0 0;
   display: block;
   text-align: center;
+  line-height: 1.3;
+}
+
+/* Badge Images */
+.mt-badge-images {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 12px 0;
+  align-items: center;
+}
+
+.mt-badge-images .badge-img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 38px;
+  object-fit: contain;
+}
+
+/* Capsule Badges */
+.mt-capsule-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 12px 0;
+  align-items: center;
+}
+
+.mt-capsule-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: fit-content;
+  max-width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.mt-capsule-badge:hover {
+  transform: scale(1.05);
+}
+
+.mt-capsule-badge .check-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.mt-capsule-badge.gray {
+  background-color: #b8b8b8;
+  color: #ffffff;
+}
+
+.mt-capsule-badge.green {
+  background: linear-gradient(135deg, #7cb342 0%, #9ccc65 100%);
+  color: #ffffff;
+}
+
+.mt-capsule-badge.orange {
+  background: linear-gradient(135deg, #ff9800 0%, #ffa726 100%);
+  color: #ffffff;
 }
 
 .mt-buy-now-btn {
@@ -357,29 +430,35 @@
 }
 
 .mt-total-line {
-  font-size: 1.1rem;
-  margin-top: 3px;
-  font-weight: 500;
+  font-size: 1.25rem;
+  margin-top: 8px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
 }
 
 .mt-strikethrough {
   text-decoration: line-through;
-  color: #999;
+  color: #000;
   margin-right: 0.5rem;
+  font-weight: 400;
 }
 
 .mt-final-price {
-  font-weight: bold;
-  color: #000;
+  font-weight: 700;
+  color: #dc3545;
+  font-size: 1.3rem;
 }
 
 .mt-payment-icons {
   margin: 0.4rem 0;
+  padding: 0;
 }
 
 .mt-payment-icons img {
   width: 100%;
   max-width: 200px;
+  padding: 0;
 }
 
 .mt-subscribe-savings {
@@ -416,6 +495,7 @@
   font-weight: 500;
   color: #333;
   display: block;
+  line-height: 1.3;
 }
 
 .mt-subscribe-savings .line2 .price-highlight {
@@ -429,10 +509,10 @@
   margin: 4px 0;
   padding: 6px 10px;
   background: #28a745;
-  color: white;
+  border-radius: 6px;
+  color: #fff;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 8px;
 }
 
 .mt-cancel-notice.show {
@@ -447,6 +527,9 @@
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mt-subscription-guarantee .guarantee-title {
@@ -469,7 +552,7 @@
   line-height: 1.5;
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive - EXACT from go.html */
 @media (max-width: 992px) {
   .mt-product-grid {
     flex-direction: column;
@@ -517,21 +600,39 @@
   }
 }
 
-@media (max-width: 480px) {
-  .mt-product-price h4, .mt-display-price {
-    font-size: 2.5rem;
-  }
-
-  .mt-option-label {
-    font-size: 0.7rem;
-  }
-
-  .mt-option-price {
-    font-size: 0.85rem;
-  }
-}
-
+/* Mobile Side-by-Side Layout (767px and below) */
 @media (max-width: 767px) {
+  .mt-product-grid {
+    padding: 0 5px;
+    gap: 0.8rem;
+  }
+
+  .mt-product-card {
+    border: 2px solid #1565c0;
+    border-radius: 8px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .mt-product-card.mt-featured {
+    border-color: #1976d2;
+  }
+
+  .mt-product-header {
+    padding: 8px 12px;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .mt-product-header p {
+    font-size: 0.7rem;
+    margin: 0;
+  }
+
   .mt-product-content {
     display: grid;
     grid-template-columns: 42% 58%;
@@ -602,6 +703,305 @@
 
   .mt-product-card.mt-featured .mt-product-details {
     border-left: none;
+  }
+
+  .mt-best-badge {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    right: auto;
+    font-size: 0.5rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  .mt-option-btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .mt-option-label {
+    font-size: 0.65rem;
+  }
+
+  .mt-option-price {
+    font-size: 0.75rem;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 2.2rem;
+    margin: 5px 0;
+  }
+
+  .mt-savings-badge {
+    font-size: 0.85rem;
+    margin: 5px 0;
+  }
+
+  .mt-buy-now-btn {
+    max-width: 150px;
+    margin: 5px auto 0;
+  }
+
+  .mt-shipping-text {
+    font-size: 0.75rem;
+    margin-top: 5px;
+  }
+
+  .mt-total-line {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+
+  .mt-payment-icons {
+    margin: 8px 0;
+  }
+
+  .mt-payment-icons img {
+    max-width: 150px;
+  }
+
+  .mt-subscribe-savings {
+    padding: 6px 8px;
+    margin: 5px 0;
+  }
+
+  .mt-subscribe-savings .line1 {
+    font-size: 0.75rem;
+  }
+
+  .mt-subscribe-savings .line2 {
+    font-size: 0.65rem;
+  }
+
+  .mt-recurring-price {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile: Stack cards vertically */
+  .mt-product-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .mt-product-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+    position: relative;
+  }
+
+  /* Keep header at top with existing colors */
+  .mt-product-header {
+    padding: 1rem 0.8rem;
+    text-align: center;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .mt-product-header p {
+    display: none;
+  }
+
+  /* Horizontal layout: left (image) + right (pricing) */
+  .mt-product-content {
+    flex-direction: row;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  /* Left side: Product image column - 35% width */
+  .mt-product-image {
+    flex: 0 0 35%;
+    border: none;
+    background: transparent;
+    padding: 1rem 0 0.3rem 0;
+    margin: 0;
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  /* Add subtitle before image using ::before */
+  .mt-product-card[data-card="2bottle"] .mt-product-image::before {
+    content: "60 DAY SUPPLY";
+    font-size: 0.95rem;
+    color: #1565c0;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    display: block;
+    line-height: 1.3;
+    width: 100%;
+  }
+
+  .mt-product-card[data-card="6bottle"] .mt-product-image::before {
+    content: "+ 1 FREE BOTTLE • 210 DAY SUPPLY";
+    font-size: 0.8rem;
+    color: #1565c0;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    display: block;
+    line-height: 1.3;
+    width: 100%;
+  }
+
+  .mt-product-card[data-card="4bottle"] .mt-product-image::before {
+    content: "FREE SHIPPING • 120 DAY SUPPLY";
+    font-size: 0.9rem;
+    color: #1565c0;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    display: block;
+    line-height: 1.3;
+    width: 100%;
+  }
+
+  .mt-product-image img {
+    max-width: 100%;
+    max-height: 130px;
+  }
+
+  .mt-best-badge {
+    display: none;
+  }
+
+  /* Right side: All pricing details - takes remaining space */
+  .mt-product-details {
+    flex: 1;
+    padding: 0;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mt-product-price {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    order: 2;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .mt-price-info p {
+    font-size: 1rem;
+  }
+
+  /* Badge images - show first */
+  .mt-badge-images {
+    gap: 4px;
+    margin: 6px 0;
+    align-items: flex-start;
+    order: 1;
+  }
+
+  .mt-badge-images .badge-img {
+    max-height: 26px;
+  }
+
+  /* Buy button - wider, closer to edges */
+  .mt-buy-now-btn {
+    max-width: 90%;
+    width: 100%;
+    margin: 6px auto;
+    order: 3;
+  }
+
+  .mt-shipping-text {
+    font-size: 0.8rem;
+    margin-top: 4px;
+    order: 4;
+  }
+
+  .mt-total-line {
+    font-size: 0.95rem;
+    margin-top: 4px;
+    order: 6;
+  }
+
+  .mt-final-price {
+    font-size: 1.05rem;
+  }
+
+  .mt-payment-icons {
+    margin: 5px 0;
+    order: 5;
+  }
+
+  .mt-payment-icons img {
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mt-product-header {
+    padding: 0.9rem 0.8rem;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+  }
+
+  .mt-product-card[data-card="2bottle"] .mt-product-image::before {
+    font-size: 0.85rem;
+  }
+
+  .mt-product-card[data-card="4bottle"] .mt-product-image::before {
+    font-size: 0.8rem;
+  }
+
+  .mt-product-card[data-card="6bottle"] .mt-product-image::before {
+    font-size: 0.7rem;
+  }
+
+  .mt-product-image {
+    flex: 0 0 38%;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 3.8rem;
+    font-weight: 700;
+  }
+
+  .mt-price-info p {
+    font-size: 0.9rem;
+  }
+
+  .mt-badge-images .badge-img {
+    max-height: 24px;
+  }
+
+  .mt-buy-now-btn {
+    max-width: 90%;
+  }
+
+  .mt-total-line {
+    font-size: 0.85rem;
+  }
+
+  .mt-final-price {
+    font-size: 1rem;
   }
 }
 </style>
@@ -2657,32 +3057,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -2696,7 +3079,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -2704,35 +3087,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -2743,52 +3111,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 
@@ -3388,32 +3734,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -3425,45 +3754,30 @@ window.__lo_site_id = 271871;
 
   <!-- 6+1 Bottles - BEST VALUE -->
   <div class="mt-product-card mt-featured" data-card="6bottle">
-    <div class="mt-product-header mt-gold-header">
+    <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles">
-        <div class="mt-best-badge mt-gold">BEST VALUE</div>
+        <img src="../../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles - Best Value">
+        <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810" data-url="#subscribe-6bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
-          <img src="../../lib/img/buy-now.webp" alt="Buy Now">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text mt-free-shipping">FREE US SHIPPING</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -3474,43 +3788,25 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>+ 1 PREMIUM EBOOK • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
-        <div class="mt-best-badge">MOST POPULAR</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475" data-url="#subscribe-4bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met3&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text mt-free-shipping">FREE US SHIPPING</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -4026,32 +4322,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -4065,7 +4344,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -4073,35 +4352,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -4112,52 +4376,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 <div class="row">
@@ -4679,32 +4921,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -4718,7 +4943,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -4726,35 +4951,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -4765,52 +4975,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 <div class="row">
@@ -5680,32 +5868,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -5719,7 +5890,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -5727,35 +5898,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -5766,52 +5922,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 <div class="row">
@@ -6315,32 +6449,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -6354,7 +6471,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -6362,35 +6479,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -6401,52 +6503,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 <div class="row">
@@ -7075,32 +7155,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -7112,45 +7175,30 @@ window.__lo_site_id = 271871;
 
   <!-- 6+1 Bottles - BEST VALUE -->
   <div class="mt-product-card mt-featured" data-card="6bottle">
-    <div class="mt-product-header mt-gold-header">
+    <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles">
-        <div class="mt-best-badge mt-gold">BEST VALUE</div>
+        <img src="../../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles - Best Value">
+        <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810" data-url="#subscribe-6bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
-          <img src="../../lib/img/buy-now.webp" alt="Buy Now">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text mt-free-shipping">FREE US SHIPPING</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -7161,43 +7209,25 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>+ 1 PREMIUM EBOOK • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
-        <div class="mt-best-badge">MOST POPULAR</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475" data-url="#subscribe-4bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met3&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text mt-free-shipping">FREE US SHIPPING</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -7552,32 +7582,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -7589,45 +7602,30 @@ window.__lo_site_id = 271871;
 
   <!-- 6+1 Bottles - BEST VALUE -->
   <div class="mt-product-card mt-featured" data-card="6bottle">
-    <div class="mt-product-header mt-gold-header">
+    <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles">
-        <div class="mt-best-badge mt-gold">BEST VALUE</div>
+        <img src="../../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles - Best Value">
+        <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810" data-url="#subscribe-6bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
-          <img src="../../lib/img/buy-now.webp" alt="Buy Now">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+          <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text mt-free-shipping">FREE US SHIPPING</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -7638,43 +7636,25 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>+ 1 PREMIUM EBOOK • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
-        <div class="mt-best-badge">MOST POPULAR</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475" data-url="#subscribe-4bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met3&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text mt-free-shipping">FREE US SHIPPING</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -8053,32 +8033,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -8092,7 +8055,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -8100,35 +8063,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -8139,52 +8087,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 <div class="row">
@@ -8747,32 +8673,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -8786,7 +8695,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -8794,35 +8703,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -8833,52 +8727,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 <div class="row">
@@ -9242,32 +9114,15 @@ window.__lo_site_id = 271871;
         <img src="../../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="71" data-total="142" data-save="218" data-url="#subscribe-2bottle">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="79" data-total="158" data-save="200" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $55/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">60 Days</span>, 1 Bottle for Just <span class="price-highlight">$55+Shipping</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met2&redirect=aHR0cHM6Ly9idXlnb29kcy5jb20vdGhhbmt5b3U/YWNjb3VudF9pZD0xMTk0Mw==" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -9281,7 +9136,7 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS • 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -9289,35 +9144,20 @@ window.__lo_site_id = 271871;
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="44" data-total="264" data-save="810">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="49" data-total="294" data-save="780">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $34/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">210 Days</span>, 1 Bottle for Just <span class="price-highlight">$34</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met6&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$294</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
@@ -9328,52 +9168,30 @@ window.__lo_site_id = 271871;
   <div class="mt-product-card" data-card="4bottle">
     <div class="mt-product-header">
       <h3>4 BOTTLES</h3>
-      <p>FREE US SHIPPING • 120 DAY SUPPLY</p>
+      <p>FREE SHIPPING &bull; 120 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
         <img src="../../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
-        <div class="mt-subscription-toggle">
-          <div class="mt-subscription-option" data-type="subscribe" data-price="58" data-total="232" data-save="475">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">Subscribe & save up to 30%</span>
-            </div>
-          </div>
-          <div class="mt-subscription-option active" data-type="onetime" data-price="64" data-total="256" data-save="450" data-url="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
-            <div class="mt-option-left">
-              <div class="mt-radio-dot"></div>
-              <span class="mt-option-label">One-time purchase</span>
-            </div>
-          </div>
-        </div>
-        <p class="mt-recurring-price">Recurring: $49/bottle</p>
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <div class="mt-subscribe-savings">
-          <span class="line1">Congrats!</span>
-          <span class="line2">You will get <span class="price-highlight">30% OFF</span> on the Subscription Order! After <span class="price-highlight">120 Days</span>, 1 Bottle for Just <span class="price-highlight">$49</span> will start delivering every Month.</span>
+        <div class="mt-badge-images">
+          <img src="../../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
         </div>
-        <div class="mt-cancel-notice">Cancel subscription anytime!</div>
-        <a href="https://www.digistore24.com/product/PRODUCT_ID?account_id=11943&product_codename=met4&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../../lib/img/buy-now.webp" alt="Buy Now">
         </a>
-        <p class="mt-shipping-text">FREE US Shipping</p>
+        <p class="mt-shipping-text">FREE Shipping</p>
         <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
         <div class="mt-payment-icons"><img src="../../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-subscription-guarantee">
-  <p class="guarantee-title"><span>No Hassle</span> Guarantee</p>
-  <p class="guarantee-text">For Subscription Orders, you are always notified before each shipment and you can cancel anytime.</p>
 </div>
 <!-- END NEW PRICING CARDS -->
 <div class="row">

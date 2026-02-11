@@ -344,6 +344,9 @@ window.__lo_site_id = 329229;
 <!-- NEW PRICING CARDS CSS -->
 <style>
 /* NEW PRICING CARDS CSS */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+
+/* NEW PRICING CARDS CSS */
 .mt-product-grid {
   display: flex;
   flex-wrap: nowrap;
@@ -358,7 +361,7 @@ window.__lo_site_id = 329229;
 
 .mt-product-card {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   max-width: 340px;
   width: calc(33.333% - 0.75rem);
@@ -369,6 +372,7 @@ window.__lo_site_id = 329229;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #1976d2;
 }
 
 .mt-product-card:hover {
@@ -377,8 +381,8 @@ window.__lo_site_id = 329229;
 }
 
 .mt-product-card.mt-featured {
-  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-  border: 2px solid #ffc107;
+  background: #fff;
+  border: 2px solid #1976d2;
 }
 
 .mt-product-header {
@@ -386,6 +390,7 @@ window.__lo_site_id = 329229;
   text-align: center;
   padding: 0.6rem 1rem;
   color: white;
+  border-radius: 18px 18px 0 0;
 }
 
 .mt-product-card.mt-featured .mt-product-header {
@@ -476,6 +481,103 @@ window.__lo_site_id = 329229;
   margin: 0;
 }
 
+.mt-subscription-toggle {
+  width: 100%;
+  background: #1a1a2e;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.mt-subscription-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.mt-subscription-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mt-subscription-option.active {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mt-option-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mt-radio-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #666;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mt-subscription-option.active .mt-radio-dot {
+  border-color: #fff;
+  background: #fff;
+}
+
+.mt-radio-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  opacity: 0;
+}
+
+.mt-subscription-option.active .mt-radio-dot::after {
+  opacity: 1;
+}
+
+.mt-option-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.mt-option-price {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.mt-option-price span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.mt-recurring-price {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #1565c0;
+  font-weight: 600;
+  margin-top: 5px;
+  display: none !important;
+}
+
+.mt-recurring-price.show {
+  display: none !important;
+}
+
 .mt-savings-badge {
   background: none;
   color: #000;
@@ -486,6 +588,75 @@ window.__lo_site_id = 329229;
   display: block;
   text-align: center;
   line-height: 1.3;
+}
+
+/* Badge Images */
+.mt-badge-images {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 12px 0;
+  align-items: center;
+}
+
+.mt-badge-images .badge-img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 38px;
+  object-fit: contain;
+}
+
+/* Capsule Badges */
+.mt-capsule-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 12px 0;
+  align-items: center;
+}
+
+.mt-capsule-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: fit-content;
+  max-width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.mt-capsule-badge:hover {
+  transform: scale(1.05);
+}
+
+.mt-capsule-badge .check-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.mt-capsule-badge.gray {
+  background-color: #b8b8b8;
+  color: #ffffff;
+}
+
+.mt-capsule-badge.green {
+  background: linear-gradient(135deg, #7cb342 0%, #9ccc65 100%);
+  color: #ffffff;
+}
+
+.mt-capsule-badge.orange {
+  background: linear-gradient(135deg, #ff9800 0%, #ffa726 100%);
+  color: #ffffff;
 }
 
 .mt-buy-now-btn {
@@ -513,20 +684,24 @@ window.__lo_site_id = 329229;
 }
 
 .mt-total-line {
-  font-size: 1.1rem;
-  margin-top: 3px;
-  font-weight: 500;
+  font-size: 1.25rem;
+  margin-top: 8px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
 }
 
 .mt-strikethrough {
   text-decoration: line-through;
-  color: #999;
+  color: #000;
   margin-right: 0.5rem;
+  font-weight: 400;
 }
 
 .mt-final-price {
-  font-weight: bold;
-  color: #000;
+  font-weight: 700;
+  color: #dc3545;
+  font-size: 1.3rem;
 }
 
 .mt-payment-icons {
@@ -540,34 +715,547 @@ window.__lo_site_id = 329229;
   padding: 0;
 }
 
-/* Responsive - Tablet */
-@media (max-width: 992px) {
-  .mt-product-grid {
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-  .mt-product-card {
-    width: calc(50% - 1rem);
-    min-width: 280px;
-  }
+.mt-subscribe-savings {
+  display: none;
+  text-align: center;
+  margin: 4px 0;
+  background: rgba(26, 26, 46, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(26, 26, 46, 0.15);
+  border-radius: 8px;
+  padding: 6px 10px;
 }
 
-/* Responsive - Mobile */
-@media (max-width: 600px) {
+.mt-subscribe-savings.show {
+  display: block;
+  animation: borderFlicker 2.5s ease-in-out infinite;
+}
+
+@keyframes borderFlicker {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #000; }
+}
+
+.mt-subscribe-savings .line1 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1565c0;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.mt-subscribe-savings .line2 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #333;
+  display: block;
+  line-height: 1.3;
+}
+
+.mt-subscribe-savings .line2 .price-highlight {
+  font-weight: 700;
+  color: #1565c0;
+}
+
+.mt-cancel-notice {
+  display: none;
+  text-align: center;
+  margin: 4px 0;
+  padding: 6px 10px;
+  background: #28a745;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.mt-cancel-notice.show {
+  display: block;
+}
+
+.mt-subscription-guarantee {
+  text-align: center;
+  padding: 25px 30px;
+  margin-top: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-subscription-guarantee .guarantee-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a237e;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.mt-subscription-guarantee .guarantee-title span {
+  color: #1565c0;
+}
+
+.mt-subscription-guarantee .guarantee-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Mobile Responsive - EXACT from go.html */
+@media (max-width: 992px) {
   .mt-product-grid {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+  }
+
+  .mt-product-card {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .mt-product-card.mt-featured {
+    order: -1;
+  }
+
+  .mt-product-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8rem;
+  }
+
+  .mt-product-image {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.5rem;
+  }
+
+  .mt-product-details {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 3rem;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .mt-product-header p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Side-by-Side Layout (767px and below) */
+@media (max-width: 767px) {
+  .mt-product-grid {
+    padding: 0 5px;
+    gap: 0.8rem;
+  }
+
+  .mt-product-card {
+    border: 2px solid #1565c0;
+    border-radius: 8px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .mt-product-card.mt-featured {
+    border-color: #1976d2;
+  }
+
+  .mt-product-header {
+    padding: 8px 12px;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .mt-product-header p {
+    font-size: 0.7rem;
+    margin: 0;
+  }
+
+  .mt-product-content {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    grid-template-rows: auto 1fr;
+    padding: 0;
+    background: #fff;
+    position: relative;
+  }
+
+  .mt-product-image {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 130px;
+    max-width: 200px;
+    padding: 5px 5px 8px 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border: none;
+    background: transparent;
+  }
+
+  .mt-product-image img {
+    max-height: 180px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .mt-product-details {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 0 8px 8px 5px;
+    border-left: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mt-subscription-toggle {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    gap: 3px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 6px 8px;
+  }
+
+  .mt-subscription-option {
+    padding: 5px 8px;
+  }
+
+  .mt-option-label {
+    font-size: 0.75rem;
+  }
+
+  .mt-radio-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mt-cancel-notice {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
+
+  .mt-product-card.mt-featured .mt-product-details {
+    border-left: none;
+  }
+
+  .mt-best-badge {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    right: auto;
+    font-size: 0.5rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  .mt-option-btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .mt-option-label {
+    font-size: 0.65rem;
+  }
+
+  .mt-option-price {
+    font-size: 0.75rem;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 2.2rem;
+    margin: 5px 0;
+  }
+
+  .mt-savings-badge {
+    font-size: 0.85rem;
+    margin: 5px 0;
+  }
+
+  .mt-buy-now-btn {
+    max-width: 150px;
+    margin: 5px auto 0;
+  }
+
+  .mt-shipping-text {
+    font-size: 0.75rem;
+    margin-top: 5px;
+  }
+
+  .mt-total-line {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+
+  .mt-payment-icons {
+    margin: 8px 0;
+  }
+
+  .mt-payment-icons img {
+    max-width: 150px;
+  }
+
+  .mt-subscribe-savings {
+    padding: 6px 8px;
+    margin: 5px 0;
+  }
+
+  .mt-subscribe-savings .line1 {
+    font-size: 0.75rem;
+  }
+
+  .mt-subscribe-savings .line2 {
+    font-size: 0.65rem;
+  }
+
+  .mt-recurring-price {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile: Stack cards vertically */
+  .mt-product-grid {
+    flex-direction: column;
+    gap: 1.5rem;
     padding: 1rem;
   }
+
   .mt-product-card {
     width: 100%;
-    max-width: 340px;
+    max-width: 100%;
+    min-width: unset;
+    position: relative;
   }
+
+  /* Keep header at top with existing colors */
+  .mt-product-header {
+    padding: 1rem 0.8rem;
+    text-align: center;
+  }
+
   .mt-product-header h3 {
     font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
   }
+
+  .mt-product-header p {
+    display: none;
+  }
+
+  /* Horizontal layout: left (image) + right (pricing) */
+  .mt-product-content {
+    flex-direction: row;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  /* Left side: Product image column - 35% width */
+  .mt-product-image {
+    flex: 0 0 35%;
+    border: none;
+    background: transparent;
+    padding: 1rem 0 0.3rem 0;
+    margin: 0;
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  /* Add subtitle before image using ::before */
+  .mt-product-card[data-card="2bottle"] .mt-product-image::before {
+    content: "60 DAY SUPPLY";
+    font-size: 0.95rem;
+    color: #1565c0;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    display: block;
+    line-height: 1.3;
+    width: 100%;
+  }
+
+  .mt-product-card[data-card="6bottle"] .mt-product-image::before {
+    content: "+ 1 FREE BOTTLE • 210 DAY SUPPLY";
+    font-size: 0.8rem;
+    color: #1565c0;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    display: block;
+    line-height: 1.3;
+    width: 100%;
+  }
+
+  .mt-product-card[data-card="3bottle"] .mt-product-image::before {
+    content: "FREE SHIPPING • 90 DAY SUPPLY";
+    font-size: 0.9rem;
+    color: #1565c0;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    display: block;
+    line-height: 1.3;
+    width: 100%;
+  }
+
+  .mt-product-image img {
+    max-width: 100%;
+    max-height: 130px;
+  }
+
+  .mt-best-badge {
+    display: none;
+  }
+
+  /* Right side: All pricing details - takes remaining space */
+  .mt-product-details {
+    flex: 1;
+    padding: 0;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mt-product-price {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    order: 2;
+  }
+
   .mt-product-price h4, .mt-display-price {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .mt-price-info p {
+    font-size: 1rem;
+  }
+
+  /* Badge images - show first */
+  .mt-badge-images {
+    gap: 4px;
+    margin: 6px 0;
+    align-items: flex-start;
+    order: 1;
+  }
+
+  .mt-badge-images .badge-img {
+    max-height: 26px;
+  }
+
+  /* Buy button - wider, closer to edges */
+  .mt-buy-now-btn {
+    max-width: 90%;
+    width: 100%;
+    margin: 6px auto;
+    order: 3;
+  }
+
+  .mt-shipping-text {
+    font-size: 0.8rem;
+    margin-top: 4px;
+    order: 4;
+  }
+
+  .mt-total-line {
+    font-size: 0.95rem;
+    margin-top: 4px;
+    order: 6;
+  }
+
+  .mt-final-price {
+    font-size: 1.05rem;
+  }
+
+  .mt-payment-icons {
+    margin: 5px 0;
+    order: 5;
+  }
+
+  .mt-payment-icons img {
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mt-product-header {
+    padding: 0.9rem 0.8rem;
+  }
+
+  .mt-product-header h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+  }
+
+  .mt-product-card[data-card="2bottle"] .mt-product-image::before {
+    font-size: 0.85rem;
+  }
+
+  .mt-product-card[data-card="3bottle"] .mt-product-image::before {
+    font-size: 0.8rem;
+  }
+
+  .mt-product-card[data-card="6bottle"] .mt-product-image::before {
+    font-size: 0.7rem;
+  }
+
+  .mt-product-image {
+    flex: 0 0 38%;
+  }
+
+  .mt-product-price h4, .mt-display-price {
+    font-size: 3.8rem;
+    font-weight: 700;
+  }
+
+  .mt-price-info p {
+    font-size: 0.9rem;
+  }
+
+  .mt-badge-images .badge-img {
+    max-height: 24px;
+  }
+
+  .mt-buy-now-btn {
+    max-width: 90%;
+  }
+
+  .mt-total-line {
+    font-size: 0.85rem;
+  }
+
+  .mt-final-price {
+    font-size: 1rem;
   }
 }
 </style>
@@ -805,8 +1493,11 @@ window.__lo_site_id = 329229;
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <a href="https://tnproduct.pay.clickbank.net/?cbitems=2" class="mt-buy-now-btn">
+        <div class="mt-badge-images">
+          <img src="../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+        </div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -820,7 +1511,7 @@ window.__lo_site_id = 329229;
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS - 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -832,8 +1523,13 @@ window.__lo_site_id = 329229;
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <a href="https://tnproduct.pay.clickbank.net/?cbitems=7" class="mt-buy-now-btn">
+        <div class="mt-badge-images">
+          <img src="../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
+        </div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">FREE Shipping</p>
@@ -844,26 +1540,29 @@ window.__lo_site_id = 329229;
   </div>
 
   <!-- 4 Bottles -->
-  <div class="mt-product-card" data-card="4bottle">
+  <div class="mt-product-card" data-card="3bottle">
     <div class="mt-product-header">
-      <h3>4 BOTTLES</h3>
-      <p>FREE SHIPPING - 120 DAY SUPPLY</p>
+      <h3>3 BOTTLES</h3>
+      <p>FREE SHIPPING &bull; 90 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
+        <img src="../lib/img/3bottlesupgrade.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <a href="https://tnproduct.pay.clickbank.net/?cbitems=4" class="mt-buy-now-btn">
+        <div class="mt-badge-images">
+          <img src="../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+        </div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">FREE Shipping</p>
-        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$642</span> <span class="mt-final-price">$192</span></p>
         <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
@@ -1233,11 +1932,11 @@ window.__lo_site_id = 329229;
                             </h3>-->
 							
 							<picture class="img-fluid">
-                                <source class="float-right pl-4 pb-2" width="350px" srcset="../lib/img/3-bottle-buy-btn.png" media="(min-width: 768px)" type="image/png" />
-                                <source class="" srcset="../lib/img/3-bottle-buy-btn.png" media="(max-width: 768px)" type="image/png" />
-                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-4 pb-2" width="350px" src="../lib/img/3-bottle-buy-btn.png" />
+                                <source class="float-right pl-4 pb-2" width="350px" srcset="../lib/img/3bottlesupgrade.png" media="(min-width: 768px)" type="image/png" />
+                                <source class="" srcset="../lib/img/3bottlesupgrade.png" media="(max-width: 768px)" type="image/png" />
+                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-4 pb-2" width="350px" src="../lib/img/3bottlesupgrade.png" />
                                 <div class="text-center">
-                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2" src="../lib/img/3-bottle-buy-btn.png" />
+                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2" src="../lib/img/3bottlesupgrade.png" />
                                 </div>
 							</picture>
 							
@@ -1582,8 +2281,11 @@ Because you either get results with Meta Trim BHB, or you get your money back. N
           <h4 class="mt-display-price">$79</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $200!</div>
-        <a href="https://tnproduct.pay.clickbank.net/?cbitems=2" class="mt-buy-now-btn">
+        <div class="mt-badge-images">
+          <img src="../pills/save200.png" alt="You Save $200" class="badge-img">
+          <img src="../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+        </div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">+ $19.99 Shipping</p>
@@ -1597,7 +2299,7 @@ Because you either get results with Meta Trim BHB, or you get your money back. N
   <div class="mt-product-card mt-featured" data-card="6bottle">
     <div class="mt-product-header">
       <h3>6 + 1 BOTTLES</h3>
-      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS - 210 DAY SUPPLY</p>
+      <p>+ 1 FREE BOTTLE + 2 PREMIUM EBOOKS &bull; 210 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
@@ -1609,8 +2311,13 @@ Because you either get results with Meta Trim BHB, or you get your money back. N
           <h4 class="mt-display-price">$49</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $780!</div>
-        <a href="https://tnproduct.pay.clickbank.net/?cbitems=7" class="mt-buy-now-btn">
+        <div class="mt-badge-images">
+          <img src="../pills/780.png" alt="You Save $780" class="badge-img">
+          <img src="../pills/discount.png" alt="Biggest Discount" class="badge-img">
+          <img src="../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+          <img src="../pills/ebooks.png" alt="3 Free Ebooks" class="badge-img">
+        </div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../lib/img/buy-now2.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">FREE Shipping</p>
@@ -1621,26 +2328,29 @@ Because you either get results with Meta Trim BHB, or you get your money back. N
   </div>
 
   <!-- 4 Bottles -->
-  <div class="mt-product-card" data-card="4bottle">
+  <div class="mt-product-card" data-card="3bottle">
     <div class="mt-product-header">
-      <h3>4 BOTTLES</h3>
-      <p>FREE SHIPPING - 120 DAY SUPPLY</p>
+      <h3>3 BOTTLES</h3>
+      <p>FREE SHIPPING &bull; 90 DAY SUPPLY</p>
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../lib/img/3-bottle-buy-btn.png" alt="MetaTrim 4 Bottles">
+        <img src="../lib/img/3bottlesupgrade.png" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
         <div class="mt-product-price">
           <h4 class="mt-display-price">$64</h4>
           <div class="mt-price-info"><p>/Bottle</p></div>
         </div>
-        <div class="mt-savings-badge">YOU SAVE $450!</div>
-        <a href="https://tnproduct.pay.clickbank.net/?cbitems=4" class="mt-buy-now-btn">
+        <div class="mt-badge-images">
+          <img src="../pills/450.webp" alt="You Save $450" class="badge-img">
+          <img src="../pills/60days.webp" alt="180 Days Guarantee" class="badge-img">
+        </div>
+        <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=" class="mt-buy-now-btn">
           <img src="../lib/img/buy-now.webp" alt="Buy Now">
         </a>
         <p class="mt-shipping-text">FREE Shipping</p>
-        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$706</span> <span class="mt-final-price">$256</span></p>
+        <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$642</span> <span class="mt-final-price">$192</span></p>
         <div class="mt-payment-icons"><img src="../lib/img/cards.webp" alt="Payment Methods"></div>
       </div>
     </div>
@@ -2001,11 +2711,11 @@ Because you either get results with Meta Trim BHB, or you get your money back. N
                             </h3>-->
 							
 							<picture class="img-fluid">
-                                <source class="float-right pl-4 pb-2" width="350px" srcset="../lib/img/3-bottle-buy-btn.png" media="(min-width: 768px)" type="image/png" />
-                                <source class="" srcset="../lib/img/3-bottle-buy-btn.png" media="(max-width: 768px)" type="image/png" />
-                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-4 pb-2" width="350px" src="../lib/img/3-bottle-buy-btn.png" />
+                                <source class="float-right pl-4 pb-2" width="350px" srcset="../lib/img/3bottlesupgrade.png" media="(min-width: 768px)" type="image/png" />
+                                <source class="" srcset="../lib/img/3bottlesupgrade.png" media="(max-width: 768px)" type="image/png" />
+                                <img loading="lazy" class="img-fluid float-right d-none d-sm-block pl-4 pb-2" width="350px" src="../lib/img/3bottlesupgrade.png" />
                                 <div class="text-center">
-                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2" src="../lib/img/3-bottle-buy-btn.png" />
+                                    <img loading="lazy" class="img-fluid d-block d-sm-none py-2" src="../lib/img/3bottlesupgrade.png" />
                                 </div>
 							</picture>
 							
