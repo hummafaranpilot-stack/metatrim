@@ -640,23 +640,35 @@ $apiUrl = $protocol . '://' . $host . $path . '/api.php';
         + "&vid1=&vid2=&vid3="
         + "&caller_url=" + encodeURIComponent(window.location.href);
 
-    // Create and inject BuyGoods tracking script
-    var bgScript = document.createElement('script');
-    bgScript.type = 'text/javascript';
-    bgScript.src = bgSrc;
-    document.head.appendChild(bgScript);
+    // Inject BuyGoods tracking script
+    // Use document.write() during initial parsing (first load) for guaranteed synchronous execution
+    // Use createElement for already-loaded pages (SPA navigation, etc.)
+    if (document.readyState === 'loading') {
+        // FIRST LOAD: document.write() is synchronous and reliable during parsing
+        document.write('<scr' + 'ipt type="text/javascript" src="' + bgSrc + '"></scr' + 'ipt>');
+        console.log('[BuyGoods] Tracking script injected via document.write (first load)');
+    } else {
+        // PAGE ALREADY LOADED: use createElement
+        var bgScript = document.createElement('script');
+        bgScript.type = 'text/javascript';
+        bgScript.src = bgSrc;
+        document.head.appendChild(bgScript);
+        console.log('[BuyGoods] Tracking script injected via createElement (reload)');
+    }
 
-    console.log('[BuyGoods] Tracking script injected with clean URL:', window.location.href);
+    console.log('[BuyGoods] Clean URL:', window.location.href);
 
     // Conversion iframe (after DOM ready)
     function injectConversionIframe() {
         setTimeout(function() {
+            if (!document.body) return;
             var i = document.createElement("iframe");
             i.async = true;
             i.style.display = "none";
+            // Re-read sessid2 cookie here - it may have been set by BuyGoods tracking above
             i.setAttribute("src", "https://buygoods.com/affiliates/go/conversion/iframe/bg?a=11943&t=6bea6c7c7a71a36b83e176af6f6189de&s=" + ReadCookie('sessid2'));
             document.body.appendChild(i);
-        }, 1000);
+        }, 2000);
     }
 
     if (document.readyState === 'loading') {
