@@ -4,7 +4,11 @@
       "Bash(start:*)",
       "Bash(dir \"..\\\\lib\\\\img\"\" /b | findstr /i \"icon favicon png \")",
       "Bash(dir:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(node:*)",
+      "Bash(git checkout:*)",
+      "Bash(del \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\temp_grid.html\")",
+      "Bash(del \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\update_best.js\")"
     ]
   }
 }
