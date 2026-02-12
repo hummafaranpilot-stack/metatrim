@@ -658,6 +658,72 @@ $apiUrl = $protocol . '://' . $host . $path . '/api.php';
 
     console.log('[BuyGoods] Clean URL:', window.location.href);
 
+    // ============================================================
+    // APPEND sessid2 TO ALL CHECKOUT LINKS
+    // BuyGoods tracking sets the sessid2 cookie after loading.
+    // We poll for it, then update all buygoods.com checkout links.
+    // ============================================================
+    function updateCheckoutLinks() {
+        var sessid2 = ReadCookie('sessid2');
+        if (!sessid2) return false;
+
+        var links = document.querySelectorAll('a[href*="buygoods.com"]');
+        var updated = 0;
+        links.forEach(function(link) {
+            try {
+                var url = new URL(link.href);
+                if (!url.searchParams.get('sessid2')) {
+                    url.searchParams.set('sessid2', sessid2);
+                    link.href = url.toString();
+                    updated++;
+                }
+            } catch (e) {}
+        });
+        if (updated > 0) {
+            console.log('[BuyGoods] sessid2 appended to', updated, 'checkout link(s)');
+        }
+        return true;
+    }
+
+    // Poll for sessid2 cookie (BuyGoods tracking may take a moment to set it)
+    function waitForSessid2() {
+        var attempts = 0;
+        var maxAttempts = 20; // 20 x 500ms = 10 seconds max
+        var interval = setInterval(function() {
+            attempts++;
+            if (updateCheckoutLinks() || attempts >= maxAttempts) {
+                clearInterval(interval);
+                if (attempts >= maxAttempts) {
+                    console.warn('[BuyGoods] sessid2 cookie not found after 10s');
+                }
+            }
+        }, 500);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', waitForSessid2);
+    } else {
+        waitForSessid2();
+    }
+
+    // Also update on click (catch-all safety net)
+    document.addEventListener('click', function(e) {
+        var target = e.target.closest('a[href*="buygoods.com"]');
+        if (target) {
+            var sessid2 = ReadCookie('sessid2');
+            if (sessid2) {
+                try {
+                    var url = new URL(target.href);
+                    if (!url.searchParams.get('sessid2')) {
+                        url.searchParams.set('sessid2', sessid2);
+                        target.href = url.toString();
+                        console.log('[BuyGoods] sessid2 appended on click');
+                    }
+                } catch (e) {}
+            }
+        }
+    }, true);
+
     // Conversion iframe (after DOM ready)
     function injectConversionIframe() {
         setTimeout(function() {

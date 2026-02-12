@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout Test (No Shaving)</title>
+
+<!-- DEFAULT BUYGOODS TRACKING - NO SHAVING -->
+<script>var mysrc = "https://tracking.buygoods.com/track/?a=11943&firstcookie=0"+"&tracking_redirect=&referrer="+encodeURIComponent(document.referrer)+"&sessid2="+ReadCookie('sessid2')+"&product=met2v2,met3v2,met6v2,met2v2s,met6v2s,met3v2s&vid1=&vid2=&vid3=&caller_url="+encodeURIComponent(window.location.href); if(typeof add_to_cart !== 'undefined') { mysrc = mysrc+'&add_to_cart='+add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name){name += '='; var parts = document.cookie.split(/;\s*/);for (var i = 0; i < parts.length; i++) {var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length)} return '';}</script>
+
+<script type="text/javascript">setTimeout(function () {var i = document.createElement("iframe"),oid = new URLSearchParams(window.location.search);i.async = true;i.style="display:none";i.setAttribute("src", "https://buygoods.com/affiliates/go/conversion/iframe/bg?a=11943&t=6bea6c7c7a71a36b83e176af6f6189de&s="+ReadCookie('sessid2'));document.body.appendChild(i);}, 1000);</script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 40px 20px; }
+.container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+h1 { font-size: 22px; color: #333; margin-bottom: 8px; }
+.badge { display: inline-block; background: #e74c3c; color: #fff; font-size: 11px; padding: 3px 10px; border-radius: 20px; margin-bottom: 20px; }
+.info { background: #f0f4ff; border-left: 4px solid #3b82f6; padding: 14px 18px; margin-bottom: 30px; font-size: 14px; color: #444; line-height: 1.6; }
+.info code { background: #e2e8f0; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+.btn { display: block; width: 100%; padding: 18px; font-size: 18px; font-weight: bold; color: #fff; background: linear-gradient(135deg, #27ae60, #219a52); border: none; border-radius: 8px; cursor: pointer; text-decoration: none; text-align: center; margin-bottom: 12px; transition: transform 0.15s; }
+.btn:hover { transform: scale(1.02); }
+.params { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+.params h3 { font-size: 14px; color: #888; margin-bottom: 10px; }
+.params pre { background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 6px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+.params .key { color: #9cdcfe; }
+.params .val { color: #ce9178; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>MetaTrim Checkout Test</h1>
+    <span class="badge">NO SHAVING - Direct BuyGoods</span>
+
+    <div class="info">
+        This page uses the <code>default BuyGoods tracking script</code> only.<br>
+        No shaving-check.php is loaded. Compare with the real landing page to verify both work equally.
+    </div>
+
+    <a class="btn" href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">
+        Buy 2 Bottles - Checkout
+    </a>
+
+    <div class="params">
+        <h3>URL Parameters Detected</h3>
+        <pre id="params-display">Loading...</pre>
+    </div>
+
+    <div class="params">
+        <h3>sessid2 Cookie</h3>
+        <pre id="cookie-display">Loading...</pre>
+    </div>
+</div>
+
+<script>
+// Show current URL params
+var params = new URLSearchParams(window.location.search);
+var display = document.getElementById('params-display');
+if (params.toString()) {
+    var lines = [];
+    params.forEach(function(value, key) {
+        lines.push('<span class="key">' + key + '</span> = <span class="val">' + value + '</span>');
+    });
+    display.innerHTML = lines.join('\n');
+} else {
+    display.textContent = '(none)';
+}
+
+// Show sessid2 cookie
+var cookieDisplay = document.getElementById('cookie-display');
+var sessid2 = ReadCookie('sessid2');
+cookieDisplay.innerHTML = sessid2
+    ? '<span class="key">sessid2</span> = <span class="val">' + sessid2 + '</span>'
+    : '(not set yet - BuyGoods tracking may still be loading)';
+
+// Re-check cookie after BuyGoods tracking has time to set it
+setTimeout(function() {
+    var s = ReadCookie('sessid2');
+    if (s) {
+        cookieDisplay.innerHTML = '<span class="key">sessid2</span> = <span class="val">' + s + '</span>';
+    }
+}, 3000);
+</script>
+</body>
+</html>
