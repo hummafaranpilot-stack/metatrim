@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Create Session - Shaving Dashboard</title>
+    <title>Shaver - Shaving Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -112,11 +112,14 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            max-width: 800px;
+            max-width: 600px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
         }
 
         .form-group label {
@@ -133,80 +136,45 @@
             margin-top: 5px;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-group input {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             transition: all 0.3s;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-group input:focus {
             border-color: #3498db;
             outline: none;
         }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin: 0;
-        }
-
-        .btn-primary {
-            padding: 12px 30px;
-            background: #3498db;
+        .btn-start {
+            padding: 14px 40px;
+            background: #e74c3c;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.05rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
+            width: 100%;
         }
 
-        .btn-primary:hover {
-            background: #2980b9;
+        .btn-start:hover {
+            background: #c0392b;
             transform: translateY(-2px);
         }
 
-        .btn-secondary {
-            padding: 12px 30px;
+        .btn-start:disabled {
             background: #95a5a6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-left: 10px;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-
+        /* Alert */
         .alert {
             padding: 15px 20px;
             border-radius: 8px;
@@ -226,25 +194,139 @@
             border: 1px solid #f5c6cb;
         }
 
-        .alert-info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
+        /* Active Sessions Table */
+        .sessions-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 25px;
         }
 
-        .section-divider {
-            border-top: 2px solid #ecf0f1;
-            margin: 30px 0;
-        }
-
-        .section-title {
+        .sessions-card h2 {
             font-size: 1.2rem;
             color: #2c3e50;
             margin-bottom: 20px;
-            font-weight: 700;
         }
 
-        /* Mobile Menu Toggle */
+        .session-count {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .session-count.zero {
+            background: #95a5a6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 2px solid #eee;
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+        }
+
+        tr:hover td {
+            background: #f8f9fa;
+        }
+
+        .aff-id {
+            font-weight: 700;
+            color: #2c3e50;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+        }
+
+        .sub-id {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 16px;
+        }
+
+        .stat {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .stat strong {
+            color: #2c3e50;
+        }
+
+        .running-since {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .btn-stop {
+            padding: 8px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-stop:hover {
+            background: #c0392b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #95a5a6;
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Pulse animation for active indicator */
+        .active-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #27ae60;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Mobile */
         .mobile-menu-toggle {
             display: none;
             position: fixed;
@@ -268,10 +350,7 @@
         .mobile-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5);
             z-index: 999;
         }
@@ -280,55 +359,19 @@
             display: block;
         }
 
-        /* Mobile Responsive Styles */
         @media (max-width: 768px) {
-            html, body {
-                overflow-x: hidden;
-                max-width: 100vw;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .sidebar {
-                transform: translateX(-250px);
-                transition: transform 0.3s ease;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 70px 15px 15px 15px;
-                width: 100%;
-            }
-
-            .header {
-                padding: 20px 15px;
-            }
-
-            .header h1 {
-                font-size: 1.4rem;
-            }
-
-            .form-card {
-                padding: 20px 15px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                width: 100%;
-                margin: 5px 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-content {
-                padding: 70px 10px 10px 10px;
-            }
+            html, body { overflow-x: hidden; max-width: 100vw; }
+            .mobile-menu-toggle { display: block; }
+            .sidebar { transform: translateX(-250px); transition: transform 0.3s ease; }
+            .main-content { margin-left: 0; padding: 70px 15px 15px 15px; width: 100%; }
+            .header { padding: 20px 15px; }
+            .header h1 { font-size: 1.4rem; }
+            .form-card, .sessions-card { padding: 20px 15px; }
+            .form-row { grid-template-columns: 1fr; }
+            .btn-start { padding: 14px 20px; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 10px 8px; }
+            .stats { flex-direction: column; gap: 4px; }
         }
     </style>
 </head>
@@ -357,22 +400,22 @@
         </div>
 
         <div class="nav-section">
-            <div class="nav-section-title">Shaving Analytics</div>
+            <div class="nav-section-title">Shaving</div>
             <a href="shaving-analytics-complete.html" class="nav-item">
                 <i class="fas fa-chart-bar"></i>
                 <span>Traffic Analytics</span>
             </a>
-            <a href="sessions.html" class="nav-item">
+            <a href="create-session.html" class="nav-item active">
                 <i class="fas fa-scissors"></i>
+                <span>Shaver</span>
+            </a>
+            <a href="sessions.html" class="nav-item">
+                <i class="fas fa-list"></i>
                 <span>Active Sessions</span>
             </a>
             <a href="history.html" class="nav-item">
                 <i class="fas fa-history"></i>
                 <span>Session History</span>
-            </a>
-            <a href="create-session.html" class="nav-item active">
-                <i class="fas fa-plus-circle"></i>
-                <span>Create Session</span>
             </a>
             <a href="embed-code.html" class="nav-item">
                 <i class="fas fa-code"></i>
@@ -393,8 +436,8 @@
     <div class="main-content">
         <!-- Header -->
         <div class="header">
-            <h1><i class="fas fa-plus-circle"></i> Create Shaving Session</h1>
-            <p>Manually create and configure a new traffic shaving session</p>
+            <h1><i class="fas fa-scissors"></i> Shaver</h1>
+            <p>Enter an Affiliate ID to start shaving their traffic</p>
         </div>
 
         <!-- Alert Messages -->
@@ -403,204 +446,195 @@
         <!-- Create Session Form -->
         <div class="form-card">
             <form id="createSessionForm">
-                <div class="section-title">Basic Information</div>
-
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="affiliateId">Affiliate ID *</label>
-                        <input type="text" id="affiliateId" name="affiliateId" required placeholder="e.g., 1122">
-                        <div class="help-text">Enter the affiliate ID to track</div>
+                        <label for="affiliateId">Affiliate ID</label>
+                        <input type="text" id="affiliateId" required placeholder="e.g. 1122">
                     </div>
 
                     <div class="form-group">
-                        <label for="subId">Sub ID (Optional)</label>
-                        <input type="text" id="subId" name="subId" placeholder="e.g., campaign01">
-                        <div class="help-text">Sub-affiliate identifier</div>
+                        <label for="subId">Sub ID <span style="font-weight:400;color:#aaa;">(optional)</span></label>
+                        <input type="text" id="subId" placeholder="e.g. campaign01">
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="landingPage">Landing Page URL *</label>
-                    <input type="url" id="landingPage" name="landingPage" required placeholder="https://example.com/page">
-                    <div class="help-text">Full URL of the landing page to track</div>
-                </div>
-
-                <div class="section-divider"></div>
-                <div class="section-title">Shaving Configuration</div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="shavingPercentage">Shaving Percentage *</label>
-                        <input type="number" id="shavingPercentage" name="shavingPercentage" required min="0" max="100" value="20" placeholder="20">
-                        <div class="help-text">Percentage of traffic to shave (0-100)</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sessionDuration">Session Duration (minutes)</label>
-                        <input type="number" id="sessionDuration" name="sessionDuration" min="1" value="30" placeholder="30">
-                        <div class="help-text">How long the session should last</div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="targetCountry">Target Country (Optional)</label>
-                        <select id="targetCountry" name="targetCountry">
-                            <option value="">All Countries</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="GB">United Kingdom</option>
-                            <option value="AU">Australia</option>
-                            <option value="BR">Brazil</option>
-                            <option value="PK">Pakistan</option>
-                            <option value="IN">India</option>
-                        </select>
-                        <div class="help-text">Limit shaving to specific country</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="targetDevice">Target Device (Optional)</label>
-                        <select id="targetDevice" name="targetDevice">
-                            <option value="">All Devices</option>
-                            <option value="Desktop">Desktop</option>
-                            <option value="Mobile">Mobile</option>
-                            <option value="Tablet">Tablet</option>
-                        </select>
-                        <div class="help-text">Limit shaving to specific device type</div>
-                    </div>
-                </div>
-
-                <div class="section-divider"></div>
-                <div class="section-title">Advanced Options</div>
-
-                <div class="form-group">
-                    <label for="shavingRules">Shaving Rules (JSON)</label>
-                    <textarea id="shavingRules" name="shavingRules" placeholder='{"min_clicks": 2, "min_scroll": 0.5}'></textarea>
-                    <div class="help-text">JSON configuration for advanced shaving rules</div>
-                </div>
-
-                <div class="form-group">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="autoStart" name="autoStart" checked>
-                        <label for="autoStart" style="margin: 0;">Auto-start session immediately</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="trackBehavior" name="trackBehavior" checked>
-                        <label for="trackBehavior" style="margin: 0;">Enable behavior tracking (clicks, scroll, duration)</label>
-                    </div>
-                </div>
-
-                <div class="section-divider"></div>
-
-                <div style="display: flex; gap: 10px;">
-                    <button type="submit" class="btn-primary">
-                        <i class="fas fa-check-circle"></i> Create Session
-                    </button>
-                    <button type="button" class="btn-secondary" onclick="resetForm()">
-                        <i class="fas fa-redo"></i> Reset Form
-                    </button>
-                </div>
+                <button type="submit" class="btn-start" id="btnStart">
+                    <i class="fas fa-play"></i> Start Shaving
+                </button>
             </form>
+        </div>
+
+        <!-- Active Sessions -->
+        <div class="sessions-card">
+            <h2>
+                Active Sessions
+                <span class="session-count zero" id="sessionCount">0</span>
+            </h2>
+            <div id="sessionsBody">
+                <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Loading...
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         const API_URL = 'api.php';
 
+        // Load active sessions on page load
+        document.addEventListener('DOMContentLoaded', loadSessions);
+
         // Handle form submission
         document.getElementById('createSessionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const formData = {
-                action: 'createSession',
-                affiliateId: document.getElementById('affiliateId').value,
-                subId: document.getElementById('subId').value,
-                landingPage: document.getElementById('landingPage').value,
-                shavingPercentage: parseFloat(document.getElementById('shavingPercentage').value),
-                sessionDuration: parseInt(document.getElementById('sessionDuration').value),
-                targetCountry: document.getElementById('targetCountry').value,
-                targetDevice: document.getElementById('targetDevice').value,
-                shavingRules: document.getElementById('shavingRules').value,
-                autoStart: document.getElementById('autoStart').checked,
-                trackBehavior: document.getElementById('trackBehavior').checked
-            };
+            const affId = document.getElementById('affiliateId').value.trim();
+            const subId = document.getElementById('subId').value.trim();
 
-            // Validate shaving rules JSON
-            if (formData.shavingRules) {
-                try {
-                    JSON.parse(formData.shavingRules);
-                } catch (e) {
-                    showAlert('Invalid JSON in Shaving Rules field', 'error');
-                    return;
-                }
+            if (!affId) {
+                showAlert('Please enter an Affiliate ID', 'error');
+                return;
             }
+
+            const btn = document.getElementById('btnStart');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Starting...';
 
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify({
+                        action: 'createSession',
+                        aff_id: affId,
+                        sub_id: subId
+                    })
                 });
 
                 const result = await response.json();
 
                 if (result.success) {
-                    showAlert('Session created successfully! Session ID: ' + (result.sessionId || 'Generated'), 'success');
-                    setTimeout(() => {
-                        window.location.href = 'sessions.html';
-                    }, 2000);
+                    showAlert('Shaving started for Aff ID: ' + affId, 'success');
+                    document.getElementById('affiliateId').value = '';
+                    document.getElementById('subId').value = '';
+                    loadSessions();
                 } else {
-                    showAlert('Error: ' + (result.error || 'Failed to create session'), 'error');
+                    showAlert(result.error || 'Failed to start session', 'error');
                 }
             } catch (error) {
                 showAlert('Network error: ' + error.message, 'error');
             }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-play"></i> Start Shaving';
         });
 
+        // Load and display active sessions
+        async function loadSessions() {
+            try {
+                const response = await fetch(API_URL + '?action=get_sessions');
+                const result = await response.json();
+
+                const sessions = result.data || result.sessions || [];
+                const countEl = document.getElementById('sessionCount');
+                const body = document.getElementById('sessionsBody');
+
+                countEl.textContent = sessions.length;
+                countEl.className = 'session-count' + (sessions.length === 0 ? ' zero' : '');
+
+                if (sessions.length === 0) {
+                    body.innerHTML = '<div class="empty-state"><i class="fas fa-check-circle"></i>No active shaving sessions</div>';
+                    return;
+                }
+
+                let html = '<table><thead><tr><th>Affiliate</th><th>Stats</th><th>Running Since</th><th></th></tr></thead><tbody>';
+
+                sessions.forEach(function(s) {
+                    const startDate = new Date(s.startTime);
+                    const ago = timeAgo(startDate);
+
+                    html += '<tr>';
+                    html += '<td><span class="active-dot"></span><span class="aff-id">' + escapeHtml(s.affId) + '</span>';
+                    if (s.subId) html += '<br><span class="sub-id">sub: ' + escapeHtml(s.subId) + '</span>';
+                    html += '</td>';
+                    html += '<td><div class="stats"><span class="stat"><strong>' + s.visits + '</strong> visits</span><span class="stat"><strong>' + s.clicks + '</strong> clicks</span></div></td>';
+                    html += '<td><span class="running-since">' + ago + '</span></td>';
+                    html += '<td><button class="btn-stop" onclick="stopSession(\'' + escapeHtml(s.id) + '\', \'' + escapeHtml(s.affId) + '\')"><i class="fas fa-stop"></i> Stop</button></td>';
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table>';
+                body.innerHTML = html;
+
+            } catch (error) {
+                document.getElementById('sessionsBody').innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i>Failed to load sessions</div>';
+            }
+        }
+
+        // Stop a session
+        async function stopSession(sessionId, affId) {
+            if (!confirm('Stop shaving for Aff ID: ' + affId + '?')) return;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'stop_session',
+                        session_id: sessionId
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('Stopped shaving for Aff ID: ' + affId, 'success');
+                    loadSessions();
+                } else {
+                    showAlert(result.error || 'Failed to stop session', 'error');
+                }
+            } catch (error) {
+                showAlert('Network error: ' + error.message, 'error');
+            }
+        }
+
+        // Helpers
         function showAlert(message, type) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type}`;
-            alertDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
-
             const container = document.getElementById('alertContainer');
-            container.innerHTML = '';
-            container.appendChild(alertDiv);
-
-            // Auto-remove after 5 seconds
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 5000);
+            container.innerHTML = '<div class="alert alert-' + type + '"><i class="fas fa-' + (type === 'success' ? 'check-circle' : 'exclamation-circle') + '"></i> ' + message + '</div>';
+            setTimeout(function() { container.innerHTML = ''; }, 4000);
         }
 
-        function resetForm() {
-            document.getElementById('createSessionForm').reset();
-            document.getElementById('alertContainer').innerHTML = '';
+        function timeAgo(date) {
+            const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+            if (seconds < 60) return 'just now';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return minutes + 'm ago';
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return hours + 'h ' + (minutes % 60) + 'm ago';
+            const days = Math.floor(hours / 24);
+            return days + 'd ' + (hours % 24) + 'h ago';
         }
 
-        // Mobile Menu Functions
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        // Auto-refresh sessions every 30 seconds
+        setInterval(loadSessions, 30000);
+
+        // Mobile Menu
         function toggleMobileMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.mobile-overlay');
-            sidebar.classList.toggle('mobile-open');
-            overlay.classList.toggle('active');
+            document.querySelector('.sidebar').classList.toggle('mobile-open');
+            document.querySelector('.mobile-overlay').classList.toggle('active');
         }
 
         function closeMobileMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.mobile-overlay');
-            sidebar.classList.remove('mobile-open');
-            overlay.classList.remove('active');
+            document.querySelector('.sidebar').classList.remove('mobile-open');
+            document.querySelector('.mobile-overlay').classList.remove('active');
         }
-
-        // Close mobile menu when clicking a nav item
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', closeMobileMenu);
-            });
-        });
     </script>
 </body>
 </html>
