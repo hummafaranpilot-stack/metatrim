@@ -1292,13 +1292,13 @@
                                 <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
                             </div>
                             <div class="mt-savings-badge">YOU SAVE $110!</div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbitems=8" class="mt-buy-now-btn" id="buy-btn-1">
+                            <a href="https://tnproduct.pay.clickbank.net/?cbitems=15" class="mt-buy-now-btn" id="buy-btn-1">
                                 <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-1">
                             </a>
                             <p class="mt-shipping-text">+ $19.99 Shipping</p>
                             <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$69</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="https://metatrim.trustednutraproduct.com/v2/upsell2.html" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://metatrim.trustednutraproduct.com/v3/upsell2.html" class="no-thanks-link">No thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1326,7 +1326,7 @@
                             <p class="mt-shipping-text free">FREE Shipping</p>
                             <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$234</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="https://metatrim.trustednutraproduct.com/v2/upsell2.html" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://metatrim.trustednutraproduct.com/v3/upsell2.html" class="no-thanks-link">No thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1354,7 +1354,7 @@
                             <p class="mt-shipping-text free">FREE Shipping</p>
                             <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span class="mt-final-price">$162</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="https://metatrim.trustednutraproduct.com/v2/upsell2.html" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://metatrim.trustednutraproduct.com/v3/upsell2.html" class="no-thanks-link">No thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1433,7 +1433,7 @@
     <!-- Bottom CTA Banner -->
     <div class="bottom-cta">
         <p>Don't miss this <span class="highlight">exclusive offer</span>! Save up to <span class="highlight">$840</span> on your MetaTrim BHB upgrade!</p>
-        <a href="https://metatrim.trustednutraproduct.com/v2/upsell2.html" class="no-thanks-link">No thanks, I'll pass on this exclusive offer</a>
+        <a href="https://metatrim.trustednutraproduct.com/v3/upsell2.html" class="no-thanks-link">No thanks, I'll pass on this exclusive offer</a>
     </div>
 
     <!-- Footer -->
@@ -1493,7 +1493,7 @@
                 const card = this.closest('.mt-product-card');
                 const isSubscribe = this.checked;
 
-                // Only swap buy button image - no price or text changes
+                // Swap buy button image and href
                 const buyButton = card.querySelector('.mt-buy-now-btn');
                 const btnImg = buyButton ? buyButton.querySelector('img') : null;
                 if (btnImg) {
@@ -1503,6 +1503,14 @@
                     } else {
                         btnImg.src = btnImg.dataset.originalSrc;
                         btnImg.alt = 'Buy Now';
+                    }
+                }
+                if (buyButton) {
+                    if (isSubscribe) {
+                        buyButton.dataset.originalHref = buyButton.dataset.originalHref || buyButton.href;
+                        buyButton.href = 'https://tnproduct.pay.clickbank.net/?cbitems=8';
+                    } else {
+                        buyButton.href = buyButton.dataset.originalHref || buyButton.href;
                     }
                 }
 

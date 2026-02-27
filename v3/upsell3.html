@@ -1305,10 +1305,9 @@
                             <span class="mt-best-badge">TRY IT!</span>
                         </div>
                         <div class="mt-product-details">
-                            <!-- Subscribe Checkbox -->
-                            <div class="mt-subscribe-checkbox">
-                                <input type="checkbox" id="subscribe-checkbox" checked>
-                                <label for="subscribe-checkbox">Subscribe & Go Hassle Free</label>
+                            <!-- Subscription Only -->
+                            <div class="mt-subscribe-badge" style="background: linear-gradient(135deg, #28a745, #20c997); color: #fff; padding: 8px 16px; border-radius: 8px; text-align: center; font-weight: 700; font-size: 14px; margin-bottom: 10px;">
+                                Subscribe & Go Hassle Free
                             </div>
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$0</h4>
@@ -1451,36 +1450,7 @@
         });
     </script>
 
-    <!-- Subscribe Toggle Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const checkbox = document.getElementById('subscribe-checkbox');
-            const buyBtn = document.getElementById('buy-btn-trial');
-            const subscriptionInfo = document.getElementById('sub-info-trial');
-
-            // URLs for subscription and one-time purchase
-            const subscribeUrl = "https://www.ClickBank.com/product/UPSELL_PRODUCT_ID/?account_id=11943&product_codename=gut1s&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi9UaGFua3lvdS5odG1s";
-            const oneTimeUrl = "https://www.ClickBank.com/product/UPSELL_PRODUCT_ID/?account_id=11943&product_codename=gut1u&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi9UaGFua3lvdS5odG1s";
-
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    buyBtn.href = subscribeUrl;
-                    subscriptionInfo.classList.add('show');
-                } else {
-                    buyBtn.href = oneTimeUrl;
-                    subscriptionInfo.classList.remove('show');
-                }
-            });
-
-            // Make entire checkbox wrapper clickable
-            document.querySelector('.mt-subscribe-checkbox').addEventListener('click', function(e) {
-                if (e.target.tagName !== 'INPUT') {
-                    checkbox.checked = !checkbox.checked;
-                    checkbox.dispatchEvent(new Event('change'));
-                }
-            });
-        });
-    </script>
+    <!-- Subscription Only - no toggle needed -->
 
     <!-- Social Proof Popup -->
     <link href="popup/css/style1.css" type="text/css" rel="stylesheet">
