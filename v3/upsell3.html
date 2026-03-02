@@ -1321,10 +1321,9 @@
                             <img src="Clickbank Structure/1-gutalia.png" alt="Gutalia Prime 1 Bottle">
                         </div>
                         <div class="mt-product-details">
-                            <!-- Subscription Only -->
-                            <div class="mt-subscribe-badge"
-                                style="background: linear-gradient(135deg, #28a745, #20c997); color: #fff; padding: 8px 16px; border-radius: 8px; text-align: center; font-weight: 700; font-size: 14px; margin-bottom: 10px;">
-                                Subscribe & Go Hassle Free
+                            <div class="mt-subscribe-checkbox">
+                                <input type="checkbox" id="subscribe-trial">
+                                <label for="subscribe-trial">Subscribe & Go Hassle Free</label>
                             </div>
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$0</h4>
@@ -1333,7 +1332,7 @@
                                 </div>
                             </div>
                             <!-- Subscription Info -->
-                            <div class="mt-subscription-info show" id="sub-info-trial">
+                            <div class="mt-subscription-info" id="sub-info-trial">
                                 <div class="congrats">Congrats!</div>
                                 <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span
                                         class="highlight">$69+Shipping</span> will start delivering <span
@@ -1498,7 +1497,71 @@
         });
     </script>
 
-    <!-- Subscription Only - no toggle needed -->
+    <!-- Subscription Checkbox JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Store original buy button images
+            document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
+                img.dataset.originalSrc = img.src;
+            });
+
+            // Handle checkbox subscribe functionality
+            const subscribeCheckboxes = document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]');
+
+            subscribeCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const card = this.closest('.mt-product-card');
+                    const isSubscribe = this.checked;
+
+                    // Swap buy button image and href
+                    const buyButton = card.querySelector('.mt-buy-now-btn');
+                    const btnImg = buyButton ? buyButton.querySelector('img') : null;
+                    if (btnImg) {
+                        if (isSubscribe) {
+                            btnImg.src = 'lib/img/subscribe.webp';
+                            btnImg.alt = 'Subscribe Now';
+                        } else {
+                            btnImg.src = btnImg.dataset.originalSrc;
+                            btnImg.alt = 'Buy Now';
+                        }
+                    }
+                    if (buyButton) {
+                        if (isSubscribe) {
+                            buyButton.dataset.originalHref = buyButton.dataset.originalHref || buyButton.href;
+                            buyButton.href = 'https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=14&cbrblaccpt=true';
+                        } else {
+                            buyButton.href = buyButton.dataset.originalHref || buyButton.href;
+                        }
+                    }
+
+                    // Show/hide subscription info with flicker animation
+                    const subscriptionInfo = card.querySelector('.mt-subscription-info');
+                    if (subscriptionInfo) {
+                        if (isSubscribe) {
+                            subscriptionInfo.classList.add('show');
+                            // Re-trigger animation
+                            subscriptionInfo.style.animation = 'none';
+                            subscriptionInfo.offsetHeight; // Trigger reflow
+                            subscriptionInfo.style.animation = 'borderFlicker 2.5s ease-in-out infinite';
+                        } else {
+                            subscriptionInfo.classList.remove('show');
+                        }
+                    }
+                });
+            });
+
+            // Make entire checkbox wrapper clickable
+            document.querySelectorAll('.mt-subscribe-checkbox').forEach(wrapper => {
+                wrapper.addEventListener('click', function (e) {
+                    if (e.target.tagName !== 'INPUT') {
+                        const checkbox = this.querySelector('input[type="checkbox"]');
+                        checkbox.checked = !checkbox.checked;
+                        checkbox.dispatchEvent(new Event('change'));
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Social Proof Popup -->
     <link href="popup/css/style1.css" type="text/css" rel="stylesheet">
