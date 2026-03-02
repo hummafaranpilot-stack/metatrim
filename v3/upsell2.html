@@ -2,26 +2,28 @@
 <html lang="en">
 
 <head>
-<script>
-    var mysrc = "https://tracking.ClickBank.com/track/?a=11943&firstcookie=0"+"&tracking_redirect=&referrer="+encodeURIComponent(document.referrer)+"&sessid2="+ReadCookie('sessid2')+"&product=ora1u,ora3u,ora6u&vid1=&vid2=&vid3=&caller_url="+encodeURIComponent(window.location.href); if(typeof add_to_cart !== 'undefined') { mysrc = mysrc+'&add_to_cart='+add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name){name += '='; var parts = document.cookie.split(/;\s*/);for (var i = 0; i < parts.length; i++) {var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length)} return '';}
-</script>
+    <script>
+        var mysrc = "https://tracking.ClickBank.com/track/?a=11943&firstcookie=0" + "&tracking_redirect=&referrer=" + encodeURIComponent(document.referrer) + "&sessid2=" + ReadCookie('sessid2') + "&product=ora1u,ora3u,ora6u&vid1=&vid2=&vid3=&caller_url=" + encodeURIComponent(window.location.href); if (typeof add_to_cart !== 'undefined') { mysrc = mysrc + '&add_to_cart=' + add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name) { name += '='; var parts = document.cookie.split(/;\s*/); for (var i = 0; i < parts.length; i++) { var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length) } return ''; }
+    </script>
 
-<script type="text/javascript">
-    var i = document.createElement("iframe"),oid = new URLSearchParams(window.location.search);i.async = true;i.style="display:none";i.setAttribute("src", "https://www.ClickBank.com/tracking/AFFILIATE_ID?conversion=1&s="+ReadCookie('sessid2')+"&o="+oid.get('order_id_global')+"&ut="+oid.get('token'));document.body.appendChild(i);
-</script>
+    <script type="text/javascript">
+        var i = document.createElement("iframe"), oid = new URLSearchParams(window.location.search); i.async = true; i.style = "display:none"; i.setAttribute("src", "https://www.ClickBank.com/tracking/AFFILIATE_ID?conversion=1&s=" + ReadCookie('sessid2') + "&o=" + oid.get('order_id_global') + "&ut=" + oid.get('token')); document.body.appendChild(i);
+    </script>
 
-<script>
-    window.clickbank = {
-        vendor: "tnproduct"
-    }
-</script>
-<script src="https://scripts.clickbank.net/hop.min.js" defer></script>
+    <script>
+        window.clickbank = {
+            vendor: "tnproduct"
+        }
+    </script>
+    <script src="https://scripts.clickbank.net/hop.min.js" defer></script>
 
     <meta charset="UTF-8">
     <link rel="icon" href="lib/img/icon-7.svg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Offer - Orabiome Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -36,7 +38,12 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Montserrat', sans-serif;
         }
 
@@ -345,7 +352,8 @@
             gap: 0.2rem;
         }
 
-        .mt-product-price h4, .mt-display-price {
+        .mt-product-price h4,
+        .mt-display-price {
             font-size: 4.5rem;
             color: #00695c;
             font-weight: 800;
@@ -732,7 +740,8 @@
                 font-size: 0.9rem;
             }
 
-            .mt-product-price h4, .mt-display-price {
+            .mt-product-price h4,
+            .mt-display-price {
                 font-size: 3.5rem;
             }
 
@@ -822,7 +831,8 @@
                 max-width: 200px;
             }
 
-            .mt-product-price h4, .mt-display-price {
+            .mt-product-price h4,
+            .mt-display-price {
                 font-size: 3rem;
             }
 
@@ -966,7 +976,8 @@
                 font-size: 12px;
             }
 
-            .mt-product-price h4, .mt-display-price {
+            .mt-product-price h4,
+            .mt-display-price {
                 font-size: 2.5rem;
             }
 
@@ -1108,6 +1119,7 @@
                 font-size: 12px;
             }
         }
+
         /* Page Indicator Badge - In Header */
         .page-indicator {
             background: rgba(0, 0, 0, 0.3);
@@ -1123,7 +1135,6 @@
             margin-left: 15px;
             vertical-align: middle;
         }
-
     </style>
 </head>
 
@@ -1133,7 +1144,7 @@
     <div class="success-header">
         <span class="checkmark">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
             </svg>
         </span>
         <p>Your Order Is Complete!</p>
@@ -1155,7 +1166,8 @@
         <div class="hero-content container">
             <span class="wait-badge">Add Daily Use Products to Your Order!</span>
             <h1 class="hero-title">Enhance Your Smile With <span class="highlight">Orabiome Pro!</span></h1>
-            <p class="hero-subtitle">Get our premium dental probiotic at up to <strong>25% OFF</strong> - fresh breath, whiter teeth, and healthier gums start here!</p>
+            <p class="hero-subtitle">Get our premium dental probiotic at up to <strong>25% OFF</strong> - fresh breath,
+                whiter teeth, and healthier gums start here!</p>
         </div>
     </section>
 
@@ -1183,16 +1195,21 @@
                         <div class="mt-product-details">
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$69</h4>
-                                <div class="mt-price-info"><p>/Bottle</p></div>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
                             </div>
                             <div class="mt-savings-badge">YOU SAVE $110!</div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbitems=13" class="mt-buy-now-btn" id="buy-btn-1">
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=13" class="mt-buy-now-btn"
+                                id="buy-btn-1">
                                 <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-1">
                             </a>
                             <p class="mt-shipping-text">+ $19.99 Shipping</p>
-                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$69</span></p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span
+                                    class="mt-final-price">$69</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="Thankyou.html" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=13" class="no-thanks-link">No
+                                thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1211,16 +1228,21 @@
                         <div class="mt-product-details">
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$39</h4>
-                                <div class="mt-price-info"><p>/Bottle</p></div>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
                             </div>
                             <div class="mt-savings-badge">YOU SAVE $840!</div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbitems=11" class="mt-buy-now-btn" id="buy-btn-6">
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=11" class="mt-buy-now-btn"
+                                id="buy-btn-6">
                                 <img src="lib/img/buy-now2.webp" alt="Buy Now" id="buy-img-6">
                             </a>
                             <p class="mt-shipping-text free">FREE Shipping</p>
-                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$234</span></p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span
+                                    class="mt-final-price">$234</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="Thankyou.html" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=13" class="no-thanks-link">No
+                                thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1239,16 +1261,21 @@
                         <div class="mt-product-details">
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$54</h4>
-                                <div class="mt-price-info"><p>/Bottle</p></div>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
                             </div>
                             <div class="mt-savings-badge">YOU SAVE $375!</div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbitems=12" class="mt-buy-now-btn" id="buy-btn-3">
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=12" class="mt-buy-now-btn"
+                                id="buy-btn-3">
                                 <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-3">
                             </a>
                             <p class="mt-shipping-text free">FREE Shipping</p>
-                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span class="mt-final-price">$162</span></p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span
+                                    class="mt-final-price">$162</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="Thankyou.html" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=13" class="no-thanks-link">No
+                                thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1262,28 +1289,40 @@
         <div class="benefits-grid">
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
                 </div>
                 <h4>Fresh Breath</h4>
                 <p>All-day confidence</p>
             </div>
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+                    </svg>
                 </div>
                 <h4>Whiter Teeth</h4>
                 <p>Naturally brighter smile</p>
             </div>
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                    </svg>
                 </div>
                 <h4>Healthy Gums</h4>
                 <p>Strong gum support</p>
             </div>
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM19 19.09H5V4.91h14v14.18zM6 15h12v2H6zm0-4h12v2H6zm0-4h12v2H6z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM19 19.09H5V4.91h14v14.18zM6 15h12v2H6zm0-4h12v2H6zm0-4h12v2H6z" />
+                    </svg>
                 </div>
                 <h4>Oral Balance</h4>
                 <p>Probiotic microbiome</p>
@@ -1302,21 +1341,24 @@
             <div class="reviews-grid">
                 <div class="review-card">
                     <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="review-text">"My dentist noticed the difference! My gums are healthier and my breath stays fresh all day. Orabiome Pro is now part of my daily routine."</p>
+                    <p class="review-text">"My dentist noticed the difference! My gums are healthier and my breath stays
+                        fresh all day. Orabiome Pro is now part of my daily routine."</p>
                     <span class="review-author">- Michelle T.</span>
                     <span class="verified-badge">&#10003; Verified Buyer</span>
                 </div>
 
                 <div class="review-card">
                     <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="review-text">"I've tried so many products for bad breath. Orabiome Pro actually works from the inside out. My confidence is through the roof now!"</p>
+                    <p class="review-text">"I've tried so many products for bad breath. Orabiome Pro actually works from
+                        the inside out. My confidence is through the roof now!"</p>
                     <span class="review-author">- Robert K.</span>
                     <span class="verified-badge">&#10003; Verified Buyer</span>
                 </div>
 
                 <div class="review-card">
                     <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="review-text">"My teeth look noticeably whiter after just 3 weeks. I love that it's natural probiotics supporting my oral health instead of harsh chemicals."</p>
+                    <p class="review-text">"My teeth look noticeably whiter after just 3 weeks. I love that it's natural
+                        probiotics supporting my oral health instead of harsh chemicals."</p>
                     <span class="review-author">- Sandra L.</span>
                     <span class="verified-badge">&#10003; Verified Buyer</span>
                 </div>
@@ -1326,8 +1368,10 @@
 
     <!-- Bottom CTA Banner -->
     <div class="bottom-cta">
-        <p>Don't miss this <span class="highlight">exclusive offer</span>! Save up to <span class="highlight">$840</span> on Orabiome Pro!</p>
-        <a href="Thankyou.html" class="no-thanks-link">No thanks, I'll pass on this exclusive offer</a>
+        <p>Don't miss this <span class="highlight">exclusive offer</span>! Save up to <span
+                class="highlight">$840</span> on Orabiome Pro!</p>
+        <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=13" class="no-thanks-link">No thanks, I'll pass on
+            this exclusive offer</a>
     </div>
 
     <!-- Footer -->
@@ -1339,13 +1383,20 @@
             <a href="contact.html" target="_blank">Contact Us</a>
         </div>
         <p class="footer-disclaimer">
-            ClickBank is the retailer of this product. CLICKBANK® is a registered trademark of Click Sales, Inc., a Delaware corporation located at 1444 S. Entertainment Ave., Suite 410 Boise, ID 83709, USA and used by permission. ClickBank's role as retailer does not constitute an endorsement, approval or review of this product or any claim, statement or opinion used in promotion of this product.
+            ClickBank is the retailer of this product. CLICKBANK® is a registered trademark of Click Sales, Inc., a
+            Delaware corporation located at 1444 S. Entertainment Ave., Suite 410 Boise, ID 83709, USA and used by
+            permission. ClickBank's role as retailer does not constitute an endorsement, approval or review of this
+            product or any claim, statement or opinion used in promotion of this product.
         </p>
         <p class="footer-disclaimer">
-            Statements on this website have not been evaluated by the Food and Drug Administration. Products are not intended to diagnose, treat, cure or prevent any disease. If you are pregnant, nursing, taking medication, or have a medical condition, consult your physician before using our products.
+            Statements on this website have not been evaluated by the Food and Drug Administration. Products are not
+            intended to diagnose, treat, cure or prevent any disease. If you are pregnant, nursing, taking medication,
+            or have a medical condition, consult your physician before using our products.
         </p>
         <p class="footer-disclaimer">
-            Testimonials, case studies, and examples found on this page are results that have been forwarded to us by users of Orabiome Pro products and related products are not intended to represent or guarantee that anyone will achieve the same or similar results.
+            Testimonials, case studies, and examples found on this page are results that have been forwarded to us by
+            users of Orabiome Pro products and related products are not intended to represent or guarantee that anyone
+            will achieve the same or similar results.
         </p>
     </footer>
 
@@ -1357,7 +1408,7 @@
 
     <!-- Timer Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             let t = 300; // 5 minutes in seconds
             const countdownEl = document.getElementById('countdown');
 
@@ -1365,7 +1416,7 @@
                 let minutes = String(Math.floor(t / 60)).padStart(2, '0');
                 let seconds = String(t % 60).padStart(2, '0');
                 countdownEl.textContent = `${minutes}:${seconds}`;
-                if(t > 0) t--;
+                if (t > 0) t--;
                 else clearInterval(timerInterval);
             }, 1000);
         });
@@ -1381,7 +1432,9 @@
                 </div>
                 <div class="custom-notification-content-wrapper">
                     <p class="custom-notification-content">
-                        <span id="notify-customer">Jessica M</span> - <span id="notify-state">CA</span><br> Purchased <strong><span id="notify-quantity">1</span></strong> Bottle(s) of <b>Orabiome Pro</b> <small><span id="notify-ago">3 minutes ago</span></small>
+                        <span id="notify-customer">Jessica M</span> - <span id="notify-state">CA</span><br> Purchased
+                        <strong><span id="notify-quantity">1</span></strong> Bottle(s) of <b>Orabiome Pro</b>
+                        <small><span id="notify-ago">3 minutes ago</span></small>
                     </p>
                 </div>
             </div>
@@ -1391,53 +1444,53 @@
 
     <!-- Custom Social Proof Script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const notifications = [
-            { name: 'Jessica M', state: 'CA', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '2 minutes ago' },
-            { name: 'Brian T', state: 'TX', qty: 3, img: 'Clickbank Structure/3-orabiome.png', ago: '4 minutes ago' },
-            { name: 'Amanda K', state: 'FL', qty: 1, img: 'Clickbank Structure/1-orabiome.png', ago: '7 minutes ago' },
-            { name: 'Steven R', state: 'NY', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '11 minutes ago' },
-            { name: 'Laura P', state: 'OH', qty: 3, img: 'Clickbank Structure/3-orabiome.png', ago: '14 minutes ago' },
-            { name: 'Kevin W', state: 'WA', qty: 1, img: 'Clickbank Structure/1-orabiome.png', ago: '17 minutes ago' },
-            { name: 'Nicole H', state: 'AZ', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '21 minutes ago' },
-            { name: 'Daniel C', state: 'IL', qty: 3, img: 'Clickbank Structure/3-orabiome.png', ago: '24 minutes ago' },
-            { name: 'Rachel S', state: 'GA', qty: 1, img: 'Clickbank Structure/1-orabiome.png', ago: '27 minutes ago' },
-            { name: 'Mark J', state: 'NC', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '31 minutes ago' }
-        ];
+        document.addEventListener('DOMContentLoaded', function () {
+            const notifications = [
+                { name: 'Jessica M', state: 'CA', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '2 minutes ago' },
+                { name: 'Brian T', state: 'TX', qty: 3, img: 'Clickbank Structure/3-orabiome.png', ago: '4 minutes ago' },
+                { name: 'Amanda K', state: 'FL', qty: 1, img: 'Clickbank Structure/1-orabiome.png', ago: '7 minutes ago' },
+                { name: 'Steven R', state: 'NY', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '11 minutes ago' },
+                { name: 'Laura P', state: 'OH', qty: 3, img: 'Clickbank Structure/3-orabiome.png', ago: '14 minutes ago' },
+                { name: 'Kevin W', state: 'WA', qty: 1, img: 'Clickbank Structure/1-orabiome.png', ago: '17 minutes ago' },
+                { name: 'Nicole H', state: 'AZ', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '21 minutes ago' },
+                { name: 'Daniel C', state: 'IL', qty: 3, img: 'Clickbank Structure/3-orabiome.png', ago: '24 minutes ago' },
+                { name: 'Rachel S', state: 'GA', qty: 1, img: 'Clickbank Structure/1-orabiome.png', ago: '27 minutes ago' },
+                { name: 'Mark J', state: 'NC', qty: 6, img: 'Clickbank Structure/6-orabiome.png', ago: '31 minutes ago' }
+            ];
 
-        let currentIndex = 0;
-        const popup = document.querySelector('.custom-social-proof');
-        const notification = document.querySelector('.custom-notification');
+            let currentIndex = 0;
+            const popup = document.querySelector('.custom-social-proof');
+            const notification = document.querySelector('.custom-notification');
 
-        function showNotification() {
-            const data = notifications[currentIndex];
+            function showNotification() {
+                const data = notifications[currentIndex];
 
-            document.getElementById('notify-customer').textContent = data.name;
-            document.getElementById('notify-state').textContent = data.state;
-            document.getElementById('notify-quantity').textContent = data.qty;
-            document.getElementById('notify-ago').textContent = data.ago;
-            document.getElementById('notify-image').src = data.img;
+                document.getElementById('notify-customer').textContent = data.name;
+                document.getElementById('notify-state').textContent = data.state;
+                document.getElementById('notify-quantity').textContent = data.qty;
+                document.getElementById('notify-ago').textContent = data.ago;
+                document.getElementById('notify-image').src = data.img;
 
-            notification.classList.add('show');
+                notification.classList.add('show');
 
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    currentIndex = (currentIndex + 1) % notifications.length;
+                }, 5000);
+            }
+
+            // Initial delay then show first notification
             setTimeout(() => {
+                showNotification();
+                // Then show every 12 seconds
+                setInterval(showNotification, 12000);
+            }, 3000);
+
+            // Close button
+            document.querySelector('.custom-close').addEventListener('click', function () {
                 notification.classList.remove('show');
-                currentIndex = (currentIndex + 1) % notifications.length;
-            }, 5000);
-        }
-
-        // Initial delay then show first notification
-        setTimeout(() => {
-            showNotification();
-            // Then show every 12 seconds
-            setInterval(showNotification, 12000);
-        }, 3000);
-
-        // Close button
-        document.querySelector('.custom-close').addEventListener('click', function() {
-            notification.classList.remove('show');
+            });
         });
-    });
     </script>
 
     <div class="popup-loading-wrapper" style="display:none;">
@@ -1459,95 +1512,96 @@
 
     <!-- URL Parameter Preservation Scripts -->
     <script>
-    // Preserve URL parameters across page navigation
-    (function() {
-      var urlParams = new URLSearchParams(window.location.search);
-      var paramString = urlParams.toString();
+        // Preserve URL parameters across page navigation
+        (function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var paramString = urlParams.toString();
 
-      if (paramString) {
-        var links = document.querySelectorAll('a[href]');
+            if (paramString) {
+                var links = document.querySelectorAll('a[href]');
 
-        links.forEach(function(link) {
-          var href = link.getAttribute('href');
+                links.forEach(function (link) {
+                    var href = link.getAttribute('href');
 
-          if (!href ||
-              href.startsWith('http://') ||
-              href.startsWith('https://') ||
-              href.startsWith('mailto:') ||
-              href.startsWith('tel:') ||
-              href.startsWith('javascript:') ||
-              href.startsWith('#')) {
-            return;
-          }
+                    if (!href ||
+                        href.startsWith('http://') ||
+                        href.startsWith('https://') ||
+                        href.startsWith('mailto:') ||
+                        href.startsWith('tel:') ||
+                        href.startsWith('javascript:') ||
+                        href.startsWith('#')) {
+                        return;
+                    }
 
-          var separator = href.includes('?') ? '&' : '?';
-          link.setAttribute('href', href + separator + paramString);
-        });
-      }
-    })();
+                    var separator = href.includes('?') ? '&' : '?';
+                    link.setAttribute('href', href + separator + paramString);
+                });
+            }
+        })();
     </script>
     <script>
-    // Preserve ALL URL parameters on checkout/buy buttons (with redirect parameter support)
-    (function() {
-      var urlParams = new URLSearchParams(window.location.search);
-      var paramString = urlParams.toString();
+        // Preserve ALL URL parameters on checkout/buy buttons (with redirect parameter support)
+        (function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var paramString = urlParams.toString();
 
-      if (!paramString) return;
+            if (!paramString) return;
 
-      function appendParams(url) {
-        if (!url) return url;
+            function appendParams(url) {
+                if (!url) return url;
 
-        try {
-          var urlObj = new URL(url);
-          var redirectParam = urlObj.searchParams.get('redirect');
+                try {
+                    var urlObj = new URL(url);
+                    var redirectParam = urlObj.searchParams.get('redirect');
 
-          if (redirectParam) {
-            try {
-              var decodedRedirect = atob(redirectParam);
-              var separator = decodedRedirect.includes('?') ? '&' : '?';
-              var updatedRedirect = decodedRedirect + separator + paramString;
-              urlObj.searchParams.set('redirect', btoa(updatedRedirect));
-            } catch (e) {
-              var separator = redirectParam.includes('?') ? '&' : '?';
-              urlObj.searchParams.set('redirect', redirectParam + separator + paramString);
+                    if (redirectParam) {
+                        try {
+                            var decodedRedirect = atob(redirectParam);
+                            var separator = decodedRedirect.includes('?') ? '&' : '?';
+                            var updatedRedirect = decodedRedirect + separator + paramString;
+                            urlObj.searchParams.set('redirect', btoa(updatedRedirect));
+                        } catch (e) {
+                            var separator = redirectParam.includes('?') ? '&' : '?';
+                            urlObj.searchParams.set('redirect', redirectParam + separator + paramString);
+                        }
+                    }
+
+                    paramString.split('&').forEach(function (param) {
+                        var parts = param.split('=');
+                        if (parts[0] && parts[1]) {
+                            urlObj.searchParams.set(parts[0], parts[1]);
+                        }
+                    });
+
+                    return urlObj.toString();
+                } catch (e) {
+                    var separator = url.includes('?') ? '&' : '?';
+                    return url + separator + paramString;
+                }
             }
-          }
 
-          paramString.split('&').forEach(function(param) {
-            var parts = param.split('=');
-            if (parts[0] && parts[1]) {
-              urlObj.searchParams.set(parts[0], parts[1]);
+            function updateAllLinks() {
+                var externalLinks = document.querySelectorAll('a[href^="http"], a[href^="https"]');
+                externalLinks.forEach(function (link) {
+                    var href = link.getAttribute('href');
+                    link.setAttribute('href', appendParams(href));
+                });
+
+                var dataUrlElements = document.querySelectorAll('[data-url^="http"], [data-url^="https"]');
+                dataUrlElements.forEach(function (element) {
+                    var dataUrl = element.getAttribute('data-url');
+                    element.setAttribute('data-url', appendParams(dataUrl));
+                });
             }
-          });
 
-          return urlObj.toString();
-        } catch (e) {
-          var separator = url.includes('?') ? '&' : '?';
-          return url + separator + paramString;
-        }
-      }
-
-      function updateAllLinks() {
-        var externalLinks = document.querySelectorAll('a[href^="http"], a[href^="https"]');
-        externalLinks.forEach(function(link) {
-          var href = link.getAttribute('href');
-          link.setAttribute('href', appendParams(href));
-        });
-
-        var dataUrlElements = document.querySelectorAll('[data-url^="http"], [data-url^="https"]');
-        dataUrlElements.forEach(function(element) {
-          var dataUrl = element.getAttribute('data-url');
-          element.setAttribute('data-url', appendParams(dataUrl));
-        });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', updateAllLinks);
-      } else {
-        updateAllLinks();
-      }
-    })();
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updateAllLinks);
+            } else {
+                updateAllLinks();
+            }
+        })();
     </script>
 
 </body>
+
 </html>
