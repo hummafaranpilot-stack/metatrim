@@ -13,7 +13,11 @@
       "Bash(npx serve -p 3000)",
       "Bash(powershell -Command:*)",
       "Bash(powershell:*)",
-      "Bash(del \"D:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v3\\\\upsell4.html\")"
+      "Bash(del \"D:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v3\\\\upsell4.html\")",
+      "Bash(git add best/go/go.html long2/index.html long3/page5.html long4/go/index.html short/go/index.html upsell1.html upsell3.html)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git add upsell3.html)"
     ]
   }
 }
