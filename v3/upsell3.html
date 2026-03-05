@@ -1342,8 +1342,12 @@
                             <div class="mt-savings-badge">YOU SAVE $159!</div>
 
                             <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=14" class="mt-buy-now-btn"
-                                id="buy-btn-trial">
-                                <img src="lib/img/buy-now2.webp" alt="Buy Now" id="buy-img-trial">
+                                id="buy-btn-trial"
+                                data-unchecked-href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=14"
+                                data-checked-href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=16&cbrblaccpt=true">
+                                <img src="lib/img/buy-now2.webp" alt="Buy Now" id="buy-img-trial"
+                                    data-unchecked-src="lib/img/buy-now2.webp"
+                                    data-checked-src="lib/img/subscribe.webp">
                             </a>
                             <p class="mt-shipping-text">+ $19.99 Shipping</p>
                             <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span
@@ -1500,54 +1504,50 @@
     <!-- Subscription Checkbox JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Store original buy button images
-            document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
-                img.dataset.originalSrc = img.src;
-            });
 
-            // Handle checkbox subscribe functionality
-            const subscribeCheckboxes = document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]');
+            function updateBuyButton(card, isChecked) {
+                const buyButton = card.querySelector('.mt-buy-now-btn');
+                const btnImg = buyButton ? buyButton.querySelector('img') : null;
 
-            subscribeCheckboxes.forEach(checkbox => {
+                if (buyButton) {
+                    // Swap href: use data-checked-href or data-unchecked-href
+                    buyButton.href = isChecked
+                        ? (buyButton.dataset.checkedHref || buyButton.href)
+                        : (buyButton.dataset.uncheckedHref || buyButton.href);
+                }
+
+                if (btnImg) {
+                    // Swap image: use data-checked-src or data-unchecked-src
+                    btnImg.src = isChecked
+                        ? (btnImg.dataset.checkedSrc || btnImg.src)
+                        : (btnImg.dataset.uncheckedSrc || btnImg.src);
+                    btnImg.alt = isChecked ? 'Subscribe Now' : 'Buy Now';
+                }
+
+                // Show/hide subscription info with flicker animation
+                const subscriptionInfo = card.querySelector('.mt-subscription-info');
+                if (subscriptionInfo) {
+                    if (isChecked) {
+                        subscriptionInfo.classList.add('show');
+                        subscriptionInfo.style.animation = 'none';
+                        subscriptionInfo.offsetHeight; // Trigger reflow
+                        subscriptionInfo.style.animation = 'borderFlicker 2.5s ease-in-out infinite';
+                    } else {
+                        subscriptionInfo.classList.remove('show');
+                    }
+                }
+            }
+
+            // Handle checkbox change
+            document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', function () {
                     const card = this.closest('.mt-product-card');
-                    const isSubscribe = this.checked;
-
-                    // Swap buy button image and href
-                    const buyButton = card.querySelector('.mt-buy-now-btn');
-                    const btnImg = buyButton ? buyButton.querySelector('img') : null;
-                    if (btnImg) {
-                        if (isSubscribe) {
-                            btnImg.src = 'lib/img/subscribe.webp';
-                            btnImg.alt = 'Subscribe Now';
-                        } else {
-                            btnImg.src = btnImg.dataset.originalSrc;
-                            btnImg.alt = 'Buy Now';
-                        }
-                    }
-                    if (buyButton) {
-                        if (isSubscribe) {
-                            buyButton.dataset.originalHref = buyButton.dataset.originalHref || buyButton.href;
-                            buyButton.href = 'https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=14&cbrblaccpt=true';
-                        } else {
-                            buyButton.href = buyButton.dataset.originalHref || buyButton.href;
-                        }
-                    }
-
-                    // Show/hide subscription info with flicker animation
-                    const subscriptionInfo = card.querySelector('.mt-subscription-info');
-                    if (subscriptionInfo) {
-                        if (isSubscribe) {
-                            subscriptionInfo.classList.add('show');
-                            // Re-trigger animation
-                            subscriptionInfo.style.animation = 'none';
-                            subscriptionInfo.offsetHeight; // Trigger reflow
-                            subscriptionInfo.style.animation = 'borderFlicker 2.5s ease-in-out infinite';
-                        } else {
-                            subscriptionInfo.classList.remove('show');
-                        }
-                    }
+                    updateBuyButton(card, this.checked);
                 });
+
+                // Initialize state on load (unchecked by default)
+                const card = checkbox.closest('.mt-product-card');
+                updateBuyButton(card, checkbox.checked);
             });
 
             // Make entire checkbox wrapper clickable
