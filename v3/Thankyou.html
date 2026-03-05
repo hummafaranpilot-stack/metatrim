@@ -11,6 +11,11 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
+    <!-- ClickBank -->
+    <script>window.clickbank = { vendor: "tnproduct" }</script>
+    <script src="https://scripts.clickbank.net/hop.min.js" defer></script>
+    <script src="//cbtb.clickbank.net/?vendor=tnproduct"></script>
+
     <style>
         /* Top Header Section */
         .top-header {
@@ -128,6 +133,66 @@
         }
         .important-notice .notice-text a:hover {
             color: #fff;
+        }
+        /* Highlighted customer name */
+        #customer-name {
+            color: #FFD700;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        /* Order summary box */
+        .order-summary-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,215,0,0.25);
+            border-radius: 12px;
+            padding: 18px 28px;
+            max-width: 600px;
+            margin: 18px auto 0;
+            text-align: left;
+            font-size: 15px;
+            color: #cfd8dc;
+            line-height: 2;
+        }
+        .order-summary-box .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 4px 0;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .order-summary-box .detail-row:last-child {
+            border-bottom: none;
+        }
+        .order-summary-box .detail-label {
+            font-weight: 600;
+            color: #8ecfcf;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            min-width: 120px;
+        }
+        .order-summary-box .detail-value {
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .order-summary-box .detail-value.highlight {
+            color: #FFD700;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .order-summary-box .product-pill {
+            display: inline-block;
+            background: rgba(255,215,0,0.12);
+            border: 1px solid rgba(255,215,0,0.3);
+            color: #FFD700;
+            border-radius: 20px;
+            padding: 2px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 2px 3px 2px 0;
         }
         @media (max-width: 768px) {
             .important-notice {
@@ -750,6 +815,110 @@
                 padding: 10px;
             }
         }
+        /* eBook Bonus Section */
+        #ebook-bonus {
+            display: none;
+            background: linear-gradient(135deg, #021a38, #043b77);
+            padding: 60px 20px 70px;
+            text-align: center;
+            font-family: 'Open Sans', Arial, sans-serif;
+            border-top: 2px solid rgba(255,215,0,0.3);
+        }
+        #ebook-bonus .bonus-tag {
+            display: inline-block;
+            background: #FFD700;
+            color: #021a38;
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 6px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        #ebook-bonus h2 {
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 32px;
+            color: #FFD700;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        #ebook-bonus .bonus-sub {
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 17px;
+            color: #cfd8dc;
+            max-width: 600px;
+            margin: 0 auto 44px;
+            line-height: 1.7;
+        }
+        .ebook-bonus-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .ebook-bonus-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 20px;
+            padding: 36px 28px 32px;
+            width: 300px;
+            box-shadow: 0 0 20px rgba(255,215,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ebook-bonus-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 36px rgba(255,215,0,0.18);
+        }
+        .ebook-bonus-card img {
+            max-height: 190px;
+            max-width: 150px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+            margin-bottom: 20px;
+        }
+        .ebook-bonus-card h3 {
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .ebook-bonus-card p {
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 14px;
+            color: #8ecfcf;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+        .ebook-dl-btn {
+            display: inline-block;
+            background-color: #FFD700;
+            color: #021a38;
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 13px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255,215,0,0.3);
+        }
+        .ebook-dl-btn:hover {
+            background-color: #fff;
+            color: #021a38;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            #ebook-bonus h2 { font-size: 24px; }
+            .ebook-bonus-card { width: 100%; max-width: 320px; }
+        }
     </style>
 </head>
 
@@ -762,7 +931,7 @@
         <h1>Thank You For Purchasing<br>Meta Trim BHB!</h1>
         <p class="member-text">
             This is your personal Member Area. Please read it carefully.<br><br>
-            We are here anytime you need us! No matter what questions or problems you may have, don't hesitate to <a href="mailto:support@trustednutraproducts.com">write us by clicking here</a>. We will send you a fully detailed reply as soon as possible.
+            We are here anytime you need us! No matter what questions or problems you may have, don't hesitate to <a href="/cdn-cgi/l/email-protection#abd8dedbdbc4d9dfebdfd9ded8dfcecfc5dedfd9cadbd9c4cfdec8dfd885c8c4c6">write us by clicking here</a>. We will send you a fully detailed reply as soon as possible.
         </p>
     </div>
 
@@ -772,13 +941,36 @@
     <section class="thankyou-section">
         <!-- Important Notice Section -->
         <div class="important-notice">
-            <p class="greeting">Hi ,</p>
+            <p class="greeting">Hi <span id="customer-name"></span>,</p>
             <p class="important-title">IMPORTANT!</p>
             <p class="notice-text">
-                Your purchase of Meta Trim BHB will appear on your credit card or<br>
+                Your purchase will appear on your credit card or<br>
                 bank statement as <strong>1 charge</strong> from <strong>CLKBANK*COM</strong>.<br>
-                Questions? Contact us by <a href="mailto:support@trustednutraproducts.com">CLICKING HERE</a>.
+                Questions? Contact us by <a href="mailto:support@trustednutraproduct.com">CLICKING HERE</a>.
             </p>
+            <!-- Order Summary -->
+            <div class="order-summary-box">
+                <div class="detail-row">
+                    <span class="detail-label">Customer</span>
+                    <span class="detail-value highlight" id="summary-name">—</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Order Receipt</span>
+                    <span class="detail-value highlight" id="summary-receipt">—</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value" id="summary-email">—</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Country</span>
+                    <span class="detail-value" id="summary-country">—</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Products</span>
+                    <span class="detail-value" id="summary-products">—</span>
+                </div>
+            </div>
         </div>
 
         <div class="section-content">
@@ -808,10 +1000,34 @@
             <!-- Subtext -->
             <p class="support-text">
                 Have questions? Contact our support team anytime — we're happy to help!<br>
-                Email: <strong>support@trustednutraproducts.com</strong>
+                Email: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b383e3b3b24393f0b3f393e383f2e2f253e3f392a3b39242f3e283f3865282426">[email&#160;protected]</a></strong>
             </p>
 
         </div>
+        </div>
+    </section>
+
+    <!-- eBook Bonus Section — shown only when cbitems contains the 6+1 upsell product -->
+    <section id="ebook-bonus">
+        <div class="bonus-tag">&#9733; Exclusive Bonus — 6+1 Bottle Package</div>
+        <h2>Your Free eBook Bonuses Are Ready!</h2>
+        <p class="bonus-sub">
+            As a thank you for choosing our premium package,
+            enjoy these two digital guides — yours to keep forever.
+        </p>
+        <div class="ebook-bonus-grid">
+            <div class="ebook-bonus-card">
+                <img src="eBooks/cover_30_days_plan.png" alt="30 Days Diet Plan">
+                <h3>30 Days Diet Plan</h3>
+                <p>A complete day-by-day meal guide paired with Meta Trim BHB strategy for maximum results.</p>
+                <a href="eBooks/Diet_Plan_ebook.pdf" class="ebook-dl-btn">&#11015; Download Now</a>
+            </div>
+            <div class="ebook-bonus-card">
+                <img src="eBooks/cover_keto_recipe.png" alt="Keto Recipe Guide">
+                <h3>Keto Recipe Guide</h3>
+                <p>50+ macro-balanced keto recipes to keep you in fat-burning mode — beginner-friendly.</p>
+                <a href="eBooks/Keto_Recipe_ebook.pdf" class="ebook-dl-btn">&#11015; Download Now</a>
+            </div>
         </div>
     </section>
 
@@ -850,7 +1066,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h6>Contact Information</h6>
-                    <p>For Product Support, please contact us at <a href="mailto:support@trustednutraproducts.com">support@trustednutraproducts.com</a></p>
+                    <p>For Product Support, please contact us at <a href="/cdn-cgi/l/email-protection#ed9e989d9d829f99ad999f989e9988898398999f8c9d9f8289988e999ec38e8280"><span class="__cf_email__" data-cfemail="06757376766974724672747375726362687372746776746962736572752865696b">[email&#160;protected]</span></a></p>
                     <p>For Order Support, please contact ClickBank <a href="http://www.clkbank.com/">here</a></p>
                 </div>
                 <div class="col-lg-6">
@@ -872,9 +1088,88 @@
         </div>
     </footer>
 
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
     <script>
-        // Confetti Animation
-        (function () {
+        // ── ClickBank URL Parameter Logic ──
+        document.addEventListener('DOMContentLoaded', function () {
+            var params = new URLSearchParams(window.location.search);
+
+            // -- Product name map (add your ClickBank item IDs here) --
+            var PRODUCT_NAMES = {
+                '1':           'Meta Trim BHB (1 Bottle)',
+                '3':           'Meta Trim BHB (3 Bottles)',
+                '6':           'Meta Trim BHB (6 Bottles)',
+                '7':           'Meta Trim BHB (6+1 Bottle Package)',
+                'upsella247':  'VIP Upsell Package',
+                'ebook1':      '30 Days Diet Plan eBook',
+                'ebook2':      'Keto Recipe Guide eBook'
+            };
+
+            // -- IDs that trigger eBook bonus --
+            var BONUS_TRIGGERS = ['7', 'upsella247'];
+
+            // Customer name
+            var name = params.get('cname') || '';
+            if (name) {
+                document.getElementById('customer-name').textContent = name;
+                document.getElementById('summary-name').textContent = name;
+            }
+
+            // Receipt
+            var receipt = params.get('cbreceipt') || '';
+            if (receipt) {
+                document.getElementById('summary-receipt').textContent = receipt;
+            }
+
+            // Upsell receipt (if separate)
+            var upsellReceipt = params.get('cupsellreceipt') || '';
+
+            // Email
+            var email = params.get('cemail') || '';
+            if (email && email !== 'CUSTEMAIL') {
+                document.getElementById('summary-email').textContent = email;
+            } else {
+                document.getElementById('summary-email').textContent = 'Not provided';
+            }
+
+            // Country
+            var country = params.get('ccountry') || '';
+            if (country) {
+                document.getElementById('summary-country').textContent = country.toUpperCase();
+            }
+
+            // Products purchased — build pill list
+            var items = (params.get('cbitems') || '').split(',').map(function(i){ return i.trim(); }).filter(Boolean);
+            var productsEl = document.getElementById('summary-products');
+            if (items.length > 0) {
+                var html = '';
+                items.forEach(function(id) {
+                    var label = PRODUCT_NAMES[id] || ('Product: ' + id);
+                    html += '<span class="product-pill">' + label + '</span>';
+                });
+                // Also note upsell receipt if present
+                if (upsellReceipt) {
+                    html += '<br><small style="color:#8ecfcf;font-size:12px;">Upsell Receipt: <strong style="color:#FFD700">' + upsellReceipt + '</strong></small>';
+                }
+                productsEl.innerHTML = html;
+            } else {
+                productsEl.textContent = 'Meta Trim BHB';
+            }
+
+            // eBook bonus — show if any bonus trigger ID found
+            var showBonus = items.some(function(id) {
+                return BONUS_TRIGGERS.indexOf(id) !== -1;
+            });
+            if (showBonus) {
+                var bonus = document.getElementById('ebook-bonus');
+                if (bonus) bonus.style.display = 'block';
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             const canvas = document.getElementById('confetti-canvas');
             const ctx = canvas.getContext('2d');
 
@@ -957,20 +1252,8 @@
                 confettiArray.length = 0;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             }, 10000);
-        })();
 
-        // Smooth scroll enhancement
-        document.addEventListener('DOMContentLoaded', function () {
-            // Add a subtle entrance animation trigger
-            const box = document.querySelector('.thankyou-box');
-            setTimeout(() => {
-                box.style.transform = 'scale(1)';
-            }, 100);
-        });
-
-        // Optional: Track page load for analytics (you can add your tracking code here)
-        console.log('Thank you page loaded successfully');
+        }); // end DOMContentLoaded
     </script>
 </body>
-
 </html>
