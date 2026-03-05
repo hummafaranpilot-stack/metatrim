@@ -8,7 +8,15 @@
       "Bash(node:*)",
       "Bash(git checkout:*)",
       "Bash(del \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\temp_grid.html\")",
-      "Bash(del \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\update_best.js\")"
+      "Bash(del \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\update_best.js\")",
+      "Bash(git add v2/best/go/go.html v2/long2/index.html v2/long3/index.html v2/long3/page2.html v2/long3/page3.html v2/long3/page4.html v2/long3/page5.html v2/long4/go/index.html v2/short/go/index.html v2/vsl/index.html)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git add v2/long3/index.html v2/long4/go/index.html v2/short/go/index.html v2/vsl/index.html)",
+      "WebFetch(domain:shaver.trustednutraproduct.com)",
+      "Bash(curl -s \"https://shaver.trustednutraproduct.com/api.php?action=get_domain&domain_key=metatrim-trustednutraproduct-com-v2\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d,indent=2\\)\\)\")",
+      "Bash(git add v2/upsell1.html v2/upsell2.html v2/upsell3.html v2/upsell4.html v2/Thankyou.html)"
     ]
   }
 }
