@@ -959,10 +959,6 @@
                     <span class="detail-value highlight" id="summary-receipt">—</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Email</span>
-                    <span class="detail-value" id="summary-email">—</span>
-                </div>
-                <div class="detail-row">
                     <span class="detail-label">Country</span>
                     <span class="detail-value" id="summary-country">—</span>
                 </div>
@@ -1107,7 +1103,7 @@
             };
 
             // -- IDs that trigger eBook bonus --
-            var BONUS_TRIGGERS = ['7', 'upsella247'];
+            var BONUS_TRIGGERS = ['7'];
 
             // Customer name
             var name = params.get('cname') || '';
@@ -1124,14 +1120,6 @@
 
             // Upsell receipt (if separate)
             var upsellReceipt = params.get('cupsellreceipt') || '';
-
-            // Email
-            var email = params.get('cemail') || '';
-            if (email && email !== 'CUSTEMAIL') {
-                document.getElementById('summary-email').textContent = email;
-            } else {
-                document.getElementById('summary-email').textContent = 'Not provided';
-            }
 
             // Country
             var country = params.get('ccountry') || '';
