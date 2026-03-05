@@ -1004,40 +1004,42 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
+    <script>
         // ── ClickBank URL Parameter Logic ──
-        (function () {
+        document.addEventListener('DOMContentLoaded', function () {
             var params = new URLSearchParams(window.location.search);
 
             // Customer name — cname=Simone+kerr
             var name = params.get('cname');
             if (name) {
-                document.getElementById('customer-name').textContent = name;
+                var el = document.getElementById('customer-name');
+                if (el) el.textContent = name;
             }
 
             // Order receipt — cbreceipt=MLK9M5FE
             var receipt = params.get('cbreceipt');
             if (receipt) {
-                document.getElementById('receipt-display').innerHTML =
-                    'Order Receipt: <strong>' + receipt + '</strong><br>';
+                var el2 = document.getElementById('receipt-display');
+                if (el2) el2.innerHTML = 'Order Receipt: <strong>' + receipt + '</strong><br>';
             }
 
-            // eBook bonus: show if cbitems contains the upsell product keyword
-            // Real ClickBank param example: cbitems=upsella247
-            // Add or change the keywords below to match your actual ClickBank product IDs
+            // eBook bonus — show if cbitems contains a bonus product ID
             var items = params.get('cbitems') || '';
-            var BONUS_PRODUCTS = ['upsella247', '7']; // <-- add your product IDs here
+            var itemList = items.split(',').map(function(i) { return i.trim(); });
+            var BONUS_PRODUCTS = ['upsella247', '7'];
             var showBonus = BONUS_PRODUCTS.some(function(id) {
-                return items.split(',').map(function(i){ return i.trim(); }).indexOf(id) !== -1;
+                return itemList.indexOf(id) !== -1;
             });
             if (showBonus) {
-                document.getElementById('ebook-bonus').style.display = 'block';
+                var bonus = document.getElementById('ebook-bonus');
+                if (bonus) bonus.style.display = 'block';
             }
-        })();
+        });
+    </script>
 
-        // Confetti Animation
-        (function () {
+    <script>
             const canvas = document.getElementById('confetti-canvas');
             const ctx = canvas.getContext('2d');
 
