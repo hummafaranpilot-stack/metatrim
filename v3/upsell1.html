@@ -3,18 +3,20 @@
 
 <head>
 
-<script>
-    window.clickbank = {
-        vendor: "tnproduct"
-    }
-</script>
-<script src="https://scripts.clickbank.net/hop.min.js" defer></script>
+    <script>
+        window.clickbank = {
+            vendor: "tnproduct"
+        }
+    </script>
+    <script src="https://scripts.clickbank.net/hop.min.js" defer></script>
 
     <meta charset="UTF-8">
     <link rel="icon" href="lib/img/icon-7.svg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Upgrade Offer - MetaTrim BHB</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -29,7 +31,12 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Montserrat', sans-serif;
         }
 
@@ -41,8 +48,8 @@
 
         /* Success Header Banner */
         .success-header {
-            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #c8922a, #e8b84a, #d4a032, #f0c85a, #c8922a);
+            color: #000;
             padding: 20px 20px;
             text-align: center;
             position: sticky;
@@ -66,7 +73,7 @@
         .success-header .checkmark svg {
             width: 24px;
             height: 24px;
-            fill: #28a745;
+            fill: #c8922a;
         }
 
         .success-header p {
@@ -74,14 +81,14 @@
             font-weight: 700;
             font-size: 18px;
             margin: 0;
-            color: #fff;
+            color: #000;
             display: inline;
             vertical-align: middle;
         }
 
         /* Timer Section */
         .timer-section {
-            background: linear-gradient(135deg, #021a38 0%, #043b77 100%);
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%);
             padding: 25px 20px;
             text-align: center;
         }
@@ -103,7 +110,7 @@
 
         .timer-display {
             background: rgba(255, 255, 255, 0.15);
-            border: 2px solid #FFD700;
+            border: 2px solid #e8b84a;
             border-radius: 10px;
             padding: 10px 25px;
             display: inline-flex;
@@ -115,12 +122,12 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             font-size: 28px;
-            color: #FFD700;
+            color: #e8b84a;
         }
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #043b77 0%, #065ba8 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
             padding: 50px 20px;
             text-align: center;
             position: relative;
@@ -145,8 +152,8 @@
 
         .wait-badge {
             display: inline-block;
-            background: #FFD700;
-            color: #021a38;
+            background: linear-gradient(135deg, #c8922a, #e8b84a, #d4a032, #f0c85a, #c8922a);
+            color: #000;
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             font-size: 14px;
@@ -167,7 +174,7 @@
         }
 
         .hero-title .gold {
-            color: #FFD700;
+            color: #e8b84a;
         }
 
         .hero-subtitle {
@@ -252,19 +259,20 @@
         }
 
         .mt-product-card.mt-featured {
-            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            border: 2px solid #ffc107;
+            background: #fff;
+            border: 2px solid #c8922a;
         }
 
         .mt-product-header {
-            background: linear-gradient(135deg, #1a237e 0%, #303f9f 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
             text-align: center;
             padding: 0.6rem 1rem;
             color: white;
         }
 
         .mt-product-card.mt-featured .mt-product-header {
-            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+            background: linear-gradient(135deg, #c8922a, #e8b84a, #d4a032, #f0c85a, #c8922a);
+            color: #000;
         }
 
         .mt-product-header h3 {
@@ -296,9 +304,9 @@
             position: relative;
             text-align: center;
             padding: 0.6rem;
-            border: 2px solid #bbdefb;
+            border: 2px solid #e8d5a8;
             border-radius: 12px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            background: linear-gradient(135deg, #fdf6e3 0%, #f5e6c4 100%);
             margin-bottom: 0.5rem;
         }
 
@@ -313,8 +321,8 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: linear-gradient(135deg, #1a237e, #303f9f);
-            color: #fff;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
+            color: #f0c85a;
             font-weight: bold;
             font-size: 0.85rem;
             padding: 0.5rem 1rem;
@@ -338,9 +346,10 @@
             gap: 0.2rem;
         }
 
-        .mt-product-price h4, .mt-display-price {
+        .mt-product-price h4,
+        .mt-display-price {
             font-size: 4.5rem;
-            color: #1565c0;
+            color: #c8922a;
             font-weight: 800;
             margin: 0;
             line-height: 1;
@@ -348,7 +357,7 @@
 
         .mt-price-info p {
             font-size: 1.3rem;
-            color: #1565c0;
+            color: #c8922a;
             font-weight: 600;
             margin: 0;
         }
@@ -374,7 +383,7 @@
         .mt-subscribe-checkbox input[type="checkbox"] {
             width: 20px;
             height: 20px;
-            accent-color: #1565c0;
+            accent-color: #c8922a;
             cursor: pointer;
         }
 
@@ -404,14 +413,21 @@
         }
 
         @keyframes borderFlicker {
-            0%, 100% { border-color: transparent; }
-            50% { border-color: #000; }
+
+            0%,
+            100% {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: #000;
+            }
         }
 
         .mt-subscription-info .congrats {
             font-size: 0.9rem;
             font-weight: 700;
-            color: #1565c0;
+            color: #c8922a;
             display: block;
             margin-bottom: 2px;
         }
@@ -427,7 +443,7 @@
 
         .mt-subscription-info .highlight {
             font-weight: 700;
-            color: #1565c0;
+            color: #c8922a;
         }
 
         .mt-cancel-badge {
@@ -479,7 +495,7 @@
         }
 
         .mt-shipping-text.free {
-            color: #1565c0;
+            color: #c8922a;
         }
 
         .mt-total-line {
@@ -526,7 +542,7 @@
 
         /* Benefits Strip */
         .benefits-strip {
-            background: linear-gradient(135deg, #021a38 0%, #043b77 100%);
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%);
             padding: 40px 20px;
         }
 
@@ -549,7 +565,7 @@
             width: 70px;
             height: 70px;
             background: rgba(255, 215, 0, 0.1);
-            border: 2px solid #FFD700;
+            border: 2px solid #e8b84a;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -560,7 +576,7 @@
         .benefit-icon svg {
             width: 32px;
             height: 32px;
-            fill: #FFD700;
+            fill: #e8b84a;
         }
 
         .benefit-item h4 {
@@ -596,7 +612,7 @@
         }
 
         .reviews-header .stars {
-            color: #FFD700;
+            color: #e8b84a;
             font-size: 24px;
             letter-spacing: 3px;
         }
@@ -626,7 +642,7 @@
         }
 
         .review-stars {
-            color: #FFD700;
+            color: #e8b84a;
             font-size: 16px;
             margin-bottom: 12px;
             letter-spacing: 2px;
@@ -644,7 +660,7 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 14px;
-            color: #021a38;
+            color: #1a1a1a;
         }
 
         .verified-badge {
@@ -657,7 +673,7 @@
 
         /* Bottom CTA Banner */
         .bottom-cta {
-            background: linear-gradient(135deg, #043b77 0%, #021a38 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
             padding: 30px 20px;
             text-align: center;
         }
@@ -671,7 +687,7 @@
         }
 
         .bottom-cta .highlight {
-            color: #FFD700;
+            color: #e8b84a;
         }
 
         .bottom-cta .no-thanks-link {
@@ -684,7 +700,7 @@
 
         /* Footer */
         .footer {
-            background: linear-gradient(135deg, #021a38 0%, #0a2a4d 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
             padding: 40px 20px;
             text-align: center;
         }
@@ -705,7 +721,7 @@
         }
 
         .footer-links a:hover {
-            color: #FFD700;
+            color: #e8b84a;
         }
 
         .footer-disclaimer {
@@ -814,7 +830,8 @@
                 font-size: 0.9rem;
             }
 
-            .mt-product-price h4, .mt-display-price {
+            .mt-product-price h4,
+            .mt-display-price {
                 font-size: 3.5rem;
             }
 
@@ -904,7 +921,8 @@
                 max-width: 200px;
             }
 
-            .mt-product-price h4, .mt-display-price {
+            .mt-product-price h4,
+            .mt-display-price {
                 font-size: 3rem;
             }
 
@@ -1056,7 +1074,8 @@
                 font-size: 12px;
             }
 
-            .mt-product-price h4, .mt-display-price {
+            .mt-product-price h4,
+            .mt-display-price {
                 font-size: 2.5rem;
             }
 
@@ -1198,6 +1217,7 @@
                 font-size: 12px;
             }
         }
+
         /* Page Indicator Badge - In Header */
         .page-indicator {
             background: rgba(0, 0, 0, 0.3);
@@ -1213,7 +1233,6 @@
             margin-left: 15px;
             vertical-align: middle;
         }
-
     </style>
 </head>
 
@@ -1223,7 +1242,7 @@
     <div class="success-header">
         <span class="checkmark">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
             </svg>
         </span>
         <p>Your Order Is Complete!</p>
@@ -1245,7 +1264,8 @@
         <div class="hero-content container">
             <span class="wait-badge">Wait! Exclusive Offer Below</span>
             <h1 class="hero-title">Get The Same Package With Up To <span class="gold">25% OFF!</span></h1>
-            <p class="hero-subtitle">Maximize your results with additional MetaTrim BHB at an exclusive discounted price - only available right now!</p>
+            <p class="hero-subtitle">Maximize your results with additional MetaTrim BHB at an exclusive discounted price
+                - only available right now!</p>
         </div>
     </section>
 
@@ -1277,21 +1297,28 @@
                             </div>
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$69</h4>
-                                <div class="mt-price-info"><p>/Bottle</p></div>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
                             </div>
                             <div class="mt-subscription-info" id="sub-info-1">
                                 <div class="congrats">Congrats!</div>
-                                <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span class="highlight">$69+Shipping</span> will start delivering <span class="highlight">every Month</span>.</p>
+                                <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span
+                                        class="highlight">$69+Shipping</span> will start delivering <span
+                                        class="highlight">every Month</span>.</p>
                                 <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
                             </div>
                             <div class="mt-savings-badge">YOU SAVE $110!</div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=15" class="mt-buy-now-btn" id="buy-btn-1">
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=15" class="mt-buy-now-btn"
+                                id="buy-btn-1">
                                 <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-1">
                             </a>
                             <p class="mt-shipping-text">+ $19.99 Shipping</p>
-                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span class="mt-final-price">$69</span></p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span
+                                    class="mt-final-price">$69</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No
+                                thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1310,16 +1337,21 @@
                         <div class="mt-product-details">
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$39</h4>
-                                <div class="mt-price-info"><p>/Bottle</p></div>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
                             </div>
                             <div class="mt-savings-badge">YOU SAVE $840!</div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=9" class="mt-buy-now-btn" id="buy-btn-6">
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=9" class="mt-buy-now-btn"
+                                id="buy-btn-6">
                                 <img src="lib/img/buy-now2.webp" alt="Buy Now" id="buy-img-6">
                             </a>
                             <p class="mt-shipping-text free">FREE Shipping</p>
-                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span class="mt-final-price">$234</span></p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$1,074</span> <span
+                                    class="mt-final-price">$234</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No
+                                thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1338,16 +1370,21 @@
                         <div class="mt-product-details">
                             <div class="mt-product-price">
                                 <h4 class="mt-display-price">$54</h4>
-                                <div class="mt-price-info"><p>/Bottle</p></div>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
                             </div>
                             <div class="mt-savings-badge">YOU SAVE $375!</div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=10" class="mt-buy-now-btn" id="buy-btn-3">
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=10" class="mt-buy-now-btn"
+                                id="buy-btn-3">
                                 <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-3">
                             </a>
                             <p class="mt-shipping-text free">FREE Shipping</p>
-                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span class="mt-final-price">$162</span></p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$537</span> <span
+                                    class="mt-final-price">$162</span></p>
                             <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
-                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No thanks, continue</a>
+                            <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No
+                                thanks, continue</a>
                         </div>
                     </div>
                 </div>
@@ -1361,28 +1398,40 @@
         <div class="benefits-grid">
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 23c-1.1 0-1.99-.89-1.99-1.99h3.98c0 1.1-.89 1.99-1.99 1.99zm7-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v1.68C8.63 6.36 7 8.92 7 12v5l-2 2v1h14v-1l-2-2zm-4.5-9.17c.78.36 1.35.97 1.67 1.67.17.35.33.77.33 1.5v5h-9v-5c0-.73.16-1.15.33-1.5.32-.7.89-1.31 1.67-1.67V6.5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1.33z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 23c-1.1 0-1.99-.89-1.99-1.99h3.98c0 1.1-.89 1.99-1.99 1.99zm7-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v1.68C8.63 6.36 7 8.92 7 12v5l-2 2v1h14v-1l-2-2zm-4.5-9.17c.78.36 1.35.97 1.67 1.67.17.35.33.77.33 1.5v5h-9v-5c0-.73.16-1.15.33-1.5.32-.7.89-1.31 1.67-1.67V6.5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1.33z" />
+                    </svg>
                 </div>
                 <h4>Burns Fat Fast</h4>
                 <p>Accelerates natural ketosis</p>
             </div>
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z" />
+                    </svg>
                 </div>
                 <h4>Boosts Energy</h4>
                 <p>All-day sustained power</p>
             </div>
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.20-1.10-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.20-1.10-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z" />
+                    </svg>
                 </div>
                 <h4>Curbs Cravings</h4>
                 <p>Reduces hunger naturally</p>
             </div>
             <div class="benefit-item">
                 <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z" />
+                    </svg>
                 </div>
                 <h4>Supports Metabolism</h4>
                 <p>Optimizes fat burning</p>
@@ -1401,21 +1450,24 @@
             <div class="reviews-grid">
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Before MetaTrim BHB, my blood sugar was unstable and I felt low on energy. After 6 weeks, my A1C improved and I feel more energetic than ever!"</p>
+                    <p class="review-text">"Before MetaTrim BHB, my blood sugar was unstable and I felt low on energy.
+                        After 6 weeks, my A1C improved and I feel more energetic than ever!"</p>
                     <span class="review-author">- Aisha R.</span>
                     <span class="verified-badge">✓ Verified Buyer</span>
                 </div>
 
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"I used to struggle with sugar spikes and cravings. MetaTrim BHB stabilized my glucose levels - now I feel in control and healthier."</p>
+                    <p class="review-text">"I used to struggle with sugar spikes and cravings. MetaTrim BHB stabilized
+                        my glucose levels - now I feel in control and healthier."</p>
                     <span class="review-author">- David K.</span>
                     <span class="verified-badge">✓ Verified Buyer</span>
                 </div>
 
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Before taking this, my energy would drop mid-day. After a month with MetaTrim BHB, my energy is steady and I feel lighter and active."</p>
+                    <p class="review-text">"Before taking this, my energy would drop mid-day. After a month with
+                        MetaTrim BHB, my energy is steady and I feel lighter and active."</p>
                     <span class="review-author">- Maria L.</span>
                     <span class="verified-badge">✓ Verified Buyer</span>
                 </div>
@@ -1425,8 +1477,10 @@
 
     <!-- Bottom CTA Banner -->
     <div class="bottom-cta">
-        <p>Don't miss this <span class="highlight">exclusive offer</span>! Save up to <span class="highlight">$840</span> on your MetaTrim BHB upgrade!</p>
-        <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No thanks, I'll pass on this exclusive offer</a>
+        <p>Don't miss this <span class="highlight">exclusive offer</span>! Save up to <span
+                class="highlight">$840</span> on your MetaTrim BHB upgrade!</p>
+        <a href="https://tnproduct.pay.clickbank.net/?cbur=d&cbitems=9" class="no-thanks-link">No thanks, I'll pass on
+            this exclusive offer</a>
     </div>
 
     <!-- Footer -->
@@ -1438,13 +1492,20 @@
             <a href="contact.html" target="_blank">Contact Us</a>
         </div>
         <p class="footer-disclaimer">
-            ClickBank is the retailer of this product. CLICKBANK® is a registered trademark of Click Sales, Inc., a Delaware corporation located at 1444 S. Entertainment Ave., Suite 410 Boise, ID 83709, USA and used by permission. ClickBank's role as retailer does not constitute an endorsement, approval or review of this product or any claim, statement or opinion used in promotion of this product.
+            ClickBank is the retailer of this product. CLICKBANK® is a registered trademark of Click Sales, Inc., a
+            Delaware corporation located at 1444 S. Entertainment Ave., Suite 410 Boise, ID 83709, USA and used by
+            permission. ClickBank's role as retailer does not constitute an endorsement, approval or review of this
+            product or any claim, statement or opinion used in promotion of this product.
         </p>
         <p class="footer-disclaimer">
-            Statements on this website have not been evaluated by the Food and Drug Administration. Products are not intended to diagnose, treat, cure or prevent any disease. If you are pregnant, nursing, taking medication, or have a medical condition, consult your physician before using our products.
+            Statements on this website have not been evaluated by the Food and Drug Administration. Products are not
+            intended to diagnose, treat, cure or prevent any disease. If you are pregnant, nursing, taking medication,
+            or have a medical condition, consult your physician before using our products.
         </p>
         <p class="footer-disclaimer">
-            Testimonials, case studies, and examples found on this page are results that have been forwarded to us by users of MetaTrim BHB products and related products are not intended to represent or guarantee that anyone will achieve the same or similar results.
+            Testimonials, case studies, and examples found on this page are results that have been forwarded to us by
+            users of MetaTrim BHB products and related products are not intended to represent or guarantee that anyone
+            will achieve the same or similar results.
         </p>
     </footer>
 
@@ -1455,7 +1516,7 @@
 
     <!-- Timer Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             let t = 300; // 5 minutes in seconds
             const countdownEl = document.getElementById('countdown');
 
@@ -1463,7 +1524,7 @@
                 let minutes = String(Math.floor(t / 60)).padStart(2, '0');
                 let seconds = String(t % 60).padStart(2, '0');
                 countdownEl.textContent = `${minutes}:${seconds}`;
-                if(t > 0) t--;
+                if (t > 0) t--;
                 else clearInterval(timerInterval);
             }, 1000);
         });
@@ -1471,68 +1532,68 @@
 
     <!-- Subscription Checkbox JavaScript -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Store original buy button images
-        document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
-            img.dataset.originalSrc = img.src;
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Store original buy button images
+            document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
+                img.dataset.originalSrc = img.src;
+            });
 
-        // Handle checkbox subscribe functionality
-        const subscribeCheckboxes = document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]');
+            // Handle checkbox subscribe functionality
+            const subscribeCheckboxes = document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]');
 
-        subscribeCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const card = this.closest('.mt-product-card');
-                const isSubscribe = this.checked;
+            subscribeCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const card = this.closest('.mt-product-card');
+                    const isSubscribe = this.checked;
 
-                // Swap buy button image and href
-                const buyButton = card.querySelector('.mt-buy-now-btn');
-                const btnImg = buyButton ? buyButton.querySelector('img') : null;
-                if (btnImg) {
-                    if (isSubscribe) {
-                        btnImg.src = 'lib/img/subscribe.webp';
-                        btnImg.alt = 'Subscribe Now';
-                    } else {
-                        btnImg.src = btnImg.dataset.originalSrc;
-                        btnImg.alt = 'Buy Now';
+                    // Swap buy button image and href
+                    const buyButton = card.querySelector('.mt-buy-now-btn');
+                    const btnImg = buyButton ? buyButton.querySelector('img') : null;
+                    if (btnImg) {
+                        if (isSubscribe) {
+                            btnImg.src = 'lib/img/subscribe.webp';
+                            btnImg.alt = 'Subscribe Now';
+                        } else {
+                            btnImg.src = btnImg.dataset.originalSrc;
+                            btnImg.alt = 'Buy Now';
+                        }
                     }
-                }
-                if (buyButton) {
-                    if (isSubscribe) {
-                        buyButton.dataset.originalHref = buyButton.dataset.originalHref || buyButton.href;
-                        buyButton.href = 'https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=8&cbrblaccpt=true';
-                    } else {
-                        buyButton.href = buyButton.dataset.originalHref || buyButton.href;
+                    if (buyButton) {
+                        if (isSubscribe) {
+                            buyButton.dataset.originalHref = buyButton.dataset.originalHref || buyButton.href;
+                            buyButton.href = 'https://tnproduct.pay.clickbank.net/?cbur=a&cbitems=8&cbrblaccpt=true';
+                        } else {
+                            buyButton.href = buyButton.dataset.originalHref || buyButton.href;
+                        }
                     }
-                }
 
-                // Show/hide subscription info with flicker animation
-                const subscriptionInfo = card.querySelector('.mt-subscription-info');
-                if (subscriptionInfo) {
-                    if (isSubscribe) {
-                        subscriptionInfo.classList.add('show');
-                        // Re-trigger animation
-                        subscriptionInfo.style.animation = 'none';
-                        subscriptionInfo.offsetHeight; // Trigger reflow
-                        subscriptionInfo.style.animation = 'borderFlicker 2.5s ease-in-out infinite';
-                    } else {
-                        subscriptionInfo.classList.remove('show');
+                    // Show/hide subscription info with flicker animation
+                    const subscriptionInfo = card.querySelector('.mt-subscription-info');
+                    if (subscriptionInfo) {
+                        if (isSubscribe) {
+                            subscriptionInfo.classList.add('show');
+                            // Re-trigger animation
+                            subscriptionInfo.style.animation = 'none';
+                            subscriptionInfo.offsetHeight; // Trigger reflow
+                            subscriptionInfo.style.animation = 'borderFlicker 2.5s ease-in-out infinite';
+                        } else {
+                            subscriptionInfo.classList.remove('show');
+                        }
                     }
-                }
+                });
+            });
+
+            // Make entire checkbox wrapper clickable
+            document.querySelectorAll('.mt-subscribe-checkbox').forEach(wrapper => {
+                wrapper.addEventListener('click', function (e) {
+                    if (e.target.tagName !== 'INPUT') {
+                        const checkbox = this.querySelector('input[type="checkbox"]');
+                        checkbox.checked = !checkbox.checked;
+                        checkbox.dispatchEvent(new Event('change'));
+                    }
+                });
             });
         });
-
-        // Make entire checkbox wrapper clickable
-        document.querySelectorAll('.mt-subscribe-checkbox').forEach(wrapper => {
-            wrapper.addEventListener('click', function(e) {
-                if (e.target.tagName !== 'INPUT') {
-                    const checkbox = this.querySelector('input[type="checkbox"]');
-                    checkbox.checked = !checkbox.checked;
-                    checkbox.dispatchEvent(new Event('change'));
-                }
-            });
-        });
-    });
     </script>
 
     <!-- Social Proof Popup -->
@@ -1545,7 +1606,9 @@
                 </div>
                 <div class="custom-notification-content-wrapper">
                     <p class="custom-notification-content">
-                        <span id="notify-customer">Eli H</span> - <span id="notify-state">TX</span><br> Purchased <strong><span id="notify-quantity">1</span></strong> Bottle(s) of <b>Metatrim BHB</b> <small><span id="notify-ago">9 minutes ago</span></small>
+                        <span id="notify-customer">Eli H</span> - <span id="notify-state">TX</span><br> Purchased
+                        <strong><span id="notify-quantity">1</span></strong> Bottle(s) of <b>Metatrim BHB</b>
+                        <small><span id="notify-ago">9 minutes ago</span></small>
                     </p>
                 </div>
             </div>
@@ -1555,53 +1618,53 @@
 
     <!-- Custom Social Proof Script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const notifications = [
-            { name: 'Sarah M', state: 'CA', qty: 6, img: 'Clickbank Structure/6x.png', ago: '2 minutes ago' },
-            { name: 'Michael R', state: 'TX', qty: 3, img: 'Clickbank Structure/3x.png', ago: '5 minutes ago' },
-            { name: 'Jennifer L', state: 'FL', qty: 1, img: 'Clickbank Structure/1x.png', ago: '8 minutes ago' },
-            { name: 'David K', state: 'NY', qty: 6, img: 'Clickbank Structure/6x.png', ago: '12 minutes ago' },
-            { name: 'Emily W', state: 'OH', qty: 3, img: 'Clickbank Structure/3x.png', ago: '15 minutes ago' },
-            { name: 'James T', state: 'WA', qty: 1, img: 'Clickbank Structure/1x.png', ago: '18 minutes ago' },
-            { name: 'Amanda B', state: 'AZ', qty: 6, img: 'Clickbank Structure/6x.png', ago: '22 minutes ago' },
-            { name: 'Robert H', state: 'IL', qty: 3, img: 'Clickbank Structure/3x.png', ago: '25 minutes ago' },
-            { name: 'Lisa P', state: 'GA', qty: 1, img: 'Clickbank Structure/1x.png', ago: '28 minutes ago' },
-            { name: 'Chris D', state: 'NC', qty: 6, img: 'Clickbank Structure/6x.png', ago: '32 minutes ago' }
-        ];
+        document.addEventListener('DOMContentLoaded', function () {
+            const notifications = [
+                { name: 'Sarah M', state: 'CA', qty: 6, img: 'Clickbank Structure/6x.png', ago: '2 minutes ago' },
+                { name: 'Michael R', state: 'TX', qty: 3, img: 'Clickbank Structure/3x.png', ago: '5 minutes ago' },
+                { name: 'Jennifer L', state: 'FL', qty: 1, img: 'Clickbank Structure/1x.png', ago: '8 minutes ago' },
+                { name: 'David K', state: 'NY', qty: 6, img: 'Clickbank Structure/6x.png', ago: '12 minutes ago' },
+                { name: 'Emily W', state: 'OH', qty: 3, img: 'Clickbank Structure/3x.png', ago: '15 minutes ago' },
+                { name: 'James T', state: 'WA', qty: 1, img: 'Clickbank Structure/1x.png', ago: '18 minutes ago' },
+                { name: 'Amanda B', state: 'AZ', qty: 6, img: 'Clickbank Structure/6x.png', ago: '22 minutes ago' },
+                { name: 'Robert H', state: 'IL', qty: 3, img: 'Clickbank Structure/3x.png', ago: '25 minutes ago' },
+                { name: 'Lisa P', state: 'GA', qty: 1, img: 'Clickbank Structure/1x.png', ago: '28 minutes ago' },
+                { name: 'Chris D', state: 'NC', qty: 6, img: 'Clickbank Structure/6x.png', ago: '32 minutes ago' }
+            ];
 
-        let currentIndex = 0;
-        const popup = document.querySelector('.custom-social-proof');
-        const notification = document.querySelector('.custom-notification');
+            let currentIndex = 0;
+            const popup = document.querySelector('.custom-social-proof');
+            const notification = document.querySelector('.custom-notification');
 
-        function showNotification() {
-            const data = notifications[currentIndex];
+            function showNotification() {
+                const data = notifications[currentIndex];
 
-            document.getElementById('notify-customer').textContent = data.name;
-            document.getElementById('notify-state').textContent = data.state;
-            document.getElementById('notify-quantity').textContent = data.qty;
-            document.getElementById('notify-ago').textContent = data.ago;
-            document.getElementById('notify-image').src = data.img;
+                document.getElementById('notify-customer').textContent = data.name;
+                document.getElementById('notify-state').textContent = data.state;
+                document.getElementById('notify-quantity').textContent = data.qty;
+                document.getElementById('notify-ago').textContent = data.ago;
+                document.getElementById('notify-image').src = data.img;
 
-            notification.classList.add('show');
+                notification.classList.add('show');
 
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    currentIndex = (currentIndex + 1) % notifications.length;
+                }, 5000);
+            }
+
+            // Initial delay then show first notification
             setTimeout(() => {
+                showNotification();
+                // Then show every 12 seconds
+                setInterval(showNotification, 12000);
+            }, 3000);
+
+            // Close button
+            document.querySelector('.custom-close').addEventListener('click', function () {
                 notification.classList.remove('show');
-                currentIndex = (currentIndex + 1) % notifications.length;
-            }, 5000);
-        }
-
-        // Initial delay then show first notification
-        setTimeout(() => {
-            showNotification();
-            // Then show every 12 seconds
-            setInterval(showNotification, 12000);
-        }, 3000);
-
-        // Close button
-        document.querySelector('.custom-close').addEventListener('click', function() {
-            notification.classList.remove('show');
+            });
         });
-    });
     </script>
 
     <div class="popup-loading-wrapper" style="display:none;">
@@ -1624,4 +1687,5 @@
 
 
 </body>
+
 </html>
