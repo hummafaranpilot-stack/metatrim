@@ -1224,7 +1224,7 @@
 
     <script>
         // SMART DYNAMIC THANK YOU PAGE
-        console.log("Thank You Page Logic v1.4 Loaded");
+        console.log("Thank You Page Logic v1.5 Loaded");
         document.addEventListener('DOMContentLoaded', function () {
             var params = new URLSearchParams(window.location.search);
 
@@ -1317,11 +1317,6 @@
                 document.getElementById('row-shipping').style.display = 'flex';
             }
 
-            // AUTO-ADD EBOOKS FOR BUNDLES 4 AND 7
-            if (itemIds.indexOf('4') !== -1 || itemIds.indexOf('7') !== -1) {
-                if (itemIds.indexOf('ebook1') === -1) itemIds.push('ebook1');
-                if (itemIds.indexOf('ebook2') === -1) itemIds.push('ebook2');
-            }
 
             // Render Multi-Products
             var productListContainer = document.getElementById('product-list');
