@@ -202,7 +202,7 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px 25px 25px;
             width: 100%;
             max-width: 320px;
             transition: transform 0.3s ease;
@@ -210,6 +210,30 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            position: relative;
+        }
+        .order-badge {
+            position: absolute;
+            top: -12px;
+            background: #FFD700;
+            color: #021a38;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .order-badge.upsell {
+            background: #021a38;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+        .order-badge.bump {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -1199,11 +1223,11 @@
                     if (p) {
                         hasItems = true;
                         // Determine overall page headline type by highest priority item
-                        if (typePriority[p.type] < typePriority[primaryType]) {
-                            primaryType = p.type;
-                        }
+                        var badgeClass = p.type === 'main' ? '' : (p.type === 'bump' ? 'bump' : 'upsell');
+                        var badgeText = p.type === 'main' ? 'Main Order' : (p.type === 'bump' ? 'Order Bump' : 'Upsell Item');
 
                         html += '<div class="product-card">';
+                        html += '  <span class="order-badge ' + badgeClass + '">' + badgeText + '</span>';
                         html += '  <img src="' + p.img + '" alt="' + p.name + '">';
                         html += '  <h3>' + p.name + '</h3>';
                         html += '  <p>' + p.desc + '</p>';
@@ -1225,8 +1249,8 @@
                 productListContainer.innerHTML = '<div class="product-card"><img src="tyimages/meta_2.webp" alt="Meta Trim BHB"><h3>Meta Trim BHB</h3><p>Your order is confirmed.</p></div>';
             }
 
-            // Bonus eBook Section (only for ID 7)
-            if (itemIds.indexOf('7') !== -1) {
+            // Bonus eBook Section (only for IDs 7 or 4 - the bundles)
+            if (itemIds.indexOf('7') !== -1 || itemIds.indexOf('4') !== -1) {
                 var bonus = document.getElementById('ebook-bonus');
                 if (bonus) bonus.style.display = 'block';
             }
