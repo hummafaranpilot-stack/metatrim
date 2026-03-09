@@ -971,6 +971,65 @@
             transition: all 0.3s ease;
         }
         .ebook-dl-btn:hover { background-color: #fff; transform: translateY(-2px); }
+
+        /* Insurance Section */
+        #insurance-section {
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px dashed #4CAF50;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            display: none;
+            align-items: center;
+            gap: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .insurance-img {
+            flex: 0 0 120px;
+        }
+        .insurance-img img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+        }
+        .insurance-info {
+            flex: 1;
+            text-align: left;
+        }
+        .insurance-info h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 22px;
+            font-weight: 800;
+        }
+        .insurance-info p {
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .view-doc-btn {
+            display: inline-block;
+            background: #4CAF50;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .view-doc-btn:hover {
+            background: #fff;
+            color: #4CAF50;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            #insurance-section { flex-direction: column; text-align: center; padding: 20px; }
+            .insurance-info { text-align: center; }
+            .insurance-img { flex: 0 0 100px; }
+        }
         @media (max-width: 768px) {
             #ebook-bonus h2 { font-size: 24px; }
             .ebook-bonus-card { width: 100%; max-width: 320px; }
@@ -1050,6 +1109,21 @@
                 Email: <strong><a href="mailto:support@trustednutraproduct.com">support@trustednutraproduct.com</a></strong>
             </p>
         </div>
+        </div>
+    </section>
+
+    <!-- Insurance Section -->
+    <section id="insurance-section" class="container">
+        <div class="insurance-img">
+            <img src="tyimages/label.png" alt="Shipping Insurance">
+        </div>
+        <div class="insurance-info">
+            <h3>Shipment Insurance Active</h3>
+            <p>
+                If you clicked the Checkbox (Include Shipment Insurance) while ordering, then this section is for you. 
+                Your package is now fully protected against loss, damage, or theft during transit.
+            </p>
+            <a href="tyimages/cheatsheet.pdf" class="view-doc-btn" target="_blank">View Insurance Document</a>
         </div>
     </section>
 
@@ -1225,6 +1299,7 @@
 
                 itemIds.forEach(function(id) {
                     if (seenIds[id]) return;
+                    if (id === 'shipping') return; // Handled in dedicated section
                     seenIds[id] = true;
                     var p = PRODUCTS[id];
                     if (p) {
@@ -1260,6 +1335,12 @@
             if (itemIds.indexOf('7') !== -1 || itemIds.indexOf('4') !== -1) {
                 var bonus = document.getElementById('ebook-bonus');
                 if (bonus) bonus.style.display = 'block';
+            }
+
+            // Insurance Section
+            if (itemIds.indexOf('shipping') !== -1) {
+                var ins = document.getElementById('insurance-section');
+                if (ins) ins.style.display = 'flex';
             }
         });
     </script>
