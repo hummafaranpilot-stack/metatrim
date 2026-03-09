@@ -1144,10 +1144,19 @@
             var upsellRcpt = params.get('cupsellreceipt') || '';
             var country    = params.get('ccountry') || '';
             
-            // Handle both cbitems (comma) and item (pipe)
-            var rawItems = params.get('cbitems') || params.get('item') || '';
-            var separator = rawItems.indexOf('|') !== -1 ? '|' : ',';
-            var itemIds = rawItems.split(separator).map(function(i){ return i.trim(); }).filter(Boolean);
+            // Handle both cbitems (comma) AND item (pipe) - Merge them to ensure all products show
+            var itemIds = [];
+            var paramItems = params.get('item') || '';
+            var cbItems = params.get('cbitems') || '';
+
+            // Helper to parse either pipe or comma
+            function parseIds(str) {
+                if (!str) return [];
+                var sep = str.indexOf('|') !== -1 ? '|' : ',';
+                return str.split(sep).map(function(i){ return i.trim(); }).filter(Boolean);
+            }
+
+            itemIds = parseIds(paramItems).concat(parseIds(cbItems));
             
             var stAddr     = params.get('st_addr1') || '';
             var stCity     = params.get('st_city') || '';
