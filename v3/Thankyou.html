@@ -190,21 +190,63 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-        /* Product Image */
-        .product-img {
-            margin-bottom: 30px;
+        /* Multi-Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            justify-items: center;
         }
-
-        .product-img img {
-            max-width: 200px;
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
             width: 100%;
-            transition: transform 0.4s ease;
-            animation: pulse 2s ease-in-out infinite;
+            max-width: 320px;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
-
-        .product-img img:hover {
-            transform: scale(1.1);
-            animation: none;
+        .product-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: #FFD700;
+        }
+        .product-card img {
+            max-width: 140px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+        .product-card h3 {
+            font-size: 18px;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .product-card p {
+            font-size: 14px;
+            color: #cfd8dc;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #FFD700;
+            color: #021a38;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            background: #fff;
         }
 
         /* Headings */
@@ -967,13 +1009,12 @@
 
         <div class="section-content">
         <div class="thankyou-box">
-            <div class="product-img">
-                <img id="product-img" src="" alt="" style="visibility:hidden">
+            <div id="product-list" class="product-grid">
+                <!-- Products will be injected here -->
             </div>
-            <h1 id="order-headline">Your Order is Confirmed!</h1>
+            <h1 id="order-headline" style="margin-top: 40px;">Your Order is Confirmed!</h1>
             <p class="main-text" id="order-main-text">
-                Your order of <strong>Meta Trim BHB</strong> has been successfully placed.
-                You're one step closer to achieving your weight loss goals and a healthier lifestyle.
+                Your order has been successfully placed. You're one step closer to achieving your goals!
             </p>
             <p class="sub-text" id="order-sub-text">
                 You'll receive an email confirmation shortly with your order details.
@@ -1074,19 +1115,20 @@
             var params = new URLSearchParams(window.location.search);
 
             var PRODUCTS = {
-                '2':      { name: 'MetaTrim BHB',  desc: '2 Bottles - 60 Day Supply',    img: 'tyimages/meta_2.webp',     type: 'main' },
-                '4':      { name: 'MetaTrim BHB',  desc: '3 Bottles - 90 Day Supply',    img: 'tyimages/meta_3.webp',     type: 'main' },
-                '7':      { name: 'MetaTrim BHB',  desc: '6+1 Bottles - 210 Day Supply', img: 'tyimages/meta_6+1.webp',   type: 'main', ebooks: true },
-                '8':      { name: 'MetaTrim BHB',  desc: '1 Bottle - Subscribe & Save',  img: 'tyimages/meta_1.webp',     type: 'upsell1' },
-                '15':     { name: 'MetaTrim BHB',  desc: '1 Bottle - 30 Day Supply',     img: 'tyimages/meta_1.webp',     type: 'upsell1' },
-                '9':      { name: 'MetaTrim BHB',  desc: '6 Bottles - 180 Day Supply',   img: 'tyimages/meta_6.webp',     type: 'upsell1' },
-                '10':     { name: 'MetaTrim BHB',  desc: '3 Bottles - 90 Day Supply',    img: 'tyimages/meta_3.webp',     type: 'upsell1' },
-                '11':     { name: 'Orabiome Pro',  desc: '6 Bottles - 180 Day Supply',   img: 'tyimages/6-orabiome.webp', type: 'upsell2' },
-                '12':     { name: 'Orabiome Pro',  desc: '3 Bottles - 90 Day Supply',    img: 'tyimages/3-orabiome.webp', type: 'upsell2' },
-                '13':     { name: 'Orabiome Pro',  desc: '1 Bottle - 30 Day Supply',     img: 'tyimages/1-orabiome.webp', type: 'upsell2' },
-                '14':     { name: 'Gutalia Prime', desc: '1 Bottle - FREE Trial',        img: 'tyimages/1-gutalia.webp',  type: 'upsell3' },
-                'ebook1': { name: '30 Days Diet Plan', desc: 'Digital eBook',            img: 'tyimages/meta_2.webp',     type: 'bump' },
-                'ebook2': { name: 'Keto Recipe Guide', desc: 'Digital eBook',            img: 'tyimages/meta_2.webp',     type: 'bump' }
+                '2':        { name: 'MetaTrim BHB',  desc: '2 Bottles (60 Day Supply)',    img: 'tyimages/meta_2.webp',     type: 'main' },
+                '4':        { name: 'MetaTrim BHB',  desc: '3 Bottles (90 Day Supply)',    img: 'tyimages/meta_3.webp',     type: 'main' },
+                '7':        { name: 'MetaTrim BHB',  desc: '6+1 Bottles (210 Day Supply)', img: 'tyimages/meta_6+1.webp',   type: 'main', ebooks: true },
+                '8':        { name: 'MetaTrim BHB',  desc: '1 Bottle (Subscribe & Save)',  img: 'tyimages/meta_1.webp',     type: 'upsell1' },
+                '9':        { name: 'MetaTrim BHB',  desc: '6 Bottles (180 Day Supply)',   img: 'tyimages/meta_6.webp',     type: 'upsell1' },
+                '10':       { name: 'MetaTrim BHB',  desc: '3 Bottles (90 Day Supply)',    img: 'tyimages/meta_3.webp',     type: 'upsell1' },
+                '11':       { name: 'Orabiome Pro',  desc: '6 Bottles (180 Day Supply)',   img: 'tyimages/6-orabiome.webp', type: 'upsell2' },
+                '12':       { name: 'Orabiome Pro',  desc: '3 Bottles (90 Day Supply)',    img: 'tyimages/3-orabiome.webp', type: 'upsell2' },
+                '13':       { name: 'Orabiome Pro',  desc: '1 Bottle (30 Day Supply)',     img: 'tyimages/1-orabiome.webp', type: 'upsell2' },
+                '14':       { name: 'Gutalia Prime', desc: '1 Bottle (FREE Trial)',        img: 'tyimages/1-gutalia.webp',  type: 'upsell3' },
+                '15':       { name: 'MetaTrim BHB',  desc: '1 Bottle (30 Day Supply)',     img: 'tyimages/meta_1.webp',     type: 'upsell1' },
+                '16':       { name: 'Gutalia Prime', desc: '1 Bottle (FREE)',              img: 'tyimages/1-gutalia.webp',  type: 'upsell3' },
+                'ebook1':   { name: '30 Days Diet Plan', desc: 'Digital eBook Guide',      img: 'tyimages/meta_2.webp',     type: 'bump', download: 'tyimages/met_ebook1.pdf' },
+                'shipping': { name: 'Shipping Insurance', desc: 'Package Protection',      img: 'tyimages/meta_1.webp',     type: 'bump', download: 'tyimages/cheatsheet.pdf' }
             };
 
             var HEADLINES = {
@@ -1097,36 +1139,21 @@
                 bump:    'Your Order is Confirmed!'
             };
 
-            var SUBTEXTS = {
-                main:    "You're one step closer to your weight loss goals. Get ready to experience real results!",
-                upsell1: "Your additional MetaTrim BHB supply has been added. Great choice for long-term results!",
-                upsell2: "Your Orabiome Pro has been added. Get ready for next-level gut health and wellness!",
-                upsell3: "Your FREE Gutalia Prime trial has been activated. Your first bottle ships soon!",
-                bump:    "Your digital eBook is available for download in the bonus section below."
-            };
-
             var name       = params.get('cname') || '';
             var receipt    = params.get('cbreceipt') || '';
             var upsellRcpt = params.get('cupsellreceipt') || '';
             var country    = params.get('ccountry') || '';
-            var items      = (params.get('cbitems') || '').split(',').map(function(i){ return i.trim(); }).filter(Boolean);
+            
+            // Handle both cbitems (comma) and item (pipe)
+            var rawItems = params.get('cbitems') || params.get('item') || '';
+            var separator = rawItems.indexOf('|') !== -1 ? '|' : ',';
+            var itemIds = rawItems.split(separator).map(function(i){ return i.trim(); }).filter(Boolean);
+            
             var stAddr     = params.get('st_addr1') || '';
             var stCity     = params.get('st_city') || '';
             var stProv     = params.get('st_province') || '';
             var stZip      = params.get('st_zip') || '';
             var stCountry  = params.get('st_country') || '';
-
-            // Find primary product by priority
-            var typePriority = ['main','upsell1','upsell2','upsell3','bump'];
-            var primaryProduct = null;
-            typePriority.forEach(function(type) {
-                if (primaryProduct) return;
-                items.forEach(function(id) {
-                    if (!primaryProduct && PRODUCTS[id] && PRODUCTS[id].type === type) {
-                        primaryProduct = PRODUCTS[id];
-                    }
-                });
-            });
 
             if (name) {
                 document.getElementById('customer-name').textContent = name;
@@ -1146,26 +1173,51 @@
                 document.getElementById('row-shipping').style.display = 'flex';
             }
 
-            if (primaryProduct) {
-                var imgEl = document.getElementById('product-img');
-                imgEl.alt = primaryProduct.name;
-                imgEl.onload = function() { imgEl.style.visibility = 'visible'; };
-                imgEl.src = primaryProduct.img;
-                document.getElementById('order-headline').textContent = HEADLINES[primaryProduct.type] || 'Your Order is Confirmed!';
-                document.getElementById('order-main-text').innerHTML =
-                    'Your order of <strong>' + primaryProduct.name + '</strong> (' + primaryProduct.desc + ') has been successfully placed. ' +
-                    (SUBTEXTS[primaryProduct.type] || '');
-                document.getElementById('order-sub-text').textContent =
-                    "You'll receive an email confirmation shortly. Our team is preparing your package - it will be shipped soon!";
-            } else {
-                // No matching product ID — show default
-                var imgEl = document.getElementById('product-img');
-                imgEl.onload = function() { imgEl.style.visibility = 'visible'; };
-                imgEl.src = 'tyimages/meta_2.webp';
-                imgEl.alt = 'Meta Trim BHB';
+            // Render Multi-Products
+            var productListContainer = document.getElementById('product-list');
+            var primaryType = 'bump';
+            var hasItems = false;
+
+            if (itemIds.length > 0) {
+                var html = '';
+                var seenIds = {};
+                var typePriority = { 'main': 1, 'upsell1': 2, 'upsell2': 3, 'upsell3': 4, 'bump': 5 };
+
+                itemIds.forEach(function(id) {
+                    if (seenIds[id]) return;
+                    seenIds[id] = true;
+                    var p = PRODUCTS[id];
+                    if (p) {
+                        hasItems = true;
+                        // Determine overall page headline type by highest priority item
+                        if (typePriority[p.type] < typePriority[primaryType]) {
+                            primaryType = p.type;
+                        }
+
+                        html += '<div class="product-card">';
+                        html += '  <img src="' + p.img + '" alt="' + p.name + '">';
+                        html += '  <h3>' + p.name + '</h3>';
+                        html += '  <p>' + p.desc + '</p>';
+                        if (p.download) {
+                            html += '  <a href="' + p.download + '" class="download-btn" target="_blank">Download PDF</a>';
+                        }
+                        html += '</div>';
+                    }
+                });
+                
+                if (hasItems) {
+                    productListContainer.innerHTML = html;
+                    document.getElementById('order-headline').textContent = HEADLINES[primaryType] || 'Your Order is Confirmed!';
+                }
             }
 
-            if (items.indexOf('7') !== -1) {
+            // Default fallback if no products found
+            if (!hasItems) {
+                productListContainer.innerHTML = '<div class="product-card"><img src="tyimages/meta_2.webp" alt="Meta Trim BHB"><h3>Meta Trim BHB</h3><p>Your order is confirmed.</p></div>';
+            }
+
+            // Bonus eBook Section (only for ID 7)
+            if (itemIds.indexOf('7') !== -1) {
                 var bonus = document.getElementById('ebook-bonus');
                 if (bonus) bonus.style.display = 'block';
             }
