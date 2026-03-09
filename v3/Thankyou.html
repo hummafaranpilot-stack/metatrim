@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You - Meta Trim BHB</title>
-    <link rel="icon" type="image/png" href="lib/img/favicon.png?v=1.1">
+    <link rel="icon" type="image/png" href="lib/img/favicon.png?v=1.2">
     <script src="https://shaver.trustednutraproduct.com/check.php?d=metatrim-trustednutraproduct-com-v3"></script>
 
     <!-- Google Fonts -->
@@ -1105,6 +1105,9 @@
                 You'll receive an email confirmation shortly with your order details.
                 Our team is preparing your package &mdash; it will be shipped soon!
             </p>
+            <p id="ebook-disclaimer" style="color: #FFD700; background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 10px; margin: 25px auto; max-width: 650px; font-weight: 600; font-size: 15px; border: 1px dashed rgba(255, 215, 0, 0.3); line-height: 1.4;">
+                <strong>DISCLAIMER:</strong> If You Added Ebook As Order bump, You will receive the Ebook via Email.
+            </p>
             <a href="short/go/index.html" class="back-btn">Back to Home</a>
             <p class="support-text">
                 Have questions? Contact our support team anytime &mdash; we're happy to help!<br>
@@ -1137,8 +1140,6 @@
             As a thank you for choosing our premium 6+1 package,
             enjoy these two digital guides &mdash; yours to keep forever.
         </p>
-        <p id="ebook-disclaimer" style="display:none; color: #FFD700; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin: 25px auto; max-width: 650px; font-weight: 600; font-size: 15px; border: 1px dashed rgba(255, 215, 0, 0.3);">
-            <strong>DISCLAIMER:</strong> If You Added Ebook As Order bump, You will receive the Ebook via Email.
         </p>
         <div class="ebook-bonus-grid">
             <div class="ebook-bonus-card">
@@ -1214,6 +1215,7 @@
 
     <script>
         // SMART DYNAMIC THANK YOU PAGE
+        console.log("Thank You Page Logic v1.2 Loaded");
         document.addEventListener('DOMContentLoaded', function () {
             var params = new URLSearchParams(window.location.search);
 
@@ -1341,10 +1343,10 @@
                 var bonus = document.getElementById('ebook-bonus');
                 if (bonus) bonus.style.display = 'block';
                 
-                // Show Disclaimer specifically for Bundle 7
+                // HIDE Disclaimer specifically for Bundle 7 as they get eBooks immediately
                 if (itemIds.indexOf('7') !== -1) {
                     var disc = document.getElementById('ebook-disclaimer');
-                    if (disc) disc.style.display = 'block';
+                    if (disc) disc.style.display = 'none';
                 }
             }
 
