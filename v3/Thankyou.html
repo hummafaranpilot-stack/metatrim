@@ -1215,7 +1215,7 @@
 
     <script>
         // SMART DYNAMIC THANK YOU PAGE
-        console.log("Thank You Page Logic v1.2 Loaded");
+        console.log("Thank You Page Logic v1.3 Loaded");
         document.addEventListener('DOMContentLoaded', function () {
             var params = new URLSearchParams(window.location.search);
 
@@ -1263,6 +1263,26 @@
             }
 
             itemIds = parseIds(paramItems).concat(parseIds(cbItems));
+            
+            // RECEIPT VALIDATION: Only keep as many items as there are receipts
+            // This prevents showing items from cbitems if they didn't have a receipt (declined upsells)
+            var actualReceipts = parseIds(receipt);
+            var receiptCount = actualReceipts.length;
+            
+            // Uniquify while preserving order
+            var uniqueFound = [];
+            itemIds.forEach(function(id) {
+                if (uniqueFound.indexOf(id) === -1 && PRODUCTS[id]) {
+                    uniqueFound.push(id);
+                }
+            });
+
+            // If we have more products detected than receipts, slice the list
+            // However, we prioritize the product IDs from 'item' if possible
+            if (uniqueFound.length > receiptCount && receiptCount > 0) {
+                uniqueFound = uniqueFound.slice(0, receiptCount);
+            }
+            itemIds = uniqueFound;
             
             var stAddr     = params.get('st_addr1') || '';
             var stCity     = params.get('st_city') || '';
