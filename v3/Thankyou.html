@@ -1028,9 +1028,18 @@
             transform: translateY(-2px);
         }
         @media (max-width: 768px) {
-            #insurance-section { flex-direction: column; text-align: center; padding: 20px; }
+            #insurance-section { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 15px; 
+                margin: 20px auto 0;
+                gap: 15px;
+            }
             .insurance-info { text-align: center; }
-            .insurance-img { flex: 0 0 100px; }
+            .insurance-img { flex: 0 0 80px; }
+            .insurance-info h3 { font-size: 18px; margin-bottom: 5px; }
+            .insurance-info p { font-size: 14px; margin-bottom: 15px; line-height: 1.4; }
+            .view-doc-btn { padding: 10px 20px; font-size: 13px; }
         }
         @media (max-width: 768px) {
             #ebook-bonus h2 { font-size: 24px; }
@@ -1215,7 +1224,7 @@
 
     <script>
         // SMART DYNAMIC THANK YOU PAGE
-        console.log("Thank You Page Logic v1.3 Loaded");
+        console.log("Thank You Page Logic v1.4 Loaded");
         document.addEventListener('DOMContentLoaded', function () {
             var params = new URLSearchParams(window.location.search);
 
