@@ -1230,8 +1230,8 @@
                     if (p) {
                         hasItems = true;
                         // Determine overall page headline type by highest priority item
-                        var badgeClass = p.type === 'main' ? '' : (p.type === 'bump' ? 'bump' : 'upsell');
-                        var badgeText = p.type === 'main' ? 'Main Order' : (p.type === 'bump' ? 'Order Bump' : 'Upsell Item');
+                        var badgeClass = p.type === 'main' ? 'main' : (p.type === 'bump' ? 'bump' : 'upsell');
+                        var badgeText = p.type === 'main' ? 'Main Order' : (p.type === 'bump' ? 'Order Bonus' : 'Upsell Item');
 
                         html += '<div class="product-card">';
                         html += '  <span class="order-badge ' + badgeClass + '">' + badgeText + '</span>';
