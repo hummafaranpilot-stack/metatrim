@@ -1137,6 +1137,9 @@
             As a thank you for choosing our premium 6+1 package,
             enjoy these two digital guides &mdash; yours to keep forever.
         </p>
+        <p id="ebook-disclaimer" style="display:none; color: #FFD700; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin: 25px auto; max-width: 650px; font-weight: 600; font-size: 15px; border: 1px dashed rgba(255, 215, 0, 0.3);">
+            <strong>DISCLAIMER:</strong> If You Added Ebook As Order bump, You will receive the Ebook via Email.
+        </p>
         <div class="ebook-bonus-grid">
             <div class="ebook-bonus-card">
                 <img src="/eBooks/cover_30_days_plan.png" alt="30 Days Diet Plan">
@@ -1337,6 +1340,12 @@
             if (itemIds.indexOf('7') !== -1 || itemIds.indexOf('4') !== -1) {
                 var bonus = document.getElementById('ebook-bonus');
                 if (bonus) bonus.style.display = 'block';
+                
+                // Show Disclaimer specifically for Bundle 7
+                if (itemIds.indexOf('7') !== -1) {
+                    var disc = document.getElementById('ebook-disclaimer');
+                    if (disc) disc.style.display = 'block';
+                }
             }
 
             // Insurance Section - Always show section now as per user request
