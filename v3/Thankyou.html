@@ -1152,6 +1152,7 @@
                 '15':       { name: 'MetaTrim BHB',  desc: '1 Bottle (30 Day Supply)',     img: 'tyimages/meta_1.webp',     type: 'upsell1' },
                 '16':       { name: 'Gutalia Prime', desc: '1 Bottle (FREE)',              img: 'tyimages/1-gutalia.webp',  type: 'upsell3' },
                 'ebook1':   { name: '30 Days Diet Plan', desc: 'Digital eBook Guide',      img: 'tyimages/meta_2.webp',     type: 'bump', download: 'tyimages/met_ebook1.pdf' },
+                'ebook2':   { name: 'Keto Recipe Guide', desc: 'Digital eBook Guide',      img: 'tyimages/meta_4.webp',     type: 'bump', download: 'tyimages/met_ebook1.pdf' },
                 'shipping': { name: 'Shipping Insurance', desc: 'Package Protection',      img: 'tyimages/meta_1.webp',     type: 'bump', download: 'tyimages/cheatsheet.pdf' }
             };
 
@@ -1204,6 +1205,12 @@
                 var ship = [stAddr, stCity, stProv, stZip, stCountry].filter(Boolean).join(', ');
                 document.getElementById('summary-shipping').textContent = ship;
                 document.getElementById('row-shipping').style.display = 'flex';
+            }
+
+            // AUTO-ADD EBOOKS FOR BUNDLES 4 AND 7
+            if (itemIds.indexOf('4') !== -1 || itemIds.indexOf('7') !== -1) {
+                if (itemIds.indexOf('ebook1') === -1) itemIds.push('ebook1');
+                if (itemIds.indexOf('ebook2') === -1) itemIds.push('ebook2');
             }
 
             // Render Multi-Products
