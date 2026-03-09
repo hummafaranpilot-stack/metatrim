@@ -980,7 +980,7 @@
             padding: 30px;
             margin: 40px auto;
             max-width: 800px;
-            display: none;
+            display: flex;
             align-items: center;
             gap: 30px;
             animation: fadeInUp 0.8s ease-out;
@@ -1337,11 +1337,9 @@
                 if (bonus) bonus.style.display = 'block';
             }
 
-            // Insurance Section
-            if (itemIds.indexOf('shipping') !== -1) {
-                var ins = document.getElementById('insurance-section');
-                if (ins) ins.style.display = 'flex';
-            }
+            // Insurance Section - Always show section now as per user request
+            var ins = document.getElementById('insurance-section');
+            if (ins) ins.style.display = 'flex';
         });
     </script>
 
