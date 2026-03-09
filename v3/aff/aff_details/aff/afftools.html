@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<title>Trusted Nutra Products&#8482; - Meta Trim BHB Affiliate Tools</title>
-	<link rel="icon" type="image/png" href="../../../lib/img/logo.png">
+	<link rel="icon" type="image/png" href="../../../Clickbank Structure/favicon.png">
     <meta property="og:url" name="url" content="index.html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<meta charset="utf-8">
@@ -84,12 +84,230 @@ window.__lo_site_id = 329229;
 	<link rel="stylesheet" type="text/css" href="../css/affstyle.css">
 <link rel="stylesheet" type="text/css" href="../css/affstyle-new.css">
 
-   <style>
+    <style>
         span.spinner-border.spinner-border-sm {
             width: 23px ;
             height: 23px;
         }
-   </style> 
+        
+        /* Navigation Styles */
+        .top-banner-red-links {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 1000px;
+            background: #a93226 !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+            border-radius: 12px !important;
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 25px;
+            padding: 18px 25px !important;
+            position: relative !important;
+            top: 0 !important;
+            width: auto !important;
+        }
+        .top-banner-red-links a, .top-banner-red-links span {
+            color: white !important;
+            font-weight: 700;
+            font-size: 15px !important; /* Slightly bigger font */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none !important;
+            display: inline-block;
+            margin: 0;
+            background: none !important;
+        }
+        .top-banner-red-links a:hover {
+            color: rgba(255,255,255,0.8) !important;
+            text-decoration: underline !important;
+        }
+
+        @media (max-width: 768px) {
+            .top-banner-red-links {
+                gap: 8px 15px;
+                padding: 15px !important;
+                border-radius: 15px !important;
+                margin: 20px 10px;
+            }
+            .top-banner-red-links a, .top-banner-red-links span {
+                font-size: 13px !important;
+            }
+        }
+        
+        /* Image Preloader */
+        .img-preloader {
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .img-preloader .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #a93226;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .img-preloader img {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .img-preloader.loaded .spinner {
+            display: none;
+        }
+        .img-preloader.loaded img {
+            opacity: 1;
+            position: relative;
+        }
+
+        /* Stats Styling */
+        .stat-item {
+            display: flex;
+            align-items: center;
+        }
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: #184579;
+        }
+        .stat-info {
+            display: flex;
+            align-items: center;
+        }
+        .stat-label {
+            font-weight: 700;
+            margin-right: 5px;
+        }
+        .stat-value {
+            color: #dc3545; /* Bootstrap text-danger fallback */
+        }
+
+        /* Mobile Stats Styling */
+        @media (max-width: 768px) {
+            #offer-stats .bg-bright {
+                background: #FDF7F0 !important; /* Soft cream background for stats box on mobile */
+                border: 1px solid #eee !important;
+                padding: 30px 20px !important;
+            }
+            #offer-stats h3 {
+                font-size: 1.6rem !important;
+                color: #184579 !important;
+                margin-bottom: 30px !important;
+            }
+            .stat-item {
+                display: flex !important;
+                align-items: flex-start !important;
+                margin-bottom: 25px !important;
+                text-align: left !important;
+            }
+            .check-icon {
+                color: #28a745 !important;
+                font-size: 18px !important;
+                margin-right: 12px !important;
+                margin-top: 4px !important;
+                font-weight: 800 !important;
+            }
+            .icon-box {
+                background: #184579 !important;
+                color: white !important;
+                padding: 4px !important;
+                border-radius: 4px !important;
+                margin-right: 12px !important;
+                width: 32px !important;
+                height: 32px !important;
+                flex-shrink: 0 !important;
+            }
+            .stat-info {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+            .stat-label {
+                font-weight: 800 !important;
+                color: #184579 !important;
+                font-size: 15px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 2px !important;
+                margin-right: 0 !important;
+            }
+            .stat-value {
+                color: #d9534f !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+            }
+        }
+        
+        /* Image Preview Cursor */
+        .proof-img, .campaign-img {
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        .proof-img:hover {
+            transform: scale(1.01);
+        }
+        
+        /* Zoom Modal Styling */
+        #zoomModal .modal-content {
+            background-color: rgba(0,0,0,0.9);
+            border: none;
+        }
+        #zoom-container {
+            overflow: auto;
+            max-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #zoomed-image {
+            transition: transform 0.2s;
+            max-width: 100%;
+        }
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1060;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+        .zoom-btn {
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 5px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .zoom-btn:hover {
+            background: #eee;
+        }
+    </style> 
 
 
     </head>
@@ -111,6 +329,7 @@ window.__lo_site_id = 329229;
             <div class="top-heading">
                 <h1 class="text-blue">MONSTER OFFER <br class="br-xr br-14pm">Meta Trim BHB<sup class="tm">TM</sup>!</h1>
 				<h3>is going to supercharge <br class="br-se br-14pm br-12p br-xr">your commissions!
+                <br><span style="color: #d9534f; font-size: 0.85em; font-weight: 800;">AOV: $271.83 | EPC: $3.81+ | 70-90% Commission</span>
 </h3>
 				<p class="text-center mt-3"><span style="display: inline-block; border: 2px dashed #1a4b8c; color: #1a4b8c; font-size: 16px; font-weight: 600; padding: 10px 25px; border-radius: 8px; background: #fff;">ClickBank Affiliates Only</span></p>
             </div>
@@ -128,7 +347,7 @@ window.__lo_site_id = 329229;
 					</div>
 						<div class="col-12 col-lg-6 col-md-10 mx-auto prod-description px-1 px-md-3 my-auto">
 					      <ul class="text-left my-lg-4 col-12 col-md-10 mx-auto pl-4 pl-md-0 new-list">
-            <li class="mb-2 mb-lg-4 pb-md-2">Massive payouts - <strong>$120-$170 per sale</strong> with subscription upsells</li>
+            <li class="mb-2 mb-lg-4 pb-md-2">Massive payouts - <strong>$150-$170 per sale</strong> with subscription upsells</li>
             <li class="mb-2 mb-lg-4 pb-md-2">BHB Ketone weight loss supplement - converts well with a wide audience base</li>
             <li class="mb-2 mb-lg-4 pb-md-2">Constantly optimized swipes & landers to ensure best conversions</li>
           </ul>
@@ -150,19 +369,116 @@ window.__lo_site_id = 329229;
         <main>
             <div class="inner-wrapper py-2">
                 <div class="top-banner-red-links">
-                    <span>Offer Information <span class="slash">|</span></span>
-                    <a href="#traffic-tips">Traffic Tips <span class="slash">|</span></a>
-                    <a href="#landing-pages">Landing Pages <span class="slash">|</span></a>
-                    <a href="#google-ads-guide">Google Ads Guide <span class="slash">|</span></a>
-					<br class="d-md-block d-none"><a href="#offer-details">Offer Details <span class="slash">|</span></a>
-					<a href="#email-swipes">Email Swipes <span class="slash">|</span></a>
-                    <a href="#product-images">Product Images <span class="slash">|</span></a>
-					<a href="#ad-images">Campaign Images <span class="slash">|</span></a>
-                    <a href="#install-pixels">Install Pixel <span class="slash">|</span></a>
+                    <a href="#offer-info">Offer Information</a>
+                    <a href="#traffic-tips">Traffic Tips</a>
+                    <a href="#offer-proofs">Offer Proofs</a>
+                    <a href="#landing-pages">Landing Pages</a>
+                    <a href="#google-ads-guide">Google Ads Guide</a>
+                    <a href="#offer-details">Offer Details</a>
+                    <a href="#email-swipes">Email Swipes</a>
+                    <a href="#product-images">Product Images</a>
+                    <a href="#ad-images">Campaign Images</a>
+                    <a href="#install-pixels">Install Pixel</a>
                     <a href="#contact-us">Contact Us</a>
                 </div>
 
-                <section class="container-md first-section section-paragraphs">
+                <!-- Proofs of Offer Performance Section -->
+                <section id="offer-proofs" class="container-md py-4 mt-4">
+                    <h3 class="section-header text-center mb-4">Proofs of Offer Performance</h3>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-10 mb-5">
+                            <div class="card-dashed p-3">
+                                <img src="../../../Proofs/2.png" alt="Offer Performance Proof 1" class="img-fluid rounded shadow-lg w-100 proof-img" onclick="openZoomModal(this.src)">
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-10 mb-5">
+                            <div class="card-dashed p-3">
+                                <img src="../../../Proofs/1.png" alt="Offer Performance Proof 2" class="img-fluid rounded shadow-lg w-100 proof-img" onclick="openZoomModal(this.src)">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Performance Stats & Why Promote Section -->
+                <section id="offer-stats" class="container-md py-4">
+                    <div class="row">
+                        <div class="col-12 col-lg-10 mx-auto">
+                            <div class="bg-bright py-4 px-4 px-md-5 rounded shadow-sm border">
+                                <h3 class="text-blue text-center mb-4" style="font-weight: 800; font-size: 1.8rem; text-transform: uppercase;">Offer Performance Statistics</h3>
+                                <p class="text-center mb-4" style="font-size: 1.1rem; color: #333; font-weight: 600;">Skyrocket your earnings with these industry-leading metrics!</p>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-4 mb-md-3 stat-item">
+                                                <i class="material-icons check-icon d-md-none">check</i>
+                                                <div class="icon-box"><i class="material-icons" style="font-size: 20px;">analytics</i></div>
+                                                <div class="stat-info">
+                                                    <strong class="stat-label">Average Order Value (AOV):</strong>
+                                                    <span class="stat-value">$271.83</span>
+                                                </div>
+                                            </li>
+                                            <li class="mb-4 mb-md-3 stat-item">
+                                                <i class="material-icons check-icon d-md-none">check</i>
+                                                <div class="icon-box"><i class="material-icons" style="font-size: 20px;">trending_up</i></div>
+                                                <div class="stat-info">
+                                                    <strong class="stat-label">Average Customer LTV:</strong>
+                                                    <span class="stat-value">$398.71</span>
+                                                </div>
+                                            </li>
+                                            <li class="mb-4 mb-md-3 stat-item">
+                                                <i class="material-icons check-icon d-md-none">check</i>
+                                                <div class="icon-box"><i class="material-icons" style="font-size: 20px;">paid</i></div>
+                                                <div class="stat-info">
+                                                    <strong class="stat-label">Commission Rate:</strong>
+                                                    <span class="stat-value">70-90% Range</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-4 mb-md-3 stat-item">
+                                                <i class="material-icons check-icon d-md-none">check</i>
+                                                <div class="icon-box"><i class="material-icons" style="font-size: 20px;">shopping_cart</i></div>
+                                                <div class="stat-info">
+                                                    <strong class="stat-label">Checkout Conversion Rate:</strong>
+                                                    <span class="stat-value">53.50%</span>
+                                                </div>
+                                            </li>
+                                            <li class="mb-4 mb-md-3 stat-item">
+                                                <i class="material-icons check-icon d-md-none">check</i>
+                                                <div class="icon-box"><i class="material-icons" style="font-size: 20px;">group</i></div>
+                                                <div class="stat-info">
+                                                    <strong class="stat-label">Monthly Visitors:</strong>
+                                                    <span class="stat-value">76,987 (+5.46%)</span>
+                                                </div>
+                                            </li>
+                                            <li class="mb-4 mb-md-3 stat-item">
+                                                <i class="material-icons check-icon d-md-none">check</i>
+                                                <div class="icon-box"><i class="material-icons" style="font-size: 20px;">bolt</i></div>
+                                                <div class="stat-info">
+                                                    <strong class="stat-label">Earnings Per Click (EPC):</strong>
+                                                    <span class="stat-value">$3.81+</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="text-center font-italic text-muted mb-4" style="font-size: 0.95rem;">* These stats are from BuyGoods Launched Offer!</p>
+                                
+                                <hr>
+
+                                <div class="mt-4">
+                                    <h4 class="text-blue mb-3" style="font-weight: 700;">WHY THIS OFFER IS WORTH PROMOTING</h4>
+                                    <p style="font-size: 1.1rem; line-height: 1.7;">The <strong>AOV sits at $271.83</strong> and is climbing — that directly means larger commissions in your pocket per sale. The <strong>Customer LTV of $398.71</strong> tells you buyers aren't one-and-done; there's repeat value baked in. Most importantly, the <strong>checkout conversion rate is 53.50%</strong>, which means once your traffic hits the cart, more than half of them actually buy. That's rare.</p>
+                                    <p style="font-size: 1.1rem; line-height: 1.7;">The offer is doing over <strong>$660K a month in revenue</strong>. This isn't a test — it's a proven, scaled offer with active traffic and real buyers coming in every day.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="container-md first-section section-paragraphs" id="offer-info">
                     <h3 class="section-header section-header-2">Offer Information<span></span></h3>
                       <div class="row">
                         <div class="col-12 col-md-10 mx-auto">
@@ -170,7 +486,7 @@ window.__lo_site_id = 329229;
                     <p>
 Meta Trim BHB™ is a premium ketogenic supplement designed to support healthy weight loss and boost energy levels naturally.
 </p>
-               <p>Backed by scientific studies, here's how <br class="br-se br-12p">Meta Trim BHB™ helps your customers achieve their goals: </p>
+                <p>Backed by scientific studies and a <strong>53.50% Checkout Conversion Rate</strong>, here's how <br class="br-se br-12p">Meta Trim BHB™ helps your customers achieve their goals: </p>
 
                <ul class="list-wrapper text-left mt-4 mt-md-0 mb-4 col-12 col-md-10 mx-auto pl-4 pl-md-5">
             <li class="mb-2 mb-md-3 font-weight-bold"><i class=" icon material-icons">check</i> <p>Triggers ketosis to burn fat for energy instead of carbs</p></li>
@@ -408,7 +724,7 @@ bottom: unset;
                         <div class="col-12 col-lg-9 col-md-10 mx-auto">
                             <div class="bg-bright py-4 px-5">
                               <h2 class="text-center text-blue" id="traffic-tips">Traffic Tips</h2>
-                                <p>Affiliates promoting Meta Trim BHB™ can earn <strong>$120-$170 per sale</strong> with subscription upsells!</p>
+                                <p>Affiliates promoting Meta Trim BHB™ can earn <strong>$150-$170 per sale</strong> with subscription upsells! (Average Order Value: <strong>$271.83</strong>)</p>
           <p>We have made the best conversions among people who are: </p>
                                 <ul class="new-list my-0 py-0 px-0 px-lg-4 mx-lg-4 mx-0">
                                     <li class="mb-md-4">Looking to lose weight naturally and effectively</li>
@@ -417,7 +733,7 @@ bottom: unset;
                                     <li class="mb-md-4">Wanting to reduce appetite and control cravings</li>
                                     <li class="mb-md-4">Seeking supplements to boost metabolism</li>
                                     <li class="mb-md-4">Age groups 25-65 years old (primarily women 35+)</li>
-                                    <li class="mb-md-4">Top converting markets: USA, Canada, UK, Australia</li>
+                                    <li class="mb-md-4">Top converting markets: USA, Canada, UK, Australia (Scaling over <strong>76,987</strong> monthly visitors)</li>
                                 </ul>
 
                             </div>
@@ -630,7 +946,8 @@ bottom: unset;
 							<ul class="orange-check-list">
 								<li><strong>Frontend:</strong> 65% per initial sale</li>
 								<li><strong>Backend:</strong> 40% per upsell</li>
-								<li><strong>Fixed CPA:</strong> Starting from $120/Sale</li>
+								<li><strong>Fixed CPA:</strong> Starting from $150/Sale</li>
+								<li><strong>Checkout Conversion:</strong> 53.50%</li>
 								<li><strong>Payout:</strong> NET 15, Monthly</li>
 							</ul>
 						</div>
@@ -644,6 +961,7 @@ bottom: unset;
 								<li><strong>Restrictions:</strong> None - all sources allowed</li>
 								<li><strong>Best Sources:</strong> Google Ads & Facebook Ads</li>
 								<li><strong>Network:</strong> ClickBank Only</li>
+								<li><strong>Customer LTV:</strong> $398.71</li>
 							</ul>
 						</div>
 					</div>
@@ -659,7 +977,7 @@ bottom: unset;
 							<strong>BASE OFFER (What You Publicly List)</strong>
 						</div>
 						<div class="bg-light p-4 mb-3" style="border: 1px solid #ddd; border-top: 0;">
-							<h3 class="text-success text-center mb-1" style="font-weight: 700;">$120</h3>
+							<h3 class="text-success text-center mb-1" style="font-weight: 700;">$150</h3>
 							<p class="text-center text-muted mb-3" style="font-size: 16px;">Flat CPA</p>
 							<ul class="mb-0 text-center" style="font-size: 15px; list-style: none; padding: 0;">
 								<li>Applies to all packages</li>
@@ -680,27 +998,27 @@ bottom: unset;
 								<div>
 									<strong style="font-size: 16px;">Tier 1 - Starter</strong>
 									<p class="mb-0 text-muted" style="font-size: 14px;">0-19 sales/day</p>
-									<p class="mb-0" style="font-size: 15px;"><strong>Standard Rate:</strong> $120 CPA on ALL packages</p>
+									<p class="mb-0" style="font-size: 15px;"><strong>Standard Rate:</strong> $150 CPA on ALL packages</p>
 								</div>
-								<span class="badge bg-success" style="font-size: 16px; padding: 10px 20px;">$120</span>
+								<span class="badge bg-success" style="font-size: 16px; padding: 10px 20px;">$150</span>
 							</div>
 							<!-- Tier 2 -->
 							<div class="d-flex justify-content-between align-items-center p-3" style="border-bottom: 1px solid #ddd; background: #fffbf0;">
 								<div>
 									<strong style="font-size: 16px;">Tier 2 - Scalers</strong>
 									<p class="mb-0 text-muted" style="font-size: 14px;">20-49 sales/day</p>
-									<p class="mb-0" style="font-size: 15px;"><strong>Elevated Rate:</strong> $140 CPA on ALL packages</p>
+									<p class="mb-0" style="font-size: 15px;"><strong>Elevated Rate:</strong> $160 CPA on ALL packages</p>
 								</div>
-								<span class="badge" style="font-size: 16px; padding: 10px 20px; background: #f5a623;">$140</span>
+								<span class="badge" style="font-size: 16px; padding: 10px 20px; background: #f5a623;">$160</span>
 							</div>
 							<!-- Tier 3 -->
 							<div class="d-flex justify-content-between align-items-center p-3" style="background: #fff5f5; border-radius: 0 0 8px 8px;">
 								<div>
 									<strong style="font-size: 16px;">Tier 3 - Whales</strong>
 									<p class="mb-0 text-muted" style="font-size: 14px;">50+ sales/day</p>
-									<p class="mb-0" style="font-size: 15px;"><strong>Premium Rate:</strong> $150-$170 CPA on ALL packages</p>
+									<p class="mb-0" style="font-size: 15px;"><strong>Premium Rate:</strong> $170 CPA on ALL packages</p>
 								</div>
-								<span class="badge bg-danger" style="font-size: 16px; padding: 10px 20px;">$150-$170</span>
+								<span class="badge bg-danger" style="font-size: 16px; padding: 10px 20px;">$170</span>
 							</div>
 						</div>
 					</div>
@@ -874,17 +1192,25 @@ bottom: unset;
                     <p>Here are the product images you can use in your promotions. You MUST NOT use any other product images without prior written permissions from us.</p>
                     <p>To save these images to your computer: Right click the image and select “Open image in new tab” > right-click the image and select "Save Image As".</p>
                 </div>
-                    <div class="row my-3 justify-content-center text-center mx-auto">
                         <div class="col-12 col-md-4 mb-lg-0 mb-4">
-                            <img src="../../../lib/img/prod1.png" class="img-fluid" alt="Meta Trim BHB 2 Bottles">
+                            <div class="img-preloader">
+                                <div class="spinner"></div>
+                                <img src="../../../tyimages/meta_1.webp" class="img-fluid" alt="Meta Trim BHB 1 Bottle" onload="this.parentElement.classList.add('loaded')">
+                            </div>
                         </div>
                         <div class="col-12 col-md-4 mb-lg-0 mb-4">
-                            <img src="../../../lib/img/3-bottle-buy-btn.png" class="img-fluid" alt="Meta Trim BHB 4 Bottles">
+                            <div class="img-preloader">
+                                <div class="spinner"></div>
+                                <img src="../../../tyimages/meta_3.webp" class="img-fluid" alt="Meta Trim BHB 3 Bottles" onload="this.parentElement.classList.add('loaded')">
+                            </div>
                         </div>
                         <div class="col-12 col-md-4">
-                            <img src="../../../lib/img/6-bottles.png" class="img-fluid" alt="Meta Trim BHB 6 Bottles">
+                            <div class="img-preloader">
+                                <div class="spinner"></div>
+                                <img src="../../../tyimages/meta_6+1.webp" class="img-fluid" alt="Meta Trim BHB 6+1 Bottles" onload="this.parentElement.classList.add('loaded')">
+                            </div>
                         </div>
-                    </div></div>
+                    </div>
                 </section>
 
 
@@ -1012,25 +1338,71 @@ bottom: unset;
 					<p class="text-center text-muted mt-3"><em>+ Many more images included in the ZIP download!</em></p>
                 </section>
 
-				<!-- Image Lightbox Modal -->
-				<div class="modal fade" id="imageLightbox" tabindex="-1" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered modal-xl">
-						<div class="modal-content bg-transparent border-0">
-							<div class="modal-body p-0 text-center">
-								<button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1; font-size: 1.5rem;"></button>
-								<img src="" id="lightboxImage" class="img-fluid" style="max-height: 90vh; border-radius: 8px;">
+
+				<script>
+					document.querySelectorAll('.campaign-img').forEach(img => {
+						img.addEventListener('click', function(e) {
+							openZoomModal(this.src);
+						});
+					});
+				</script>
+
+				<!-- Zoom Modal -->
+				<div class="modal fade" id="zoomModal" tabindex="-1" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 95vw;">
+						<div class="modal-content">
+							<div class="modal-body p-0 position-relative">
+								<button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1070; background-color: rgba(0,0,0,0.5); padding: 10px;"></button>
+								<div id="zoom-container">
+									<img src="" id="zoomed-image">
+								</div>
+								<div class="zoom-controls">
+									<button class="zoom-btn" onclick="zoomIn()">+</button>
+									<button class="zoom-btn" onclick="zoomOut()">−</button>
+									<button class="zoom-btn" onclick="resetZoom()" style="font-size: 14px; width: auto; padding: 0 15px; border-radius: 20px;">Reset</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<script>
-					document.querySelectorAll('.campaign-img').forEach(img => {
-						img.addEventListener('click', function(e) {
-							e.preventDefault();
-							document.getElementById('lightboxImage').src = this.src;
-							new bootstrap.Modal(document.getElementById('imageLightbox')).show();
-						});
+					let currentScale = 1;
+					let zoomModal;
+					const zoomedImg = document.getElementById('zoomed-image');
+
+					function openZoomModal(src) {
+						if (!zoomModal) {
+							zoomModal = new bootstrap.Modal(document.getElementById('zoomModal'));
+						}
+						zoomedImg.src = src;
+						currentScale = 1;
+						zoomedImg.style.transform = `scale(${currentScale})`;
+						zoomModal.show();
+					}
+
+					function zoomIn() {
+						currentScale += 0.2;
+						if(currentScale > 4) currentScale = 4;
+						zoomedImg.style.transform = `scale(${currentScale})`;
+					}
+
+					function zoomOut() {
+						currentScale -= 0.2;
+						if(currentScale < 0.5) currentScale = 0.5;
+						zoomedImg.style.transform = `scale(${currentScale})`;
+					}
+
+					function resetZoom() {
+						currentScale = 1;
+						zoomedImg.style.transform = `scale(${currentScale})`;
+					}
+
+					// Mouse wheel zoom
+					document.getElementById('zoom-container').addEventListener('wheel', function(e) {
+						e.preventDefault();
+						if (e.deltaY < 0) zoomIn();
+						else zoomOut();
 					});
 				</script>
 
@@ -1057,7 +1429,7 @@ bottom: unset;
                    <div class="row">
                       <div class="col-12 col-md-9 mx-auto">
                     <p>Please contact us at
-                      <span class="black"><a href="mailto:affiliates@trustednutraproduct.com?subject=RE: Meta Trim BHB Affiliate Inquiry" class="black">affiliates@trustednutraproduct.com</a></span></p>
+                      <span class="black"><a href="mailto:contact@trustednutraproduct.com?subject=RE: Meta Trim BHB Affiliate Inquiry" class="black">contact@trustednutraproduct.com</a></span></p>
                      </div>
             </div>
                 </section>
@@ -1075,12 +1447,12 @@ bottom: unset;
 				<h6 class="mb-3">Contact Information</h6>
 				<div class="row">
 					<div class="col-12">
-						<p class="mail">For Product Support, please contact us at <a href="mailto:support@trustednutraproduct.com" class="text-yellow">support@trustednutraproduct.com</a></p>
+						<p class="mail">For Product Support, please contact us at <a href="mailto:contact@trustednutraproduct.com" class="text-yellow">contact@trustednutraproduct.com</a></p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-12">
-						<p class="mail">For Affiliate Inquiries, please contact us at <a href="mailto:affiliates@trustednutraproduct.com" class="text-yellow">affiliates@trustednutraproduct.com</a></p>
+						<p class="mail">For Affiliate Inquiries, please contact us at <a href="mailto:contact@trustednutraproduct.com" class="text-yellow">contact@trustednutraproduct.com</a></p>
 					</div>
 				</div>
 			</div>
