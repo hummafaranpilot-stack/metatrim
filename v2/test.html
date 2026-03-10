@@ -4,352 +4,229 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BuyGoods Affiliate Test</title>
-  <script>var mysrc = "https://tracking.buygoods.com/track/?a=11943&firstcookie=0"+"&tracking_redirect=&referrer="+encodeURIComponent(document.referrer)+"&sessid2="+ReadCookie('sessid2')+"&product=met2v2,met3v2,met6v2,met2v2s,met6v2s,met3v2s&vid1=&vid2=&vid3=&caller_url="+encodeURIComponent(window.location.href); if(typeof add_to_cart !== 'undefined') { mysrc = mysrc+'&add_to_cart='+add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name){name += '='; var parts = document.cookie.split(/;\s*/);for (var i = 0; i < parts.length; i++) {var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length)} return '';}</script>
 
-<script type="text/javascript">setTimeout(function () {var i = document.createElement("iframe"),oid = new URLSearchParams(window.location.search);i.async = true;i.style="display:none";i.setAttribute("src", "https://buygoods.com/affiliates/go/conversion/iframe/bg?a=11943&t=6bea6c7c7a71a36b83e176af6f6189de&s="+ReadCookie('sessid2'));document.body.appendChild(i);}, 1000);</script>
+  <!-- ░░░ BUYGOODS TRACKING SCRIPT ░░░ -->
+  <script>var mysrc = "https://tracking.buygoods.com/track/?a=11943&firstcookie=0"+"&tracking_redirect=&referrer="+encodeURIComponent(document.referrer)+"&sessid2="+ReadCookie('sessid2')+"&product=met2v2,met3v2,met6v2,met2v2s,met6v2s,met3v2s&vid1=&vid2=&vid3=&caller_url="+encodeURIComponent(window.location.href); if(typeof add_to_cart !== 'undefined') { mysrc = mysrc+'&add_to_cart='+add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name){name += '='; var parts = document.cookie.split(/;\s*/);for (var i = 0; i < parts.length; i++) {var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length)} return '';}</script>
+  <script type="text/javascript">setTimeout(function () {var i = document.createElement("iframe"),oid = new URLSearchParams(window.location.search);i.async = true;i.style="display:none";i.setAttribute("src", "https://buygoods.com/affiliates/go/conversion/iframe/bg?a=11943&t=6bea6c7c7a71a36b83e176af6f6189de&s="+ReadCookie('sessid2'));document.body.appendChild(i);}, 1000);</script>
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
 
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
-
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:       #0a0a0f;
-      --panel:    #11111a;
-      --border:   #1e1e2e;
-      --accent:   #00ffaa;
-      --danger:   #ff4455;
-      --warn:     #ffcc00;
-      --text:     #e0e0f0;
-      --muted:    #555570;
-      --mono:     'JetBrains Mono', monospace;
-      --sans:     'Syne', sans-serif;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-      gap: 28px;
-    }
-
-    /* ── grid noise overlay ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,255,170,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,170,.03) 1px, transparent 1px);
-      background-size: 32px 32px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container { position: relative; z-index: 1; width: 100%; max-width: 780px; }
-
-    /* ── header ── */
-    header {
-      display: flex; align-items: center; gap: 14px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-    }
-    .badge {
-      background: var(--accent);
-      color: #000;
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      padding: 4px 10px;
-      border-radius: 3px;
-    }
-    header h1 { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
-    header p  { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 3px; }
-
-    /* ── param strip ── */
-    #param-strip {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 20px;
-      font-family: var(--mono);
-      font-size: 12px;
-    }
-    #param-strip .label { color: var(--muted); margin-bottom: 8px; font-size: 10px; letter-spacing: .1em; }
-    #param-strip .row   { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
-    .tag {
-      background: #1a1a2e;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 3px 10px;
-      font-size: 11px;
-    }
-    .tag span { color: var(--accent); }
-    .tag.missing span { color: var(--danger); }
-
-    /* ── cookie table ── */
-    #cookie-box {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    #cookie-box .box-head {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border);
-      font-size: 11px; letter-spacing: .1em; color: var(--muted);
-    }
-    #cookie-box .box-head strong { color: var(--text); font-size: 13px; }
-    #cookie-count {
-      background: var(--accent);
-      color: #000;
-      font-family: var(--mono);
-      font-size: 10px; font-weight: 700;
-      padding: 2px 8px; border-radius: 20px;
-    }
-    #cookie-list { padding: 12px 20px; display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }
-    .c-row {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 6px 10px;
-      border-radius: 5px;
-      background: #0e0e18;
-      border: 1px solid transparent;
-      transition: border-color .2s;
-    }
-    .c-row:hover { border-color: var(--border); }
-    .c-row .k { color: var(--warn); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .c-row .v { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .c-row.highlight .k { color: var(--accent); }
-    .c-row.highlight { border-color: rgba(0,255,170,.2); }
-    #no-cookies { padding: 20px; color: var(--muted); font-family: var(--mono); font-size: 12px; text-align: center; }
-
-    /* ── buttons ── */
-    .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-    .btn {
-      display: flex; flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-      padding: 18px 22px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      cursor: pointer;
-      transition: all .2s;
-      text-align: left;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn .btn-label { font-family: var(--sans); font-size: 14px; font-weight: 700; }
-    .btn .btn-sub   { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-
-    .btn-checkout {
-      border-color: rgba(0,255,170,.3);
-      background: linear-gradient(135deg, #0d1f1a, #0a0a0f);
-    }
-    .btn-checkout:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(0,255,170,.1); }
-    .btn-checkout .btn-label { color: var(--accent); }
-
-    .btn-cleaner {
-      border-color: rgba(255,68,85,.3);
-      background: linear-gradient(135deg, #1f0d10, #0a0a0f);
-    }
-    .btn-cleaner:hover { border-color: var(--danger); box-shadow: 0 0 20px rgba(255,68,85,.1); }
-    .btn-cleaner .btn-label { color: var(--danger); }
-
-    .btn-refresh {
-      border-color: rgba(255,204,0,.3);
-      background: linear-gradient(135deg, #1a1700, #0a0a0f);
-    }
-    .btn-refresh:hover { border-color: var(--warn); }
-    .btn-refresh .btn-label { color: var(--warn); }
-
-    .btn-copy {
-      border-color: var(--border);
-    }
-    .btn-copy:hover { border-color: #444; }
-    .btn-copy .btn-label { color: var(--text); }
-
-    /* ── log ── */
-    #log-box {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    #log-box .box-head {
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border);
-      font-size: 11px; letter-spacing: .1em; color: var(--muted);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    #log-box .box-head strong { color: var(--text); font-size: 13px; }
-    #log        { padding: 12px 20px; font-family: var(--mono); font-size: 11px; max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
-    .log-line   { display: flex; gap: 10px; }
-    .log-time   { color: var(--muted); white-space: nowrap; }
-    .log-msg    { color: var(--text); }
-    .log-ok     .log-msg { color: var(--accent); }
-    .log-err    .log-msg { color: var(--danger); }
-    .log-warn   .log-msg { color: var(--warn); }
-
-    /* ── status pill ── */
-    #status-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--mono); font-size: 10px;
-      padding: 3px 10px; border-radius: 20px;
-      border: 1px solid var(--border);
-    }
-    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-
-    .auto-step { color: var(--muted); padding:6px 10px; border-radius:5px; border:1px solid transparent; transition:all .3s; font-family:var(--mono); font-size:11px; }
-    .auto-step.active { color:var(--warn);   border-color:rgba(255,204,0,.2);  background:#1a1700; }
-    .auto-step.done   { color:var(--accent); border-color:rgba(0,255,170,.2);  background:#0d1f1a; }
-    .auto-step.err    { color:var(--danger); border-color:rgba(255,68,85,.2);  background:#1f0d10; }
-
-    /* scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0a0f;--panel:#11111a;--border:#1e1e2e;--accent:#00ffaa;--danger:#ff4455;--warn:#ffcc00;--text:#e0e0f0;--muted:#555570;--mono:'JetBrains Mono',monospace;--sans:'Syne',sans-serif}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 16px;gap:14px}
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,170,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,170,.03) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+    .wrap{position:relative;z-index:1;width:100%;max-width:780px;display:flex;flex-direction:column;gap:14px}
+    /* header */
+    header{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+    .badge{background:var(--accent);color:#000;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;padding:4px 10px;border-radius:3px}
+    header h1{font-size:19px;font-weight:800}
+    header p{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:2px}
+    .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);margin-left:auto}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.5s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    /* panels */
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    .ph{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+    .ph strong{color:var(--text);font-size:13px}
+    .pb{padding:12px 16px}
+    /* params */
+    .row{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:#1a1a2e;border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;font-family:var(--mono)}
+    .tag span{color:var(--accent)}
+    .tag.miss span{color:var(--danger)}
+    .tag.hi{border-color:rgba(0,255,170,.35)}
+    /* cookies */
+    .cbadge{background:var(--accent);color:#000;font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+    #cookie-list{display:flex;flex-direction:column;gap:5px;max-height:200px;overflow-y:auto}
+    .cr{display:grid;grid-template-columns:180px 1fr;gap:10px;font-family:var(--mono);font-size:11px;padding:5px 10px;border-radius:5px;background:#0e0e18;border:1px solid transparent}
+    .cr .k{color:var(--warn);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cr .v{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cr.hi{border-color:rgba(0,255,170,.2)}
+    .cr.hi .k{color:var(--accent)}
+    /* auto panel */
+    #auto-panel{border-color:rgba(255,204,0,.4);display:none}
+    .prog-wrap{background:#1a1a2e;border-radius:6px;height:8px;overflow:hidden;margin-bottom:12px}
+    .prog-bar{height:100%;background:var(--warn);width:0%;transition:width .4s;border-radius:6px}
+    .step{font-family:var(--mono);font-size:11px;color:var(--muted);padding:7px 12px;border-radius:5px;border:1px solid transparent;transition:all .3s;margin-bottom:4px}
+    .step.active{color:var(--warn);border-color:rgba(255,204,0,.25);background:#1a1700}
+    .step.done{color:var(--accent);border-color:rgba(0,255,170,.25);background:#0d1f1a}
+    .step.fail{color:var(--danger);border-color:rgba(255,68,85,.25);background:#1f0d10}
+    /* before snapshot */
+    #before-panel{border-color:rgba(0,255,170,.35);display:none}
+    #before-snap{font-family:var(--mono);font-size:10px;color:var(--accent);white-space:pre-wrap;word-break:break-all;max-height:150px;overflow-y:auto;line-height:1.6}
+    #countdown{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--warn);text-align:center;padding:10px 0 6px}
+    .copy-btn{background:var(--accent);color:#000;border:none;border-radius:5px;font-family:var(--mono);font-size:11px;font-weight:700;padding:5px 14px;cursor:pointer;transition:opacity .2s}
+    .copy-btn:hover{opacity:.8}
+    /* buttons */
+    .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .btn{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:14px 18px;border-radius:10px;border:1px solid var(--border);background:var(--panel);cursor:pointer;transition:all .2s;text-align:left}
+    .btn:hover{transform:translateY(-2px)}
+    .btn .lbl{font-family:var(--sans);font-size:13px;font-weight:700}
+    .btn .sub{font-family:var(--mono);font-size:10px;color:var(--muted)}
+    .btn-go{border-color:rgba(0,255,170,.3);background:linear-gradient(135deg,#0d1f1a,#0a0a0f)}
+    .btn-go:hover{border-color:var(--accent)}
+    .btn-go .lbl{color:var(--accent)}
+    .btn-clr{border-color:rgba(255,68,85,.3);background:linear-gradient(135deg,#1f0d10,#0a0a0f)}
+    .btn-clr:hover{border-color:var(--danger)}
+    .btn-clr .lbl{color:var(--danger)}
+    .btn-ref{border-color:rgba(255,204,0,.3);background:linear-gradient(135deg,#1a1700,#0a0a0f)}
+    .btn-ref:hover{border-color:var(--warn)}
+    .btn-ref .lbl{color:var(--warn)}
+    .btn-snap .lbl{color:var(--text)}
+    /* log */
+    #log{padding:10px 16px;font-family:var(--mono);font-size:11px;max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
+    .ll{display:flex;gap:10px}
+    .lt{color:var(--muted);white-space:nowrap}
+    .lm{color:var(--text)}
+    .lok .lm{color:var(--accent)}
+    .lerr .lm{color:var(--danger)}
+    .lwrn .lm{color:var(--warn)}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
   </style>
 </head>
 <body>
-
-<div class="container" style="display:flex;flex-direction:column;gap:20px;">
+<div class="wrap">
 
   <!-- Header -->
   <header>
     <div>
-      <div style="display:flex;align-items:center;gap:10px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:3px">
         <span class="badge">TEST</span>
         <h1>BuyGoods Affiliate Tracker</h1>
       </div>
       <p>Session & Cookie Behavior Analysis Tool</p>
     </div>
-    <div style="margin-left:auto;" id="status-pill">
-      <span class="dot"></span> LIVE
-    </div>
+    <div class="pill"><span class="dot"></span> LIVE</div>
   </header>
 
   <!-- URL Params -->
-  <div id="param-strip">
-    <div class="label">DETECTED URL PARAMETERS</div>
-    <div class="row" id="param-row"></div>
+  <div class="panel">
+    <div class="ph"><strong>🔗 URL Parameters</strong></div>
+    <div class="pb"><div class="row" id="param-row"></div></div>
   </div>
 
-  <!-- Cookie Viewer -->
-  <div id="cookie-box">
-    <div class="box-head">
+  <!-- Active Cookies -->
+  <div class="panel">
+    <div class="ph">
       <strong>🍪 Active Cookies</strong>
-      <span id="cookie-count">0</span>
+      <span class="cbadge" id="cookie-count">0</span>
     </div>
-    <div id="cookie-list"><div id="no-cookies">No cookies found</div></div>
+    <div class="pb">
+      <div id="cookie-list">
+        <div style="color:var(--muted);font-family:var(--mono);font-size:12px;text-align:center;padding:8px">Waiting for cookies...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTO MODE -->
+  <div class="panel" id="auto-panel">
+    <div class="ph">
+      <strong>⚡ AUTO MODE</strong>
+      <span id="auto-status" style="font-family:var(--mono);font-size:11px;color:var(--warn)">Starting...</span>
+    </div>
+    <div class="pb">
+      <div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+      <div id="s1" class="step">⏳ Step 1: Waiting for all 6 BuyGoods cookies...</div>
+      <div id="s2" class="step">⏸ Step 2: Capturing BEFORE snapshot</div>
+      <div id="s3" class="step">⏸ Step 3: Countdown — copy your snapshot!</div>
+      <div id="s4" class="step">⏸ Step 4: Running cleaner + redirect</div>
+    </div>
+  </div>
+
+  <!-- BEFORE SNAPSHOT -->
+  <div class="panel" id="before-panel">
+    <div class="ph">
+      <strong>📸 BEFORE Snapshot</strong>
+      <button class="copy-btn" onclick="copyBefore()">📋 Copy JSON</button>
+    </div>
+    <div class="pb">
+      <div id="countdown"></div>
+      <pre id="before-snap"></pre>
+    </div>
   </div>
 
   <!-- Buttons -->
   <div class="btn-grid">
-
-    <button class="btn btn-checkout" onclick="goCheckout()">
-      <span class="btn-label">🛒 Open Checkout</span>
-      <span class="btn-sub">Opens BuyGoods checkout with aff_id</span>
+    <button class="btn btn-go" onclick="goCheckout()">
+      <span class="lbl">🛒 Open Checkout</span>
+      <span class="sub">Sends aff_id + sessid2 + subid</span>
     </button>
-
-    <button class="btn btn-cleaner" onclick="runCleaner()">
-      <span class="btn-label">🧹 Run Cleaner</span>
-      <span class="btn-sub">Clear aff_id + cookies → redirect clean</span>
+    <button class="btn btn-clr" onclick="manualCleaner()">
+      <span class="lbl">🧹 Manual Cleaner</span>
+      <span class="sub">Clear cookies + redirect clean</span>
     </button>
-
-    <button class="btn btn-refresh" onclick="refreshCookies()">
-      <span class="btn-label">🔄 Refresh Cookie View</span>
-      <span class="btn-sub">Re-read cookies without reloading page</span>
+    <button class="btn btn-ref" onclick="refreshCookies()">
+      <span class="lbl">🔄 Refresh Cookies</span>
+      <span class="sub">Re-read without reloading</span>
     </button>
-
-    <button class="btn btn-copy" onclick="copySnapshot()">
-      <span class="btn-label">📋 Copy Snapshot</span>
-      <span class="btn-sub">Copy all cookies + params to clipboard</span>
+    <button class="btn btn-snap" onclick="copySnapshot()">
+      <span class="lbl">📋 Copy Snapshot</span>
+      <span class="sub">Copy current state to clipboard</span>
     </button>
-
-  </div>
-
-  <!-- Auto Mode Panel -->
-  <div id="auto-box" style="display:none;background:var(--panel);border:1px solid rgba(255,204,0,.4);border-radius:10px;overflow:hidden;">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);">
-      <strong style="font-size:13px;">⚡ AUTO MODE</strong>
-      <span id="auto-status" style="font-family:var(--mono);font-size:11px;color:var(--warn);">Initializing...</span>
-    </div>
-    <div style="padding:16px 20px;">
-      <div style="background:#1a1a2e;border-radius:6px;height:8px;overflow:hidden;margin-bottom:14px;">
-        <div id="auto-progress" style="height:100%;background:var(--warn);width:0%;transition:width .4s;border-radius:6px;"></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div id="step1" class="auto-step">⏳ Step 1: Waiting for BuyGoods cookies...</div>
-        <div id="step2" class="auto-step">⏸️ Step 2: Running cleaner</div>
-        <div id="step3" class="auto-step">⏸️ Step 3: Waiting for new session</div>
-        <div id="step4" class="auto-step">⏸️ Step 4: Ready — click Checkout!</div>
-      </div>
-    </div>
   </div>
 
   <!-- Log -->
-  <div id="log-box">
-    <div class="box-head">
+  <div class="panel">
+    <div class="ph">
       <strong>📟 Activity Log</strong>
-      <span id="log-count" style="font-family:var(--mono);font-size:10px;color:var(--muted);">0 events</span>
+      <span id="log-count" style="font-family:var(--mono);font-size:10px;color:var(--muted)">0 events</span>
     </div>
     <div id="log"></div>
   </div>
 
 </div>
-
 <script>
   // ── CONFIG ──────────────────────────────────────────────
-  const CHECKOUT_URL = "https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=";
+  const CHECKOUT_URL   = "https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=";
+  const STABLE_SECS    = 3;   // cookies must be stable for this many seconds
+  const COUNTDOWN_SECS = 5;   // seconds to show snapshot before cleaner runs
   // ────────────────────────────────────────────────────────
 
-  // ── CORE HELPERS (defined first — used everywhere) ──────
+  let logCount  = 0;
+  let beforeSnap = null;
+
+  // ── CORE HELPERS ────────────────────────────────────────
   function getCookie(name) {
-    const parts = document.cookie.split(/;\s*/);
-    for (const part of parts) {
-      if (part.startsWith(name + '=')) return part.substring(name.length + 1);
-    }
+    for (const p of document.cookie.split(/;\s*/))
+      if (p.startsWith(name + '=')) return p.substring(name.length + 1);
     return '';
   }
-
-  function getDomainVariations() {
-    const h = location.hostname;
-    const parts = h.split('.');
-    const variations = ['', h, '.' + h];
+  function cookieCount() {
+    return document.cookie ? document.cookie.split(';').filter(Boolean).length : 0;
+  }
+  function getDomains() {
+    const h = location.hostname, parts = h.split('.');
+    const v = ['', h, '.' + h];
     for (let i = 1; i < parts.length - 1; i++) {
       const d = parts.slice(i).join('.');
-      variations.push(d);
-      variations.push('.' + d);
+      v.push(d, '.' + d);
     }
-    return [...new Set(variations)];
+    return [...new Set(v)];
   }
-  // ────────────────────────────────────────────────────────
+  function getSnapshot() {
+    const params = Object.fromEntries(new URLSearchParams(window.location.search));
+    const cookies = {};
+    document.cookie.split(';').forEach(c => {
+      const [k, ...v] = c.split('=');
+      if (k.trim()) cookies[k.trim()] = v.join('=').trim();
+    });
+    return { timestamp: new Date().toISOString(), url: window.location.href, params, cookies };
+  }
 
-  let logCount = 0;
-
+  // ── LOG ─────────────────────────────────────────────────
   function log(msg, type = '') {
-    const el = document.getElementById('log');
+    const el  = document.getElementById('log');
     const now = new Date();
-    const t = now.toTimeString().slice(0,8) + '.' + String(now.getMilliseconds()).padStart(3,'0');
-    const line = document.createElement('div');
-    line.className = 'log-line ' + (type ? 'log-' + type : '');
-    line.innerHTML = `<span class="log-time">[${t}]</span><span class="log-msg">${msg}</span>`;
-    el.appendChild(line);
+    const t   = now.toTimeString().slice(0,8) + '.' + String(now.getMilliseconds()).padStart(3,'0');
+    const ln  = document.createElement('div');
+    ln.className = 'll' + (type ? ' l' + type : '');
+    ln.innerHTML = `<span class="lt">[${t}]</span><span class="lm">${msg}</span>`;
+    el.appendChild(ln);
     el.scrollTop = el.scrollHeight;
-    logCount++;
-    document.getElementById('log-count').textContent = logCount + ' events';
+    document.getElementById('log-count').textContent = (++logCount) + ' events';
   }
 
   // ── PARAMS ──────────────────────────────────────────────
@@ -357,271 +234,245 @@
     const params = new URLSearchParams(window.location.search);
     const row = document.getElementById('param-row');
     row.innerHTML = '';
-    if ([...params].length === 0) {
-      row.innerHTML = '<span class="tag missing"><span>No parameters in URL</span></span>';
+    if (![...params].length) {
+      row.innerHTML = '<span class="tag miss"><span>No parameters in URL</span></span>';
       return;
     }
     params.forEach((v, k) => {
-      const tag = document.createElement('div');
-      const isAff = k === 'aff_id';
-      tag.className = 'tag' + (isAff ? ' highlight' : '');
-      tag.innerHTML = `${k}=<span>${v}</span>`;
-      row.appendChild(tag);
-      if (isAff) log(`aff_id detected: ${v}`, 'ok');
+      const t = document.createElement('div');
+      t.className = 'tag' + (k === 'aff_id' ? ' hi' : '');
+      t.innerHTML = `${k}=<span>${v}</span>`;
+      row.appendChild(t);
+      if (k === 'aff_id') log(`aff_id detected: ${v}`, 'ok');
+      if (k === 'subid')  log(`subid detected: ${v}`, 'ok');
     });
   }
 
-  // ── COOKIES ─────────────────────────────────────────────
-  const BG_KEYS = ['sessid2','spisessid2_11943','spisessid2_5316','spireferrer_11943','spireferrer_5316','spi_funnel_codename'];
-
+  // ── COOKIE DISPLAY ──────────────────────────────────────
+  const BG = ['sessid2','aff_id','sid','campaign_id','spi_funnel_codename','referrer','spireferrer','spisessid'];
   function refreshCookies() {
     const list = document.getElementById('cookie-list');
-    const cookies = document.cookie;
+    const raw  = document.cookie;
     list.innerHTML = '';
-
-    if (!cookies.trim()) {
-      list.innerHTML = '<div id="no-cookies">No cookies found</div>';
+    if (!raw.trim()) {
+      list.innerHTML = '<div style="color:var(--muted);font-family:var(--mono);font-size:12px;text-align:center;padding:8px">No cookies found</div>';
       document.getElementById('cookie-count').textContent = '0';
-      log('Cookie refresh: 0 cookies found', 'warn');
       return;
     }
-
-    const pairs = cookies.split(';').map(c => c.trim()).filter(Boolean);
+    const pairs = raw.split(';').map(c => c.trim()).filter(Boolean);
     document.getElementById('cookie-count').textContent = pairs.length;
-
     pairs.forEach(pair => {
       const idx = pair.indexOf('=');
       const k = pair.slice(0, idx).trim();
       const v = pair.slice(idx + 1).trim();
       const row = document.createElement('div');
-      const isBG = BG_KEYS.some(bk => k.includes(bk) || k === bk);
-      row.className = 'c-row' + (isBG ? ' highlight' : '');
-      row.innerHTML = `<span class="k">${k}</span><span class="v">${v}</span>`;
+      row.className = 'cr' + (BG.some(b => k.toLowerCase().includes(b)) ? ' hi' : '');
+      row.innerHTML = `<span class="k">${k}</span><span class="v">${v || '(empty)'}</span>`;
       list.appendChild(row);
     });
+  }
 
-    log(`Cookie refresh: ${pairs.length} cookies found`, 'ok');
+  // ── CLEAR COOKIES ───────────────────────────────────────
+  function clearAllCookies() {
+    const domains = getDomains();
+    const paths   = ['/', '/v2/', '/v2', ''];
+    const exp     = 'Thu, 01 Jan 1970 00:00:00 UTC';
+    document.cookie.split(';').forEach(c => {
+      const k = c.split('=')[0].trim();
+      if (!k) return;
+      domains.forEach(d => paths.forEach(p =>
+        document.cookie = `${k}=; expires=${exp}; path=${p}${d ? '; domain=' + d : ''}`
+      ));
+    });
+    return cookieCount();
+  }
+
+  // ── MANUAL CLEANER ──────────────────────────────────────
+  function manualCleaner() {
+    log('🧹 Manual cleaner...', 'wrn');
+    const after = clearAllCookies();
+    log(`${after} cookies remain after clear`, after > 0 ? 'err' : 'ok');
+    const clean = location.origin + location.pathname;
+    log(`Redirecting → ${clean}`, 'wrn');
+    setTimeout(() => { location.href = clean; }, 1500);
   }
 
   // ── CHECKOUT ────────────────────────────────────────────
   function goCheckout() {
-    const urlParams  = new URLSearchParams(window.location.search);
-    const affId      = urlParams.get('aff_id')   || getCookie('aff_id')    || '';
-    const subId      = urlParams.get('subid')     || getCookie('sid')       || '';
-    const sessid     = getCookie('sessid2')        || '';
-    const campaignId = getCookie('campaign_id')    || '';
-
-    const checkout   = new URL(CHECKOUT_URL);
-    if (affId)      checkout.searchParams.set('aff_id',      affId);
-    if (sessid)     checkout.searchParams.set('sessid2',     sessid);
-    if (subId)      checkout.searchParams.set('subid',       subId);
-    if (campaignId) checkout.searchParams.set('campaign_id', campaignId);
-
-    const finalURL = checkout.toString();
-    log(`── Checkout Params ──`, '');
-    log(`aff_id:  ${affId   || '❌ MISSING'}`, affId   ? 'ok' : 'err');
-    log(`sessid2: ${sessid  || '❌ MISSING'}`, sessid  ? 'ok' : 'err');
-    log(`subid:   ${subId   || '(empty)'}`,    'ok');
-    log(`Opening → ${finalURL.slice(0, 80)}...`, 'ok');
-    window.open(finalURL, '_blank');
-  }
-
-  // ── CLEANER ─────────────────────────────────────────────
-  function runCleaner(silent = false) {
-    if (!silent) log('🧹 Cleaner started...', 'warn');
-
-    const before      = document.cookie;
-    const beforeCount = before ? before.split(';').filter(Boolean).length : 0;
-    if (!silent) log(`BEFORE: ${beforeCount} cookies`, 'warn');
-
-    const domains = getDomainVariations();
-    const paths   = ['/', '/v2/', '/v2', ''];
-    const expires = 'Thu, 01 Jan 1970 00:00:00 UTC';
-
-    document.cookie.split(';').forEach(c => {
-      const k = c.split('=')[0].trim();
-      if (!k) return;
-      domains.forEach(d => {
-        paths.forEach(p => {
-          const dp = d ? `; domain=${d}` : '';
-          document.cookie = `${k}=; expires=${expires}; path=${p}${dp}`;
-        });
-      });
-      if (!silent) log(`Deleted: ${k}`, 'warn');
-    });
-
-    const after      = document.cookie;
-    const afterCount = after ? after.split(';').filter(Boolean).length : 0;
-    if (!silent) log(`AFTER: ${afterCount} cookies remain`, afterCount > 0 ? 'err' : 'ok');
-
-    // Only redirect if NOT in auto mode
-    if (!silent) {
-      const cleanURL = window.location.origin + window.location.pathname;
-      log(`Redirecting → ${cleanURL}`, 'warn');
-      setTimeout(() => { window.location.href = cleanURL; }, 2000);
-    }
-
-    return afterCount;
+    const urlP   = new URLSearchParams(window.location.search);
+    const affId  = urlP.get('aff_id')  || getCookie('aff_id')  || '';
+    const subId  = urlP.get('subid')   || getCookie('sid')      || '';
+    const sessid = getCookie('sessid2') || '';
+    const campId = getCookie('campaign_id') || '';
+    const url    = new URL(CHECKOUT_URL);
+    if (affId)  url.searchParams.set('aff_id',     affId);
+    if (sessid) url.searchParams.set('sessid2',    sessid);
+    if (subId)  url.searchParams.set('subid',      subId);
+    if (campId) url.searchParams.set('campaign_id',campId);
+    log('── Checkout ──', '');
+    log(`aff_id:  ${affId  || '❌ MISSING'}`, affId  ? 'ok' : 'err');
+    log(`sessid2: ${sessid || '❌ MISSING'}`, sessid ? 'ok' : 'err');
+    log(`subid:   ${subId  || '(none)'}`, 'ok');
+    window.open(url.toString(), '_blank');
   }
 
   // ── COPY SNAPSHOT ───────────────────────────────────────
   function copySnapshot() {
-    const params = Object.fromEntries(new URLSearchParams(window.location.search));
-    const cookies = {};
-    document.cookie.split(';').forEach(c => {
-      const [k, ...v] = c.split('=');
-      if (k.trim()) cookies[k.trim()] = v.join('=').trim();
-    });
-    const snap = {
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      params,
-      cookies
-    };
-    navigator.clipboard.writeText(JSON.stringify(snap, null, 2))
-      .then(() => log('Snapshot copied to clipboard ✅', 'ok'))
-      .catch(() => log('Clipboard copy failed ❌', 'err'));
+    navigator.clipboard.writeText(JSON.stringify(getSnapshot(), null, 2))
+      .then(() => log('Snapshot copied ✅', 'ok'))
+      .catch(() => log('Clipboard failed ❌', 'err'));
+  }
+  function copyBefore() {
+    if (!beforeSnap) return;
+    navigator.clipboard.writeText(JSON.stringify(beforeSnap, null, 2))
+      .then(() => log('BEFORE copied ✅', 'ok'))
+      .catch(() => log('Clipboard failed ❌', 'err'));
   }
 
-  // ── AUTO MODE ───────────────────────────────────────────
-  const urlParams = new URLSearchParams(window.location.search);
-  const hasAffId  = urlParams.has('aff_id');
-
-  function setStep(id, state, text) {
+  // ── AUTO MODE HELPERS ───────────────────────────────────
+  function setStep(id, cls, txt) {
     const el = document.getElementById(id);
     if (!el) return;
-    el.className = 'auto-step ' + state;
-    if (text) el.textContent = text;
+    el.className = 'step ' + cls;
+    if (txt) el.textContent = txt;
   }
-  function setProgress(pct) {
-    const el = document.getElementById('auto-progress');
-    if (el) el.style.width = pct + '%';
-  }
-  function setAutoStatus(text) {
-    const el = document.getElementById('auto-status');
-    if (el) el.textContent = text;
-  }
+  function setProg(p) { const el = document.getElementById('prog'); if (el) el.style.width = p + '%'; }
+  function setStat(t) { const el = document.getElementById('auto-status'); if (el) el.textContent = t; }
 
+  // PHASE 1 — wait for cookies to stabilize
   function runAutoMode() {
-    const box = document.getElementById('auto-box');
-    if (box) box.style.display = 'block';
-    log('⚡ AUTO MODE activated', 'ok');
-    log('Polling for BG cookies every 500ms...', 'ok');
+    document.getElementById('auto-panel').style.display = 'block';
+    log('⚡ AUTO MODE started', 'ok');
 
-    setStep('step1', 'active', '⏳ Step 1: Waiting for BuyGoods cookies...');
-    setProgress(10);
+    setStep('s1', 'active', `⏳ Step 1: Waiting for cookies to stabilize...`);
+    setProg(5); setStat('Waiting for cookies...');
 
-    let waited = 0;
-    const maxWait = 10000;
+    let elapsed    = 0;
+    let lastCount  = -1;
+    let stableTime = 0;
+    const MAX      = 15000;
+    const STABLE_MS = STABLE_SECS * 1000;
 
-    const cookieWatcher = setInterval(() => {
-      waited += 500;
-      setProgress(Math.min(10 + (waited / maxWait) * 30, 40));
+    const watcher = setInterval(() => {
+      elapsed += 500;
+      const cnt = cookieCount();
+      refreshCookies();
 
-      const affCookie  = getCookie('aff_id');
-      const sessCookie = getCookie('sessid2');
+      if (cnt > 0 && cnt === lastCount) {
+        stableTime += 500;
+        const remaining = ((STABLE_MS - stableTime) / 1000).toFixed(1);
+        setStat(`${cnt} cookies — stable for ${(stableTime/1000).toFixed(1)}s / ${STABLE_SECS}s`);
+        setProg(Math.min(5 + (stableTime / STABLE_MS) * 30, 35));
+        setStep('s1', 'active', `⏳ Step 1: ${cnt} cookies — stabilizing ${(stableTime/1000).toFixed(1)}s/${STABLE_SECS}s...`);
+      } else {
+        // count changed — reset stable timer
+        if (cnt !== lastCount && lastCount !== -1) {
+          log(`Cookie count changed: ${lastCount} → ${cnt}`, 'wrn');
+        }
+        stableTime = 0;
+        setStat(`${cnt} cookies loading... ${elapsed/1000}s`);
+        setProg(Math.min(5 + (elapsed / MAX) * 15, 20));
+        setStep('s1', 'active', `⏳ Step 1: ${cnt} cookies detected — waiting for stable...`);
+      }
 
-      setAutoStatus(`Waiting for cookies... ${waited/1000}s`);
+      lastCount = cnt;
 
-      if (affCookie && sessCookie) {
-        clearInterval(cookieWatcher);
-        log(`✅ Cookies ready! aff_id=${affCookie}`, 'ok');
-        setStep('step1', 'done', `✅ Step 1: Cookies loaded (aff_id=${affCookie})`);
-        setProgress(40);
-        phase2_cleaner();
-      } else if (waited >= maxWait) {
-        clearInterval(cookieWatcher);
-        log('⚠️ Timeout — running cleaner anyway', 'warn');
-        setStep('step1', 'err', '⚠️ Step 1: Timeout — cookies slow/blocked');
-        setProgress(40);
-        phase2_cleaner();
+      if (stableTime >= STABLE_MS && cnt > 0) {
+        clearInterval(watcher);
+        log(`✅ Cookies stable at ${cnt} for ${STABLE_SECS}s!`, 'ok');
+        setStep('s1', 'done', `✅ Step 1: ${cnt} cookies stable — ready!`);
+        setProg(35);
+        phase2();
+      } else if (elapsed >= MAX) {
+        clearInterval(watcher);
+        log(`⚠️ Timeout after ${elapsed/1000}s — ${cnt} cookies`, 'wrn');
+        setStep('s1', cnt > 0 ? 'done' : 'fail',
+          cnt > 0 ? `✅ Step 1: ${cnt} cookies (timeout — proceeding)` 
+                  : `⚠️ Step 1: No cookies detected!`);
+        setProg(35);
+        if (cnt > 0) phase2();
       }
     }, 500);
   }
 
-  function phase2_cleaner() {
-    setStep('step2', 'active', '⏳ Step 2: Running cleaner...');
-    setProgress(50);
-    setAutoStatus('Clearing cookies...');
-    log('🧹 Auto cleaner running silently...', 'warn');
+  // PHASE 2 — capture + show BEFORE snapshot
+  function phase2() {
+    setStep('s2', 'active', '⏳ Step 2: Capturing BEFORE snapshot...');
+    setStat('Capturing...'); setProg(45);
 
-    const surviving = runCleaner(true);
+    beforeSnap = getSnapshot();
+    document.getElementById('before-panel').style.display = 'block';
+    document.getElementById('before-snap').textContent = JSON.stringify(beforeSnap, null, 2);
 
-    log(`Cleaner done! ${surviving} cookies survived`, surviving > 0 ? 'err' : 'ok');
+    log('📸 BEFORE snapshot captured', 'ok');
+    navigator.clipboard.writeText(JSON.stringify(beforeSnap, null, 2))
+      .then(() => log('Auto-copied to clipboard ✅', 'ok'))
+      .catch(() => log('Auto-copy failed — use Copy JSON button', 'wrn'));
 
-    // Strip aff_id from URL bar silently
-    const cleanURL = window.location.origin + window.location.pathname;
-    window.history.replaceState({}, '', cleanURL);
-    log(`URL cleaned → ${cleanURL}`, 'warn');
-
-    setStep('step2', 'done', `✅ Step 2: Done — ${surviving} cookies survived`);
-    setProgress(70);
-    phase3_wait();
+    setStep('s2', 'done', '✅ Step 2: BEFORE snapshot captured & copied!');
+    setProg(55);
+    phase3();
   }
 
-  function phase3_wait() {
-    setStep('step3', 'active', '⏳ Step 3: Waiting for new BG session...');
-    setAutoStatus('Waiting for new sessid...');
-    log('Waiting for BG script to create new session...', 'warn');
+  // PHASE 3 — countdown
+  function phase3() {
+    setStep('s3', 'active', `⏳ Step 3: ${COUNTDOWN_SECS}s countdown — copy snapshot!`);
+    setStat('Countdown...');
 
-    let waited2 = 0;
-    const maxWait2 = 8000;
+    const cdEl = document.getElementById('countdown');
+    let secs = COUNTDOWN_SECS;
+    cdEl.textContent = `⏱ Cleaner runs in ${secs}s`;
 
-    const sessWatcher = setInterval(() => {
-      waited2 += 500;
-      setProgress(Math.min(70 + (waited2 / maxWait2) * 25, 95));
-      setAutoStatus(`Waiting for new session... ${waited2/1000}s`);
-
-      const newSess = getCookie('sessid2');
-      const newAff  = getCookie('aff_id');
-
-      if (newSess) {
-        clearInterval(sessWatcher);
-        log(`New sessid: ${newSess}`, 'ok');
-        log(`aff_id in new session: ${newAff || '❌ GONE — commission lost!'}`, newAff ? 'warn' : 'err');
-        setStep('step3', newAff ? 'err' : 'done',
-          newAff ? `⚠️ Step 3: aff_id STILL present = ${newAff}`
-                 : `✅ Step 3: New session — aff_id GONE ❌`);
-        setProgress(95);
-        phase4_ready(newSess, newAff);
-      } else if (waited2 >= maxWait2) {
-        clearInterval(sessWatcher);
-        log('No new session detected within 8s', 'warn');
-        setStep('step3', 'err', '⚠️ Step 3: No new session detected');
-        setProgress(95);
-        phase4_ready('', '');
+    const cd = setInterval(() => {
+      secs--;
+      setProg(55 + ((COUNTDOWN_SECS - secs) / COUNTDOWN_SECS) * 20);
+      if (secs > 0) {
+        cdEl.textContent = `⏱ Cleaner runs in ${secs}s`;
+        setStep('s3', 'active', `⏳ Step 3: ${secs}s remaining — copy now!`);
+      } else {
+        clearInterval(cd);
+        cdEl.textContent = '🧹 Running cleaner...';
+        setStep('s3', 'done', '✅ Step 3: Countdown done!');
+        setProg(75);
+        phase4();
       }
-    }, 500);
+    }, 1000);
   }
 
-  function phase4_ready(sessid, affId) {
-    setProgress(100);
-    refreshCookies();
-    if (!affId) {
-      setStep('step4', 'done', '🛒 Step 4: READY — Click Checkout (aff_id STRIPPED!)');
-      setAutoStatus('✅ Done — aff_id stripped!');
-      log('─────────────────────────', '');
-      log('🚨 RESULT: aff_id stripped! Commission will be LOST on checkout!', 'err');
-      log('🛒 Click Open Checkout to complete the test', 'warn');
-    } else {
-      setStep('step4', 'err', `⚠️ Step 4: aff_id survived = ${affId}`);
-      setAutoStatus('⚠️ aff_id survived!');
-      log('✅ RESULT: aff_id survived — affiliate may be protected', 'ok');
+  // PHASE 4 — clear + redirect
+  function phase4() {
+    setStep('s4', 'active', '⏳ Step 4: Clearing cookies + redirecting...');
+    setStat('Cleaning...'); log('🧹 Auto cleaner running...', 'wrn');
+
+    const before = cookieCount();
+    const after  = clearAllCookies();
+    log(`Cleared ${before - after} cookies. ${after} survived.`, after > 0 ? 'err' : 'ok');
+
+    if (after > 0) {
+      document.cookie.split(';').forEach(c => {
+        const k = c.split('=')[0].trim();
+        if (k) log(`🚨 SURVIVED: ${k}`, 'err');
+      });
     }
+
+    const clean = location.origin + location.pathname;
+    log(`Redirecting → ${clean}`, 'wrn');
+    setStep('s4', 'done', '✅ Step 4: Done! Redirecting in 1s...');
+    setProg(100); setStat('Redirecting...');
+    setTimeout(() => { location.href = clean; }, 1000);
   }
 
   // ── INIT ────────────────────────────────────────────────
-  log('Test page loaded', 'ok');
+  log('Page loaded', 'ok');
   readParams();
   refreshCookies();
   setInterval(refreshCookies, 3000);
 
-  if (hasAffId) {
-    setTimeout(runAutoMode, 500);
+  if (new URLSearchParams(window.location.search).has('aff_id')) {
+    setTimeout(runAutoMode, 300);
   } else {
-    log('ℹ️ No aff_id in URL — manual mode only', 'warn');
+    log('ℹ️ No aff_id — manual mode', 'wrn');
   }
 </script>
-
 </body>
 </html>
