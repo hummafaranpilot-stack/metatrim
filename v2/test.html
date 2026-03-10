@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -237,6 +235,12 @@
     </div>
   </header>
 
+  <!-- Domain Info -->
+  <div id="param-strip" style="margin-top:0;">
+    <div class="label">CURRENT DOMAIN SCOPE</div>
+    <div class="row" id="domain-row"></div>
+  </div>
+
   <!-- URL Params -->
   <div id="param-strip">
     <div class="label">DETECTED URL PARAMETERS</div>
@@ -370,42 +374,68 @@
     window.open(url, '_blank');
   }
 
+  // ── DOMAIN VARIATIONS ───────────────────────────────────
+  function getDomainVariations() {
+    const h = location.hostname;
+    const parts = h.split('.');
+    const variations = ['', h, '.' + h];
+    for (let i = 1; i < parts.length - 1; i++) {
+      const d = parts.slice(i).join('.');
+      variations.push(d);
+      variations.push('.' + d);
+    }
+    return [...new Set(variations)];
+  }
+
   // ── CLEANER ─────────────────────────────────────────────
   function runCleaner() {
     log('🧹 Cleaner started...', 'warn');
 
-    // Step 1: snapshot before
-    const before = document.cookie;
-    log(`Cookies BEFORE: ${before || '(none)'}`, 'warn');
+    const before      = document.cookie;
+    const beforeCount = before ? before.split(';').filter(Boolean).length : 0;
+    log(`BEFORE: ${beforeCount} cookies`, 'warn');
 
-    // Step 2: clear ALL cookies
+    const domains = getDomainVariations();
+    const paths   = ['/', '/v2/', '/v2', ''];
+    const expires = 'Thu, 01 Jan 1970 00:00:00 UTC';
+
+    log(`Targeting ${domains.length} domain variants × ${paths.length} paths`, 'warn');
+    log(`Domains: ${domains.filter(Boolean).join(' | ')}`, 'warn');
+
+    // Nuclear delete — every cookie × every domain × every path
     document.cookie.split(';').forEach(c => {
       const k = c.split('=')[0].trim();
-      // delete for current path and domain variations
-      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${location.hostname};`;
-      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${location.hostname};`;
+      if (!k) return;
+      domains.forEach(d => {
+        paths.forEach(p => {
+          const dp = d ? `; domain=${d}` : '';
+          document.cookie = `${k}=; expires=${expires}; path=${p}${dp}`;
+        });
+      });
+      log(`Delete attempt: ${k}`, 'warn');
     });
-    log(`Cookies cleared via JS`, 'warn');
 
-    // Step 3: snapshot after
-    const after = document.cookie;
-    log(`Cookies AFTER clear: ${after || '(none)'}`, after ? 'err' : 'ok');
+    const after      = document.cookie;
+    const afterCount = after ? after.split(';').filter(Boolean).length : 0;
+    const cleared    = beforeCount - afterCount;
 
-    if (after) {
-      log('⚠️ Some cookies NOT clearable (HttpOnly or Secure)', 'err');
+    log(`─────────────────────────────`, '');
+    log(`Cleared: ${cleared} cookies`, 'ok');
+    log(`Surviving: ${afterCount} cookies`, afterCount > 0 ? 'err' : 'ok');
+
+    if (afterCount > 0) {
+      after.split(';').forEach(c => {
+        const k = c.split('=')[0].trim();
+        if (k) log(`🚨 SURVIVED → ${k} (parent domain or HttpOnly)`, 'err');
+      });
     } else {
-      log('✅ All JS-accessible cookies cleared', 'ok');
+      log('✅ ALL cookies cleared successfully!', 'ok');
     }
 
-    // Step 4: build clean URL (strip aff_id and sessid)
     const cleanURL = window.location.origin + window.location.pathname;
-    log(`Redirecting to clean URL: ${cleanURL}`, 'warn');
+    log(`Redirecting → ${cleanURL}`, 'warn');
 
-    // Step 5: redirect after short delay so log is visible
-    setTimeout(() => {
-      window.location.href = cleanURL;
-    }, 1500);
+    setTimeout(() => { window.location.href = cleanURL; }, 2500);
   }
 
   // ── COPY SNAPSHOT ───────────────────────────────────────
@@ -429,6 +459,17 @@
 
   // ── INIT ────────────────────────────────────────────────
   log('Test page loaded', 'ok');
+
+  // Show domain scope
+  const domRow = document.getElementById('domain-row');
+  getDomainVariations().filter(Boolean).forEach(d => {
+    const tag = document.createElement('div');
+    tag.className = 'tag';
+    tag.innerHTML = `domain=<span>${d}</span>`;
+    domRow.appendChild(tag);
+  });
+  log(`Domain variants: ${getDomainVariations().filter(Boolean).join(', ')}`, 'ok');
+
   readParams();
   refreshCookies();
 
