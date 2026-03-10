@@ -211,10 +211,10 @@
     .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-    .auto-step { color: var(--muted); padding: 6px 10px; border-radius:5px; border:1px solid transparent; transition: all .3s; }
-    .auto-step.active { color: var(--warn); border-color: rgba(255,204,0,.2); background:#1a1700; }
-    .auto-step.done   { color: var(--accent); border-color: rgba(0,255,170,.2); background:#0d1f1a; }
-    .auto-step.err    { color: var(--danger); border-color: rgba(255,68,85,.2); background:#1f0d10; }
+    .auto-step { color: var(--muted); padding:6px 10px; border-radius:5px; border:1px solid transparent; transition:all .3s; font-family:var(--mono); font-size:11px; }
+    .auto-step.active { color:var(--warn);   border-color:rgba(255,204,0,.2);  background:#1a1700; }
+    .auto-step.done   { color:var(--accent); border-color:rgba(0,255,170,.2);  background:#0d1f1a; }
+    .auto-step.err    { color:var(--danger); border-color:rgba(255,68,85,.2);  background:#1f0d10; }
 
     /* scrollbar */
     ::-webkit-scrollbar { width: 4px; }
@@ -280,29 +280,26 @@
 
   </div>
 
-    <!-- Auto Mode Status -->
-    <div id="auto-box" style="display:none;">
-      <div id="cookie-box" style="border-color:rgba(255,204,0,.4);">
-        <div class="box-head">
-          <strong>⚡ AUTO MODE</strong>
-          <span id="auto-status" style="font-family:var(--mono);font-size:11px;color:var(--warn);">Initializing...</span>
-        </div>
-        <div style="padding:16px 20px;">
-          <!-- Progress Bar -->
-          <div style="background:#1a1a2e;border-radius:6px;height:8px;overflow:hidden;margin-bottom:14px;">
-            <div id="auto-progress" style="height:100%;background:var(--warn);width:0%;transition:width .3s;border-radius:6px;"></div>
-          </div>
-          <!-- Steps -->
-          <div style="display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:11px;">
-            <div id="step1" class="auto-step">⏳ Step 1: Waiting for BG cookies to load...</div>
-            <div id="step2" class="auto-step">⏸️ Step 2: Running cleaner</div>
-            <div id="step3" class="auto-step">⏸️ Step 3: Waiting for new session</div>
-            <div id="step4" class="auto-step">⏸️ Step 4: Ready — click Checkout!</div>
-          </div>
-        </div>
+  <!-- Auto Mode Panel -->
+  <div id="auto-box" style="display:none;background:var(--panel);border:1px solid rgba(255,204,0,.4);border-radius:10px;overflow:hidden;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);">
+      <strong style="font-size:13px;">⚡ AUTO MODE</strong>
+      <span id="auto-status" style="font-family:var(--mono);font-size:11px;color:var(--warn);">Initializing...</span>
+    </div>
+    <div style="padding:16px 20px;">
+      <div style="background:#1a1a2e;border-radius:6px;height:8px;overflow:hidden;margin-bottom:14px;">
+        <div id="auto-progress" style="height:100%;background:var(--warn);width:0%;transition:width .4s;border-radius:6px;"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div id="step1" class="auto-step">⏳ Step 1: Waiting for BuyGoods cookies...</div>
+        <div id="step2" class="auto-step">⏸️ Step 2: Running cleaner</div>
+        <div id="step3" class="auto-step">⏸️ Step 3: Waiting for new session</div>
+        <div id="step4" class="auto-step">⏸️ Step 4: Ready — click Checkout!</div>
       </div>
     </div>
+  </div>
 
+  <!-- Log -->
   <div id="log-box">
     <div class="box-head">
       <strong>📟 Activity Log</strong>
@@ -315,8 +312,29 @@
 
 <script>
   // ── CONFIG ──────────────────────────────────────────────
-  // Change this to your BuyGoods checkout URL
   const CHECKOUT_URL = "https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=";
+  // ────────────────────────────────────────────────────────
+
+  // ── CORE HELPERS (defined first — used everywhere) ──────
+  function getCookie(name) {
+    const parts = document.cookie.split(/;\s*/);
+    for (const part of parts) {
+      if (part.startsWith(name + '=')) return part.substring(name.length + 1);
+    }
+    return '';
+  }
+
+  function getDomainVariations() {
+    const h = location.hostname;
+    const parts = h.split('.');
+    const variations = ['', h, '.' + h];
+    for (let i = 1; i < parts.length - 1; i++) {
+      const d = parts.slice(i).join('.');
+      variations.push(d);
+      variations.push('.' + d);
+    }
+    return [...new Set(variations)];
+  }
   // ────────────────────────────────────────────────────────
 
   let logCount = 0;
@@ -387,50 +405,63 @@
 
   // ── CHECKOUT ────────────────────────────────────────────
   function goCheckout() {
-    const params = new URLSearchParams(window.location.search);
-    const affId = params.get('aff_id');
-    let url = CHECKOUT_URL;
-    if (affId) url += `&aff_id=${affId}`;
-    log(`Opening checkout → ${url.slice(0,60)}...`, 'ok');
-    window.open(url, '_blank');
+    const urlParams  = new URLSearchParams(window.location.search);
+    const affId      = urlParams.get('aff_id')   || getCookie('aff_id')    || '';
+    const subId      = urlParams.get('subid')     || getCookie('sid')       || '';
+    const sessid     = getCookie('sessid2')        || '';
+    const campaignId = getCookie('campaign_id')    || '';
+
+    const checkout   = new URL(CHECKOUT_URL);
+    if (affId)      checkout.searchParams.set('aff_id',      affId);
+    if (sessid)     checkout.searchParams.set('sessid2',     sessid);
+    if (subId)      checkout.searchParams.set('subid',       subId);
+    if (campaignId) checkout.searchParams.set('campaign_id', campaignId);
+
+    const finalURL = checkout.toString();
+    log(`── Checkout Params ──`, '');
+    log(`aff_id:  ${affId   || '❌ MISSING'}`, affId   ? 'ok' : 'err');
+    log(`sessid2: ${sessid  || '❌ MISSING'}`, sessid  ? 'ok' : 'err');
+    log(`subid:   ${subId   || '(empty)'}`,    'ok');
+    log(`Opening → ${finalURL.slice(0, 80)}...`, 'ok');
+    window.open(finalURL, '_blank');
   }
 
   // ── CLEANER ─────────────────────────────────────────────
-  function runCleaner() {
-    log('🧹 Cleaner started...', 'warn');
+  function runCleaner(silent = false) {
+    if (!silent) log('🧹 Cleaner started...', 'warn');
 
-    // Step 1: snapshot before
-    const before = document.cookie;
-    log(`Cookies BEFORE: ${before || '(none)'}`, 'warn');
+    const before      = document.cookie;
+    const beforeCount = before ? before.split(';').filter(Boolean).length : 0;
+    if (!silent) log(`BEFORE: ${beforeCount} cookies`, 'warn');
 
-    // Step 2: clear ALL cookies
+    const domains = getDomainVariations();
+    const paths   = ['/', '/v2/', '/v2', ''];
+    const expires = 'Thu, 01 Jan 1970 00:00:00 UTC';
+
     document.cookie.split(';').forEach(c => {
       const k = c.split('=')[0].trim();
-      // delete for current path and domain variations
-      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${location.hostname};`;
-      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${location.hostname};`;
+      if (!k) return;
+      domains.forEach(d => {
+        paths.forEach(p => {
+          const dp = d ? `; domain=${d}` : '';
+          document.cookie = `${k}=; expires=${expires}; path=${p}${dp}`;
+        });
+      });
+      if (!silent) log(`Deleted: ${k}`, 'warn');
     });
-    log(`Cookies cleared via JS`, 'warn');
 
-    // Step 3: snapshot after
-    const after = document.cookie;
-    log(`Cookies AFTER clear: ${after || '(none)'}`, after ? 'err' : 'ok');
+    const after      = document.cookie;
+    const afterCount = after ? after.split(';').filter(Boolean).length : 0;
+    if (!silent) log(`AFTER: ${afterCount} cookies remain`, afterCount > 0 ? 'err' : 'ok');
 
-    if (after) {
-      log('⚠️ Some cookies NOT clearable (HttpOnly or Secure)', 'err');
-    } else {
-      log('✅ All JS-accessible cookies cleared', 'ok');
+    // Only redirect if NOT in auto mode
+    if (!silent) {
+      const cleanURL = window.location.origin + window.location.pathname;
+      log(`Redirecting → ${cleanURL}`, 'warn');
+      setTimeout(() => { window.location.href = cleanURL; }, 2000);
     }
 
-    // Step 4: build clean URL (strip aff_id and sessid)
-    const cleanURL = window.location.origin + window.location.pathname;
-    log(`Redirecting to clean URL: ${cleanURL}`, 'warn');
-
-    // Step 5: redirect after short delay so log is visible
-    setTimeout(() => {
-      window.location.href = cleanURL;
-    }, 1500);
+    return afterCount;
   }
 
   // ── COPY SNAPSHOT ───────────────────────────────────────
@@ -458,144 +489,104 @@
 
   function setStep(id, state, text) {
     const el = document.getElementById(id);
+    if (!el) return;
     el.className = 'auto-step ' + state;
     if (text) el.textContent = text;
   }
-
   function setProgress(pct) {
-    document.getElementById('auto-progress').style.width = pct + '%';
+    const el = document.getElementById('auto-progress');
+    if (el) el.style.width = pct + '%';
   }
-
   function setAutoStatus(text) {
-    document.getElementById('auto-status').textContent = text;
+    const el = document.getElementById('auto-status');
+    if (el) el.textContent = text;
   }
 
   function runAutoMode() {
-    document.getElementById('auto-box').style.display = 'block';
+    const box = document.getElementById('auto-box');
+    if (box) box.style.display = 'block';
     log('⚡ AUTO MODE activated', 'ok');
-    log('aff_id detected in URL — starting auto sequence', 'ok');
+    log('Polling for BG cookies every 500ms...', 'ok');
 
-    // ── PHASE 1: Wait for BG cookies (poll every 500ms, max 10s) ──
     setStep('step1', 'active', '⏳ Step 1: Waiting for BuyGoods cookies...');
     setProgress(10);
-    setAutoStatus('Waiting for cookies...');
 
-    let waited   = 0;
+    let waited = 0;
     const maxWait = 10000;
-    const poll    = 500;
 
     const cookieWatcher = setInterval(() => {
-      waited += poll;
-      const pct = Math.min(10 + (waited / maxWait) * 30, 40);
-      setProgress(pct);
+      waited += 500;
+      setProgress(Math.min(10 + (waited / maxWait) * 30, 40));
 
-      const affCookie = getCookie('aff_id');
+      const affCookie  = getCookie('aff_id');
       const sessCookie = getCookie('sessid2');
+
+      setAutoStatus(`Waiting for cookies... ${waited/1000}s`);
 
       if (affCookie && sessCookie) {
         clearInterval(cookieWatcher);
-        log(`✅ Cookies loaded! aff_id=${affCookie} sessid=${sessCookie}`, 'ok');
+        log(`✅ Cookies ready! aff_id=${affCookie}`, 'ok');
         setStep('step1', 'done', `✅ Step 1: Cookies loaded (aff_id=${affCookie})`);
         setProgress(40);
         phase2_cleaner();
       } else if (waited >= maxWait) {
         clearInterval(cookieWatcher);
-        log('⚠️ Timeout waiting for cookies — running cleaner anyway', 'warn');
+        log('⚠️ Timeout — running cleaner anyway', 'warn');
         setStep('step1', 'err', '⚠️ Step 1: Timeout — cookies slow/blocked');
         setProgress(40);
         phase2_cleaner();
-      } else {
-        setAutoStatus(`Waiting for cookies... ${waited/1000}s`);
-        log(`Polling cookies... ${waited/1000}s (aff_id=${affCookie || 'not set yet'})`, '');
       }
-    }, poll);
+    }, 500);
   }
 
-  // ── PHASE 2: Run Cleaner ──
   function phase2_cleaner() {
     setStep('step2', 'active', '⏳ Step 2: Running cleaner...');
     setProgress(50);
     setAutoStatus('Clearing cookies...');
-    log('🧹 Auto cleaner running...', 'warn');
+    log('🧹 Auto cleaner running silently...', 'warn');
 
-    // Snapshot before
-    const before = document.cookie;
-    log(`BEFORE: ${before || '(none)'}`, 'warn');
+    const surviving = runCleaner(true);
 
-    // Nuclear delete
-    const domains = getDomainVariations();
-    const paths   = ['/', '/v2/', '/v2', ''];
-    const expires = 'Thu, 01 Jan 1970 00:00:00 UTC';
+    log(`Cleaner done! ${surviving} cookies survived`, surviving > 0 ? 'err' : 'ok');
 
-    document.cookie.split(';').forEach(c => {
-      const k = c.split('=')[0].trim();
-      if (!k) return;
-      domains.forEach(d => {
-        paths.forEach(p => {
-          const dp = d ? `; domain=${d}` : '';
-          document.cookie = `${k}=; expires=${expires}; path=${p}${dp}`;
-        });
-      });
-      log(`Deleted: ${k}`, 'warn');
-    });
-
-    const after = document.cookie;
-    const surviving = after ? after.split(';').filter(Boolean).length : 0;
-
-    log(`AFTER clear: ${surviving} cookies remain`, surviving > 0 ? 'err' : 'ok');
-
-    if (surviving > 0) {
-      after.split(';').forEach(c => {
-        const k = c.split('=')[0].trim();
-        if (k) log(`🚨 SURVIVED: ${k}`, 'err');
-      });
-    }
-
-    setStep('step2', 'done', `✅ Step 2: Cleaner done (${surviving} survived)`);
-    setProgress(70);
-    phase3_wait();
-  }
-
-  // ── PHASE 3: Wait for new session to be created ──
-  function phase3_wait() {
-    setStep('step3', 'active', '⏳ Step 3: Waiting for new session...');
-    setAutoStatus('Waiting for new sessid...');
-    log('Waiting for BG script to create new session...', 'warn');
-
-    // Remove aff_id from URL silently
+    // Strip aff_id from URL bar silently
     const cleanURL = window.location.origin + window.location.pathname;
     window.history.replaceState({}, '', cleanURL);
     log(`URL cleaned → ${cleanURL}`, 'warn');
 
-    // Wait for new sessid to appear
-    let waited2    = 0;
+    setStep('step2', 'done', `✅ Step 2: Done — ${surviving} cookies survived`);
+    setProgress(70);
+    phase3_wait();
+  }
+
+  function phase3_wait() {
+    setStep('step3', 'active', '⏳ Step 3: Waiting for new BG session...');
+    setAutoStatus('Waiting for new sessid...');
+    log('Waiting for BG script to create new session...', 'warn');
+
+    let waited2 = 0;
     const maxWait2 = 8000;
 
     const sessWatcher = setInterval(() => {
       waited2 += 500;
-      const pct = Math.min(70 + (waited2 / maxWait2) * 25, 95);
-      setProgress(pct);
+      setProgress(Math.min(70 + (waited2 / maxWait2) * 25, 95));
+      setAutoStatus(`Waiting for new session... ${waited2/1000}s`);
 
       const newSess = getCookie('sessid2');
       const newAff  = getCookie('aff_id');
 
-      setAutoStatus(`New session: ${newSess || 'pending...'}`);
-
       if (newSess) {
         clearInterval(sessWatcher);
-        log(`New sessid: ${newSess}`, newAff ? 'warn' : 'ok');
+        log(`New sessid: ${newSess}`, 'ok');
         log(`aff_id in new session: ${newAff || '❌ GONE — commission lost!'}`, newAff ? 'warn' : 'err');
-
-        if (newAff) {
-          setStep('step3', 'err', `⚠️ Step 3: aff_id STILL present = ${newAff}`);
-        } else {
-          setStep('step3', 'done', `✅ Step 3: New session — aff_id GONE ❌`);
-        }
+        setStep('step3', newAff ? 'err' : 'done',
+          newAff ? `⚠️ Step 3: aff_id STILL present = ${newAff}`
+                 : `✅ Step 3: New session — aff_id GONE ❌`);
         setProgress(95);
         phase4_ready(newSess, newAff);
       } else if (waited2 >= maxWait2) {
         clearInterval(sessWatcher);
-        log('No new session detected', 'warn');
+        log('No new session detected within 8s', 'warn');
         setStep('step3', 'err', '⚠️ Step 3: No new session detected');
         setProgress(95);
         phase4_ready('', '');
@@ -603,22 +594,18 @@
     }, 500);
   }
 
-  // ── PHASE 4: Ready ──
   function phase4_ready(sessid, affId) {
     setProgress(100);
     refreshCookies();
-
     if (!affId) {
-      setStep('step4', 'done',
-        '🛒 Step 4: READY — Click checkout (NO aff_id = commission lost!)');
+      setStep('step4', 'done', '🛒 Step 4: READY — Click Checkout (aff_id STRIPPED!)');
       setAutoStatus('✅ Done — aff_id stripped!');
       log('─────────────────────────', '');
-      log('🚨 RESULT: aff_id successfully stripped from session!', 'err');
-      log('🛒 Checkout button ready — click to verify commission loss', 'warn');
+      log('🚨 RESULT: aff_id stripped! Commission will be LOST on checkout!', 'err');
+      log('🛒 Click Open Checkout to complete the test', 'warn');
     } else {
-      setStep('step4', 'err',
-        `⚠️ Step 4: aff_id still present = ${affId}`);
-      setAutoStatus('⚠️ aff_id survived — affiliate protected');
+      setStep('step4', 'err', `⚠️ Step 4: aff_id survived = ${affId}`);
+      setAutoStatus('⚠️ aff_id survived!');
       log('✅ RESULT: aff_id survived — affiliate may be protected', 'ok');
     }
   }
@@ -627,15 +614,12 @@
   log('Test page loaded', 'ok');
   readParams();
   refreshCookies();
-
-  // Auto-refresh cookies every 3 seconds
   setInterval(refreshCookies, 3000);
 
-  // Start auto mode only if aff_id is in URL
   if (hasAffId) {
     setTimeout(runAutoMode, 500);
   } else {
-    log('ℹ️ No aff_id in URL — manual mode', 'warn');
+    log('ℹ️ No aff_id in URL — manual mode only', 'warn');
   }
 </script>
 
