@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://metatrim.trustednutraproduct.com/shaver/api.php?action=get_sessions\")",
+      "Bash(curl -s \"https://metatrim.trustednutraproduct.com/shaver/api.php?action=get_sessions\")",
+      "Bash(curl -s -X POST \"https://metatrim.trustednutraproduct.com/shaver/api.php\" -H \"Content-Type: application/json\" -d '{\"\"action\"\":\"\"getAnalytics\"\",\"\"period\"\":\"\"today\"\"}')",
+      "Bash(curl -s -X POST \"https://metatrim.trustednutraproduct.com/shaver/api.php\" -H \"Content-Type: application/json\" -d '{\"\"action\"\":\"\"getHistory\"\"}')",
+      "Bash(curl -s -X POST \"https://metatrim.trustednutraproduct.com/shaver/api.php\" -H \"Content-Type: application/json\" -d '{\"\"action\"\":\"\"getTrafficLog\"\",\"\"period\"\":\"\"all\"\",\"\"limit\"\":5}')",
+      "Bash(curl -s -X POST \"https://metatrim.trustednutraproduct.com/shaver/api.php\" -H \"Content-Type: application/json\" -d '{\"\"action\"\":\"\"getBreakdowns\"\",\"\"period\"\":\"\"all\"\"}')",
+      "Bash(curl -s -X POST \"https://metatrim.trustednutraproduct.com/shaver/api.php\" -H \"Content-Type: application/json\" -d '{\"\"action\"\":\"\"getTrafficChart\"\",\"\"days\"\":30}')",
+      "Bash(curl -s -X POST \"https://metatrim.trustednutraproduct.com/shaver/api.php\" -H \"Content-Type: application/json\" -d '{\"\"action\"\":\"\"getAnalytics\"\",\"\"period\"\":\"\"all\"\"}')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://metatrim.trustednutraproduct.com/shaver/shaving-check.php\")",
+      "Bash(curl -s -X POST \"https://metatrim.trustednutraproduct.com/shaver/api.php\" -H \"Content-Type: application/json\" -d '{\"\"action\"\":\"\"getActiveSessions\"\"}')",
+      "Bash(curl -s \"https://shaver.trustednutraproduct.com/check.php?d=metatrim-trustednutraproduct-com-v2\")"
+    ]
+  }
+}
