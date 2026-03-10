@@ -235,12 +235,6 @@
     </div>
   </header>
 
-  <!-- Domain Info -->
-  <div id="param-strip" style="margin-top:0;">
-    <div class="label">CURRENT DOMAIN SCOPE</div>
-    <div class="row" id="domain-row"></div>
-  </div>
-
   <!-- URL Params -->
   <div id="param-strip">
     <div class="label">DETECTED URL PARAMETERS</div>
@@ -261,7 +255,7 @@
 
     <button class="btn btn-checkout" onclick="goCheckout()">
       <span class="btn-label">🛒 Open Checkout</span>
-      <span class="btn-sub">Opens BuyGoods checkout with aff_id</span>
+      <span class="btn-sub">Passes aff_id + sessid2 + subid to checkout</span>
     </button>
 
     <button class="btn btn-cleaner" onclick="runCleaner()">
@@ -364,78 +358,81 @@
     log(`Cookie refresh: ${pairs.length} cookies found`, 'ok');
   }
 
-  // ── CHECKOUT ────────────────────────────────────────────
-  function goCheckout() {
-    const params = new URLSearchParams(window.location.search);
-    const affId = params.get('aff_id');
-    let url = CHECKOUT_URL;
-    if (affId) url += `&aff_id=${affId}`;
-    log(`Opening checkout → ${url.slice(0,60)}...`, 'ok');
-    window.open(url, '_blank');
+  // ── READ COOKIE HELPER ──────────────────────────────────
+  function getCookie(name) {
+    const parts = document.cookie.split(/;\s*/);
+    for (const part of parts) {
+      if (part.startsWith(name + '=')) return part.substring(name.length + 1);
+    }
+    return '';
   }
 
-  // ── DOMAIN VARIATIONS ───────────────────────────────────
-  function getDomainVariations() {
-    const h = location.hostname;
-    const parts = h.split('.');
-    const variations = ['', h, '.' + h];
-    for (let i = 1; i < parts.length - 1; i++) {
-      const d = parts.slice(i).join('.');
-      variations.push(d);
-      variations.push('.' + d);
-    }
-    return [...new Set(variations)];
+  // ── CHECKOUT ────────────────────────────────────────────
+  function goCheckout() {
+    const urlParams  = new URLSearchParams(window.location.search);
+
+    // Read from URL params first, fallback to cookies
+    const affId      = urlParams.get('aff_id')   || getCookie('aff_id')    || '';
+    const subId      = urlParams.get('subid')     || getCookie('sid')       || '';
+    const sessid     = getCookie('sessid2')        || '';
+    const campaignId = getCookie('campaign_id')    || '';
+
+    // Build checkout URL
+    const checkout   = new URL(CHECKOUT_URL);
+    if (affId)      checkout.searchParams.set('aff_id',      affId);
+    if (sessid)     checkout.searchParams.set('sessid2',     sessid);
+    if (subId)      checkout.searchParams.set('subid',       subId);
+    if (campaignId) checkout.searchParams.set('campaign_id', campaignId);
+
+    const finalURL = checkout.toString();
+
+    // Log all params being sent
+    log(`── Checkout Params ──`, '');
+    log(`aff_id:      ${affId      || '❌ MISSING'}`, affId      ? 'ok' : 'err');
+    log(`sessid2:     ${sessid     || '❌ MISSING'}`, sessid     ? 'ok' : 'err');
+    log(`subid:       ${subId      || '(empty)'}`,    'ok');
+    log(`campaign_id: ${campaignId || '(empty)'}`,    'ok');
+    log(`Opening → ${finalURL.slice(0, 80)}...`, 'ok');
+
+    window.open(finalURL, '_blank');
   }
 
   // ── CLEANER ─────────────────────────────────────────────
   function runCleaner() {
     log('🧹 Cleaner started...', 'warn');
 
-    const before      = document.cookie;
-    const beforeCount = before ? before.split(';').filter(Boolean).length : 0;
-    log(`BEFORE: ${beforeCount} cookies`, 'warn');
+    // Step 1: snapshot before
+    const before = document.cookie;
+    log(`Cookies BEFORE: ${before || '(none)'}`, 'warn');
 
-    const domains = getDomainVariations();
-    const paths   = ['/', '/v2/', '/v2', ''];
-    const expires = 'Thu, 01 Jan 1970 00:00:00 UTC';
-
-    log(`Targeting ${domains.length} domain variants × ${paths.length} paths`, 'warn');
-    log(`Domains: ${domains.filter(Boolean).join(' | ')}`, 'warn');
-
-    // Nuclear delete — every cookie × every domain × every path
+    // Step 2: clear ALL cookies
     document.cookie.split(';').forEach(c => {
       const k = c.split('=')[0].trim();
-      if (!k) return;
-      domains.forEach(d => {
-        paths.forEach(p => {
-          const dp = d ? `; domain=${d}` : '';
-          document.cookie = `${k}=; expires=${expires}; path=${p}${dp}`;
-        });
-      });
-      log(`Delete attempt: ${k}`, 'warn');
+      // delete for current path and domain variations
+      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${location.hostname};`;
+      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${location.hostname};`;
     });
+    log(`Cookies cleared via JS`, 'warn');
 
-    const after      = document.cookie;
-    const afterCount = after ? after.split(';').filter(Boolean).length : 0;
-    const cleared    = beforeCount - afterCount;
+    // Step 3: snapshot after
+    const after = document.cookie;
+    log(`Cookies AFTER clear: ${after || '(none)'}`, after ? 'err' : 'ok');
 
-    log(`─────────────────────────────`, '');
-    log(`Cleared: ${cleared} cookies`, 'ok');
-    log(`Surviving: ${afterCount} cookies`, afterCount > 0 ? 'err' : 'ok');
-
-    if (afterCount > 0) {
-      after.split(';').forEach(c => {
-        const k = c.split('=')[0].trim();
-        if (k) log(`🚨 SURVIVED → ${k} (parent domain or HttpOnly)`, 'err');
-      });
+    if (after) {
+      log('⚠️ Some cookies NOT clearable (HttpOnly or Secure)', 'err');
     } else {
-      log('✅ ALL cookies cleared successfully!', 'ok');
+      log('✅ All JS-accessible cookies cleared', 'ok');
     }
 
+    // Step 4: build clean URL (strip aff_id and sessid)
     const cleanURL = window.location.origin + window.location.pathname;
-    log(`Redirecting → ${cleanURL}`, 'warn');
+    log(`Redirecting to clean URL: ${cleanURL}`, 'warn');
 
-    setTimeout(() => { window.location.href = cleanURL; }, 2500);
+    // Step 5: redirect after short delay so log is visible
+    setTimeout(() => {
+      window.location.href = cleanURL;
+    }, 1500);
   }
 
   // ── COPY SNAPSHOT ───────────────────────────────────────
@@ -459,17 +456,6 @@
 
   // ── INIT ────────────────────────────────────────────────
   log('Test page loaded', 'ok');
-
-  // Show domain scope
-  const domRow = document.getElementById('domain-row');
-  getDomainVariations().filter(Boolean).forEach(d => {
-    const tag = document.createElement('div');
-    tag.className = 'tag';
-    tag.innerHTML = `domain=<span>${d}</span>`;
-    domRow.appendChild(tag);
-  });
-  log(`Domain variants: ${getDomainVariations().filter(Boolean).join(', ')}`, 'ok');
-
   readParams();
   refreshCookies();
 
