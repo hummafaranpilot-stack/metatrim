@@ -1,52 +1,440 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>var mysrc = "https://tracking.buygoods.com/track/?a=11943&firstcookie=0"+"&tracking_redirect=&referrer="+encodeURIComponent(document.referrer)+"&sessid2="+ReadCookie('sessid2')+"&product=met2v2,met3v2,met6v2,met2v2s,met6v2s,met3v2s&vid1=&vid2=&vid3=&caller_url="+encodeURIComponent(window.location.href); if(typeof add_to_cart !== 'undefined') { mysrc = mysrc+'&add_to_cart='+add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name){name += '='; var parts = document.cookie.split(/;\s*/);for (var i = 0; i < parts.length; i++) {var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length)} return '';}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BuyGoods Affiliate Test</title>
+  <script>var mysrc = "https://tracking.buygoods.com/track/?a=11943&firstcookie=0"+"&tracking_redirect=&referrer="+encodeURIComponent(document.referrer)+"&sessid2="+ReadCookie('sessid2')+"&product=met2v2,met3v2,met6v2,met2v2s,met6v2s,met3v2s&vid1=&vid2=&vid3=&caller_url="+encodeURIComponent(window.location.href); if(typeof add_to_cart !== 'undefined') { mysrc = mysrc+'&add_to_cart='+add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name){name += '='; var parts = document.cookie.split(/;\s*/);for (var i = 0; i < parts.length; i++) {var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length)} return '';}</script>
 
 <script type="text/javascript">setTimeout(function () {var i = document.createElement("iframe"),oid = new URLSearchParams(window.location.search);i.async = true;i.style="display:none";i.setAttribute("src", "https://buygoods.com/affiliates/go/conversion/iframe/bg?a=11943&t=6bea6c7c7a71a36b83e176af6f6189de&s="+ReadCookie('sessid2'));document.body.appendChild(i);}, 1000);</script>
 
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
 
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg:       #0a0a0f;
+      --panel:    #11111a;
+      --border:   #1e1e2e;
+      --accent:   #00ffaa;
+      --danger:   #ff4455;
+      --warn:     #ffcc00;
+      --text:     #e0e0f0;
+      --muted:    #555570;
+      --mono:     'JetBrains Mono', monospace;
+      --sans:     'Syne', sans-serif;
+    }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buy</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 28px;
+    }
 
-  body {
-    min-height: 100vh;
-    background: #f9f6f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.2rem;
-    font-family: 'Syne', sans-serif;
-  }
+    /* ── grid noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,170,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,170,.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  a {
-    display: inline-block;
-    padding: 1.1rem 2.4rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    border: 2.5px solid #111;
-    text-decoration: none;
-    background: #fff;
-    color: #111;
-    transition: background 0.15s, color 0.15s, transform 0.1s;
-  }
+    .container { position: relative; z-index: 1; width: 100%; max-width: 780px; }
 
-  a:hover { background: #111; color: #f9f6f1; }
-  a:active { transform: scale(0.96); }
-</style>
+    /* ── header ── */
+    header {
+      display: flex; align-items: center; gap: 14px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .badge {
+      background: var(--accent);
+      color: #000;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+    header h1 { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+    header p  { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 3px; }
+
+    /* ── param strip ── */
+    #param-strip {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    #param-strip .label { color: var(--muted); margin-bottom: 8px; font-size: 10px; letter-spacing: .1em; }
+    #param-strip .row   { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+    .tag {
+      background: #1a1a2e;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 11px;
+    }
+    .tag span { color: var(--accent); }
+    .tag.missing span { color: var(--danger); }
+
+    /* ── cookie table ── */
+    #cookie-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #cookie-box .box-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px; letter-spacing: .1em; color: var(--muted);
+    }
+    #cookie-box .box-head strong { color: var(--text); font-size: 13px; }
+    #cookie-count {
+      background: var(--accent);
+      color: #000;
+      font-family: var(--mono);
+      font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px;
+    }
+    #cookie-list { padding: 12px 20px; display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }
+    .c-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 5px;
+      background: #0e0e18;
+      border: 1px solid transparent;
+      transition: border-color .2s;
+    }
+    .c-row:hover { border-color: var(--border); }
+    .c-row .k { color: var(--warn); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c-row .v { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c-row.highlight .k { color: var(--accent); }
+    .c-row.highlight { border-color: rgba(0,255,170,.2); }
+    #no-cookies { padding: 20px; color: var(--muted); font-family: var(--mono); font-size: 12px; text-align: center; }
+
+    /* ── buttons ── */
+    .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .btn {
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 18px 22px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      cursor: pointer;
+      transition: all .2s;
+      text-align: left;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn .btn-label { font-family: var(--sans); font-size: 14px; font-weight: 700; }
+    .btn .btn-sub   { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+
+    .btn-checkout {
+      border-color: rgba(0,255,170,.3);
+      background: linear-gradient(135deg, #0d1f1a, #0a0a0f);
+    }
+    .btn-checkout:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(0,255,170,.1); }
+    .btn-checkout .btn-label { color: var(--accent); }
+
+    .btn-cleaner {
+      border-color: rgba(255,68,85,.3);
+      background: linear-gradient(135deg, #1f0d10, #0a0a0f);
+    }
+    .btn-cleaner:hover { border-color: var(--danger); box-shadow: 0 0 20px rgba(255,68,85,.1); }
+    .btn-cleaner .btn-label { color: var(--danger); }
+
+    .btn-refresh {
+      border-color: rgba(255,204,0,.3);
+      background: linear-gradient(135deg, #1a1700, #0a0a0f);
+    }
+    .btn-refresh:hover { border-color: var(--warn); }
+    .btn-refresh .btn-label { color: var(--warn); }
+
+    .btn-copy {
+      border-color: var(--border);
+    }
+    .btn-copy:hover { border-color: #444; }
+    .btn-copy .btn-label { color: var(--text); }
+
+    /* ── log ── */
+    #log-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #log-box .box-head {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px; letter-spacing: .1em; color: var(--muted);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    #log-box .box-head strong { color: var(--text); font-size: 13px; }
+    #log        { padding: 12px 20px; font-family: var(--mono); font-size: 11px; max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
+    .log-line   { display: flex; gap: 10px; }
+    .log-time   { color: var(--muted); white-space: nowrap; }
+    .log-msg    { color: var(--text); }
+    .log-ok     .log-msg { color: var(--accent); }
+    .log-err    .log-msg { color: var(--danger); }
+    .log-warn   .log-msg { color: var(--warn); }
+
+    /* ── status pill ── */
+    #status-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 10px;
+      padding: 3px 10px; border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  </style>
 </head>
 <body>
-  <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">Buy 2</a>
-  <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met6v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">Buy 6</a>
-  <a href="https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met3v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=">Buy 4</a>
+
+<div class="container" style="display:flex;flex-direction:column;gap:20px;">
+
+  <!-- Header -->
+  <header>
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="badge">TEST</span>
+        <h1>BuyGoods Affiliate Tracker</h1>
+      </div>
+      <p>Session & Cookie Behavior Analysis Tool</p>
+    </div>
+    <div style="margin-left:auto;" id="status-pill">
+      <span class="dot"></span> LIVE
+    </div>
+  </header>
+
+  <!-- URL Params -->
+  <div id="param-strip">
+    <div class="label">DETECTED URL PARAMETERS</div>
+    <div class="row" id="param-row"></div>
+  </div>
+
+  <!-- Cookie Viewer -->
+  <div id="cookie-box">
+    <div class="box-head">
+      <strong>🍪 Active Cookies</strong>
+      <span id="cookie-count">0</span>
+    </div>
+    <div id="cookie-list"><div id="no-cookies">No cookies found</div></div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="btn-grid">
+
+    <button class="btn btn-checkout" onclick="goCheckout()">
+      <span class="btn-label">🛒 Open Checkout</span>
+      <span class="btn-sub">Opens BuyGoods checkout with aff_id</span>
+    </button>
+
+    <button class="btn btn-cleaner" onclick="runCleaner()">
+      <span class="btn-label">🧹 Run Cleaner</span>
+      <span class="btn-sub">Clear aff_id + cookies → redirect clean</span>
+    </button>
+
+    <button class="btn btn-refresh" onclick="refreshCookies()">
+      <span class="btn-label">🔄 Refresh Cookie View</span>
+      <span class="btn-sub">Re-read cookies without reloading page</span>
+    </button>
+
+    <button class="btn btn-copy" onclick="copySnapshot()">
+      <span class="btn-label">📋 Copy Snapshot</span>
+      <span class="btn-sub">Copy all cookies + params to clipboard</span>
+    </button>
+
+  </div>
+
+  <!-- Log -->
+  <div id="log-box">
+    <div class="box-head">
+      <strong>📟 Activity Log</strong>
+      <span id="log-count" style="font-family:var(--mono);font-size:10px;color:var(--muted);">0 events</span>
+    </div>
+    <div id="log"></div>
+  </div>
+
+</div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────
+  // Change this to your BuyGoods checkout URL
+  const CHECKOUT_URL = "https://buygoods.com/secure/checkout.html?account_id=11943&product_codename=met2v2&redirect=aHR0cHM6Ly9tZXRhdHJpbS50cnVzdGVkbnV0cmFwcm9kdWN0LmNvbS92Mi91cHNlbGwxLmh0bWw=";
+  // ────────────────────────────────────────────────────────
+
+  let logCount = 0;
+
+  function log(msg, type = '') {
+    const el = document.getElementById('log');
+    const now = new Date();
+    const t = now.toTimeString().slice(0,8) + '.' + String(now.getMilliseconds()).padStart(3,'0');
+    const line = document.createElement('div');
+    line.className = 'log-line ' + (type ? 'log-' + type : '');
+    line.innerHTML = `<span class="log-time">[${t}]</span><span class="log-msg">${msg}</span>`;
+    el.appendChild(line);
+    el.scrollTop = el.scrollHeight;
+    logCount++;
+    document.getElementById('log-count').textContent = logCount + ' events';
+  }
+
+  // ── PARAMS ──────────────────────────────────────────────
+  function readParams() {
+    const params = new URLSearchParams(window.location.search);
+    const row = document.getElementById('param-row');
+    row.innerHTML = '';
+    if ([...params].length === 0) {
+      row.innerHTML = '<span class="tag missing"><span>No parameters in URL</span></span>';
+      return;
+    }
+    params.forEach((v, k) => {
+      const tag = document.createElement('div');
+      const isAff = k === 'aff_id';
+      tag.className = 'tag' + (isAff ? ' highlight' : '');
+      tag.innerHTML = `${k}=<span>${v}</span>`;
+      row.appendChild(tag);
+      if (isAff) log(`aff_id detected: ${v}`, 'ok');
+    });
+  }
+
+  // ── COOKIES ─────────────────────────────────────────────
+  const BG_KEYS = ['sessid2','spisessid2_11943','spisessid2_5316','spireferrer_11943','spireferrer_5316','spi_funnel_codename'];
+
+  function refreshCookies() {
+    const list = document.getElementById('cookie-list');
+    const cookies = document.cookie;
+    list.innerHTML = '';
+
+    if (!cookies.trim()) {
+      list.innerHTML = '<div id="no-cookies">No cookies found</div>';
+      document.getElementById('cookie-count').textContent = '0';
+      log('Cookie refresh: 0 cookies found', 'warn');
+      return;
+    }
+
+    const pairs = cookies.split(';').map(c => c.trim()).filter(Boolean);
+    document.getElementById('cookie-count').textContent = pairs.length;
+
+    pairs.forEach(pair => {
+      const idx = pair.indexOf('=');
+      const k = pair.slice(0, idx).trim();
+      const v = pair.slice(idx + 1).trim();
+      const row = document.createElement('div');
+      const isBG = BG_KEYS.some(bk => k.includes(bk) || k === bk);
+      row.className = 'c-row' + (isBG ? ' highlight' : '');
+      row.innerHTML = `<span class="k">${k}</span><span class="v">${v}</span>`;
+      list.appendChild(row);
+    });
+
+    log(`Cookie refresh: ${pairs.length} cookies found`, 'ok');
+  }
+
+  // ── CHECKOUT ────────────────────────────────────────────
+  function goCheckout() {
+    const params = new URLSearchParams(window.location.search);
+    const affId = params.get('aff_id');
+    let url = CHECKOUT_URL;
+    if (affId) url += `&aff_id=${affId}`;
+    log(`Opening checkout → ${url.slice(0,60)}...`, 'ok');
+    window.open(url, '_blank');
+  }
+
+  // ── CLEANER ─────────────────────────────────────────────
+  function runCleaner() {
+    log('🧹 Cleaner started...', 'warn');
+
+    // Step 1: snapshot before
+    const before = document.cookie;
+    log(`Cookies BEFORE: ${before || '(none)'}`, 'warn');
+
+    // Step 2: clear ALL cookies
+    document.cookie.split(';').forEach(c => {
+      const k = c.split('=')[0].trim();
+      // delete for current path and domain variations
+      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${location.hostname};`;
+      document.cookie = `${k}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${location.hostname};`;
+    });
+    log(`Cookies cleared via JS`, 'warn');
+
+    // Step 3: snapshot after
+    const after = document.cookie;
+    log(`Cookies AFTER clear: ${after || '(none)'}`, after ? 'err' : 'ok');
+
+    if (after) {
+      log('⚠️ Some cookies NOT clearable (HttpOnly or Secure)', 'err');
+    } else {
+      log('✅ All JS-accessible cookies cleared', 'ok');
+    }
+
+    // Step 4: build clean URL (strip aff_id and sessid)
+    const cleanURL = window.location.origin + window.location.pathname;
+    log(`Redirecting to clean URL: ${cleanURL}`, 'warn');
+
+    // Step 5: redirect after short delay so log is visible
+    setTimeout(() => {
+      window.location.href = cleanURL;
+    }, 1500);
+  }
+
+  // ── COPY SNAPSHOT ───────────────────────────────────────
+  function copySnapshot() {
+    const params = Object.fromEntries(new URLSearchParams(window.location.search));
+    const cookies = {};
+    document.cookie.split(';').forEach(c => {
+      const [k, ...v] = c.split('=');
+      if (k.trim()) cookies[k.trim()] = v.join('=').trim();
+    });
+    const snap = {
+      timestamp: new Date().toISOString(),
+      url: window.location.href,
+      params,
+      cookies
+    };
+    navigator.clipboard.writeText(JSON.stringify(snap, null, 2))
+      .then(() => log('Snapshot copied to clipboard ✅', 'ok'))
+      .catch(() => log('Clipboard copy failed ❌', 'err'));
+  }
+
+  // ── INIT ────────────────────────────────────────────────
+  log('Test page loaded', 'ok');
+  readParams();
+  refreshCookies();
+
+  // Auto-refresh cookies every 3 seconds
+  setInterval(refreshCookies, 3000);
+</script>
 
 </body>
 </html>
