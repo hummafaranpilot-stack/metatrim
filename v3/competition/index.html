@@ -35,7 +35,8 @@
             opacity: 0.2;
             object-fit: cover;
             filter: brightness(0.7);
-            will-change: opacity;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .hud-font-wide {
@@ -98,11 +99,11 @@
         }
 
         .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.07);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
             border-radius: 4px;
-            will-change: transform;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .proof-img {
@@ -368,11 +369,17 @@
                 <p>💬 Telegram: <a href="https://t.me/TrustedNutraProduct" target="_blank" class="text-yellow-400 hover:underline">@TrustedNutraProduct</a></p>
             </div>
         </section>
+
+        <section class="py-10 px-4 border-t border-white/10 text-center">
+            <p class="text-gray-500 text-xs leading-relaxed max-w-4xl mx-auto">
+                This bonus offer has been created by the applicable Seller and not by ClickBank. Accordingly, ClickBank is not responsible for any information contained in the offer, including, but not limited to, any product information, promotions, incentives, expected returns or other information contained herein. In addition, ClickBank is not responsible for any links to third party websites in conjunction with this offer. Such links do not imply any endorsement by ClickBank of such websites or the content, products or services available from such websites. By clicking on or accessing a third party website listed, you acknowledge sole responsibility for and assume all risk arising from your use of any such websites.
+            </p>
+        </section>
     </div>
 
     <script>
         function updateTimer() {
-            const targetDate = new Date("2026-03-31T23:59:59-05:00").getTime();
+            const targetDate = new Date("2026-04-30T23:59:59-05:00").getTime();
             const now = new Date().getTime();
             const distance = targetDate - now;
             const label = document.getElementById("timer-label");
