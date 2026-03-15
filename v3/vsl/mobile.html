@@ -6843,7 +6843,9 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 					</script>
 						</div>
 					</div>
-<script>document.write('<div id="timer-gate" style="display:none">')</script>
+<style id="timer-gate">
+  section, #ScarcityBar { display: none !important; }
+</style>
 <section id="buylink" class="" style="display: none;">
   <!-- Page Content -->
   <div id="buylink" style="display:block;">
@@ -8111,7 +8113,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
     var now = Date.now();
     function showContent() {
       var gate = document.getElementById("timer-gate");
-      if (gate) gate.style.display = "block";
+      if (gate) gate.remove();
       runtimer();
     }
     if (firstVisit) {
@@ -8153,7 +8155,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 		});
   </script>
 </section>
-<script>document.write('</div>')</script>
 <div class="text-center text-blue mb-4 mt-4">
   <p class="text-written">Video not working? In a hurry? <br class="rwd-break">
     <a href="../cb/go/indexwritten.html" style="text-decoration: underline;">Click here to read the text version.</a>
