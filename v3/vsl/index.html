@@ -6750,7 +6750,11 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 				});
 				</script>
 						</div>
-					</div> <section id="buylink" class="py-4" style="display: none;">
+					</div>
+<style id="timer-gate">
+  #buylink, #buylink ~ *, #buylink2, #buylink2 ~ *, #ScarcityBar { display: none !important; }
+</style>
+<section id="buylink" class="py-4" style="display: none;">
   <!-- Page Content -->
   <div id="buylink" style="display:block;">
     <section id="" class="py-4">
@@ -9395,35 +9399,21 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
     var waitTime = 1682000;
     var firstVisit = localStorage.getItem("access_time");
     var now = Date.now();
+    function showContent() {
+      var gate = document.getElementById("timer-gate");
+      if (gate) gate.remove();
+      runtimer();
+    }
     if (firstVisit) {
       var elapsed = now - parseInt(firstVisit);
       if (elapsed >= waitTime) {
-        document.getElementById("buylink").style.display = "block";
-        document.getElementById("buylink2").style.display = "block";
-        document.getElementById("ScarcityBar").style.display = "block";
-        runtimer();
+        showContent();
       } else {
-        document.getElementById("buylink").style.display = "none";
-        document.getElementById("buylink2").style.display = "none";
-        document.getElementById("ScarcityBar").style.display = "none";
-        setTimeout(function() {
-          document.getElementById("buylink").style.display = "block";
-          document.getElementById("buylink2").style.display = "block";
-          document.getElementById("ScarcityBar").style.display = "block";
-          runtimer();
-        }, waitTime - elapsed);
+        setTimeout(showContent, waitTime - elapsed);
       }
     } else {
       localStorage.setItem("access_time", now);
-      document.getElementById("buylink").style.display = "none";
-      document.getElementById("buylink2").style.display = "none";
-      document.getElementById("ScarcityBar").style.display = "none";
-      setTimeout(function() {
-        document.getElementById("buylink").style.display = "block";
-        document.getElementById("buylink2").style.display = "block";
-        document.getElementById("ScarcityBar").style.display = "block";
-        runtimer();
-      }, waitTime);
+      setTimeout(showContent, waitTime);
     }
     
     $(document).ready(function() {
