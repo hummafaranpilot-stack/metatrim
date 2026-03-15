@@ -6583,6 +6583,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 			<h3 class="my-3 text-blue">Big Medicine is shaking its head in disbelief!</h3>-->
 		</div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.5/mobile-detect.min.js"></script>
 	<script>
   var md = new MobileDetect(window.navigator.userAgent);
   console.log(md.mobile());
@@ -6745,8 +6746,8 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 					var played = false;
 					var browserHeight = window.innerHeight;
 					var browserWidth = window.innerWidth;
-
-					</script>
+				});
+				</script>
 						</div>
 					</div> <section id="buylink" class="py-4" style="display: none;">
   <!-- Page Content -->
@@ -9390,20 +9391,33 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 		setTimeout("showScarcityBar()", 1682000);
 	</script>      
   <script>
-    let getStorage = localStorage.getItem("access");
-    if (getStorage == 'successful') {
-      document.getElementById("buylink").style.display = "block";
-      document.getElementById("ScarcityBar").style.display = "block";
-      runtimer();
+    var waitTime = 1682000;
+    var firstVisit = localStorage.getItem("access_time");
+    var now = Date.now();
+    if (firstVisit) {
+      var elapsed = now - parseInt(firstVisit);
+      if (elapsed >= waitTime) {
+        document.getElementById("buylink").style.display = "block";
+        document.getElementById("ScarcityBar").style.display = "block";
+        runtimer();
+      } else {
+        document.getElementById("buylink").style.display = "none";
+        document.getElementById("ScarcityBar").style.display = "none";
+        setTimeout(function() {
+          document.getElementById("buylink").style.display = "block";
+          document.getElementById("ScarcityBar").style.display = "block";
+          runtimer();
+        }, waitTime - elapsed);
+      }
     } else {
-      localStorage.setItem("access", "successful");
+      localStorage.setItem("access_time", now);
       document.getElementById("buylink").style.display = "none";
       document.getElementById("ScarcityBar").style.display = "none";
       setTimeout(function() {
         document.getElementById("buylink").style.display = "block";
         document.getElementById("ScarcityBar").style.display = "block";
         runtimer();
-      }, 1682000);
+      }, waitTime);
     }
     
     $(document).ready(function() {
