@@ -7820,7 +7820,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
         </div>
       </div>
     </section>
-    <section id="" class="py-4">
+    <section id="buylink2" class="py-4" style="display:none;">
       <div class="container">
         <div class="row">
           <div class="col-lg-10 mx-auto"> 
@@ -8111,13 +8111,16 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
       var elapsed = now - parseInt(firstVisit);
       if (elapsed >= waitTime) {
         document.getElementById("buylink").style.display = "block";
+        document.getElementById("buylink2").style.display = "block";
         document.getElementById("ScarcityBar").style.display = "block";
         runtimer();
       } else {
         document.getElementById("buylink").style.display = "none";
+        document.getElementById("buylink2").style.display = "none";
         document.getElementById("ScarcityBar").style.display = "none";
         setTimeout(function() {
           document.getElementById("buylink").style.display = "block";
+          document.getElementById("buylink2").style.display = "block";
           document.getElementById("ScarcityBar").style.display = "block";
           runtimer();
         }, waitTime - elapsed);
@@ -8125,9 +8128,11 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
     } else {
       localStorage.setItem("access_time", now);
       document.getElementById("buylink").style.display = "none";
+      document.getElementById("buylink2").style.display = "none";
       document.getElementById("ScarcityBar").style.display = "none";
       setTimeout(function() {
         document.getElementById("buylink").style.display = "block";
+        document.getElementById("buylink2").style.display = "block";
         document.getElementById("ScarcityBar").style.display = "block";
         runtimer();
       }, waitTime);
