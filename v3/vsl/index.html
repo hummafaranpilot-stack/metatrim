@@ -6752,7 +6752,10 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 						</div>
 					</div>
 <style id="timer-gate">
-  #buylink, #buylink ~ *, #buylink2, #buylink2 ~ *, #ScarcityBar { display: none !important; }
+  [id="buylink"], [id="buylink2"], [id="ScarcityBar"],
+  [id="buylink"] ~ *:not(.text-center):not(.modal):not(footer):not(style):not(script):not(div[class*="modal"]),
+  [id="buylink2"] ~ *:not(.text-center):not(.modal):not(footer):not(style):not(script):not(div[class*="modal"])
+  { display: none !important; }
 </style>
 <section id="buylink" class="py-4" style="display: none;">
   <!-- Page Content -->
