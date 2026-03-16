@@ -47,6 +47,12 @@ The original code is preserved inside the HTML comments.
 - **Replaced with:** "within the first 4 weeks" + "Your belly may start to flatten and you'll likely notice that clothes begin to feel looser."
 - **Action to reverse:** Remove comment and restore original two lines
 
+## 8. "restores" → "helps bring back" (~Line 7357)
+- **What:** "And restores definition to your arms and thighs…"
+- **Comment marker:** `COMMENTED OUT: restores`
+- **Replaced with:** "And helps bring back definition to your arms and thighs…"
+- **Action to reverse:** Remove inline comment and restore "restores"
+
 ---
 
 *Last updated: March 17, 2026*
