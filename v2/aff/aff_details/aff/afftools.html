@@ -92,7 +92,46 @@ window.__lo_site_id = 329229;
             width: 23px ;
             height: 23px;
         }
-        
+
+        /* Blinking NEW badge */
+        .top-banner-red-links .new-blink-badge,
+        span.new-blink-badge {
+            background: #000000 !important;
+            color: #ffffff !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            padding: 4px 12px !important;
+            border-radius: 4px !important;
+            margin-left: 6px !important;
+            vertical-align: middle !important;
+            line-height: 1 !important;
+            display: inline-block !important;
+            letter-spacing: 0.5px !important;
+            animation: blink-green 1.5s ease-in-out infinite;
+        }
+        @keyframes blink-green {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Updated badge blinking with rounded border */
+        .updated-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 8px;
+            border: 2px solid #1e8e3e;
+            animation: blink-border 1.5s ease-in-out infinite;
+        }
+        @keyframes blink-border {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(40,167,69,0.4); }
+            50% { opacity: 0.6; box-shadow: 0 0 8px 2px rgba(40,167,69,0.3); }
+        }
+
         /* Navigation Styles */
         .top-banner-red-links {
             text-align: center;
@@ -140,46 +179,7 @@ window.__lo_site_id = 329229;
             }
         }
         
-        /* Image Preloader */
-        .img-preloader {
-            position: relative;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8f9fa;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .img-preloader .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #a93226;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .img-preloader img {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .img-preloader.loaded .spinner {
-            display: none;
-        }
-        .img-preloader.loaded img {
-            opacity: 1;
-            position: relative;
-        }
+        /* Image Preloader - removed, was causing white box on product images */
 
         /* Stats Styling */
         .stat-item {
@@ -315,6 +315,135 @@ window.__lo_site_id = 329229;
     </style>
 
 
+    <!-- Preload product images to prevent flash -->
+    <link rel="preload" as="image" href="../../../tyimages/meta_1.webp">
+    <link rel="preload" as="image" href="../../../tyimages/meta_3.webp">
+    <link rel="preload" as="image" href="../../../tyimages/meta_6+1.webp">
+    <link rel="preload" as="image" href="../../../lib/img/200.png">
+
+    <!-- Neon Launch Event Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Launch Event Styles -->
+    <style>
+        .launch-event-wrapper {
+            background-color: #184579;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='34' viewBox='0 0 60 34' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.06' stroke-width='0.8'%3E%3Cg transform='rotate(-30 15 9)'%3E%3Crect x='1' y='1' width='28' height='15' rx='2'/%3E%3Crect x='3.5' y='3.5' width='23' height='10' rx='1'/%3E%3Ccircle cx='15' cy='8.5' r='3.5'/%3E%3C/g%3E%3Cg transform='translate(34 14) rotate(-30 8 8)'%3E%3Ccircle cx='8' cy='8' r='7.5'/%3E%3Ccircle cx='8' cy='8' r='5'/%3E%3Ctext x='8' y='11.5' text-anchor='middle' font-family='serif' font-size='9' font-weight='bold' fill='%23ffffff' fill-opacity='0.06' stroke='none'%3E%24%3C/text%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            padding: 0;
+            margin: 0 -100vw;
+            padding-left: 100vw;
+            padding-right: 100vw;
+            overflow: hidden;
+            position: relative;
+        }
+        .launch-event-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 45px 20px 50px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .launch-banner-border {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto 30px;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            animation: borderPulseOut 0.9s ease-out infinite;
+        }
+        @keyframes borderPulseOut {
+            0% { box-shadow: 0 0 0 0 rgba(100, 200, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(100, 200, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(100, 200, 255, 0); }
+        }
+        .launch-banner-img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .launch-countdown-border {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            animation: borderPulseOut 0.9s ease-out infinite;
+        }
+        .launch-countdown-container {
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            border-radius: 8px;
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .launch-countdown-label {
+            font-family: 'Syncopate', sans-serif;
+            color: #fff200;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .launch-countdown-timer {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4.5rem;
+            color: #ffffff;
+            letter-spacing: 6px;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            line-height: 1;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .launch-countdown-sub {
+            font-family: 'Montserrat', sans-serif;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .launch-cta-text {
+            font-family: 'Syncopate', sans-serif;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 25px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+            text-align: center;
+            width: 100%;
+        }
+        .launch-cta-text span {
+            color: #fff200;
+        }
+        @media (max-width: 768px) {
+            .launch-countdown-timer {
+                font-size: 2.8rem;
+                letter-spacing: 3px;
+            }
+            .launch-countdown-label {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+            .launch-cta-text {
+                font-size: 12px;
+            }
+            .launch-event-inner {
+                padding: 30px 15px 40px;
+            }
+            .launch-banner-img {
+                border-radius: 8px;
+            }
+        }
+    </style>
     </head>
 
 <body>
@@ -334,9 +463,10 @@ window.__lo_site_id = 329229;
             <div class="top-heading">
                 <h1 class="text-blue">MONSTER OFFER <br class="br-xr br-14pm">Meta Trim BHB<sup class="tm">TM</sup>!</h1>
 				<h3>is going to supercharge <br class="br-se br-14pm br-12p br-xr">your commissions!
-                <br><span style="color: #d9534f; font-size: 0.85em; font-weight: 800;">AOV: $271.83 | EPC: $3.81+ | 70-90% Commission</span>
+                <br><span style="color: #d9534f; font-size: 0.85em; font-weight: 800;">AOV: $271.83 | EPC: $3.81+ | $200 CPA or 80% Revshare</span>
 </h3>
 				<p class="text-center mt-3"><span style="display: inline-block; border: 2px dashed #1a4b8c; color: #1a4b8c; font-size: 16px; font-weight: 600; padding: 10px 25px; border-radius: 8px; background: #fff;">BuyGoods Affiliates Only</span></p>
+				<p class="text-center mt-2 mb-0"><span style="display:inline-block;background:#020205;color:#fff200;font-family:'Syncopate',sans-serif;font-size:12px;font-weight:700;padding:10px 25px;border-radius:8px;border:1px solid rgba(255,200,0,0.4);letter-spacing:2px;text-transform:uppercase;animation:blink-green 1.5s ease-in-out infinite;box-shadow:0 0 20px rgba(255,200,0,0.15);">LIVE EVENT: $200 CPA | 80% Revshare — March 23 to April 2</span></p>
             </div>
 
 
@@ -373,6 +503,29 @@ window.__lo_site_id = 329229;
 
         <main>
             <div class="inner-wrapper py-2">
+
+                <!-- ========== LAUNCH EVENT BANNER ========== -->
+                <section id="launch-event">
+                    <div class="launch-event-wrapper">
+                        <div class="launch-event-inner">
+                            <div class="launch-banner-border">
+                                <img src="../../../lib/img/200.png" alt="Spring 2026 - $200 CPA | 80% Revshare - 10-Day Launch Event" class="launch-banner-img">
+                            </div>
+
+                            <div class="launch-countdown-border">
+                            <div class="launch-countdown-container">
+                                <div class="launch-countdown-label">Offer Ends In</div>
+                                <div class="launch-countdown-timer" id="launch-countdown">00 : 00 : 00 : 00</div>
+                                <div class="launch-countdown-sub">Days &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Minutes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Seconds</div>
+                            </div>
+                            </div>
+
+                            <p class="launch-cta-text"><span>$200 CPA</span> or <span>80% Revshare</span> — All Affiliates Welcome</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- ========== END LAUNCH EVENT BANNER ========== -->
+
                 <div class="top-banner-red-links">
                     <a href="#offer-info">Offer Information</a>
                     <a href="#traffic-tips">Traffic Tips</a>
@@ -380,11 +533,14 @@ window.__lo_site_id = 329229;
                     <a href="#landing-pages">Landing Pages</a>
                     <a href="#google-ads-guide">Google Ads Guide</a>
                     <a href="#offer-details">Offer Details</a>
-                    <a href="#email-swipes">Email Swipes</a>
                     <a href="#product-images">Product Images</a>
-                    <a href="#ad-images">Campaign Images</a>
                     <a href="#install-pixels">Install Pixel</a>
                     <a href="#contact-us">Contact Us</a>
+                    <span style="flex-basis:100%;height:0;"></span>
+                    <a href="#launch-event" style="background:rgba(255,200,0,0.25) !important;border-radius:6px;padding:6px 12px !important;border:1px solid rgba(255,200,0,0.5) !important;">$200 CPA EVENT <span class="new-blink-badge" style="background:#fff200 !important;color:#000 !important;">LIVE</span></a>
+                    <a href="#landing-pages" style="background:rgba(255,255,255,0.15) !important;border-radius:6px;padding:6px 12px !important;">VSL <span class="new-blink-badge">NEW</span></a>
+                    <a href="#ad-copy" style="background:rgba(255,255,255,0.15) !important;border-radius:6px;padding:6px 12px !important;">Ad Copy Swipes <span class="new-blink-badge">NEW</span></a>
+                    <a href="#ad-images" style="background:rgba(255,255,255,0.15) !important;border-radius:6px;padding:6px 12px !important;">Campaign Creatives <span class="new-blink-badge">NEW</span></a>
                 </div>
 
                 <!-- Proofs of Offer Performance Section -->
@@ -753,6 +909,30 @@ bottom: unset;
 			<section class="container-md py-4" id="landing-pages">
 				<h3 class="section-header text-center mb-4">Landing Pages</h3>
 
+				<!-- VSL Section -->
+				<div style="background:#184579;border-radius:0;padding:40px 20px;margin:0 -100vw 30px;padding-left:100vw;padding-right:100vw;overflow:hidden;">
+					<h4 class="text-center mb-1" style="font-weight:800;font-size:1.6rem;color:white;">Video Sales Letter (VSL) <span style="background:#fff;color:#000;font-size:11px;font-weight:700;padding:4px 12px;border-radius:4px;margin-left:6px;vertical-align:middle;display:inline-block;animation:blink-green 1.5s ease-in-out infinite;">NEW</span></h4>
+					<p class="text-center mb-4" style="color:rgba(255,255,255,0.6);font-size:14px;">Highest converting formats — send traffic directly to these</p>
+					<div class="row justify-content-center text-center">
+						<div class="col-md-5 col-lg-4 mb-3">
+							<div style="background:rgba(255,255,255,0.08);border:1px dashed rgba(255,255,255,0.25);border-radius:10px;padding:25px 20px;">
+								<h4 style="font-size:1.4rem;font-weight:700;color:white;text-align:center;">VSL</h4>
+								<p style="font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:12px;text-align:center;">40+ Minute High Converting</p>
+								<div style="text-align:center;"><span class="badge bg-danger mb-3" style="font-size:13px;padding:6px 14px;">Highest Converting</span></div>
+								<a href="../../../vsl/index.html" class="btn btn-danger fw-bold mt-2 d-block mx-auto" style="font-size:15px;padding:10px 30px;" target="_blank">Preview VSL</a>
+							</div>
+						</div>
+						<div class="col-md-5 col-lg-4 mb-3">
+							<div style="background:rgba(255,255,255,0.08);border:1px dashed rgba(255,255,255,0.25);border-radius:10px;padding:25px 20px;">
+								<h4 style="font-size:1.4rem;font-weight:700;color:white;text-align:center;">Index Written TSL</h4>
+								<p style="font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:12px;text-align:center;">Alternative of VSL</p>
+								<div style="text-align:center;"><span class="badge bg-warning text-dark mb-3" style="font-size:13px;padding:6px 14px;">Text Based</span></div>
+								<a href="../../../cb/go/indexwritten.html" class="btn btn-danger fw-bold mt-2 d-block mx-auto" style="font-size:15px;padding:10px 30px;" target="_blank">Preview Written TSL</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<!-- Best Performing Long TSLs -->
 				<h4 class="text-blue text-center mb-4" style="font-weight: 700; font-size: 1.6rem;">Best Performing Long TSLs</h4>
 				<div class="row mb-4">
@@ -843,7 +1023,7 @@ bottom: unset;
 			<section class="container-md py-4" id="google-ads-guide">
 				<h3 class="section-header text-center mb-3">Google Ads Traffic Guide</h3>
 				<p class="text-center mb-4">
-					<a href="../../../lib/docs/google-ads-tips.pdf" class="btn btn-danger" target="_blank">Download Full PDF Guide</a>
+					<a href="../../../lib/docs/MetaTrim_BHB_Google_Ads.html" class="btn btn-danger" target="_blank">View Full Google Ads Copy Swipes</a>
 				</p>
 
 				<div class="row">
@@ -950,6 +1130,18 @@ bottom: unset;
 					</div>
 				</div>
 
+				<!-- 10-Day Launch Event Promo Box -->
+				<div class="row mt-4 justify-content-center">
+					<div class="col-12 col-lg-9 col-xl-8">
+						<div style="background: #184579; border-radius: 10px; padding: 30px 25px; margin-bottom: 25px; text-align: center; border: 1px dashed rgba(255, 255, 255, 0.25);">
+							<p style="font-family: 'Syncopate', sans-serif; color: #fff200; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px;">10-Day Launch Event</p>
+							<h3 style="font-family: 'Bebas Neue', sans-serif; color: #ffffff; font-size: 3rem; letter-spacing: 4px; margin: 0 0 8px; text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);">$200 CPA | 80% REVSHARE</h3>
+							<p style="color: rgba(255, 255, 255, 0.7); font-size: 15px; margin: 0 0 5px;">March 23 — April 2, 2026</p>
+							<p style="color: rgba(255, 255, 255, 0.5); font-size: 13px; margin: 0;">All affiliates welcome. Choose CPA or Revshare — whichever earns you more.</p>
+						</div>
+					</div>
+				</div>
+
 				<!-- Volume-Based Tiered CPA Section -->
 				<div class="row mt-4 justify-content-center">
 					<div class="col-12 col-lg-9 col-xl-8">
@@ -1032,11 +1224,8 @@ bottom: unset;
                 </section>-->
 
 
-                <section class="container-md swipes-section py-4">
-                    <h3 id="email-swipes" class="section-header email-swipes">Top Email Swipes</h3>
-					<p class="text-center mb-4">
-						<a href="../../../lib/docs/email-swipes.pdf" class="btn btn-danger fw-bold" style="font-size: 16px; padding: 12px 30px;" target="_blank">Download All Email Swipes (PDF)</a>
-					</p>
+                <!-- Email Swipes section removed -->
+                <section class="d-none">
 
 					<!-- Sending Strategy -->
 					<div class="row mb-4">
@@ -1175,174 +1364,556 @@ bottom: unset;
                     <p>Here are the product images you can use in your promotions. You MUST NOT use any other product images without prior written permissions from us.</p>
                     <p>To save these images to your computer: Right click the image and select “Open image in new tab” > right-click the image and select "Save Image As".</p>
                 </div>
-                    <div class="row my-3 justify-content-center text-center mx-auto">
+                    <div class="row my-3 justify-content-center text-center mx-auto" style="min-height:300px;">
                         <div class="col-12 col-md-4 mb-lg-0 mb-4">
-                            <div class="img-preloader">
-                                <div class="spinner"></div>
-                                <img src="../../../tyimages/meta_1.webp" class="img-fluid" alt="Meta Trim BHB 1 Bottle" onload="this.parentElement.classList.add('loaded')">
-                            </div>
+                            <img src="../../../tyimages/meta_1.webp" alt="Meta Trim BHB 1 Bottle" fetchpriority="high" style="max-width:100%;height:auto;">
                         </div>
                         <div class="col-12 col-md-4 mb-lg-0 mb-4">
-                            <div class="img-preloader">
-                                <div class="spinner"></div>
-                                <img src="../../../tyimages/meta_3.webp" class="img-fluid" alt="Meta Trim BHB 3 Bottles" onload="this.parentElement.classList.add('loaded')">
-                            </div>
+                            <img src="../../../tyimages/meta_3.webp" alt="Meta Trim BHB 3 Bottles" fetchpriority="high" style="max-width:100%;height:auto;">
                         </div>
                         <div class="col-12 col-md-4">
-                            <div class="img-preloader">
-                                <div class="spinner"></div>
-                                <img src="../../../tyimages/meta_6+1.webp" class="img-fluid" alt="Meta Trim BHB 6+1 Bottles" onload="this.parentElement.classList.add('loaded')">
-                            </div>
+                            <img src="../../../tyimages/meta_6+1.webp" alt="Meta Trim BHB 6+1 Bottles" fetchpriority="high" style="max-width:100%;height:auto;">
                         </div>
                     </div></div>
                 </section>
 
 
-				<section class="container-md py-4">
-                    <h3 id="ad-images" class="section-header">Campaign Images</h3>
-					<p class="text-center mb-4">
-						<a href="../../../lib/docs/campaign-images.zip" class="btn btn-danger fw-bold" style="font-size: 16px; padding: 12px 30px;" download>Download All HD Images (ZIP)</a>
-					</p>
-                    <div class="row">
-                        <div class="col-12 col-lg-10 mx-auto">
-							<p class="text-center">Here are the campaign images you can use in your promotions. Click the button above to download all images in full HD quality.</p>
-						</div>
-					</div>
+	
+				<!-- Ad Copy Swipes Section -->
+				<section class="container-md py-4" id="ad-copy">
+					<h3 class="section-header text-center mb-3">Ad Copy Swipes</h3>
+					<p class="text-center mb-4 text-muted">Ready-to-use ad copy for every platform. Download, customize with your affiliate link, and launch.</p>
 
-					<p class="text-center text-muted mb-4"><em>Click any image to view full size</em></p>
-
-					<!-- Banner Ads -->
-					<h5 class="text-blue text-center mt-4 mb-3" style="font-weight: 700;">Banner Ads (Animated GIFs)</h5>
-					<div class="row justify-content-center text-center">
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/1/250x250.gif"><img src="../../../long3/Images Data/1/250x250.gif" class="img-fluid border rounded shadow-sm campaign-img" alt="Banner 250x250"></span>
-							<p class="small text-muted mt-2">250x250</p>
+					<div class="row justify-content-center g-3">
+						<div class="col-6 col-md-3 mb-3">
+							<div class="card-dashed text-center h-100" style="padding: 25px 15px;">
+								<i class="fab fa-facebook" style="font-size: 40px; color: #1877F2; margin-bottom: 15px;"></i>
+								<h5 style="font-weight: 700; font-size: 1rem;">Facebook Ads</h5>
+								<p class="text-muted" style="font-size: 13px;">35+ ads, 20 hooks, compliance guide</p>
+								<a href="../../../lib/docs/MetaTrim_BHB_Facebook_Ads.html" class="btn btn-sm btn-danger mt-2" target="_blank">Download</a>
+							</div>
 						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/1/300x250.gif"><img src="../../../long3/Images Data/1/300x250.gif" class="img-fluid border rounded shadow-sm campaign-img" alt="Banner 300x250"></span>
-							<p class="small text-muted mt-2">300x250</p>
+						<div class="col-6 col-md-3 mb-3">
+							<div class="card-dashed text-center h-100" style="padding: 25px 15px;">
+								<i class="fab fa-google" style="font-size: 40px; color: #4285F4; margin-bottom: 15px;"></i>
+								<h5 style="font-weight: 700; font-size: 1rem;">Google Ads</h5>
+								<p class="text-muted" style="font-size: 13px;">YouTube scripts, PMax, Display assets</p>
+								<a href="../../../lib/docs/MetaTrim_BHB_Google_Ads.html" class="btn btn-sm btn-danger mt-2" target="_blank">Download</a>
+							</div>
 						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/2/250x250.gif"><img src="../../../long3/Images Data/2/250x250.gif" class="img-fluid border rounded shadow-sm campaign-img" alt="Banner 250x250 v2"></span>
-							<p class="small text-muted mt-2">250x250 v2</p>
+						<div class="col-6 col-md-3 mb-3">
+							<div class="card-dashed text-center h-100" style="padding: 25px 15px;">
+								<i class="fas fa-ad" style="font-size: 40px; color: #FF6B00; margin-bottom: 15px;"></i>
+								<h5 style="font-weight: 700; font-size: 1rem;">Native Ads</h5>
+								<p class="text-muted" style="font-size: 13px;">40+ headlines, advertorial templates</p>
+								<a href="../../../lib/docs/MetaTrim_BHB_Native_Ads.html" class="btn btn-sm btn-danger mt-2" target="_blank">Download</a>
+							</div>
 						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/3/300x250.gif"><img src="../../../long3/Images Data/3/300x250.gif" class="img-fluid border rounded shadow-sm campaign-img" alt="Banner 300x250 v3"></span>
-							<p class="small text-muted mt-2">300x250 v3</p>
-						</div>
-					</div>
-
-					<!-- Lifestyle Images -->
-					<h5 class="text-blue text-center mt-4 mb-3" style="font-weight: 700;">Lifestyle & Promotional Images</h5>
-					<div class="row justify-content-center text-center">
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/shop1.jpg"><img src="../../../long3/Images Data/shop1.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Shop 1"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/shop2.jpg"><img src="../../../long3/Images Data/shop2.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Shop 2"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/drink.jpg"><img src="../../../long3/Images Data/drink.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Drink"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/cook.jpg"><img src="../../../long3/Images Data/cook.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Cook"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/eat2.jpg"><img src="../../../long3/Images Data/eat2.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Eat"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/run2.jpg"><img src="../../../long3/Images Data/run2.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Run"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/bed.jpg"><img src="../../../long3/Images Data/bed.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Bed"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/kissing.jpg"><img src="../../../long3/Images Data/kissing.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Kissing"></span>
-						</div>
-					</div>
-
-					<!-- Testimonial Images -->
-					<h5 class="text-blue text-center mt-4 mb-3" style="font-weight: 700;">Testimonial & Result Images</h5>
-					<div class="row justify-content-center text-center">
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/beforeafter1.jpg"><img src="../../../long3/Images Data/beforeafter1.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Before After 1"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/beforeafter2.jpg"><img src="../../../long3/Images Data/beforeafter2.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Before After 2"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/result1.jpg"><img src="../../../long3/Images Data/result1.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Result 1"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/selfie.jpg"><img src="../../../long3/Images Data/selfie.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Selfie"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/melissa.jpg"><img src="../../../long3/Images Data/melissa.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Melissa"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/samantha.jpg"><img src="../../../long3/Images Data/samantha.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Samantha"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/mariah2.jpg"><img src="../../../long3/Images Data/mariah2.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Mariah"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/grace2.jpg"><img src="../../../long3/Images Data/grace2.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Grace"></span>
-						</div>
-					</div>
-
-					<!-- Video Thumbnails -->
-					<h5 class="text-blue text-center mt-4 mb-3" style="font-weight: 700;">Video Thumbnails & Camera Shots</h5>
-					<div class="row justify-content-center text-center">
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/video1.jpg"><img src="../../../long3/Images Data/video1.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Video 1"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/video3.jpg"><img src="../../../long3/Images Data/video3.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Video 3"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/camera1.jpg"><img src="../../../long3/Images Data/camera1.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Camera 1"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/camera2.jpg"><img src="../../../long3/Images Data/camera2.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Camera 2"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/camera3.jpg"><img src="../../../long3/Images Data/camera3.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Camera 3"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/camera4.jpg"><img src="../../../long3/Images Data/camera4.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Camera 4"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/camera5.jpg"><img src="../../../long3/Images Data/camera5.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Camera 5"></span>
-						</div>
-						<div class="col-6 col-md-3 mb-4">
-							<span data-img="../../../long3/Images Data/camera7.jpg"><img src="../../../long3/Images Data/camera7.jpg" class="img-fluid border rounded shadow-sm campaign-img" alt="Camera 7"></span>
-						</div>
-					</div>
-
-					<p class="text-center text-muted mt-3"><em>+ Many more images included in the ZIP download!</em></p>
-                </section>
-
-				<!-- Image Lightbox Modal -->
-				<div class="modal fade" id="imageLightbox" tabindex="-1" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered modal-xl">
-						<div class="modal-content bg-transparent border-0">
-							<div class="modal-body p-0 text-center">
-								<button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1; font-size: 1.5rem;"></button>
-								<img src="" id="lightboxImage" class="img-fluid" style="max-height: 90vh; border-radius: 8px;">
+						<div class="col-6 col-md-3 mb-3">
+							<div class="card-dashed text-center h-100" style="padding: 25px 15px;">
+								<i class="fas fa-search" style="font-size: 40px; color: #34A853; margin-bottom: 15px;"></i>
+								<h5 style="font-weight: 700; font-size: 1rem;">Search Ads</h5>
+								<p class="text-muted" style="font-size: 13px;">Keywords, headlines, descriptions</p>
+								<a href="../../../lib/docs/MetaTrim_BHB_Search_Ads.html" class="btn btn-sm btn-danger mt-2" target="_blank">Download</a>
 							</div>
 						</div>
 					</div>
-				</div>
+				</section>
 
-				<script>
-					document.querySelectorAll('.campaign-img').forEach(img => {
-						img.addEventListener('click', function(e) {
-							e.preventDefault();
-							document.getElementById('lightboxImage').src = this.src;
-							new bootstrap.Modal(document.getElementById('imageLightbox')).show();
-						});
-					});
-				</script>
+
+<section class="container-md py-4">
+                    <h3 id="ad-images" class="section-header">Campaign Creative Assets</h3>
+					<p class="text-center mb-2">
+						<a href="../../../creative-assets/zips/all-creatives.zip" class="btn btn-danger fw-bold" style="font-size: 16px; padding: 12px 30px;" download>Download All HD Images (ZIP)</a>
+					</p>
+                    <p class="text-center text-muted mb-3"><em>Click any image to view full size. 131+ professional images organized by category.</em></p>
+
+                    <!-- Category Tabs -->
+                    <style>
+    #creativeTab .nav-link { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
+    #creativeTab .nav-link.active { background: #a93226; color: white; border-color: #a93226; }
+    #creativeTab .nav-link:hover:not(.active) { background: #e0e0e0; }
+    .creative-img { cursor: zoom-in; width: 100%; height: 200px; object-fit: cover; border-radius: 8px; transition: transform 0.2s; }
+    .creative-img:hover { transform: scale(1.02); }
+    .video-hover-container { position: relative; overflow: hidden; border-radius: 8px; }
+    .video-hover-container video { width: 100%; display: block; border-radius: 8px; }
+    .video-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #a93226; width: 0%; transition: width 0.1s linear; border-radius: 0 0 8px 8px; }
+    .video-hover-container:hover .video-progress { opacity: 1; }
+    .download-category-btn { display: inline-block; margin-top: 15px; }
+</style>
+<ul class="nav nav-pills justify-content-center flex-wrap mb-4" id="creativeTab" role="tablist">
+  <li class="nav-item m-1" role="presentation"><button class="nav-link active" id="banner-ads-tab" data-bs-toggle="pill" data-bs-target="#banner-ads" type="button" role="tab" aria-controls="banner-ads" aria-selected="true" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Banner Ads</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link" id="influencer-tab" data-bs-toggle="pill" data-bs-target="#influencer" type="button" role="tab" aria-controls="influencer" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Influencer</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link" id="testimonial-tab" data-bs-toggle="pill" data-bs-target="#testimonial" type="button" role="tab" aria-controls="testimonial" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Testimonials</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link" id="lifestyle-tab" data-bs-toggle="pill" data-bs-target="#lifestyle" type="button" role="tab" aria-controls="lifestyle" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Lifestyle</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link" id="hook-clips-tab" data-bs-toggle="pill" data-bs-target="#hook-clips" type="button" role="tab" aria-controls="hook-clips" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Hook Clips</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link" id="ugc-tab" data-bs-toggle="pill" data-bs-target="#ugc" type="button" role="tab" aria-controls="ugc" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">UGC</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link" id="before-after-tab" data-bs-toggle="pill" data-bs-target="#before-after" type="button" role="tab" aria-controls="before-after" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Before & After</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link" id="unboxing-tab" data-bs-toggle="pill" data-bs-target="#unboxing" type="button" role="tab" aria-controls="unboxing" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Unboxing</button></li>
+</ul>
+<div class="tab-content" id="creativeTabContent">
+  <div class="tab-pane fade show active" id="banner-ads" role="tabpanel" aria-labelledby="banner-ads-tab">
+    <p class="text-center text-muted mb-2"><em>Professional ad banners for Google Display Network</em></p>
+    <p class="text-center mb-3"><strong>6 images</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/banner-ads/1-set-1-category-Product-Best-Value-Offer-referenc_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Banner Ads" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/banner-ads/2-set-2-category-Product-Mid-Offer-referenceimage-_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Banner Ads" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/banner-ads/3-set-3-category-Product-Entry-Offer-referenceimag_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Banner Ads" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/banner-ads/4-set-4-category-Testimonial-Social-Proof-referenc_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Banner Ads" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/banner-ads/5-set-5-category-Lifestyle-Benefit-referenceimage-_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Banner Ads" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/banner-ads/6-set-6-category-Ingredient-Science-Trust-referenc_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Banner Ads" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/banner-ads.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Banner Ads (ZIP)</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="influencer" role="tabpanel" aria-labelledby="influencer-tab">
+    <p class="text-center text-muted mb-2"><em>Expert and authority endorsement images</em></p>
+    <p class="text-center mb-3"><strong>10 images</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/1-set-1-category-Female-Nutritionist-filename-infl_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/3-set-3-category-Female-Fitness-Coach-filename-inf_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/4-set-4-category-Mom-Lifestyle-filename-influencer_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/5-set-5-category-Woman-50-Active-filename-influenc_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/6-set-6-category-Male-Fitness-filename-influencer0_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/7-set-7-category-Pharmacist-Expert-filename-influe_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/7-set-7-category-Pharmacist-Expert-filename-influe_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/7-set-7-category-Pharmacist-Expert-filename-influe_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/8-set-8-category-Couple-Lifestyle-filename-influen_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/influencer/8-set-8-category-Couple-Lifestyle-filename-influen_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Influencer" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/influencer.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Influencer (ZIP)</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="testimonial" role="tabpanel" aria-labelledby="testimonial-tab">
+    <p class="text-center text-muted mb-2"><em>Quote card designs with customer stories</em></p>
+    <p class="text-center mb-3"><strong>8 images</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/1-set-1-category-Patricia-Weight-Loss-Journey-file_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/2-set-2-category-Sean-Male-Weight-Loss-filename-te_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/3-set-3-category-Linda-Senior-Transformation-filen_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/4-set-4-category-Emily-Energy-Confidence-filename-_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/5-set-5-category-Susan-Dress-Size-Drop-filename-te_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/6-set-6-category-Robert-Joint-Pain-Relief-filename_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/7-set-7-category-Diane-Sleep-Improvement-filename-_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/testimonial/8-set-8-category-Couple-Both-Using-It-filename-tes_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Testimonials" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/testimonial.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Testimonials (ZIP)</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="lifestyle" role="tabpanel" aria-labelledby="lifestyle-tab">
+    <p class="text-center text-muted mb-2"><em>Aspirational lifestyle photography for all platforms</em></p>
+    <p class="text-center mb-3"><strong>38 images</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/1-set-1-category-Morning-Breakfast-filename-lifest_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/1-set-1-category-Morning-Breakfast-filename-lifest_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/1-set-1-category-Morning-Breakfast-filename-lifest_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/1-set-1-category-Morning-Breakfast-filename-lifest_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/10-set-10-category-Beach-Sunset-filename-lifestyle_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/10-set-10-category-Beach-Sunset-filename-lifestyle_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/2-set-2-category-Fitting-Room-Joy-filename-lifesty_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/2-set-2-category-Fitting-Room-Joy-filename-lifesty_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/2-set-2-category-Fitting-Room-Joy-filename-lifesty_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/2-set-2-category-Fitting-Room-Joy-filename-lifesty_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/3-set-3-category-Evening-Park-Walk-filename-lifest_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/3-set-3-category-Evening-Park-Walk-filename-lifest_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/3-set-3-category-Evening-Park-Walk-filename-lifest_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/3-set-3-category-Evening-Park-Walk-filename-lifest_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/4-set-4-category-Peaceful-Morning-filename-lifesty_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/4-set-4-category-Peaceful-Morning-filename-lifesty_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/4-set-4-category-Peaceful-Morning-filename-lifesty_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/4-set-4-category-Peaceful-Morning-filename-lifesty_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/5-set-5-category-Friends-at-Dinner-filename-lifest_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/5-set-5-category-Friends-at-Dinner-filename-lifest_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/5-set-5-category-Friends-at-Dinner-filename-lifest_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/5-set-5-category-Friends-at-Dinner-filename-lifest_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/6-set-6-category-Backyard-with-Kids-filename-lifes_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/6-set-6-category-Backyard-with-Kids-filename-lifes_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/6-set-6-category-Backyard-with-Kids-filename-lifes_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/6-set-6-category-Backyard-with-Kids-filename-lifes_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/7-set-7-category-Morning-Mirror-filename-lifestyle_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/7-set-7-category-Morning-Mirror-filename-lifestyle_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/7-set-7-category-Morning-Mirror-filename-lifestyle_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/7-set-7-category-Morning-Mirror-filename-lifestyle_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/8-set-8-category-Grocery-Shopping-filename-lifesty_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/8-set-8-category-Grocery-Shopping-filename-lifesty_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/8-set-8-category-Grocery-Shopping-filename-lifesty_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/8-set-8-category-Grocery-Shopping-filename-lifesty_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/9-set-9-category-Couple-Dancing-filename-lifestyle_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/9-set-9-category-Couple-Dancing-filename-lifestyle_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/9-set-9-category-Couple-Dancing-filename-lifestyle_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/lifestyle/9-set-9-category-Couple-Dancing-filename-lifestyle_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Lifestyle" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/lifestyle.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Lifestyle (ZIP)</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="hook-clips" role="tabpanel" aria-labelledby="hook-clips-tab">
+    <p class="text-center text-muted mb-2"><em>Scroll-stopping images and videos for ads</em></p>
+    <p class="text-center mb-3"><strong>15 images + 2 videos</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/1-set-1-category-Anti-Exercise-filename-hook01nogy_c (1).jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/1-set-1-category-Anti-Exercise-filename-hook01nogy_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/10-set-10-category-One-Simple-Change-filename-hook_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/2-set-2-category-Fast-Metabolism-Myth-filename-hoo_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/3-set-3-category-Doctor-Shocked-filename-hook03doc_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/3-set-3-category-Doctor-Surprised-filename-hook03d_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/4-set-4-category-Breakfast-Plate-filename-hook04br_b (1).jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/4-set-4-category-Breakfast-Plate-filename-hook04br_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/5-set-5-category-Stop-Counting-Calories-filename-h_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/6-set-6-category-Scale-Frustration-filename-hook06_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/7-set-7-category-Age-Confidence-filename-hook07age_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/8-set-8-category-Diets-Frustration-filename-hook08_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/9-set-9-category-Husband-Noticed-filename-hook09hu_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/fast.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/hook-clips/run2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Hook Clips" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-12 mt-3"><h5 class="text-center" style="color:#184579;font-weight:700;">Video Clips</h5></div>
+      <div class="col-6 col-md-4">
+        <div class="video-hover-container" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+          <video muted preload="metadata" data-vid-id="vid-hook-clips-1-set-1-category-Anti-Exercise-Hook-format-Portrai_mp4">
+            <source src="../../../creative-assets/hook-clips/videos/1-set-1-category-Anti-Exercise-Hook-format-Portrai.mp4" type="video/mp4">
+          </video>
+          <div class="video-progress"></div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="video-hover-container" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+          <video muted preload="metadata" data-vid-id="vid-hook-clips-6-set-6-category-Age-Reveal-format-Portrait-916-du_mp4">
+            <source src="../../../creative-assets/hook-clips/videos/6-set-6-category-Age-Reveal-format-Portrait-916-du.mp4" type="video/mp4">
+          </video>
+          <div class="video-progress"></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/hook-clips.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Hook Clips (ZIP)</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="ugc" role="tabpanel" aria-labelledby="ugc-tab">
+    <p class="text-center text-muted mb-2"><em>User-generated content style images</em></p>
+    <p class="text-center mb-3"><strong>17 images</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/1-set-1-category-iPhone-Selfie-Review-filename-ugc_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/1-set-1-category-iPhone-Selfie-Review-filename-ugc_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/1-set-1-category-iPhone-Selfie-Review-filename-ugc_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/1-set-1-category-iPhone-Selfie-Review-filename-ugc_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/2-set-2-category-Kitchen-Counter-Flat-lay-filename_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/2-set-2-category-Kitchen-Counter-Flat-lay-filename_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/2-set-2-category-Kitchen-Counter-Flat-lay-filename_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/2-set-2-category-Kitchen-Counter-Flat-lay-filename_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/3-set-3-category-Text-Message-Screenshot-filename-_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/3-set-3-category-Text-Message-Screenshot-filename-_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/4-set-4-category-Hand-Holding-Bottle-in-Store-file_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/4-set-4-category-Hand-Holding-Bottle-in-Store-file_b.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/4-set-4-category-Hand-Holding-Bottle-in-Store-file_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/4-set-4-category-Hand-Holding-Bottle-in-Store-file_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/5-set-5-category-Morning-Routine-with-Product-file_a.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/5-set-5-category-Morning-Routine-with-Product-file_c.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/ugc/6-set-6-category-Social-Media-Comment-Screenshot-f_d.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="UGC" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/ugc.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download UGC (ZIP)</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="before-after" role="tabpanel" aria-labelledby="before-after-tab">
+    <p class="text-center text-muted mb-2"><em>Transformation photos for Facebook & Native ads</em></p>
+    <p class="text-center mb-3"><strong>17 images</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/beforeafter1.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/beforeafter2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/cindychen.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/daviddean2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/deby.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/fgr1.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/fgr2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/grace2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/jane2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/jc.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/john2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/manne.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/mariah2.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/melissa.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/result1.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/samantha.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="../../../creative-assets/before-after/wlcr.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Before & After" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/before-after.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Before & After (ZIP)</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="unboxing" role="tabpanel" aria-labelledby="unboxing-tab">
+    <p class="text-center text-muted mb-2"><em>Package arrival and unboxing moments</em></p>
+    <p class="text-center mb-3"><strong>4 images</strong></p>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/unboxing/1-set-1-category-Package-on-Doorstep-filename-unbo.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Unboxing" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/unboxing/2-set-2-category-Hands-Holding-Sealed-Box-filename.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Unboxing" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/unboxing/3-set-3-category-Box-Just-Opened-filename-unboxing.jpg" class="img-fluid border rounded shadow-sm creative-img" alt="Unboxing" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+      <div class="col-6 col-md-4">
+        <img src="../../../creative-assets/unboxing/4_______set_4______category_filming_unboxing_on_ph_delpmaspu.png" class="img-fluid border rounded shadow-sm creative-img" alt="Unboxing" loading="lazy" onclick="openZoomModal(this.src)">
+      </div>
+    </div>
+    <div class="text-center download-category-btn">
+      <a href="../../../creative-assets/zips/unboxing.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Unboxing (ZIP)</a>
+    </div>
+  </div>
+</div>
+<script>
+function hoverPlay(container) {
+    var vid = container.querySelector('video');
+    var bar = container.querySelector('.video-progress');
+    vid.currentTime = 0;
+    vid.play();
+    vid._interval = setInterval(function() {
+        if (vid.duration) {
+            bar.style.width = (vid.currentTime / vid.duration * 100) + '%';
+        }
+    }, 100);
+}
+function hoverPause(container) {
+    var vid = container.querySelector('video');
+    var bar = container.querySelector('.video-progress');
+    vid.pause();
+    vid.currentTime = 0;
+    bar.style.width = '0%';
+    if (vid._interval) clearInterval(vid._interval);
+}
+</script>
+
+
+
+                </section>
+
+				<!-- Old lightbox removed — using openZoomModal instead -->
 
 
 
@@ -1578,6 +2149,37 @@ bottom: unset;
             });
         </script>
 
+
+<!-- Launch Event Countdown Timer Script -->
+<script>
+    function updateLaunchCountdown() {
+        const targetDate = new Date("2026-04-02T23:59:59-05:00").getTime();
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        const clock = document.getElementById("launch-countdown");
+
+        if (distance < 0) {
+            clock.innerHTML = "OFFER ENDED";
+            clock.style.color = "#ff4500";
+            clock.style.fontSize = "3rem";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const d = days.toString().padStart(2, '0');
+        const h = hours.toString().padStart(2, '0');
+        const m = minutes.toString().padStart(2, '0');
+        const s = seconds.toString().padStart(2, '0');
+
+        clock.innerHTML = `${d} : ${h} : ${m} : ${s}`;
+    }
+    setInterval(updateLaunchCountdown, 1000);
+    updateLaunchCountdown();
+</script>
 
 </body>
 
