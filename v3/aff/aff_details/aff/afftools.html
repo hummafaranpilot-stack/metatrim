@@ -378,6 +378,7 @@ window.__lo_site_id = 329229;
                     <a href="#traffic-tips">Traffic Tips</a>
                     <a href="#offer-proofs">Offer Proofs</a>
                     <a href="#landing-pages">Landing Pages</a>
+                    <a href="#hoplink-generator">Hoplink Generator</a>
                     <a href="#google-ads-guide">Google Ads Guide</a>
                     <a href="#offer-details">Offer Details</a>
                     <!-- Email Swipes hidden -->
@@ -886,6 +887,96 @@ bottom: unset;
 					</div>
 				</div>
 			</section>
+
+		<!-- Hoplink Generator Section -->
+		<section class="container-md py-4" id="hoplink-generator">
+			<h3 class="section-header text-center mb-4">Get Your Affiliate Links</h3>
+			<div class="row justify-content-center">
+				<div class="col-md-8 col-lg-6">
+					<div style="border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+
+						<!-- Header -->
+						<div style="background:linear-gradient(135deg,#1565c0 0%,#1976d2 50%,#2196f3 100%);padding:25px 30px;display:flex;align-items:center;justify-content:space-between;">
+							<div>
+								<h4 style="color:#ff6b35;font-weight:800;font-size:1.5rem;margin:0;line-height:1.2;">Get Your Links And</h4>
+								<h4 style="color:white;font-weight:800;font-size:1.5rem;margin:0;">Get Started</h4>
+							</div>
+							<img src="../images/clickbank-logo.webp" alt="ClickBank" style="height:40px;background:white;padding:6px 10px;border-radius:6px;border:2px solid #1a237e;">
+						</div>
+
+						<!-- Form Body -->
+						<div style="background:white;padding:30px;">
+							<div style="position:relative;">
+								<!-- Vertical timeline line -->
+								<div style="position:absolute;left:8px;top:20px;bottom:60px;width:2px;background:#e0e0e0;z-index:0;"></div>
+
+								<!-- Step 1 -->
+								<div style="display:flex;align-items:flex-start;margin-bottom:22px;position:relative;">
+									<div style="width:18px;height:18px;border-radius:50%;background:#e53935;flex-shrink:0;margin-top:3px;z-index:1;border:3px solid #ffcdd2;"></div>
+									<div style="margin-left:16px;flex:1;">
+										<p style="color:#e53935;font-weight:700;font-size:13px;margin-bottom:4px;">Step 1</p>
+										<p style="font-weight:700;font-size:15px;margin-bottom:8px;">Enter your ClickBank Affiliate ID</p>
+										<input type="text" id="affiliateId" placeholder="Your ClickBank ID" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:6px;font-size:15px;outline:none;">
+										<span id="affiliate-error-message" style="color:#e53935;font-size:13px;display:block;margin-top:4px;"></span>
+									</div>
+								</div>
+
+								<!-- Step 2 -->
+								<div style="display:flex;align-items:flex-start;margin-bottom:22px;position:relative;">
+									<div style="width:18px;height:18px;border-radius:50%;background:#e53935;flex-shrink:0;margin-top:3px;z-index:1;border:3px solid #ffcdd2;"></div>
+									<div style="margin-left:16px;flex:1;">
+										<p style="color:#e53935;font-weight:700;font-size:13px;margin-bottom:4px;">Step 2</p>
+										<p style="font-weight:700;font-size:15px;margin-bottom:8px;">Enter your Tracking ID <span style="font-weight:400;color:#888;">(Optional)</span></p>
+										<input type="text" id="trackingId" placeholder="Your Tracking ID" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:6px;font-size:15px;outline:none;">
+									</div>
+								</div>
+
+								<!-- Step 3 -->
+								<div style="display:flex;align-items:flex-start;position:relative;">
+									<div style="width:18px;height:18px;border-radius:50%;background:#e53935;flex-shrink:0;margin-top:3px;z-index:1;border:3px solid #ffcdd2;"></div>
+									<div style="margin-left:16px;flex:1;">
+										<p style="color:#e53935;font-weight:700;font-size:13px;margin-bottom:4px;">Step 3</p>
+										<p style="font-weight:700;font-size:15px;margin-bottom:8px;">Select Landing Page</p>
+										<select id="landingPage" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:6px;font-size:15px;background:white;outline:none;">
+											<option value="short">Short TSL — Quick &amp; Direct Approach (Default)</option>
+											<option value="vsl">VSL — 40+ Minute High Converting</option>
+											<option value="longtsl1">Long TSL #1 — Top Performer (Best Converting)</option>
+											<option value="longtsl2">Long TSL #2 — High Conversion Rate (Recommended)</option>
+											<option value="longtsl3">Long TSL #3 — Single Page Format (Classic Style)</option>
+											<option value="longtsl4">Long TSL #4 — 5-Page Multi-Step Funnel</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<!-- Generate Button -->
+							<button id="submit" style="width:100%;background:#2e7d32;color:white;border:none;border-radius:8px;padding:16px;font-size:17px;font-weight:800;letter-spacing:1px;cursor:pointer;text-transform:uppercase;margin-top:24px;transition:background 0.2s;" onmouseover="this.style.background='#1b5e20'" onmouseout="this.style.background='#2e7d32'">
+								GENERATE HOPLINK &#10148;
+							</button>
+
+							<!-- Output -->
+							<div style="margin-top:20px;">
+								<p style="font-size:14px;font-weight:600;margin-bottom:6px;color:#333;">Your Hoplink:</p>
+								<div style="position:relative;">
+									<input type="text" id="SSLHopLink" readonly placeholder="" style="width:100%;padding:10px 42px 10px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;background:#f9f9f9;outline:none;">
+									<button id="copy" title="Copy to clipboard" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#555;font-size:18px;padding:0;">
+										<i class="fas fa-copy"></i>
+									</button>
+									<span id="myTooltip" style="display:none;position:absolute;right:0;top:-28px;background:#333;color:white;font-size:12px;padding:3px 8px;border-radius:4px;">Copied!</span>
+								</div>
+							</div>
+
+							<!-- Contact -->
+							<p class="text-center mt-3" style="font-size:13px;">
+								<a href="mailto:contact@trustednutraproduct.com" style="color:#1565c0;text-decoration:none;">
+									&#9993; Contact Affiliate Success Manager
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 			<!-- Google Ads Traffic Guide Section -->
 			<section class="container-md py-4" id="google-ads-guide">
@@ -1939,89 +2030,53 @@ function hoverPause(container) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 
      <script>
-            let name = document.querySelector("#name");
-            let email =  document.querySelector("#email");
-            let nameErrorMesg = document.querySelector("#name-error-message");
-            let emailErrorMesg =  document.querySelector("#email-error-message");
-            let affiliateErrorMesg = document.querySelector("#affiliate-error-message");
-            let affiliateId = document.querySelector("#affiliateId");
-            let trackingId =  document.querySelector("#trackingId");
-            let hotLink  =  document.querySelector("#SSLHopLink");
-            let submit = document.querySelector("#submit");
-            let copy = document.querySelector("#copy");
-            let landingPage = document.querySelector("#landingPage");
-            let tooltip = document.querySelector("#myTooltip");
-            let spinnerBox  =  document.querySelector(".spinner-box");
-            let btnText = document.querySelector(".btn-text");
+            const affiliateId = document.querySelector("#affiliateId");
+            const trackingId  = document.querySelector("#trackingId");
+            const hotLink     = document.querySelector("#SSLHopLink");
+            const submit      = document.querySelector("#submit");
+            const copy        = document.querySelector("#copy");
+            const landingPage = document.querySelector("#landingPage");
+            const tooltip     = document.querySelector("#myTooltip");
+            const affiliateErrorMesg = document.querySelector("#affiliate-error-message");
 
-            // Base URL for Meta Trim landing pages
-            const baseUrl = 'https://metatrim.trustednutraproduct.com/v1';
+            // cbpage values — empty string means default (no cbpage param)
+            const cbPageMap = {
+                'short':    '',
+                'vsl':      'vsl',
+                'longtsl1': 'longtsl1',
+                'longtsl2': 'longtsl2',
+                'longtsl3': 'longtsl3',
+                'longtsl4': 'longtsl4'
+            };
 
-            submit.addEventListener("click", function(e){
+            submit.addEventListener("click", function(e) {
                 e.preventDefault();
-
-                nameErrorMesg.innerHTML = '';
-                emailErrorMesg.innerHTML = '';
                 affiliateErrorMesg.innerHTML = '';
 
-                let hasError = false;
-
-                if(!name.value){
-                    nameErrorMesg.innerHTML = 'Name is required';
-                    hasError = true;
-                }
-
-                if(!email.value){
-                    emailErrorMesg.innerHTML = 'Email is required';
-                    hasError = true;
-                }
-
-                if(!affiliateId.value) {
+                if (!affiliateId.value.trim()) {
                     affiliateErrorMesg.innerHTML = 'ClickBank Affiliate ID is required';
-                    hasError = true;
+                    return;
                 }
 
-                if (hasError) return;
+                const affId    = affiliateId.value.trim();
+                const pageVal  = landingPage.options[landingPage.selectedIndex].value;
+                const cbpage   = cbPageMap[pageVal];
 
-                // Generate the link immediately (no server call needed)
-                generateHotLink();
+                let link = `https://hop.clickbank.net/?affiliate=${affId}&vendor=tnproduct`;
+                if (cbpage) link += `&cbpage=${cbpage}`;
+                if (trackingId.value.trim()) link += `&tid=${trackingId.value.trim()}`;
 
-                function generateHotLink() {
-                    // Landing page URL mappings
-                    let pageMap = {
-                        'long2': '/long2/index.html',
-                        'long3': '/long3/page1.html',
-                        'long4': '/long4/go/index.html',
-                        'short': '/short/go/index-2.html',
-                        'checkout': '/best/go/go.html'
-                    };
-
-                    let landingPageValue = landingPage.options[landingPage.selectedIndex].value;
-                    let pagePath = pageMap[landingPageValue];
-
-                    // Build the affiliate link
-                    let affLink = `${baseUrl}${pagePath}?aff_id=${affiliateId.value}`;
-
-                    if (trackingId.value) {
-                        affLink += `&tid=${trackingId.value}`;
-                    }
-
-                    hotLink.value = affLink;
-                }
+                hotLink.value = link;
             });
-            copy.addEventListener("click", function(e){
+
+            copy.addEventListener("click", function(e) {
                 e.preventDefault();
-                if (hotLink.value == '') {
-                    return
-                } else {
-                       hotLink.select();
-               hotLink.setSelectionRange(0, 99999); /* For mobile devices */
-               /* Copy the text inside the text field */
-               navigator.clipboard.writeText(hotLink.value);
+                if (!hotLink.value) return;
+                hotLink.select();
+                hotLink.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(hotLink.value);
                 tooltip.style.display = "block";
-                setTimeout(function(){ tooltip.style.display = "none"; }, 2000);
-               // tooltip.innerHTML = "Copied: " + hotLink.value;
-                }
+                setTimeout(function() { tooltip.style.display = "none"; }, 2000);
             });
         </script>
 
