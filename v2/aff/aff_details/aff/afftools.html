@@ -1273,6 +1273,13 @@ bottom: unset;
     #creativeTab .nav-link { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
     #creativeTab .nav-link.active { background: #a93226; color: white; border-color: #a93226; }
     #creativeTab .nav-link:hover:not(.active) { background: #e0e0e0; }
+    .videos-tab-btn { background: linear-gradient(135deg, #1a4b8c, #c0392b) !important; color: #fff !important; border: none !important; font-weight: 700 !important; font-size: 14px !important; padding: 8px 18px !important; border-radius: 20px !important; letter-spacing: 0.5px; box-shadow: 0 3px 10px rgba(192,57,43,0.35); }
+    .videos-tab-btn:hover { opacity: 0.9; }
+    .videos-tab-btn.active { background: linear-gradient(135deg, #c0392b, #1a4b8c) !important; box-shadow: 0 4px 14px rgba(192,57,43,0.5); }
+    .video-card { background: #f8f9fa; border-radius: 10px; overflow: hidden; border: 1px solid #ddd; transition: box-shadow 0.2s; }
+    .video-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .video-card video { width: 100%; display: block; background: #000; max-height: 200px; object-fit: cover; }
+    .video-card .video-label { font-size: 12px; font-weight: 600; color: #555; padding: 8px 10px; text-align: center; background: #fff; border-top: 1px solid #eee; }
     .creative-img { cursor: zoom-in; width: 100%; height: 200px; object-fit: cover; border-radius: 8px; transition: transform 0.2s; }
     .creative-img:hover { transform: scale(1.02); }
     .video-hover-container { position: relative; overflow: hidden; border-radius: 8px; }
@@ -1290,6 +1297,7 @@ bottom: unset;
   <li class="nav-item m-1" role="presentation"><button class="nav-link" id="ugc-tab" data-bs-toggle="pill" data-bs-target="#ugc" type="button" role="tab" aria-controls="ugc" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">UGC</button></li>
   <li class="nav-item m-1" role="presentation"><button class="nav-link" id="before-after-tab" data-bs-toggle="pill" data-bs-target="#before-after" type="button" role="tab" aria-controls="before-after" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Before & After</button></li>
   <li class="nav-item m-1" role="presentation"><button class="nav-link" id="unboxing-tab" data-bs-toggle="pill" data-bs-target="#unboxing" type="button" role="tab" aria-controls="unboxing" aria-selected="false" style="font-weight:600;font-size:14px;padding:8px 16px;border-radius:20px;">Unboxing</button></li>
+  <li class="nav-item m-1" role="presentation"><button class="nav-link videos-tab-btn" id="videos-tab" data-bs-toggle="pill" data-bs-target="#videos" type="button" role="tab" aria-controls="videos" aria-selected="false">&#9654; Videos <span style="background:#fff;color:#c0392b;font-size:10px;font-weight:800;padding:2px 7px;border-radius:10px;margin-left:5px;vertical-align:middle;">22</span></button></li>
 </ul>
 <div class="tab-content" id="creativeTabContent">
   <div class="tab-pane fade show active" id="banner-ads" role="tabpanel" aria-labelledby="banner-ads-tab">
@@ -1726,6 +1734,39 @@ bottom: unset;
       <a href="../../../creative-assets/zips/unboxing.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download Unboxing (ZIP)</a>
     </div>
   </div>
+
+  <!-- VIDEOS TAB -->
+  <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+    <p class="text-center text-muted mb-3"><em>Ad-ready video clips for Meta Trim BHB campaigns</em></p>
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/1-id-1-type-Product-Hero-Reveal-prompt-A-dramatic-.mp4" type="video/mp4"></video><div class="video-label">Product Hero Reveal</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/2-id-2-type-Capsule-Close-Up-prompt-Extreme-close-.mp4" type="video/mp4"></video><div class="video-label">Capsule Close-Up</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/3-id-3-type-Weight-Loss-Transformation-Mirror-prom.mp4" type="video/mp4"></video><div class="video-label">Weight Loss Transformation</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/4-id-4-type-Nature-Ingredients-prompt-A-lush-tropi.mp4" type="video/mp4"></video><div class="video-label">Nature Ingredients</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/5-id-5-type-Before-and-After-Scale-prompt-A-womans.mp4" type="video/mp4"></video><div class="video-label">Before & After Scale</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/6-id-6-type-Morning-Routine-prompt-A-beautiful-wom.mp4" type="video/mp4"></video><div class="video-label">Morning Routine</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/7-id-7-type-Scientific-Lab-Authority-prompt-A-clea.mp4" type="video/mp4"></video><div class="video-label">Scientific Lab Authority</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/8-id-8-type-Lifestyle-Outdoor-Energy-prompt-A-fit-.mp4" type="video/mp4"></video><div class="video-label">Lifestyle Outdoor Energy</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/9-id-9-type-Family-Confidence-prompt-A-slim-confid.mp4" type="video/mp4"></video><div class="video-label">Family Confidence</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/10-id-10-type-Product-Multi-Bottle-Display-prompt-.mp4" type="video/mp4"></video><div class="video-label">Product Multi-Bottle Display</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/11-id-11-type-Dress-Size-Moment-prompt-A-delighted.mp4" type="video/mp4"></video><div class="video-label">Dress Size Moment</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/12-id-12-type-Testimonial-Setup-prompt-A-real-look.mp4" type="video/mp4"></video><div class="video-label">Testimonial Setup</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/13-id-13-type-Waist-Measurement-prompt-Close-up-of.mp4" type="video/mp4"></video><div class="video-label">Waist Measurement</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/14-id-14-type-Nighttime-Energy-prompt-A-woman-sitt.mp4" type="video/mp4"></video><div class="video-label">Nighttime Energy</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/15-id-15-type-Romantic-Confidence-prompt-A-slim-at.mp4" type="video/mp4"></video><div class="video-label">Romantic Confidence</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/16-id-16-type-Product-Intro-Cinematic-prompt-A-cin.mp4" type="video/mp4"></video><div class="video-label">Product Intro Cinematic</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/17-id-17-type-Active-Outdoors-prompt-An-energetic-.mp4" type="video/mp4"></video><div class="video-label">Active Outdoors</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/18-id-18-type-Doctor-Recommendation-prompt-A-profe.mp4" type="video/mp4"></video><div class="video-label">Doctor Recommendation</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/19-id-19-type-Gratitude-Outro-prompt-A-slim-glowin.mp4" type="video/mp4"></video><div class="video-label">Gratitude Outro</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/20-id-20-type-CTA-Urgency-Display-prompt-A-dynamic.mp4" type="video/mp4"></video><div class="video-label">CTA Urgency Display</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/Animate_like_papercard_blooper_58960d847f.mp4" type="video/mp4"></video><div class="video-label">Animated Blooper</div></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="video-card"><video controls preload="none"><source src="../../../creative-assets/videos/clip_00561, 00562, 00563.mp4" type="video/mp4"></video><div class="video-label">Clip 00561–00563</div></div></div>
+    </div>
+    <div class="text-center mt-3">
+      <a href="../../../creative-assets/zips/videos.zip" class="btn btn-danger fw-bold" style="font-size:15px;padding:10px 25px;border-radius:8px;" download><i class="fas fa-download me-2"></i>Download All Videos (ZIP)</a>
+    </div>
+  </div>
+
 </div>
 <script>
 function hoverPlay(container) {
