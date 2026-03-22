@@ -7018,10 +7018,8 @@ function scrollToCards() {
     if (sb) sb.style.display = 'none';
     var mt = document.getElementById('mobile-toast');
     if (mt) mt.style.display = 'none';
-    var target = document.getElementById('bottomorder');
-    if (!target) return;
-    var y = target.getBoundingClientRect().top + window.pageYOffset - 10;
-    window.scrollTo({ top: y, behavior: 'instant' });
+    window.location.hash = '';
+    window.location.hash = 'bottomorder';
 }
 </script>
 
