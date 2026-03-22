@@ -475,33 +475,27 @@ html { scroll-behavior: smooth; }
     #mobile-toast { display: none !important; }
 }
 .mobile-toast-inner {
-    background: #fff;
-    padding: 12px 14px;
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+    padding: 10px 14px;
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.15);
-    border-bottom: 3px solid #1976d2;
-}
-.mobile-toast-img {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    object-fit: contain;
-    flex-shrink: 0;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.2);
 }
 .mobile-toast-content {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 .mobile-toast-title {
     margin: 0;
     font-size: 13px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #fff;
     font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
 }
 .mobile-toast-buttons {
     display: flex;
@@ -509,10 +503,10 @@ html { scroll-behavior: smooth; }
     align-items: center;
 }
 .mobile-toast-btn-primary {
-    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
-    color: #fff !important;
-    padding: 7px 14px;
-    border-radius: 50px;
+    background: #f9b738;
+    color: #0d47a1 !important;
+    padding: 7px 16px;
+    border-radius: 6px;
     font-size: 12px;
     font-weight: 700;
     text-decoration: none !important;
@@ -520,7 +514,7 @@ html { scroll-behavior: smooth; }
     white-space: nowrap;
 }
 .mobile-toast-btn-secondary {
-    color: #1565c0 !important;
+    color: #bbdefb !important;
     font-size: 11px;
     font-weight: 600;
     text-decoration: underline !important;
@@ -529,14 +523,14 @@ html { scroll-behavior: smooth; }
 .mobile-toast-close {
     background: none;
     border: none;
-    color: #bbb;
+    color: rgba(255,255,255,0.6);
     font-size: 20px;
     cursor: pointer;
     padding: 0 2px;
     line-height: 1;
     flex-shrink: 0;
 }
-.mobile-toast-close:hover { color: #666; }
+.mobile-toast-close:hover { color: #fff; }
 
 /* === DESKTOP TOAST === */
 #desktop-toast {
@@ -1689,7 +1683,7 @@ window.__lo_site_id = 271871;
         </svg>
     </button>
     <div class="mv-end-cta">
-        <a href="#bottomorder" class="mv-end-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
+        <a href="#bottomorder" class="mv-end-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
         <button class="mv-end-replay" onclick="replayVideo('hero')">&#8635; Replay</button>
     </div>
 </div>
@@ -1887,7 +1881,7 @@ window.__lo_site_id = 271871;
         </svg>
     </button>
     <div class="mv-end-cta">
-        <a href="#bottomorder" class="mv-end-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
+        <a href="#bottomorder" class="mv-end-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
         <button class="mv-end-replay" onclick="replayVideo('clip-science')">&#8635; Replay</button>
     </div>
 </div>
@@ -2110,7 +2104,7 @@ window.__lo_site_id = 271871;
         </svg>
     </button>
     <div class="mv-end-cta">
-        <a href="#bottomorder" class="mv-end-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
+        <a href="#bottomorder" class="mv-end-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
         <button class="mv-end-replay" onclick="replayVideo('clip-transform')">&#8635; Replay</button>
     </div>
 </div>
@@ -2289,7 +2283,7 @@ window.__lo_site_id = 271871;
         </svg>
     </button>
     <div class="mv-end-cta">
-        <a href="#bottomorder" class="mv-end-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
+        <a href="#bottomorder" class="mv-end-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
         <button class="mv-end-replay" onclick="replayVideo('clip-lifestyle')">&#8635; Replay</button>
     </div>
 </div>
@@ -3141,7 +3135,7 @@ window.__lo_site_id = 271871;
         </svg>
     </button>
     <div class="mv-end-cta">
-        <a href="#bottomorder" class="mv-end-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
+        <a href="#bottomorder" class="mv-end-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
         <button class="mv-end-replay" onclick="replayVideo('testimonial-patricia')">&#8635; Replay</button>
     </div>
 </div>
@@ -3164,7 +3158,7 @@ window.__lo_site_id = 271871;
         </svg>
     </button>
     <div class="mv-end-cta">
-        <a href="#bottomorder" class="mv-end-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
+        <a href="#bottomorder" class="mv-end-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
         <button class="mv-end-replay" onclick="replayVideo('testimonial-sean')">&#8635; Replay</button>
     </div>
 </div>
@@ -3187,7 +3181,7 @@ window.__lo_site_id = 271871;
         </svg>
     </button>
     <div class="mv-end-cta">
-        <a href="#bottomorder" class="mv-end-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
+        <a href="#bottomorder" class="mv-end-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Special Pricing &rarr;</a>
         <button class="mv-end-replay" onclick="replayVideo('testimonial-linda')">&#8635; Replay</button>
     </div>
 </div>
@@ -6852,7 +6846,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="sticky-cta-headline">Up to 61% OFF Meta Trim BHB</span>
             <div class="sticky-cta-timer">Offer ends in <span class="sticky-cta-timer-val" id="sticky-timer">04:59:59</span></div>
         </div>
-        <a href="#bottomorder" class="sticky-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">ORDER NOW &rarr;</a>
+        <a href="#bottomorder" class="sticky-cta-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">ORDER NOW &rarr;</a>
         <button class="sticky-cta-close" onclick="dismissStickyBar()" aria-label="Close">&times;</button>
     </div>
 </div>
@@ -6860,11 +6854,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- === MOBILE TOAST === -->
 <div id="mobile-toast" style="display:none;">
     <div class="mobile-toast-inner">
-        <img src="../../tyimages/meta_1.webp" alt="Meta Trim BHB" class="mobile-toast-img">
         <div class="mobile-toast-content">
-            <p class="mobile-toast-title">Up to 61% OFF &mdash; Limited Time</p>
+            <p class="mobile-toast-title">&darr; Up to 61% OFF &mdash; Limited Time</p>
             <div class="mobile-toast-buttons">
-                <a href="#bottomorder" class="mobile-toast-btn-primary glow-border-btn" onclick="dismissMobileToast();document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Pricing</a>
+                <a href="#bottomorder" class="mobile-toast-btn-primary" onclick="dismissMobileToast();document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">See Pricing</a>
                 <a href="https://metatrim.trustednutraproduct.com/v2/vsl/" class="mobile-toast-btn-secondary">Watch Video</a>
             </div>
         </div>
@@ -6887,7 +6880,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
         <div class="desktop-toast-footer">
-            <a href="#bottomorder" class="desktop-toast-btn glow-border-btn" onclick="dismissDesktopToast();document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">View Packages &rarr;</a>
+            <a href="#bottomorder" class="desktop-toast-btn" onclick="dismissDesktopToast();document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">View Packages &rarr;</a>
             <a href="https://metatrim.trustednutraproduct.com/v2/vsl/" class="desktop-toast-vsl">Watch video</a>
         </div>
         <button class="desktop-toast-close" onclick="dismissDesktopToast()" aria-label="Close">&times;</button>
@@ -6962,7 +6955,7 @@ function dismissStickyBar() {
                 video.pause();
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
 
     players.forEach(function(player) {
         observer.observe(player);
