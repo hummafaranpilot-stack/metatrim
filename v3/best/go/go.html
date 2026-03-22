@@ -119,30 +119,22 @@ html { scroll-behavior: smooth; }
 }
 .inline-cta-btn {
     display: inline-block;
-    background: linear-gradient(135deg, #1565c0 0%, #1976d2 50%, #1e88e5 100%);
+    background: #2e7d32;
     color: #fff !important;
     font-size: 20px;
     font-weight: 800;
     font-family: 'Montserrat', sans-serif;
     padding: 18px 45px;
-    border-radius: 50px;
+    border-radius: 8px;
     text-decoration: none !important;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 6px 20px rgba(13, 71, 161, 0.3);
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: none;
 }
 .inline-cta-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.5);
-}
-/* Green variant */
-.inline-cta-btn.green-btn {
-    background: linear-gradient(135deg, #2e7d32 0%, #388e3c 50%, #43a047 100%);
-    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
-}
-.inline-cta-btn.green-btn:hover {
-    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.5);
+    transform: scale(1.02);
+    background: #256b29;
 }
 .inline-cta-subtext {
     display: block;
@@ -153,7 +145,7 @@ html { scroll-behavior: smooth; }
     font-family: 'Montserrat', sans-serif;
 }
 @media (max-width: 768px) {
-    .inline-cta-btn { font-size: 16px; padding: 16px 30px; }
+    .inline-cta-btn { font-size: 16px; padding: 16px 28px; }
     .inline-cta-subtext { font-size: 12px; }
 }
 
@@ -1889,7 +1881,7 @@ window.__lo_site_id = 271871;
 </div>
 <div class="mv-player" data-video-id="clip-science">
     <span class="mv-badge">The science</span>
-    <video muted playsinline preload="none">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip3_science.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -2112,7 +2104,7 @@ window.__lo_site_id = 271871;
 </div>
 <div class="mv-player" data-video-id="clip-transform">
     <span class="mv-badge">Real results</span>
-    <video muted playsinline preload="none">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip2_transformation.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -2131,7 +2123,7 @@ window.__lo_site_id = 271871;
 <p class="mv-caption">67 pounds gone &mdash; see the full story (20 sec)</p>
 
 <div class="inline-cta-wrapper">
-    <a href="#bottomorder" class="inline-cta-btn green-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Try Meta Trim BHB Today &rarr;</a>
+    <a href="#bottomorder" class="inline-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Try Meta Trim BHB Today &rarr;</a>
     <span class="inline-cta-subtext">Join thousands of happy customers &bull; Up to 61% OFF</span>
 </div>
 
@@ -2291,7 +2283,7 @@ window.__lo_site_id = 271871;
 </div>
 <div class="mv-player" data-video-id="clip-lifestyle">
     <span class="mv-badge">Imagine this</span>
-    <video muted playsinline preload="none">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip5_lifestyle_promise.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3143,7 +3135,7 @@ window.__lo_site_id = 271871;
 </div>
 <div class="mv-player" data-video-id="testimonial-patricia">
     <span class="mv-badge">Patricia, 43 &mdash; Miami, FL</span>
-    <video muted playsinline preload="none">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-patricia.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3166,7 +3158,7 @@ window.__lo_site_id = 271871;
 </div>
 <div class="mv-player" data-video-id="testimonial-sean">
     <span class="mv-badge">Sean, 69 &mdash; Des Moines, IA</span>
-    <video muted playsinline preload="none">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-sean.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3189,7 +3181,7 @@ window.__lo_site_id = 271871;
 </div>
 <div class="mv-player" data-video-id="testimonial-linda">
     <span class="mv-badge">Linda, 55 &mdash; San Diego, CA</span>
-    <video muted playsinline preload="none">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-linda.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3208,7 +3200,7 @@ window.__lo_site_id = 271871;
 <p class="mv-caption">&ldquo;I dropped 7 pounds the first week&rdquo;</p>
 
 <div class="inline-cta-wrapper">
-    <a href="#bottomorder" class="inline-cta-btn green-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Get Meta Trim BHB &mdash; Up to 61% OFF &rarr;</a>
+    <a href="#bottomorder" class="inline-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Get Meta Trim BHB &mdash; Up to 61% OFF &rarr;</a>
     <span class="inline-cta-subtext">Free shipping on select packages &bull; 60-day guarantee</span>
 </div>
 
@@ -6968,9 +6960,18 @@ function dismissStickyBar() {
             var endCta = entry.target.querySelector('.mv-end-cta');
             if (entry.isIntersecting) {
                 if (!endCta.classList.contains('show')) {
-                    video.play().catch(function() {});
+                    if (video.readyState >= 3) {
+                        video.play().catch(function() {});
+                    } else {
+                        video.__wantsPlay = true;
+                        video.addEventListener('canplay', function onReady() {
+                            if (video.__wantsPlay) video.play().catch(function() {});
+                            video.removeEventListener('canplay', onReady);
+                        });
+                    }
                 }
             } else {
+                video.__wantsPlay = false;
                 video.pause();
             }
         });
@@ -7026,12 +7027,16 @@ function dismissStickyBar() {
 
             if (video.muted) {
                 video.muted = false;
-                video.currentTime = 0;
+                video.pause();
                 var ec = player.querySelector('.mv-end-cta');
                 if (ec) ec.classList.remove('show');
                 var pf = player.querySelector('.mv-progress-fill');
                 if (pf) pf.style.width = '0%';
-                video.play().catch(function() {});
+                video.currentTime = 0;
+                video.addEventListener('seeked', function onSeeked() {
+                    video.play().catch(function() {});
+                    video.removeEventListener('seeked', onSeeked);
+                });
             } else {
                 video.muted = true;
             }
