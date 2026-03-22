@@ -225,7 +225,7 @@ html { scroll-behavior: smooth; }
     margin: 0 auto 10px;
     border-radius: 10px;
     overflow: hidden;
-    background: #000;
+    background: transparent;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     cursor: pointer;
 }
@@ -680,6 +680,17 @@ img[style*="width:900px"] { max-width: 500px !important; }
     height: 24px;
     margin-left: 3px;
 }
+.mv-play-overlay.playing {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.mv-play-overlay.playing:hover,
+.mv-play-overlay.playing:active {
+    opacity: 1;
+}
+.mv-play-overlay .mv-pause-icon { display: none; }
+.mv-play-overlay.playing .mv-play-icon { display: none; }
+.mv-play-overlay.playing .mv-pause-icon { display: block; }
 .mv-play-overlay.hidden { display: none; }
 @media (max-width: 768px) {
     .mv-play-btn { width: 52px; height: 52px; }
@@ -1735,9 +1746,10 @@ window.__lo_site_id = 271871;
     <h3>The <span class="mv-highlight">Real Reason</span> You Can't Lose Weight</h3>
 </div>
 <div class="mv-player" data-video-id="hero">
-    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+    <div class="mv-play-overlay" onclick="event.stopPropagation();togglePlayPause(this);">
         <div class="mv-play-btn">
-            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-play-icon" viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-pause-icon" viewBox="0 0 24 24" fill="#fff"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
         </div>
     </div>
     <span class="mv-badge">Watch this first</span>
@@ -1938,9 +1950,10 @@ window.__lo_site_id = 271871;
     <h3>How <span class="mv-highlight">&ldquo;Sticky&rdquo; Fat Cells</span> Trap Weight on Your Body</h3>
 </div>
 <div class="mv-player" data-video-id="clip-science">
-    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+    <div class="mv-play-overlay" onclick="event.stopPropagation();togglePlayPause(this);">
         <div class="mv-play-btn">
-            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-play-icon" viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-pause-icon" viewBox="0 0 24 24" fill="#fff"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
         </div>
     </div>
     <span class="mv-badge">The science</span>
@@ -2166,9 +2179,10 @@ window.__lo_site_id = 271871;
     <h3>From Dress Size 22 to <span class="mv-highlight">Size 6</span> &mdash; A Real Transformation</h3>
 </div>
 <div class="mv-player" data-video-id="clip-transform">
-    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+    <div class="mv-play-overlay" onclick="event.stopPropagation();togglePlayPause(this);">
         <div class="mv-play-btn">
-            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-play-icon" viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-pause-icon" viewBox="0 0 24 24" fill="#fff"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
         </div>
     </div>
     <span class="mv-badge">Real results</span>
@@ -2350,9 +2364,10 @@ window.__lo_site_id = 271871;
     <h3>Eat What You Love &mdash; <span class="mv-highlight">Burn It Like Jet Fuel</span></h3>
 </div>
 <div class="mv-player" data-video-id="clip-lifestyle">
-    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+    <div class="mv-play-overlay" onclick="event.stopPropagation();togglePlayPause(this);">
         <div class="mv-play-btn">
-            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-play-icon" viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-pause-icon" viewBox="0 0 24 24" fill="#fff"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
         </div>
     </div>
     <span class="mv-badge">Imagine this</span>
@@ -3207,9 +3222,10 @@ window.__lo_site_id = 271871;
     <h3>Patricia Lost <span class="mv-highlight">54 Pounds</span> After 3 Kids</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-patricia">
-    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+    <div class="mv-play-overlay" onclick="event.stopPropagation();togglePlayPause(this);">
         <div class="mv-play-btn">
-            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-play-icon" viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-pause-icon" viewBox="0 0 24 24" fill="#fff"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
         </div>
     </div>
     <span class="mv-badge">Patricia, 43 &mdash; Miami, FL</span>
@@ -3235,9 +3251,10 @@ window.__lo_site_id = 271871;
     <h3>Sean Lost <span class="mv-highlight">36 Pounds</span> &mdash; Fits His College Wrestling Gear</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-sean">
-    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+    <div class="mv-play-overlay" onclick="event.stopPropagation();togglePlayPause(this);">
         <div class="mv-play-btn">
-            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-play-icon" viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-pause-icon" viewBox="0 0 24 24" fill="#fff"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
         </div>
     </div>
     <span class="mv-badge">Sean, 69 &mdash; Des Moines, IA</span>
@@ -3263,9 +3280,10 @@ window.__lo_site_id = 271871;
     <h3>Linda Lost <span class="mv-highlight">49 Pounds</span> After 25 Years of Failed Diets</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-linda">
-    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+    <div class="mv-play-overlay" onclick="event.stopPropagation();togglePlayPause(this);">
         <div class="mv-play-btn">
-            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-play-icon" viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+            <svg class="mv-pause-icon" viewBox="0 0 24 24" fill="#fff"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
         </div>
     </div>
     <span class="mv-badge">Linda, 55 &mdash; San Diego, CA</span>
@@ -7067,16 +7085,19 @@ function dismissStickyBar() {
     players.forEach(function(player) {
         observer.observe(player);
 
-        /* Hide play overlay when video plays */
-        var playOverlay = player.querySelector('.mv-play-overlay');
-        video.addEventListener('playing', function() {
-            if (playOverlay) playOverlay.classList.add('hidden');
-        });
-
         var video = player.querySelector('video');
         var progressFill = player.querySelector('.mv-progress-fill');
         var endCta = player.querySelector('.mv-end-cta');
         var muteBtn = player.querySelector('.mv-mute-btn');
+        var playOverlay = player.querySelector('.mv-play-overlay');
+
+        /* Sync overlay state with video */
+        video.addEventListener('playing', function() {
+            if (playOverlay) { playOverlay.classList.add('playing'); playOverlay.classList.remove('paused'); }
+        });
+        video.addEventListener('pause', function() {
+            if (playOverlay && !endCta.classList.contains('show')) { playOverlay.classList.remove('playing'); playOverlay.classList.add('paused'); }
+        });
 
         video.addEventListener('timeupdate', function() {
             if (video.duration) {
@@ -7087,13 +7108,15 @@ function dismissStickyBar() {
         video.addEventListener('ended', function() {
             endCta.classList.add('show');
             progressFill.style.width = '100%';
+            if (playOverlay) playOverlay.classList.add('hidden');
         });
 
         video.addEventListener('click', function(e) {
             e.stopPropagation();
             if (video.paused) {
                 video.play().catch(function() {});
-                if (playOverlay) playOverlay.classList.add('hidden');
+            } else {
+                video.pause();
             }
         });
 
@@ -7140,13 +7163,17 @@ function dismissStickyBar() {
 })();
 
 
-/* Start video from play overlay */
-function startVideo(overlay) {
+/* Toggle play/pause from overlay */
+function togglePlayPause(overlay) {
     var player = overlay.closest('.mv-player');
     var video = player.querySelector('video');
-    overlay.classList.add('hidden');
+    /* If playing, pause it */
+    if (!video.paused) {
+        video.pause();
+        return;
+    }
+    /* Otherwise play — unmuted, from start if first time */
     video.muted = false;
-    video.currentTime = 0;
     /* Mute all others */
     document.querySelectorAll('.mv-player video').forEach(function(v) {
         if (v !== video) { v.muted = true; v.pause(); }

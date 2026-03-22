@@ -74,23 +74,21 @@ function updateSocial() {
   }
 }
 
+/* Show a notification: slide in, hold 6s, slide out */
+function showNotification() {
+  updateSocial();
+  var el = $('.custom-social-proof');
+  el.stop(true, true).slideDown('slow');
+  setTimeout(function() {
+    el.stop(true, true).slideUp('slow');
+  }, 6000);
+}
+
 /* Initial delay: 35 seconds before first notification */
 setTimeout(function() {
-  updateSocial();
-  $('.custom-social-proof').stop().slideToggle('slow');
-
-  /* Then cycle: show 6s, hide, wait 20s, show next */
-  setInterval(function() {
-    var divID = $('.custom-social-proof');
-    if (divID.is(':hidden')) {
-      updateSocial();
-      $('.custom-social-proof').stop().slideToggle('slow');
-      /* Auto-hide after 6 seconds */
-      setTimeout(function() {
-        $('.custom-social-proof').stop().slideToggle('slow');
-      }, 6000);
-    }
-  }, 26000);
+  showNotification();
+  /* Then repeat every 25 seconds */
+  setInterval(showNotification, 25000);
 }, 35000);
 
 $('.custom-close').click(function() {
