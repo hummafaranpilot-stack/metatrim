@@ -37,9 +37,7 @@
 }
 @media (max-width: 991px) {
     .top-banner {
-        position: sticky;
-        top: 0;
-        z-index: 9999;
+        display: none;
     }
 }
 
@@ -121,16 +119,16 @@ html { scroll-behavior: smooth; }
 }
 .inline-cta-btn {
     display: inline-block;
-    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+    background: linear-gradient(135deg, #1565c0 0%, #1976d2 50%, #1e88e5 100%);
     color: #fff !important;
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
     font-family: 'Montserrat', sans-serif;
-    padding: 16px 40px;
+    padding: 18px 45px;
     border-radius: 50px;
     text-decoration: none !important;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 6px 20px rgba(13, 71, 161, 0.3);
 }
@@ -138,15 +136,24 @@ html { scroll-behavior: smooth; }
     transform: scale(1.05);
     box-shadow: 0 8px 25px rgba(13, 71, 161, 0.5);
 }
+/* Green variant */
+.inline-cta-btn.green-btn {
+    background: linear-gradient(135deg, #2e7d32 0%, #388e3c 50%, #43a047 100%);
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+}
+.inline-cta-btn.green-btn:hover {
+    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.5);
+}
 .inline-cta-subtext {
     display: block;
-    margin-top: 10px;
-    font-size: 13px;
-    color: #888;
-    font-weight: 500;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
 }
 @media (max-width: 768px) {
-    .inline-cta-btn { font-size: 15px; padding: 14px 28px; }
+    .inline-cta-btn { font-size: 16px; padding: 16px 30px; }
     .inline-cta-subtext { font-size: 12px; }
 }
 
@@ -539,7 +546,7 @@ html { scroll-behavior: smooth; }
 /* === DESKTOP TOAST === */
 #desktop-toast {
     position: fixed;
-    bottom: 90px;
+    bottom: 110px;
     right: 25px;
     z-index: 9997;
     animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2124,7 +2131,7 @@ window.__lo_site_id = 271871;
 <p class="mv-caption">67 pounds gone &mdash; see the full story (20 sec)</p>
 
 <div class="inline-cta-wrapper">
-    <a href="#bottomorder" class="inline-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Try Meta Trim BHB Today &rarr;</a>
+    <a href="#bottomorder" class="inline-cta-btn green-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Try Meta Trim BHB Today &rarr;</a>
     <span class="inline-cta-subtext">Join thousands of happy customers &bull; Up to 61% OFF</span>
 </div>
 
@@ -3201,7 +3208,7 @@ window.__lo_site_id = 271871;
 <p class="mv-caption">&ldquo;I dropped 7 pounds the first week&rdquo;</p>
 
 <div class="inline-cta-wrapper">
-    <a href="#bottomorder" class="inline-cta-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Get Meta Trim BHB &mdash; Up to 61% OFF &rarr;</a>
+    <a href="#bottomorder" class="inline-cta-btn green-btn glow-border-btn" onclick="document.getElementById('bottomorder').scrollIntoView({behavior:'smooth'});return false;">Get Meta Trim BHB &mdash; Up to 61% OFF &rarr;</a>
     <span class="inline-cta-subtext">Free shipping on select packages &bull; 60-day guarantee</span>
 </div>
 
@@ -7101,7 +7108,9 @@ function dismissDesktopToast() {
         var elapsed = (Date.now() - startTime) / 1000;
         var pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
         if (elapsed >= 60 && pct >= 15 && pct < 60) {
-            if (toast.style.display === 'none' || !toast.style.display) {
+            var stickyBar = document.getElementById('sticky-cta-desktop');
+            var stickyVisible = stickyBar && stickyBar.style.display === 'block';
+            if ((toast.style.display === 'none' || !toast.style.display) && !stickyVisible) {
                 toast.style.display = 'block';
                 if (autoHideTimer) clearTimeout(autoHideTimer);
                 autoHideTimer = setTimeout(function() {
