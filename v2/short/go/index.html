@@ -1341,30 +1341,34 @@ body { overflow-x: hidden; }
 @keyframes slideDownToast { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 .mobile-toast-inner {
     background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.2);
-}
-.mobile-toast-content {
-    flex: 1;
+    padding: 12px 16px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+    position: relative;
+}
+.mobile-toast-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
 }
 .mobile-toast-buttons {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 14px;
 }
 .mobile-toast-title {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
-    white-space: nowrap;
+    text-align: center;
 }
 .mobile-toast-btn-primary {
     background: #f9b738;
@@ -1390,9 +1394,11 @@ body { overflow-x: hidden; }
     color: rgba(255,255,255,0.6);
     font-size: 20px;
     cursor: pointer;
-    padding: 0 2px;
+    padding: 0;
     line-height: 1;
-    flex-shrink: 0;
+    position: absolute;
+    top: 8px;
+    right: 12px;
 }
 @media (min-width: 992px) { #mobile-toast { display: none !important; } }
 
@@ -1504,6 +1510,12 @@ body { overflow-x: hidden; }
 /* === HIDE OLD FLOATING BUTTON === */
 button.trynow { display: none !important; }
 
+/* === SOCIAL PROOF — above sticky bar === */
+.custom-social-proof {
+    z-index: 9996 !important;
+    bottom: 80px !important;
+}
+
 </style>
 
 <body>
@@ -1570,7 +1582,7 @@ button.trynow { display: none !important; }
 <!-- === VIDEO 1: Hero Hook === -->
 <div style="text-align:center; padding: 15px 10px;">
     <h3 style="color:#1a237e; font-weight:800; font-family:'Montserrat',sans-serif; margin-bottom:5px;">The <em style="color:#2e7d32;">Real Reason</em> You Can't Lose Weight</h3>
-    <div class="mv-player" data-video-id="hero">
+    <div class="mv-player" data-video-id="hero" data-poster-time="4">
         <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});">
             <div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div>
         </div>
@@ -3265,6 +3277,14 @@ document.querySelectorAll('.mv-player').forEach(function(player) {
 
     /* Set initial mute icon */
     if (muteBtn) muteBtn.innerHTML = MUTED_ICON;
+
+    /* Seek to poster time for preview frame */
+    var posterTime = player.getAttribute('data-poster-time');
+    if (posterTime) {
+        video.addEventListener('loadedmetadata', function() {
+            video.currentTime = parseFloat(posterTime);
+        }, { once: true });
+    }
 
     /* Progress bar */
     video.addEventListener('timeupdate', function() {
