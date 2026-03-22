@@ -157,7 +157,7 @@ window.__lo_site_id = 330757;
 
 .mt-product-card.mt-featured {
   background: #fff;
-  border: 2px solid #1976d2;
+  border: 2px solid #c8922a;
 }
 
 .mt-product-header {
@@ -169,7 +169,8 @@ window.__lo_site_id = 330757;
 }
 
 .mt-product-card.mt-featured .mt-product-header {
-  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+  background: linear-gradient(135deg, #c8922a, #e8b84a, #d4a032);
+  color: #000;
 }
 
 .mt-product-header h3 {
@@ -199,9 +200,9 @@ window.__lo_site_id = 330757;
   position: relative;
   text-align: center;
   padding: 0.6rem;
-  border: 2px solid #bbdefb;
+  border: 2px solid #e8d5a8;
   border-radius: 12px;
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  background: linear-gradient(135deg, #fdf6e3 0%, #f5e6c4 100%);
   margin-bottom: 0.5rem;
 }
 
@@ -1034,17 +1035,10 @@ window.__lo_site_id = 330757;
   }
 }
 
-/* === GREEN CTA BUTTONS === */
-.button-center.riskfree a {
-    background: #2e7d32;
-    border-radius: 8px;
-    padding: 15px 30px;
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-.button-center.riskfree a:hover {
-    transform: scale(1.02);
-    background: #256b29;
-}
+/* Prevent horizontal scroll */
+body { overflow-x: hidden; }
+
+/* === GREEN CTA BUTTONS (new inline CTAs only) === */
 .inline-cta-btn {
     display: inline-block;
     background: #2e7d32;
@@ -1267,6 +1261,8 @@ window.__lo_site_id = 330757;
     padding: 10px 20px;
     box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
     animation: slideUpBar 0.4s ease-out;
+    overflow: hidden;
+    max-width: 100vw;
 }
 @keyframes slideUpBar { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .sticky-bar-inner {
