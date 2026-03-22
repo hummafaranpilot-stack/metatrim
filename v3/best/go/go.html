@@ -234,7 +234,8 @@ html { scroll-behavior: smooth; }
     height: auto;
     display: block;
     max-height: 340px;
-    object-fit: cover;
+    object-fit: contain;
+    background: #111;
 }
 .mv-progress-bar {
     position: absolute;
@@ -6838,7 +6839,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Social Proof Notification -->
 <link href="../../popup/css/style1.css" type="text/css" rel="stylesheet">
-<section class="custom-social-proof">
+<section class="custom-social-proof" style="display:none;">
     <div class="custom-notification">
         <div class="custom-notification-container">
             <div class="custom-notification-image-wrapper">
@@ -6854,7 +6855,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </section>
 <script>window.socialProofBase='../../';</script>
-<script type="text/javascript" src="../../popup/js/social-proof.js"></script>
+<script type="text/javascript" src="../../popup/js/social-proof.js?v=2"></script>
 <script>
 // Preserve URL parameters across page navigation
 (function() {
