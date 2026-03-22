@@ -1812,7 +1812,7 @@ button.trynow { display: none !important; }
             <div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div>
         </div>
         <span class="mv-badge">Quick tip</span>
-        <video muted playsinline preload="metadata">
+        <video muted playsinline preload="auto">
             <source src="../../../video_clips/clip5_lifestyle_promise.webm" type="video/webm">
         </video>
         <div class="mv-controls">
@@ -1990,7 +1990,7 @@ bottom: unset;
         <div>
             <div class="mv-player" data-video-id="patricia">
                 <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
-                <video muted playsinline preload="metadata">
+                <video muted playsinline preload="auto">
                     <source src="../../../video_clips/testimonial-patricia.webm" type="video/webm">
                 </video>
                 <div class="mv-controls">
@@ -2009,7 +2009,7 @@ bottom: unset;
         <div>
             <div class="mv-player" data-video-id="sean">
                 <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
-                <video muted playsinline preload="metadata">
+                <video muted playsinline preload="auto">
                     <source src="../../../video_clips/testimonial-sean.webm" type="video/webm">
                 </video>
                 <div class="mv-controls">
@@ -2028,7 +2028,7 @@ bottom: unset;
         <div>
             <div class="mv-player" data-video-id="linda">
                 <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
-                <video muted playsinline preload="metadata">
+                <video muted playsinline preload="auto">
                     <source src="../../../video_clips/testimonial-linda.webm" type="video/webm">
                 </video>
                 <div class="mv-controls">
@@ -3256,9 +3256,10 @@ document.querySelectorAll('.mv-player').forEach(function(player) {
     /* Seek to poster time for preview frame */
     var posterTime = player.getAttribute('data-poster-time');
     if (posterTime) {
-        video.addEventListener('loadedmetadata', function() {
-            video.currentTime = parseFloat(posterTime);
-        }, { once: true });
+        var seekTo = parseFloat(posterTime);
+        function seekPoster() { video.currentTime = seekTo; }
+        if (video.readyState >= 1) { seekPoster(); }
+        else { video.addEventListener('loadeddata', seekPoster, { once: true }); }
     }
 
     /* Progress bar */
