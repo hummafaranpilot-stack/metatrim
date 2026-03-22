@@ -629,9 +629,14 @@ html { scroll-behavior: smooth; }
 
 /* === MOBILE: 2-col icon grids + smaller images === */
 @media (max-width: 767px) {
-    .w-50-new { max-width: 120px !important; }
-    .col-6.text-center picture img { max-width: 120px; }
-    .col-6.text-center h5 { font-size: 14px; }
+    .w-50-new { max-width: 100px !important; }
+    .col-6.text-center picture img,
+    .col-6.col-md-4 picture img,
+    .col-6.col-md-4 img.img-fluid { max-width: 100px; margin: 0 auto; }
+    .col-6.text-center h5,
+    .col-6.col-md-4 h5 { font-size: 13px; margin-bottom: 10px; }
+    .col-6.col-md-4 .col-8 { max-width: 100%; flex: 0 0 100%; }
+    .col-6.col-md-4 .col-8 img { max-width: 80px; }
 }
 
 /* === Limit large inline product images === */
@@ -642,7 +647,7 @@ img[style*="width:900px"] { max-width: 500px !important; }
     img[style*="width:900px"] { max-width: 280px !important; }
 }
 
-/* === MOBILE VIDEO PLAY BUTTON === */
+/* === VIDEO PLAY BUTTON (GLASS EFFECT) === */
 .mv-play-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -651,15 +656,35 @@ img[style*="width:900px"] { max-width: 500px !important; }
     justify-content: center;
     z-index: 4;
     cursor: pointer;
-    background: rgba(0,0,0,0.2);
 }
-.mv-play-overlay svg {
-    width: 60px;
-    height: 60px;
-    opacity: 0.9;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+.mv-play-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.mv-play-overlay:hover .mv-play-btn {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.25);
+}
+.mv-play-btn svg {
+    width: 24px;
+    height: 24px;
+    margin-left: 3px;
 }
 .mv-play-overlay.hidden { display: none; }
+@media (max-width: 768px) {
+    .mv-play-btn { width: 52px; height: 52px; }
+    .mv-play-btn svg { width: 20px; height: 20px; }
+}
 </style>
 
 <!-- Logo Area -->
@@ -1710,8 +1735,10 @@ window.__lo_site_id = 271871;
     <h3>The <span class="mv-highlight">Real Reason</span> You Can't Lose Weight</h3>
 </div>
 <div class="mv-player" data-video-id="hero">
-    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+        <div class="mv-play-btn">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
     </div>
     <span class="mv-badge">Watch this first</span>
     <video muted playsinline preload="auto">
@@ -1911,8 +1938,10 @@ window.__lo_site_id = 271871;
     <h3>How <span class="mv-highlight">&ldquo;Sticky&rdquo; Fat Cells</span> Trap Weight on Your Body</h3>
 </div>
 <div class="mv-player" data-video-id="clip-science">
-    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+        <div class="mv-play-btn">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
     </div>
     <span class="mv-badge">The science</span>
     <video muted playsinline preload="metadata">
@@ -2137,8 +2166,10 @@ window.__lo_site_id = 271871;
     <h3>From Dress Size 22 to <span class="mv-highlight">Size 6</span> &mdash; A Real Transformation</h3>
 </div>
 <div class="mv-player" data-video-id="clip-transform">
-    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+        <div class="mv-play-btn">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
     </div>
     <span class="mv-badge">Real results</span>
     <video muted playsinline preload="metadata">
@@ -2272,7 +2303,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row">		
 						<div class="d-flex justify-content-center mx-auto flex-wrap">
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14a.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14a.jpg" alt="">
@@ -2280,7 +2311,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Support Healthy <br class="d-none d-md-block d-lg-none">Metabolism</h5>	
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14b.jpg" alt="">
@@ -2288,7 +2319,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Supports a feeling  <span style="white-space:nowrap;">of fullness…</span></h5>
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14c.jpg" alt="">
@@ -2296,7 +2327,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Trigger intense <br class="d-none d-md-block">fat burning</h5>
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14d.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14d.jpg" alt="">
@@ -2304,7 +2335,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Force your body to <span style="white-space:nowrap;">release fat</span></h5>	
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14e.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14e.jpg" alt="">
@@ -2319,8 +2350,10 @@ window.__lo_site_id = 271871;
     <h3>Eat What You Love &mdash; <span class="mv-highlight">Burn It Like Jet Fuel</span></h3>
 </div>
 <div class="mv-player" data-video-id="clip-lifestyle">
-    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+        <div class="mv-play-btn">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
     </div>
     <span class="mv-badge">Imagine this</span>
     <video muted playsinline preload="metadata">
@@ -2555,7 +2588,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row">		
 						<div class="d-flex justify-content-center justify-content-md-around justify-content-lg-center mx-auto flex-wrap">
-							<div class="col-12 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-17a.webp" type="image/webp"/>
 									<img loading="lazy" class="col-8 col-md-12 px-0 img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-17a.jpg" alt="">
@@ -2564,7 +2597,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-success text-center mb-0 d-lg-none">Help the body</h4>	
 							</div>
 
-							<div class="col-12 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-17b.webp" type="image/webp"/>
 									<img loading="lazy" class="col-8 col-md-12 px-0 img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-17b.jpg" alt="">
@@ -2573,7 +2606,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-success text-center mb-0 d-lg-none">Reduce the risk of heart issues</h4>	
 							</div>
 
-							<div class="col-12 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-17c.webp" type="image/webp"/>
 									<img loading="lazy" class="col-8 col-md-12 px-0 img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-17c.jpg" alt="">
@@ -2582,7 +2615,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-success text-center mb-0 d-lg-none">Boost immunity</h4>	
 							</div>
 
-							<div class="col-12 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-17d.webp" type="image/webp"/>
 									<img loading="lazy" class="col-8 col-md-12 px-0 img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-17d.jpg" alt="">
@@ -2591,7 +2624,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-success text-center mb-0 d-lg-none">Support gut health</h4>	
 							</div>
 
-							<div class="col-12 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-17e.webp" type="image/webp"/>
 									<img loading="lazy" class="col-8 col-md-12 px-0 img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-17e.jpg" alt="">
@@ -2600,7 +2633,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-success text-center mb-0 d-lg-none">Improve bone health</h4>	
 							</div>
 
-							<div class="col-12 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 text-center px-4 py-2 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-17f.webp" type="image/webp"/>
 									<img loading="lazy" class="col-8 col-md-12 px-0 img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-17f.jpg" alt="">
@@ -2703,7 +2736,7 @@ window.__lo_site_id = 271871;
 
 									<div class="row">		
 										<div class="d-flex justify-content-center mx-auto flex-wrap">
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22a.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22a.jpg" alt="">
@@ -2711,7 +2744,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Support thyroid health</h5>	
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22b.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22b.jpg" alt="">
@@ -2719,7 +2752,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Improve gut health</h5>
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22c.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22c.jpg" alt="">
@@ -2727,7 +2760,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Strengthen heart health</h5>
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22d.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22d.jpg" alt="">
@@ -2735,7 +2768,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Promote brain health</h5>	
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22e.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22e.jpg" alt="">
@@ -2743,7 +2776,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Boost immunity</h5>	
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22f.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22f.jpg" alt="">
@@ -2797,7 +2830,7 @@ window.__lo_site_id = 271871;
 
 									<div class="row">		
 										<div class="d-flex justify-content-center mx-auto flex-wrap">
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-24a.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-24a.jpg" alt="">
@@ -2805,7 +2838,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Reduces inflammation</h5>	
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22a.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22a.jpg" alt="">
@@ -2813,7 +2846,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Supports thyroid health</h5>
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-22b.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-22b.jpg" alt="">
@@ -2821,7 +2854,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Helps with digestive and gut issues</h5>
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-24b.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-24b.jpg" alt="">
@@ -2829,7 +2862,7 @@ window.__lo_site_id = 271871;
 												<h5 class="text-blue text-center mb-0">Protects vision</h5>	
 											</div>
 
-											<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+											<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 												<picture class="img-fluid mt-md-2 mt-0 mb-3">
 													<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-24c.webp" type="image/webp"/>
 													<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-24c.jpg" alt="">
@@ -3174,8 +3207,10 @@ window.__lo_site_id = 271871;
     <h3>Patricia Lost <span class="mv-highlight">54 Pounds</span> After 3 Kids</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-patricia">
-    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+        <div class="mv-play-btn">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
     </div>
     <span class="mv-badge">Patricia, 43 &mdash; Miami, FL</span>
     <video muted playsinline preload="metadata">
@@ -3200,8 +3235,10 @@ window.__lo_site_id = 271871;
     <h3>Sean Lost <span class="mv-highlight">36 Pounds</span> &mdash; Fits His College Wrestling Gear</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-sean">
-    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+        <div class="mv-play-btn">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
     </div>
     <span class="mv-badge">Sean, 69 &mdash; Des Moines, IA</span>
     <video muted playsinline preload="metadata">
@@ -3226,8 +3263,10 @@ window.__lo_site_id = 271871;
     <h3>Linda Lost <span class="mv-highlight">49 Pounds</span> After 25 Years of Failed Diets</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-linda">
-    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    <div class="mv-play-overlay" onclick="event.stopPropagation();startVideo(this);">
+        <div class="mv-play-btn">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
     </div>
     <span class="mv-badge">Linda, 55 &mdash; San Diego, CA</span>
     <video muted playsinline preload="metadata">
@@ -3313,7 +3352,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row">		
 						<div class="d-flex justify-content-center mx-auto flex-wrap">
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14a.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14a.jpg" alt="">
@@ -3321,7 +3360,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Shape Support</h5>	
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14c.jpg" alt="">
@@ -3329,7 +3368,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Prevent fat absorption</h5>
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-32b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-32b.jpg" alt="">
@@ -3337,7 +3376,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Help you poop out fat</h5>
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14b.jpg" alt="">
@@ -3345,7 +3384,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Make you feel fuller</h5>	
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14d.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3 icon-90" src="../../cdn.truegcloud.com/puraburn/images/colin-14d.jpg" alt="">
@@ -3510,7 +3549,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row">		
 						<div class="d-flex justify-content-center mx-auto flex-wrap">
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-37a.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-37a.jpg" alt="">
@@ -3518,7 +3557,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Microplastics</h5>	
 							</div> 
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-37b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-37b.jpg" alt="">
@@ -3526,7 +3565,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">PCBs</h5>
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-37c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-37c.jpg" alt="">
@@ -3711,7 +3750,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row">		
 						<div class="d-flex justify-content-center mx-auto flex-wrap">
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-4 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-41a.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-41a.jpg" alt="">
@@ -3719,7 +3758,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Feeling invisible</h5>	
 							</div> 
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-41b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-41b.jpg" alt="">
@@ -3727,7 +3766,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-0">Being judged</h5>
 							</div>
 
-							<div class="col-12 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+							<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-41c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-41c.jpg" alt="">
@@ -5958,7 +5997,7 @@ window.__lo_site_id = 271871;
 							<div class="d-flex justify-content-center mx-auto flex-wrap">
 								
 											
-								<div class="col-11 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+								<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 									<picture class="img-fluid mt-md-2 mt-0 mb-3">
 										<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14c.webp" type="image/webp">
 										<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-14c.jpg" alt="">
@@ -5967,7 +6006,7 @@ window.__lo_site_id = 271871;
 									<h5 class="text-blue text-center mb-0">Reduce fat absorption</h5>
 								</div>
 
-								<div class="col-11 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+								<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 									<picture class="img-fluid mt-md-2 mt-0 mb-3">
 										<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14b.webp" type="image/webp">
 										<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-14b.jpg" alt="">
@@ -5976,7 +6015,7 @@ window.__lo_site_id = 271871;
 									<h5 class="text-blue text-center mb-0">Curb your appetite</h5>
 								</div>
 
-								<div class="col-11 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+								<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 									<picture class="img-fluid mt-md-2 mt-0 mb-3">
 										<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14d.webp" type="image/webp">
 										<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-14d.jpg" alt="">
@@ -5985,7 +6024,7 @@ window.__lo_site_id = 271871;
 									<h5 class="text-blue text-center mb-0">Burn fat</h5>	
 								</div>
 
-								<div class="col-11 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
+								<div class="col-6 col-md-4 col-lg-4 text-center px-2 px-md-4 py-3 py-md-0 mb-md-4">
 									<picture class="img-fluid mt-md-2 mt-0 mb-3">
 										<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-32b.webp" type="image/webp">
 										<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 px-3" src="../../cdn.truegcloud.com/puraburn/images/colin-32b.jpg" alt="">
@@ -7052,14 +7091,9 @@ function dismissStickyBar() {
 
         video.addEventListener('click', function(e) {
             e.stopPropagation();
-            if (document.fullscreenElement || document.webkitFullscreenElement) {
-                if (document.exitFullscreen) document.exitFullscreen();
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            } else {
-                if (video.requestFullscreen) video.requestFullscreen();
-                else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
-                else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
-                else if (player.requestFullscreen) player.requestFullscreen();
+            if (video.paused) {
+                video.play().catch(function() {});
+                if (playOverlay) playOverlay.classList.add('hidden');
             }
         });
 
@@ -7102,6 +7136,24 @@ function dismissStickyBar() {
         });
     });
 })();
+
+
+/* Start video from play overlay */
+function startVideo(overlay) {
+    var player = overlay.closest('.mv-player');
+    var video = player.querySelector('video');
+    overlay.classList.add('hidden');
+    video.muted = true;
+    if (video.readyState >= 2) {
+        video.play().catch(function() {});
+    } else {
+        video.addEventListener('loadeddata', function onLoad() {
+            video.play().catch(function() {});
+            video.removeEventListener('loadeddata', onLoad);
+        });
+        video.load();
+    }
+}
 
 function replayVideo(id) {
     var player = document.querySelector('.mv-player[data-video-id="' + id + '"]');
