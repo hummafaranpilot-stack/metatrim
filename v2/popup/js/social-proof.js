@@ -74,15 +74,24 @@ function updateSocial() {
   }
 }
 
-setInterval(function() {
-  var  divID = $('.custom-social-proof');
-  if (divID.is(':hidden')) {
-    $('.custom-social-proof').stop().slideToggle('slow');
-    updateSocial();
-  } else {
-    $(divID).stop().slideToggle('slow');
-  }
-}, 7000);
+/* Initial delay: 35 seconds before first notification */
+setTimeout(function() {
+  updateSocial();
+  $('.custom-social-proof').stop().slideToggle('slow');
+
+  /* Then cycle: show 6s, hide, wait 20s, show next */
+  setInterval(function() {
+    var divID = $('.custom-social-proof');
+    if (divID.is(':hidden')) {
+      updateSocial();
+      $('.custom-social-proof').stop().slideToggle('slow');
+      /* Auto-hide after 6 seconds */
+      setTimeout(function() {
+        $('.custom-social-proof').stop().slideToggle('slow');
+      }, 6000);
+    }
+  }, 26000);
+}, 35000);
 
 $('.custom-close').click(function() {
   $('.custom-social-proof').stop().slideToggle('slow');

@@ -1938,7 +1938,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">The science</span>
-    <video muted playsinline preload="metadata">
+    <video muted playsinline preload="auto">
         <source src="../../../video_clips/clip3_science.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -2166,7 +2166,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Real results</span>
-    <video muted playsinline preload="metadata">
+    <video muted playsinline preload="auto">
         <source src="../../../video_clips/clip2_transformation.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -2350,7 +2350,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Imagine this</span>
-    <video muted playsinline preload="metadata">
+    <video muted playsinline preload="auto">
         <source src="../../../video_clips/clip5_lifestyle_promise.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3207,7 +3207,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Patricia, 43 &mdash; Miami, FL</span>
-    <video muted playsinline preload="metadata">
+    <video muted playsinline preload="auto">
         <source src="../../../video_clips/testimonial-patricia.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3235,7 +3235,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Sean, 69 &mdash; Des Moines, IA</span>
-    <video muted playsinline preload="metadata">
+    <video muted playsinline preload="auto">
         <source src="../../../video_clips/testimonial-sean.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3263,7 +3263,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Linda, 55 &mdash; San Diego, CA</span>
-    <video muted playsinline preload="metadata">
+    <video muted playsinline preload="auto">
         <source src="../../../video_clips/testimonial-linda.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -7084,7 +7084,7 @@ function dismissStickyBar() {
             }
         });
 
-        muteBtn.addEventListener('click', function(e) {
+        function handleMuteToggle(e) {
             e.stopPropagation();
 
             document.querySelectorAll('.mv-player video').forEach(function(v) {
@@ -7120,7 +7120,9 @@ function dismissStickyBar() {
             var x2 = muteBtn.querySelector('.mv-mute-x2');
             if (video.muted) { x1.style.display = ''; x2.style.display = ''; }
             else { x1.style.display = 'none'; x2.style.display = 'none'; }
-        });
+        }
+        muteBtn.addEventListener('click', handleMuteToggle);
+        muteBtn.addEventListener('touchend', function(e) { e.preventDefault(); handleMuteToggle(e); });
     });
 })();
 
@@ -7130,15 +7132,31 @@ function startVideo(overlay) {
     var player = overlay.closest('.mv-player');
     var video = player.querySelector('video');
     overlay.classList.add('hidden');
-    video.muted = true;
+    video.muted = false;
+    video.currentTime = 0;
+    /* Mute all others */
+    document.querySelectorAll('.mv-player video').forEach(function(v) {
+        if (v !== video) { v.muted = true; v.pause(); }
+    });
+    function tryPlay() {
+        video.play().catch(function() { video.muted = true; video.play().catch(function(){}); });
+    }
     if (video.readyState >= 2) {
-        video.play().catch(function() {});
+        tryPlay();
     } else {
-        video.addEventListener('loadeddata', function onLoad() {
-            video.play().catch(function() {});
-            video.removeEventListener('loadeddata', onLoad);
+        video.addEventListener('canplay', function onReady() {
+            tryPlay();
+            video.removeEventListener('canplay', onReady);
         });
         video.load();
+    }
+    /* Update mute icon to unmuted */
+    var mb = player.querySelector('.mv-mute-btn');
+    if (mb) {
+        var mx1 = mb.querySelector('.mv-mute-x1');
+        var mx2 = mb.querySelector('.mv-mute-x2');
+        if (mx1) mx1.style.display = 'none';
+        if (mx2) mx2.style.display = 'none';
     }
 }
 
@@ -7171,9 +7189,8 @@ function dismissMobileToast() {
     window.addEventListener('scroll', function() {
         if (window.innerWidth >= 992) return;
         if (window.__mtDismissedAt && (Date.now() - window.__mtDismissedAt) < 120000) return;
-        var elapsed = (Date.now() - startTime) / 1000;
         var pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        if (elapsed >= 30 && pct >= 10 && pct < 50) {
+        if (pct >= 10 && pct < 50) {
             if (toast.style.display === 'none' || !toast.style.display) {
                 toast.style.display = 'block';
                 if (autoHideTimer) clearTimeout(autoHideTimer);
