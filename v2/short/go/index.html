@@ -1572,6 +1572,30 @@ button.trynow { display: none !important; }
 			</div>
 		</div>
 	</section>
+<!-- === VIDEO 1: Hero Hook === -->
+<div style="text-align:center; padding: 15px 10px;">
+    <h3 style="color:#1a237e; font-weight:800; font-family:'Montserrat',sans-serif; margin-bottom:5px;">The <em style="color:#2e7d32;">Real Reason</em> You Can't Lose Weight</h3>
+    <div class="mv-player" data-video-id="hero">
+        <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});">
+            <div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div>
+        </div>
+        <span class="mv-badge">Watch this first</span>
+        <video muted playsinline preload="auto">
+            <source src="../../../video_clips/clip1_hero_hook.webm" type="video/webm">
+        </video>
+        <div class="mv-controls">
+            <button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button>
+            <button class="mv-mute-btn" aria-label="Toggle mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><line class="mv-mute-x1" x1="2" y1="2" x2="22" y2="22" stroke="#fff" stroke-width="2"/><line class="mv-mute-x2" x1="22" y1="2" x2="2" y2="22" stroke="#fff" stroke-width="2"/></svg></button>
+        </div>
+        <div class="mv-progress"><div class="mv-progress-bar"></div></div>
+        <div class="mv-end-cta">
+            <a href="#buynow">See Special Pricing &rarr;</a>
+            <button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button>
+        </div>
+    </div>
+    <p class="mv-caption">What nobody tells you about weight loss (45 sec)</p>
+</div>
+
 	<section id="prod-description" class="pt-1 pt-md-3 pb-4 pb-lg-5">
 		<div class="container">
 			<div class="col-12 col-lg-11 mx-auto">
@@ -1600,29 +1624,6 @@ button.trynow { display: none !important; }
 			</div>
 		</div>
 	</section>
-<!-- === VIDEO 1: Hero Hook === -->
-<div style="text-align:center; padding: 15px 10px;">
-    <h3 style="color:#1a237e; font-weight:800; font-family:'Montserrat',sans-serif; margin-bottom:5px;">The <em style="color:#2e7d32;">Real Reason</em> You Can't Lose Weight</h3>
-    <div class="mv-player" data-video-id="hero">
-        <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});">
-            <div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div>
-        </div>
-        <span class="mv-badge">Watch this first</span>
-        <video muted playsinline preload="auto">
-            <source src="../../../video_clips/clip1_hero_hook.webm" type="video/webm">
-        </video>
-        <div class="mv-controls">
-            <button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button>
-            <button class="mv-mute-btn" aria-label="Toggle mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><line class="mv-mute-x1" x1="2" y1="2" x2="22" y2="22" stroke="#fff" stroke-width="2"/><line class="mv-mute-x2" x1="22" y1="2" x2="2" y2="22" stroke="#fff" stroke-width="2"/></svg></button>
-        </div>
-        <div class="mv-progress"><div class="mv-progress-bar"></div></div>
-        <div class="mv-end-cta">
-            <a href="#buynow">See Special Pricing &rarr;</a>
-            <button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button>
-        </div>
-    </div>
-    <p class="mv-caption">What nobody tells you about weight loss (45 sec)</p>
-</div>
 
 	<section id="moneyback" class="">
 		<div class="container">
