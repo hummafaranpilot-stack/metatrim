@@ -3258,6 +3258,11 @@ margin-left: 12px;
 
 <script>
 /* === VIDEO PLAYER === */
+var PAUSE_ICON = '<svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>';
+var PLAY_ICON = '<svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><polygon points="3,1 12,7 3,13"/></svg>';
+var MUTED_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+var UNMUTED_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+
 document.querySelectorAll('.mv-player').forEach(function(player) {
     var video = player.querySelector('video');
     var progressBar = player.querySelector('.mv-progress-bar');
@@ -3265,6 +3270,9 @@ document.querySelectorAll('.mv-player').forEach(function(player) {
     var muteBtn = player.querySelector('.mv-mute-btn');
     var pauseBtn = player.querySelector('.mv-pause-btn');
     var playOverlay = player.querySelector('.mv-play-overlay');
+
+    /* Set initial mute icon */
+    if (muteBtn) muteBtn.innerHTML = MUTED_ICON;
 
     /* Progress bar */
     video.addEventListener('timeupdate', function() {
@@ -3276,54 +3284,51 @@ document.querySelectorAll('.mv-player').forEach(function(player) {
     /* End CTA */
     video.addEventListener('ended', function() {
         endCta.classList.add('show');
+        if (pauseBtn) pauseBtn.innerHTML = PLAY_ICON;
     });
 
     /* Hide play overlay when video plays */
     video.addEventListener('playing', function() {
         if (playOverlay) playOverlay.classList.add('hidden');
-        /* Update pause icon to pause */
-        if (pauseBtn) pauseBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>';
+        if (pauseBtn) pauseBtn.innerHTML = PAUSE_ICON;
+    });
+
+    /* When video is paused externally */
+    video.addEventListener('pause', function() {
+        if (!video.ended && pauseBtn) pauseBtn.innerHTML = PLAY_ICON;
     });
 
     /* Pause button */
     if (pauseBtn) {
         function handlePause(e) {
             e.stopPropagation();
+            e.preventDefault();
             if (video.paused) {
                 video.play().catch(function(){});
-                pauseBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>';
             } else {
                 video.pause();
-                pauseBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><polygon points="3,1 12,7 3,13"/></svg>';
             }
         }
         pauseBtn.addEventListener('click', handlePause);
-        pauseBtn.addEventListener('touchend', function(e) { e.preventDefault(); handlePause(e); });
+        pauseBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); handlePause(e); });
     }
 
     /* Mute button */
     if (muteBtn) {
         function handleMute(e) {
             e.stopPropagation();
+            e.preventDefault();
             video.muted = !video.muted;
-            if (!video.muted) {
-                video.pause();
-                video.currentTime = 0;
-                video.addEventListener('seeked', function onSeeked() {
-                    video.play().catch(function(){});
-                    video.removeEventListener('seeked', onSeeked);
-                });
+            muteBtn.innerHTML = video.muted ? MUTED_ICON : UNMUTED_ICON;
+            if (!video.muted && video.paused) {
+                video.play().catch(function(){});
             }
-            var x1 = muteBtn.querySelector('.mv-mute-x1');
-            var x2 = muteBtn.querySelector('.mv-mute-x2');
-            if (video.muted) { if(x1) x1.style.display = ''; if(x2) x2.style.display = ''; }
-            else { if(x1) x1.style.display = 'none'; if(x2) x2.style.display = 'none'; }
         }
         muteBtn.addEventListener('click', handleMute);
-        muteBtn.addEventListener('touchend', function(e) { e.preventDefault(); handleMute(e); });
+        muteBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); handleMute(e); });
     }
 
-    /* Tap video to toggle play/pause (no fullscreen) */
+    /* Tap video to toggle play/pause */
     video.addEventListener('click', function(e) {
         e.stopPropagation();
         if (video.paused) {
@@ -3337,9 +3342,11 @@ document.querySelectorAll('.mv-player').forEach(function(player) {
 
 /* === STICKY BAR (DESKTOP) === */
 var stickyDismissed = 0;
+var stickyShown = false;
 function dismissStickyBar() {
     document.getElementById('sticky-cta-desktop').style.display = 'none';
     stickyDismissed = Date.now();
+    stickyShown = false;
 }
 /* Countdown timer */
 (function() {
@@ -3356,16 +3363,20 @@ function dismissStickyBar() {
 
 /* === MOBILE TOAST === */
 var mobileDismissed = 0;
+var mobileShown = false;
 function dismissMobileToast() {
     document.getElementById('mobile-toast').style.display = 'none';
     mobileDismissed = Date.now();
+    mobileShown = false;
 }
 
 /* === DESKTOP TOAST === */
 var desktopDismissed = 0;
+var desktopShown = false;
 function dismissDesktopToast() {
     document.getElementById('desktop-toast').style.display = 'none';
     desktopDismissed = Date.now();
+    desktopShown = false;
 }
 
 /* === SCROLL TRIGGERS === */
@@ -3378,39 +3389,49 @@ window.addEventListener('scroll', function() {
     var isMobile = window.innerWidth < 992;
     var cooldown = 120000; /* 2 min */
 
-    /* Desktop sticky bar: 3% scroll */
+    /* Desktop sticky bar: show at 3%, hide if scrolled back to top */
     if (!isMobile) {
         var bar = document.getElementById('sticky-cta-desktop');
         if (pct >= 3 && (Date.now() - stickyDismissed > cooldown)) {
             bar.style.display = 'block';
+        } else if (pct < 2) {
+            bar.style.display = 'none';
         }
     }
 
-    /* Mobile toast: 15s + 10% scroll */
+    /* Mobile toast: 15s + 10% scroll, hide if scrolled back */
     if (isMobile) {
         var toast = document.getElementById('mobile-toast');
         if (elapsed >= 15 && pct >= 10 && (Date.now() - mobileDismissed > cooldown)) {
-            if (toast.style.display === 'none') {
+            if (toast.style.display === 'none' && !mobileShown) {
                 toast.style.display = 'block';
+                mobileShown = true;
                 setTimeout(function() {
                     if (toast.style.display === 'block') dismissMobileToast();
                 }, 8000);
             }
+        } else if (pct < 5 && toast.style.display === 'block') {
+            toast.style.display = 'none';
+            mobileShown = false;
         }
     }
 
-    /* Desktop toast: 45s + 15% scroll */
+    /* Desktop toast: 45s + 15% scroll, hide if scrolled back */
     if (!isMobile) {
         var dt = document.getElementById('desktop-toast');
         var stickyBar = document.getElementById('sticky-cta-desktop');
         var stickyVisible = stickyBar && stickyBar.style.display === 'block';
         if (elapsed >= 45 && pct >= 15 && pct < 60 && !stickyVisible && (Date.now() - desktopDismissed > cooldown)) {
-            if (dt.style.display === 'none') {
+            if (dt.style.display === 'none' && !desktopShown) {
                 dt.style.display = 'block';
+                desktopShown = true;
                 setTimeout(function() {
                     if (dt.style.display === 'block') dismissDesktopToast();
                 }, 12000);
             }
+        } else if (pct < 10 && dt.style.display === 'block') {
+            dt.style.display = 'none';
+            desktopShown = false;
         }
     }
 });
