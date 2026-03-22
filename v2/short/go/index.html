@@ -1355,9 +1355,13 @@ window.__lo_site_id = 330757;
 .mobile-toast-content {
     flex: 1;
     display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.mobile-toast-buttons {
+    display: flex;
     align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 12px;
 }
 .mobile-toast-title {
     margin: 0;
@@ -3014,6 +3018,9 @@ margin-left: 12px;
 					<li><a href="../../contact.html">Contact Us</a></li>
 				</ul>
 			</div>
+			<div class="col-md-12 text-center mb-2">
+				<img src="https://help.redtrack.io/wp-content/uploads/2024/02/Screenshot_7-2-2024_16394_-removebg-preview.png" alt="BuyGoods" style="max-width:140px;height:auto;filter:brightness(0.8) contrast(1.2);opacity:0.7;">
+			</div>
 			<div class="col-md-12">
 				<p class="text-center text-uppercase mb-0">Copyright &copy; 2024 &#8211; 2026 TRUSTED NUTRA PRODUCTS&#8482;. ALL RIGHTS RESERVED.</p>
 			</div>
@@ -3287,8 +3294,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 })();
 </script>
-<span id=disclaimer></span>
-<script src="https://display.buygoods.com/v1/disclaimer?id=disclaimer&account_id=11943"></script>
+<!-- BuyGoods disclaimer text is in the footer -->
 
 <!-- === DESKTOP STICKY BAR === -->
 <div id="sticky-cta-desktop" style="display:none;">
