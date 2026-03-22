@@ -3289,32 +3289,31 @@ document.querySelectorAll('.mv-player').forEach(function(player) {
 
     /* Pause button */
     if (pauseBtn) {
-        function handlePause(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            if (video.paused) {
-                video.play().catch(function(){});
-            } else {
-                video.pause();
-            }
-        }
-        pauseBtn.addEventListener('click', handlePause);
-        pauseBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); handlePause(e); });
+        (function(v, btn) {
+            var handler = function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if (v.paused) { v.play().catch(function(){}); }
+                else { v.pause(); }
+            };
+            btn.addEventListener('click', handler);
+            btn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); handler(e); });
+        })(video, pauseBtn);
     }
 
     /* Mute button */
     if (muteBtn) {
-        function handleMute(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            video.muted = !video.muted;
-            muteBtn.innerHTML = video.muted ? MUTED_ICON : UNMUTED_ICON;
-            if (!video.muted && video.paused) {
-                video.play().catch(function(){});
-            }
-        }
-        muteBtn.addEventListener('click', handleMute);
-        muteBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); handleMute(e); });
+        (function(v, btn) {
+            var handler = function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                v.muted = !v.muted;
+                btn.innerHTML = v.muted ? MUTED_ICON : UNMUTED_ICON;
+                if (!v.muted && v.paused) { v.play().catch(function(){}); }
+            };
+            btn.addEventListener('click', handler);
+            btn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); handler(e); });
+        })(video, muteBtn);
     }
 
     /* Tap video to toggle play/pause */
