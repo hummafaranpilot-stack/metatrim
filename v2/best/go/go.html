@@ -629,6 +629,40 @@ html { scroll-behavior: smooth; }
     line-height: 1;
 }
 .desktop-toast-close:hover { color: #fff; }
+
+/* === MOBILE: 2-col icon grids + smaller images === */
+@media (max-width: 767px) {
+    .w-50-new { max-width: 120px !important; }
+    .col-6.text-center picture img { max-width: 120px; }
+    .col-6.text-center h5 { font-size: 14px; }
+}
+
+/* === Limit large inline product images === */
+img[style*="width:500px"] { max-width: 350px !important; }
+img[style*="width:900px"] { max-width: 500px !important; }
+@media (max-width: 767px) {
+    img[style*="width:500px"] { max-width: 250px !important; }
+    img[style*="width:900px"] { max-width: 280px !important; }
+}
+
+/* === MOBILE VIDEO PLAY BUTTON === */
+.mv-play-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    cursor: pointer;
+    background: rgba(0,0,0,0.2);
+}
+.mv-play-overlay svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+.mv-play-overlay.hidden { display: none; }
 </style>
 
 <!-- Logo Area -->
@@ -1670,6 +1704,9 @@ window.__lo_site_id = 271871;
     <h3>The <span class="mv-highlight">Real Reason</span> You Can't Lose Weight</h3>
 </div>
 <div class="mv-player" data-video-id="hero">
+    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    </div>
     <span class="mv-badge">Watch this first</span>
     <video muted playsinline preload="auto">
         <source src="../../../video_clips/clip1_hero_hook.webm" type="video/webm">
@@ -1868,6 +1905,9 @@ window.__lo_site_id = 271871;
     <h3>How <span class="mv-highlight">&ldquo;Sticky&rdquo; Fat Cells</span> Trap Weight on Your Body</h3>
 </div>
 <div class="mv-player" data-video-id="clip-science">
+    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    </div>
     <span class="mv-badge">The science</span>
     <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip3_science.webm" type="video/webm">
@@ -2091,6 +2131,9 @@ window.__lo_site_id = 271871;
     <h3>From Dress Size 22 to <span class="mv-highlight">Size 6</span> &mdash; A Real Transformation</h3>
 </div>
 <div class="mv-player" data-video-id="clip-transform">
+    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    </div>
     <span class="mv-badge">Real results</span>
     <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip2_transformation.webm" type="video/webm">
@@ -2270,6 +2313,9 @@ window.__lo_site_id = 271871;
     <h3>Eat What You Love &mdash; <span class="mv-highlight">Burn It Like Jet Fuel</span></h3>
 </div>
 <div class="mv-player" data-video-id="clip-lifestyle">
+    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    </div>
     <span class="mv-badge">Imagine this</span>
     <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip5_lifestyle_promise.webm" type="video/webm">
@@ -2386,7 +2432,7 @@ window.__lo_site_id = 271871;
 						<div class="d-flex flex-wrap justify-content-xl-12-around mx-auto">
 							
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 w-50-new" src="../../cdn.truegcloud.com/puraburn/images/colin-14c.jpg" alt=""/>
@@ -2394,7 +2440,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-md-0 mb-3">Preventing fat absorption</h5>
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 w-50-new" src="../../cdn.truegcloud.com/puraburn/images/colin-14b.jpg" alt=""/>
@@ -2402,7 +2448,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-blue text-center mb-md-0 mb-3">Making you <br class="d-none d-lg-block">feel fuller</h5>
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-14d.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3 w-50-new" src="../../cdn.truegcloud.com/puraburn/images/colin-14d.jpg" alt=""/>
@@ -3122,6 +3168,9 @@ window.__lo_site_id = 271871;
     <h3>Patricia Lost <span class="mv-highlight">54 Pounds</span> After 3 Kids</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-patricia">
+    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    </div>
     <span class="mv-badge">Patricia, 43 &mdash; Miami, FL</span>
     <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-patricia.webm" type="video/webm">
@@ -3145,6 +3194,9 @@ window.__lo_site_id = 271871;
     <h3>Sean Lost <span class="mv-highlight">36 Pounds</span> &mdash; Fits His College Wrestling Gear</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-sean">
+    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    </div>
     <span class="mv-badge">Sean, 69 &mdash; Des Moines, IA</span>
     <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-sean.webm" type="video/webm">
@@ -3168,6 +3220,9 @@ window.__lo_site_id = 271871;
     <h3>Linda Lost <span class="mv-highlight">49 Pounds</span> After 25 Years of Failed Diets</h3>
 </div>
 <div class="mv-player" data-video-id="testimonial-linda">
+    <div class="mv-play-overlay" onclick="this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.play().catch(function(){});">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="32,24 60,40 32,56" fill="#1976d2"/></svg>
+    </div>
     <span class="mv-badge">Linda, 55 &mdash; San Diego, CA</span>
     <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-linda.webm" type="video/webm">
@@ -4645,7 +4700,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row mb-md-3">		
 						<div class="d-flex flex-wrap justify-content-xl-12-around mx-auto text-blue">
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-46a.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-46a.jpg" alt="">
@@ -4653,7 +4708,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-center mb-md-0 mb-3">Irish Sea Moss</h5>						
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-46b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-46b.jpg" alt="">
@@ -4661,7 +4716,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-center mb-md-0 mb-3">Bladderwrack</h5>
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-46c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-46c.jpg" alt="">
@@ -4669,7 +4724,7 @@ window.__lo_site_id = 271871;
 								<h5 class="text-center mb-md-0 mb-3">Burdock</h5>
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-46d.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-46d.jpg" alt="">
@@ -5268,7 +5323,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row mb-md-3">		
 						<div class="d-flex flex-wrap justify-content-xl-12-around mx-auto">
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-54a.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-54a.jpg" alt="">
@@ -5276,7 +5331,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-blue text-center mb-md-0 mb-3">Your belly</h4>						
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-54b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-54b.jpg" alt="">
@@ -5284,7 +5339,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-blue text-center mb-md-0 mb-3">Hips</h4>
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-54c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-54c.jpg" alt="">
@@ -5292,7 +5347,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-blue text-center mb-md-0 mb-3">Butt</h4>
 							</div>
 
-							<div class="px-4 pb-3 col-lg-3 col-md-3 text-center">
+							<div class="px-4 pb-3 col-6 col-md-3 col-lg-3 text-center">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-54d.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-54d.jpg" alt="">
@@ -6235,7 +6290,7 @@ window.__lo_site_id = 271871;
 
 					<div class="row mb-md-3">		
 						<div class="d-flex flex-wrap justify-content-xl-12-around mx-auto text-blue">
-							<div class="col-8 px-4 pb-3 col-lg-3 col-md-3 text-center mx-auto">
+							<div class="col-6 px-4 pb-3 col-md-3 col-lg-3 text-center mx-auto">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-67a.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-67a.jpg" alt="">
@@ -6243,7 +6298,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-center mb-md-0 mb-3">Your children</h4>						
 							</div>
 
-							<div class="col-8 px-4 pb-3 col-lg-3 col-md-3 text-center mx-auto">
+							<div class="col-6 px-4 pb-3 col-md-3 col-lg-3 text-center mx-auto">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-67b.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-67b.jpg" alt="">
@@ -6251,7 +6306,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-center mb-md-0 mb-3">Your grandchildren</h4>
 							</div>
 
-							<div class="col-8 px-4 pb-3 col-lg-3 col-md-3 text-center mx-auto">
+							<div class="col-6 px-4 pb-3 col-md-3 col-lg-3 text-center mx-auto">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-67c.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-67c.jpg" alt="">
@@ -6259,7 +6314,7 @@ window.__lo_site_id = 271871;
 								<h4 class="text-center mb-md-0 mb-3">Your spouse</h4>
 							</div>
 
-							<div class="col-8 px-4 pb-3 col-lg-3 col-md-3 text-center mx-auto">
+							<div class="col-6 px-4 pb-3 col-md-3 col-lg-3 text-center mx-auto">
 								<picture class="img-fluid mt-md-2 mt-0 mb-3">
 									<source class="" srcset="https://cdn.truegcloud.com/puraburn/images/colin-67d.webp" type="image/webp"/>
 									<img loading="lazy" class="img-fluid mt-md-2 mt-0 mb-3" src="../../cdn.truegcloud.com/puraburn/images/colin-67d.jpg" alt="">
@@ -6959,6 +7014,12 @@ function dismissStickyBar() {
 
     players.forEach(function(player) {
         observer.observe(player);
+
+        /* Hide play overlay when video plays */
+        var playOverlay = player.querySelector('.mv-play-overlay');
+        video.addEventListener('playing', function() {
+            if (playOverlay) playOverlay.classList.add('hidden');
+        });
 
         var video = player.querySelector('video');
         var progressFill = player.querySelector('.mv-progress-fill');
