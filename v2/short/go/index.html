@@ -3471,10 +3471,10 @@ window.addEventListener('scroll', function() {
         }
     }
 
-    /* Mobile toast: 10% scroll */
+    /* Mobile toast: 15s + 10% scroll */
     if (isMobile) {
         var toast = document.getElementById('mobile-toast');
-        if (pct >= 10 && (Date.now() - mobileDismissed > cooldown)) {
+        if (elapsed >= 15 && pct >= 10 && (Date.now() - mobileDismissed > cooldown)) {
             if (toast.style.display === 'none') {
                 toast.style.display = 'block';
                 setTimeout(function() {
