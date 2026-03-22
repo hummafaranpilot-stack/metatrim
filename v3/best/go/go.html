@@ -681,13 +681,22 @@ img[style*="width:900px"] { max-width: 500px !important; }
     height: 24px;
     margin-left: 3px;
 }
-.mv-play-overlay.playing {
-    opacity: 0;
-    transition: opacity 0.3s;
+/* Playing/paused: small button next to mute (bottom-right) */
+.mv-play-overlay.playing,
+.mv-play-overlay.paused {
+    top: auto; left: auto;
+    bottom: 8px; right: 50px;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
-.mv-play-overlay.playing:hover,
-.mv-play-overlay.playing:active {
-    opacity: 1;
+.mv-play-overlay.playing .mv-play-btn,
+.mv-play-overlay.paused .mv-play-btn {
+    width: 32px; height: 32px;
+    box-shadow: none; border: none;
+}
+.mv-play-overlay.playing .mv-play-btn svg,
+.mv-play-overlay.paused .mv-play-btn svg {
+    width: 14px; height: 14px; margin-left: 0;
 }
 .mv-play-overlay .mv-pause-icon { display: none; }
 .mv-play-overlay.playing .mv-play-icon { display: none; }
@@ -696,6 +705,9 @@ img[style*="width:900px"] { max-width: 500px !important; }
 @media (max-width: 768px) {
     .mv-play-btn { width: 52px; height: 52px; }
     .mv-play-btn svg { width: 20px; height: 20px; }
+    .mv-play-overlay.playing, .mv-play-overlay.paused { right: 44px; bottom: 6px; }
+    .mv-play-overlay.playing .mv-play-btn, .mv-play-overlay.paused .mv-play-btn { width: 28px; height: 28px; }
+    .mv-play-overlay.playing .mv-play-btn svg, .mv-play-overlay.paused .mv-play-btn svg { width: 12px; height: 12px; }
 }
 </style>
 
@@ -1754,7 +1766,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Watch this first</span>
-    <video muted playsinline preload="auto">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip1_hero_hook.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -1958,7 +1970,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">The science</span>
-    <video muted playsinline preload="auto">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip3_science.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -2187,7 +2199,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Real results</span>
-    <video muted playsinline preload="auto">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip2_transformation.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -2372,7 +2384,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Imagine this</span>
-    <video muted playsinline preload="auto">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/clip5_lifestyle_promise.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3230,7 +3242,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Patricia, 43 &mdash; Miami, FL</span>
-    <video muted playsinline preload="auto">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-patricia.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3259,7 +3271,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Sean, 69 &mdash; Des Moines, IA</span>
-    <video muted playsinline preload="auto">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-sean.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -3288,7 +3300,7 @@ window.__lo_site_id = 271871;
         </div>
     </div>
     <span class="mv-badge">Linda, 55 &mdash; San Diego, CA</span>
-    <video muted playsinline preload="auto">
+    <video muted playsinline preload="metadata">
         <source src="../../../video_clips/testimonial-linda.webm" type="video/webm">
     </video>
     <div class="mv-progress-bar"><div class="mv-progress-fill"></div></div>
@@ -7060,24 +7072,11 @@ function dismissStickyBar() {
     var players = document.querySelectorAll('.mv-player');
     if (!players.length) return;
 
+    /* Only pause when scrolled out — no auto-play (user taps play button) */
     var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             var video = entry.target.querySelector('video');
-            var endCta = entry.target.querySelector('.mv-end-cta');
-            if (entry.isIntersecting) {
-                if (!endCta.classList.contains('show')) {
-                    if (video.readyState >= 3) {
-                        video.play().catch(function() {});
-                    } else {
-                        video.__wantsPlay = true;
-                        video.addEventListener('canplay', function onReady() {
-                            if (video.__wantsPlay) video.play().catch(function() {});
-                            video.removeEventListener('canplay', onReady);
-                        });
-                    }
-                }
-            } else {
-                video.__wantsPlay = false;
+            if (!entry.isIntersecting && !video.paused) {
                 video.pause();
             }
         });
