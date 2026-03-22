@@ -64,39 +64,48 @@ html { scroll-behavior: smooth; }
 .glow-border-btn {
     position: relative;
     z-index: 1;
-    isolation: isolate;
+    overflow: visible;
 }
 .glow-border-btn::before {
     content: '';
     position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
     border-radius: inherit;
-    background: conic-gradient(from var(--glow-angle, 0deg), #f9b738, #ff6b35, #1976d2, #42a5f5, #f9b738);
+    background: conic-gradient(from var(--glow-angle, 0deg), #f9b738, #ff6b35, #e53935, #1976d2, #42a5f5, #f9b738);
     z-index: -1;
-    animation: glowRotate 3s linear infinite;
+    animation: glowRotate 2.5s linear infinite;
+    filter: blur(1px);
 }
 .glow-border-btn::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
     border-radius: inherit;
-    background: inherit;
-    z-index: -1;
+    background: conic-gradient(from var(--glow-angle, 0deg), #f9b738, #ff6b35, #e53935, #1976d2, #42a5f5, #f9b738);
+    z-index: -2;
+    animation: glowRotate 2.5s linear infinite;
+    filter: blur(12px);
+    opacity: 0.6;
 }
 @supports not (background: conic-gradient(from 0deg, red, blue)) {
     .glow-border-btn::before {
         background: linear-gradient(45deg, #f9b738, #1976d2, #f9b738);
         animation: glowPulse 2s ease-in-out infinite;
+        filter: none;
+    }
+    .glow-border-btn::after {
+        background: linear-gradient(45deg, #f9b738, #1976d2, #f9b738);
+        animation: glowPulse 2s ease-in-out infinite;
     }
     @keyframes glowPulse {
-        0%, 100% { opacity: 0.6; }
-        50% { opacity: 1; }
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
     }
 }
 
