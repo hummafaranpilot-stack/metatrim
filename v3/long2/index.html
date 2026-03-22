@@ -1,8 +1,6 @@
 <!doctype html>
 <html>
 
-<!-- Mirrored from eatthefatoff.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Jan 2026 21:36:08 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
 <meta charset="UTF-8">
 <title>Meta Trim BHB - Trusted Nutra Products</title>
@@ -12,22 +10,11 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
 <link href="style1.css" rel="stylesheet" type="text/css">
 
-<!-- Add the OuiBounce CSS & Font -->
-    <!--<link rel="stylesheet" href="ouibounce-master/test/ouibounce.min.css">-->
-    <link rel="stylesheet" href="css/ouibounce.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="../ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css">
+<!--<link rel="stylesheet" href="ouibounce-master/test/ouibounce.min.css">-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Load jQuery -->
-    <script src="../ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-    <!-- Add OuiBounce JS -->
-    <script src="js/ouibounce.min.js"></script>
-    <script src="../ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
-    <script src="js/css3-animate-it.js"></script>
-
-<!-- MetaTrim New Pricing Cards Styles -->
+    <!-- MetaTrim New Pricing Cards Styles -->
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
 
@@ -57,7 +44,7 @@
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid #1976d2;
+  border: 2px solid #c8922a;
 }
 
 .mt-product-card:hover {
@@ -67,7 +54,7 @@
 
 .mt-product-card.mt-featured {
   background: #fff;
-  border: 2px solid #1976d2;
+  border: 2px solid #c8922a;
 }
 
 .mt-product-header {
@@ -79,7 +66,8 @@
 }
 
 .mt-product-card.mt-featured .mt-product-header {
-  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+  background: linear-gradient(135deg, #c8922a, #e8b84a, #d4a032);
+  color: #000;
 }
 
 .mt-product-header h3 {
@@ -109,9 +97,9 @@
   position: relative;
   text-align: center;
   padding: 0.6rem;
-  border: 2px solid #bbdefb;
+  border: 2px solid #e8d5a8;
   border-radius: 12px;
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  background: linear-gradient(135deg, #fdf6e3 0%, #f5e6c4 100%);
   margin-bottom: 0.5rem;
 }
 
@@ -126,7 +114,7 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background: linear-gradient(135deg, #1a237e, #303f9f);
+  background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
   color: #fff;
   font-weight: bold;
   font-size: 0.85rem;
@@ -944,9 +932,119 @@
   }
 }
 </style>
+
+<style>
+/* === GREEN CTA BUTTONS === */
+.cta-buynow-btn {
+    display: inline-block;
+    background: #2e7d32;
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Montserrat', 'Open Sans', sans-serif;
+    padding: 16px 40px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, background 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+.cta-buynow-btn:hover { transform: scale(1.03); background: #256b29; color: #fff !important; }
+@media (max-width: 768px) { .cta-buynow-btn { font-size: 15px; padding: 14px 28px; } }
+
+/* === MINIMALIST VIDEO PLAYER === */
+.mv-player { position: relative; max-width: 680px; margin: 20px auto; border-radius: 12px; overflow: hidden; background: transparent; box-shadow: 0 4px 20px rgba(0,0,0,0.12); cursor: pointer; }
+.mv-player video { width: 100%; display: block; border-radius: 12px; object-fit: contain; background: #111; }
+.mv-badge { position: absolute; top: 12px; left: 14px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; z-index: 3; text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Montserrat', sans-serif; }
+.mv-controls { position: absolute; bottom: 10px; right: 12px; display: flex; gap: 8px; z-index: 5; }
+.mv-mute-btn, .mv-pause-btn { background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: none; color: #fff; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.mv-mute-btn:hover, .mv-pause-btn:hover { background: rgba(0,0,0,0.7); }
+.mv-progress { position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,0.2); z-index: 5; }
+.mv-progress-bar { height: 100%; background: #2e7d32; width: 0%; transition: width 0.3s linear; }
+.mv-end-cta { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 6; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.mv-end-cta.show { opacity: 1; pointer-events: auto; }
+.mv-end-cta a { background: #2e7d32; color: #fff !important; padding: 14px 35px; border-radius: 8px; font-weight: 700; font-size: 16px; text-decoration: none !important; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+.mv-end-cta button { background: none; border: 1px solid rgba(255,255,255,0.4); color: #fff; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.mv-caption { text-align: center; color: #2e7d32; font-size: 13px; font-style: italic; margin-top: 8px; font-family: 'Montserrat', sans-serif; }
+.mv-play-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 4; cursor: pointer; }
+.mv-play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 2px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, background 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.mv-play-overlay:hover .mv-play-btn { transform: scale(1.1); background: rgba(255,255,255,0.25); }
+.mv-play-btn svg { width: 24px; height: 24px; margin-left: 3px; }
+.mv-play-overlay.hidden { display: none; }
+@media (max-width: 768px) { .mv-play-btn { width: 52px; height: 52px; } .mv-play-btn svg { width: 20px; height: 20px; } }
+
+/* === VSL REDIRECT BOX === */
+.vsl-redirect-box { max-width: 600px; margin: 25px auto; padding: 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 12px; border: 1px solid #a5d6a7; text-align: center; }
+.vsl-redirect-box h4 { font-size: 16px; font-weight: 700; color: #2e7d32; margin: 0 0 8px; font-family: 'Montserrat', sans-serif; }
+.vsl-redirect-box a { color: #1565c0; font-weight: 600; text-decoration: underline; }
+
+/* === TESTIMONIAL VIDEO GRID === */
+.testimonial-video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; padding: 0 10px; }
+.testimonial-video-grid .mv-player { max-width: 100%; margin: 0; }
+.testimonial-video-grid .mv-caption { font-size: 12px; margin-top: 6px; }
+@media (max-width: 768px) { .testimonial-video-grid { grid-template-columns: 1fr; max-width: 400px; gap: 20px; } }
+
+/* === DESKTOP STICKY BAR === */
+#sticky-cta-desktop { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 10px 20px; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); animation: slideUpBar 0.4s ease-out; overflow: hidden; max-width: 100vw; }
+@keyframes slideUpBar { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.sticky-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.sticky-bar-left { display: flex; align-items: center; gap: 12px; }
+.sticky-bar-left img { width: 45px; height: 45px; border-radius: 8px; object-fit: contain; background: #fff; padding: 3px; }
+.sticky-bar-info h4 { color: #fff; font-size: 14px; font-weight: 700; margin: 0; font-family: 'Montserrat', sans-serif; }
+.sticky-bar-info p { color: #bbdefb; font-size: 11px; margin: 2px 0 0; }
+.sticky-bar-stars { color: #f9b738; font-size: 12px; }
+.sticky-bar-timer { color: #ff6b6b; font-size: 13px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.sticky-bar-btn { background: #2e7d32; color: #fff !important; padding: 12px 28px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none !important; text-transform: uppercase; font-family: 'Montserrat', sans-serif; white-space: nowrap; transition: background 0.2s; }
+.sticky-bar-btn:hover { background: #256b29; }
+.sticky-bar-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 18px; cursor: pointer; padding: 0 5px; }
+@media (max-width: 991px) { #sticky-cta-desktop { display: none !important; } }
+
+/* === MOBILE TOAST === */
+#mobile-toast { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; animation: slideDownToast 0.4s ease-out; }
+@keyframes slideDownToast { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+.mobile-toast-inner { background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%); padding: 12px 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 0 4px 25px rgba(0,0,0,0.2); position: relative; }
+.mobile-toast-content { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+.mobile-toast-buttons { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.mobile-toast-title { margin: 0; font-size: 14px; font-weight: 700; color: #fff; font-family: 'Montserrat', sans-serif; text-align: center; }
+.mobile-toast-btn-primary { background: #f9b738; color: #0d47a1 !important; padding: 7px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; text-decoration: none !important; font-family: 'Montserrat', sans-serif; white-space: nowrap; }
+.mobile-toast-btn-secondary { color: #bbdefb !important; font-size: 11px; font-weight: 600; text-decoration: underline !important; white-space: nowrap; }
+.mobile-toast-close { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 20px; cursor: pointer; padding: 0; line-height: 1; position: absolute; top: 8px; right: 12px; }
+@media (min-width: 992px) { #mobile-toast { display: none !important; } }
+
+/* === DESKTOP TOAST === */
+#desktop-toast { position: fixed; bottom: 110px; right: 25px; z-index: 9997; width: 340px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.2); animation: slideInRight 0.4s ease-out; }
+@keyframes slideInRight { from { transform: translateX(120%); } to { transform: translateX(0); } }
+.dt-header { background: #1a1a2e; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; }
+.dt-header-left { display: flex; align-items: center; gap: 6px; }
+.dt-header-left span { color: #fff; font-size: 13px; font-weight: 700; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+.dt-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 16px; cursor: pointer; }
+.dt-body { background: #fff; padding: 14px; display: flex; align-items: center; gap: 12px; }
+.dt-body img { width: 55px; height: 55px; border-radius: 8px; object-fit: contain; background: #f5f5f5; padding: 4px; }
+.dt-info h4 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin: 0 0 3px; font-family: 'Montserrat', sans-serif; }
+.dt-info p { font-size: 12px; color: #666; margin: 0; }
+.dt-footer { background: #fff; padding: 0 14px 14px; display: flex; align-items: center; gap: 12px; }
+.dt-footer a { background: #2e7d32; color: #fff !important; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 13px; text-decoration: none !important; font-family: 'Montserrat', sans-serif; }
+.dt-footer .dt-link { color: #1565c0 !important; font-size: 12px; font-weight: 600; text-decoration: underline !important; }
+@media (max-width: 991px) { #desktop-toast { display: none !important; } }
+
+/* === SOCIAL PROOF — above sticky bar === */
+.custom-social-proof { z-index: 9996 !important; bottom: 80px !important; }
+
+/* Prevent horizontal scroll */
+body { overflow-x: hidden; }
+
+</style>
 </head>
 
 <body>
+<div style="text-align: center; padding: 15px 0;">
+    <div style="display: inline-block; background: #000; padding: 15px 30px; border-radius: 10px;">
+        <img src="../lib/img/logo.png" alt="Meta Trim BHB" style="max-width: 140px; height: auto;">
+    </div>
+</div>
+
 
 <!-- COMMENTED OUT: Media logos bar - we will reverse this after final approval of ClickBank
 <div id="topbar">
@@ -988,7 +1086,28 @@
 	  <p>If you&rsquo;re still healthy enough to read this letter consider yourself <strong>blessed</strong>. I&rsquo;m about to reveal the story of a strange little enzyme. One that your body can make on its own. One that feeds on fat. One that your body has stopped producing due to some bad stuff in our Western foods and soil.</p>
 	  <p>And a simple solution that, of all the crazy things, asks you to eat <em>more fatty foods at night.</em> </p>
 	  <p>I get it. That sounds bizarre. However, you&rsquo;ll see the science. You'll see the results others are experiencing. And then you can try it for yourself.</p>
-	  <p>Before I share the good news, I need to introduce you to <strong>Stamatis Moraitis</strong>. You&rsquo;ll see how his life-changing experience accidentally sparked national interest in this enzyme… </p>
+	  
+<div style="text-align:center; padding: 15px 10px;">
+    <h3 style="color:#1a237e; font-weight:800; font-family:'Montserrat',sans-serif; margin-bottom:5px;">The <em style="color:#2e7d32;">Real Reason</em> You Can't Lose Weight</h3>
+    <div class="mv-player" data-video-id="hero">
+        <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+        <span class="mv-badge">Watch this first</span>
+        <video muted playsinline preload="auto" poster="../../video_clips/hero_poster.jpg">
+            <source src="../../video_clips/clip1_hero_hook.webm" type="video/webm">
+        </video>
+        <div class="mv-controls">
+            <button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button>
+            <button class="mv-mute-btn" aria-label="Mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/></svg></button>
+        </div>
+        <div class="mv-progress"><div class="mv-progress-bar"></div></div>
+        <div class="mv-end-cta">
+            <a href="#buynow">See Special Pricing &rarr;</a>
+            <button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button>
+        </div>
+    </div>
+    <p class="mv-caption">What nobody tells you about weight loss (45 sec)</p>
+</div>
+<p>Before I share the good news, I need to introduce you to <strong>Stamatis Moraitis</strong>. You&rsquo;ll see how his life-changing experience accidentally sparked national interest in this enzyme… </p>
 	  <p>...and accidentally started a health and weight loss revolution…	  </p>
 	  
 		<h3 class="tac fs50 mb10">&quot;You only have <br class="mobileonly" />9 months to live.&quot;</h3>
@@ -1239,7 +1358,28 @@
       <p>Remember that old video game Pac-Man? And how that little guy would gobble up all those dots? Picture those dots as globs of fat. Belly fat. Thigh fat. Arm fat. Even face fat. Lipase-P&rsquo;s only job is to gobble it all up. Then break it down so your body can use it for energy.</p>
       <p>That&rsquo;s pretty great, wouldn&rsquo;t you agree?</p>
       <p>Now not everything is hunky-dory…</p>
-      <h4 class="tac blue">Lipase-P is sorely lacking in Americans</h4>
+      
+<div style="text-align:center; padding: 15px 10px;">
+    <h3 style="color:#1a237e; font-weight:800; font-family:'Montserrat',sans-serif; margin-bottom:5px;">How <em style="color:#2e7d32;">"Sticky" Fat Cells</em> Trap Weight on Your Body</h3>
+    <div class="mv-player" data-video-id="clip-science">
+        <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+        <span class="mv-badge">The science</span>
+        <video muted playsinline preload="auto">
+            <source src="../../video_clips/clip3_science.webm" type="video/webm">
+        </video>
+        <div class="mv-controls">
+            <button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button>
+            <button class="mv-mute-btn" aria-label="Mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/></svg></button>
+        </div>
+        <div class="mv-progress"><div class="mv-progress-bar"></div></div>
+        <div class="mv-end-cta">
+            <a href="#buynow">See Special Pricing &rarr;</a>
+            <button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button>
+        </div>
+    </div>
+    <p class="mv-caption">The hidden mechanism behind stubborn fat (15 sec)</p>
+</div>
+<h4 class="tac blue">Lipase-P is sorely lacking in Americans</h4>
       <p>And that&rsquo;s one of the main reasons we&rsquo;re getting fatter and sicker by the year.</p>
       <p>Most American foods trigger little if any Lipase-P production. That&rsquo;s why so many of us have struggled to lose weight. And since our bodies store fat around our internal organs, we suffer from serious illnesses because of the lack of Lipase-P.</p>
       <p>If you&rsquo;re interested in more of the science of Lipase-P, I&rsquo;ll cover much more later. </p>
@@ -1301,57 +1441,11 @@
 </div>
 
 <!-- Inline Bonus Section 1 -->
-<section class="bonuses-section">
-  <div class="bonuses-container">
-    <h2 class="bonuses-header">Order 6 Bottles and<br>Get 3 FREE Bonuses!</h2>
-    <div class="bonus-card">
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #1</div>
-        <h3 class="bonus-title">FREE Extra Bottle of MetaTrim BHB</h3>
-        <p class="bonus-description">Get one extra bottle absolutely FREE when you order the 6-bottle package. That's a 7th bottle to maximize your weight loss journey!</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $79</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-      <div class="bonus-image">
-        <img src="../lib/img/prod1.png" alt="Free Extra Bottle">
-      </div>
-    </div>
-    <div class="bonus-card reverse">
-      <div class="bonus-image">
-        <img src="../../eBooks/cover_keto_recipe.png" alt="Keto Recipe eBook">
-      </div>
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #2</div>
-        <h3 class="bonus-title">Keto Recipe Guide: Fat-Burning Meals</h3>
-        <p class="bonus-description">Unlock 50+ mouthwatering keto recipes designed to accelerate fat burning while keeping you satisfied.</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $49</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-    </div>
-    <div class="bonus-card">
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #3</div>
-        <h3 class="bonus-title">30-Day Diet Plan: Transformation Guide</h3>
-        <p class="bonus-description">A step-by-step 30-day meal plan to maximize your MetaTrim BHB results with daily schedules and grocery lists.</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $39</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-      <div class="bonus-image">
-        <img src="../../eBooks/cover_30_days_plan.png" alt="30-Day Diet Plan">
-      </div>
-    </div>
-  </div>
-</section>
+
 
 		<h3 class="tac blue">There's Only 1 Catch</h3>
 		<p>It doesn&rsquo;t work if you don&rsquo;t follow it. </p>
-        <p>In that way <em>Eat the Fat Off</em> is like sunscreen. It doesn&rsquo;t do a thing for you if you leave it in the tube and don&rsquo;t apply it. </p>
+        <p>In that way <em>Meta Trim BHB</em> is like sunscreen. It doesn&rsquo;t do a thing for you if you leave it in the tube and don&rsquo;t apply it. </p>
         <p>That&rsquo;s why the best results come when folks apply these simple principles. Just a few minor tweaks to your meals is all it takes. It&rsquo;s hardly a &ldquo;lifestyle overhaul.&rdquo; Even so, you still have to eat more food and follow my simple step-by-step plan.</p>
         <p>Sound fair?</p>
         <p>And we both know the truth: none of the radical diets, crazy pills or workout gadgets ever have worked for you. Or for me. Or for anyone I know. Right?</p>
@@ -1453,53 +1547,7 @@
 </div>
 
 <!-- Inline Bonus Section 2 -->
-<section class="bonuses-section">
-  <div class="bonuses-container">
-    <h2 class="bonuses-header">Order 6 Bottles and<br>Get 3 FREE Bonuses!</h2>
-    <div class="bonus-card">
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #1</div>
-        <h3 class="bonus-title">FREE Extra Bottle of MetaTrim BHB</h3>
-        <p class="bonus-description">Get one extra bottle absolutely FREE when you order the 6-bottle package. That's a 7th bottle to maximize your weight loss journey!</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $79</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-      <div class="bonus-image">
-        <img src="../lib/img/prod1.png" alt="Free Extra Bottle">
-      </div>
-    </div>
-    <div class="bonus-card reverse">
-      <div class="bonus-image">
-        <img src="../../eBooks/cover_keto_recipe.png" alt="Keto Recipe eBook">
-      </div>
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #2</div>
-        <h3 class="bonus-title">Keto Recipe Guide: Fat-Burning Meals</h3>
-        <p class="bonus-description">Unlock 50+ mouthwatering keto recipes designed to accelerate fat burning while keeping you satisfied.</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $49</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-    </div>
-    <div class="bonus-card">
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #3</div>
-        <h3 class="bonus-title">30-Day Diet Plan: Transformation Guide</h3>
-        <p class="bonus-description">A step-by-step 30-day meal plan to maximize your MetaTrim BHB results with daily schedules and grocery lists.</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $39</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-      <div class="bonus-image">
-        <img src="../../eBooks/cover_30_days_plan.png" alt="30-Day Diet Plan">
-      </div>
-    </div>
-  </div>
-</section>
+
 		
         <p>Before I tell you the price that pissed my publisher off royally, let me share a few of the specifics with you so you&rsquo;ll know what to expect and what to do first...</p>
 		
@@ -1556,59 +1604,67 @@
         	<li><strong>AND SO MORE!</strong></li>
 		</ul>
 
+
+<div style="text-align:center; padding: 15px 10px;">
+    <h3 style="color:#1a237e; font-weight:800; font-family:'Montserrat',sans-serif; margin-bottom:15px;">Real People, <em style="color:#2e7d32;">Real Results</em></h3>
+    <div class="testimonial-video-grid">
+        <div>
+            <div class="mv-player" data-video-id="patricia">
+                <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+                <video muted playsinline preload="auto"><source src="../../video_clips/testimonial-patricia.webm" type="video/webm"></video>
+                <div class="mv-controls"><button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button><button class="mv-mute-btn" aria-label="Mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/></svg></button></div>
+                <div class="mv-progress"><div class="mv-progress-bar"></div></div>
+                <div class="mv-end-cta"><a href="#buynow">Order Now &rarr;</a><button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button></div>
+            </div><p class="mv-caption">Patricia's story</p>
+        </div>
+        <div>
+            <div class="mv-player" data-video-id="sean">
+                <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+                <video muted playsinline preload="auto"><source src="../../video_clips/testimonial-sean.webm" type="video/webm"></video>
+                <div class="mv-controls"><button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button><button class="mv-mute-btn" aria-label="Mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/></svg></button></div>
+                <div class="mv-progress"><div class="mv-progress-bar"></div></div>
+                <div class="mv-end-cta"><a href="#buynow">Order Now &rarr;</a><button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button></div>
+            </div><p class="mv-caption">Sean's story</p>
+        </div>
+        <div>
+            <div class="mv-player" data-video-id="linda">
+                <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+                <video muted playsinline preload="auto"><source src="../../video_clips/testimonial-linda.webm" type="video/webm"></video>
+                <div class="mv-controls"><button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button><button class="mv-mute-btn" aria-label="Mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/></svg></button></div>
+                <div class="mv-progress"><div class="mv-progress-bar"></div></div>
+                <div class="mv-end-cta"><a href="#buynow">Order Now &rarr;</a><button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button></div>
+            </div><p class="mv-caption">Linda's story</p>
+        </div>
+    </div>
+</div>
+
+<div style="text-align:center; padding: 15px 10px;">
+    <h3 style="color:#1a237e; font-weight:800; font-family:'Montserrat',sans-serif; margin-bottom:5px;">From Dress Size 22 to <em style="color:#2e7d32;">Size 6</em> — A Real Transformation</h3>
+    <div class="mv-player" data-video-id="clip-transform">
+        <div class="mv-play-overlay" onclick="event.stopPropagation();this.classList.add('hidden');var v=this.closest('.mv-player').querySelector('video');v.muted=false;v.currentTime=0;v.play().catch(function(){v.muted=true;v.play().catch(function(){});});"><div class="mv-play-btn"><svg viewBox="0 0 24 24" fill="#fff"><polygon points="6,3 20,12 6,21"/></svg></div></div>
+        <span class="mv-badge">Real results</span>
+        <video muted playsinline preload="auto">
+            <source src="../../video_clips/clip2_transformation.webm" type="video/webm">
+        </video>
+        <div class="mv-controls">
+            <button class="mv-pause-btn" aria-label="Pause"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></button>
+            <button class="mv-mute-btn" aria-label="Mute"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/></svg></button>
+        </div>
+        <div class="mv-progress"><div class="mv-progress-bar"></div></div>
+        <div class="mv-end-cta">
+            <a href="#buynow">See Special Pricing &rarr;</a>
+            <button onclick="var v=this.closest('.mv-player').querySelector('video');v.currentTime=0;v.play();this.closest('.mv-end-cta').classList.remove('show');">&#x21bb; Replay</button>
+        </div>
+    </div>
+    <p class="mv-caption">67 pounds gone — see the full story (20 sec)</p>
+</div>
 <div class="cta-buynow-wrapper">
   <a href="#buynow" class="cta-buynow-btn">Claim Your Meta Trim BHB</a>
   <p class="cta-buynow-text">Transform your body starting today!</p>
 </div>
 
 <!-- Inline Bonus Section 3 -->
-<section class="bonuses-section">
-  <div class="bonuses-container">
-    <h2 class="bonuses-header">Order 6 Bottles and<br>Get 3 FREE Bonuses!</h2>
-    <div class="bonus-card">
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #1</div>
-        <h3 class="bonus-title">FREE Extra Bottle of MetaTrim BHB</h3>
-        <p class="bonus-description">Get one extra bottle absolutely FREE when you order the 6-bottle package. That's a 7th bottle to maximize your weight loss journey!</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $79</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-      <div class="bonus-image">
-        <img src="../lib/img/prod1.png" alt="Free Extra Bottle">
-      </div>
-    </div>
-    <div class="bonus-card reverse">
-      <div class="bonus-image">
-        <img src="../../eBooks/cover_keto_recipe.png" alt="Keto Recipe eBook">
-      </div>
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #2</div>
-        <h3 class="bonus-title">Keto Recipe Guide: Fat-Burning Meals</h3>
-        <p class="bonus-description">Unlock 50+ mouthwatering keto recipes designed to accelerate fat burning while keeping you satisfied.</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $49</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-    </div>
-    <div class="bonus-card">
-      <div class="bonus-content">
-        <div class="bonus-badge">BONUS #3</div>
-        <h3 class="bonus-title">30-Day Diet Plan: Transformation Guide</h3>
-        <p class="bonus-description">A step-by-step 30-day meal plan to maximize your MetaTrim BHB results with daily schedules and grocery lists.</p>
-        <div class="bonus-pricing">
-          <span class="retail-price">Retail Price - $39</span>
-          <span class="free-price">Today: FREE</span>
-        </div>
-      </div>
-      <div class="bonus-image">
-        <img src="../../eBooks/cover_30_days_plan.png" alt="30-Day Diet Plan">
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <p>This is a plan proven over the centuries, recently unearthed and refined for 21st century lifestyles like yours and mine.</p>
 <p>And that&rsquo;s why…</p>
@@ -1626,13 +1682,13 @@
 <p>I worked hard to test it, sure. I went on a mission to spread this word, absolutely. But I didn&rsquo;t create it alone. I stood on the shoulders of giants.</p>
 <p>And that&rsquo;s why I feel so passionate about getting this book into the hands of as many people as possible. </p>
 <p>That means the price must be 100% FAIR AND REASONABLE... AND:</p>
-<h3 class="tac">Why it's just $19</h3>
+<h3 class="tac">Why We're Offering Such A Great Deal</h3>
 <p>I thought I'd start at this low price. I&rsquo;ll keep it there until I simply can&rsquo;t keep up with the volume of customer support emails. Plus, I get a lot of 'thank you!' emails and I think it's only right to answer them all.</p>
 <p>And honestly, this is not some super-fancy book with a million-dollar publisher's ad budget. This is a simple, comprehensive, blue collar, to-the-point guide book that will give you what you need in as little time as possible. </p>
 <p>No fluff, no hype. Oprah isn&rsquo;t going to add this to her book club anytime soon, &lsquo;cause it ain&rsquo;t so fancy. </p>
 <p>It&rsquo;ll just transform your body and your life if you apply it. So who cares if it&rsquo;s just a simple e-book if it will do all that for you.</p>
-<p>And since I did the hard work for you, it&rsquo;s only fair that I ask $19 for it. Wouldn't you agree?</p>
-<p>I think $19 is a very fair price to you for... as long as I can keep it there...</p>
+<p>And since I did the hard work for you, it's only fair that I offer it at this price. Wouldn't you agree?</p>
+<p>I think our pricing is very fair to you for... as long as I can keep it there...</p>
 <h3 class="tac">Even At This Low Price <br>
   I Still <u>Guarantee</u> You&rsquo;ll Lose The Weight You Want</h3>
 <p>I am so confident that Meta Trim BHB will change your life in ways you cannot even <strong>imagine right now…</strong></p>
@@ -1659,7 +1715,7 @@
 		
 <h2 class="tac red mb0 fs50">WARNING:</h2>
 <h4 class="tac mt0">This type of simple approach is not for everyone</h4>
-<p>There are some people I don&rsquo;t want to give this handbook to. No offense. It&rsquo;s just that my life&rsquo;s work and integrity is more important than $19. So I need to make <strong>absolutely certain</strong> you&rsquo;re the lifelong weight loss partner I am looking for…</p>
+<p>There are some people I don&rsquo;t want to give this handbook to. No offense. It&rsquo;s just that my life&rsquo;s work and integrity is more important than any price. So I need to make <strong>absolutely certain</strong> you&rsquo;re the lifelong weight loss partner I am looking for…</p>
 <p><strong>Meta Trim BHB Is WRONG For You IF:</strong></p>
 <ul class="red-x">
   <li><em>You still want to starve yourself thin.</em> If you want to starve yourself, I will pray for you. But I can&rsquo;t ethically sell you this book...</li>
@@ -1723,7 +1779,7 @@
 
 <p>Now, I have one more word of <strong>warning:</strong></p>
 		
-<h3 class="tac blue">I Can Only Offer You Meta Trim BHB And All These <br class="hidemobile" />Bonuses For $19 For A Very Limited Time</h3>
+<h3 class="tac blue">I Can Only Offer You Meta Trim BHB And All These <br class="hidemobile" />At These Prices For A Very Limited Time</h3>
 <p>My goal when creating this program was to get it into as many peoples hands as quickly as possible. </p>
 <!-- COMMENTED OUT: obesity-related disease claim - we will reverse this after final approval of ClickBank
 <p>Remember <strong>The American Genocide</strong> I spoke of earlier? My friend, 822 people die every day in America alone from obesity-related disease. <em>I&rsquo;m called to help stop this genocide. </em></p>
@@ -1758,6 +1814,11 @@
 <p><strong>John Rowley</strong></p>
 
 <!-- FREE Bonuses Section -->
+
+<div class="vsl-redirect-box">
+    <h4>Prefer watching over reading?</h4>
+    <p>Watch our <a href="/v3/vsl/">short video presentation</a> to learn how Meta Trim BHB works.</p>
+</div>
 <section class="bonuses-section">
   <div class="bonuses-container">
     <h2 class="bonuses-header">Order 6 Bottles and<br>Get 3 FREE Bonuses!</h2>
@@ -1774,7 +1835,7 @@
         </div>
       </div>
       <div class="bonus-image">
-        <img src="../lib/img/prod1.png" alt="Free Extra Bottle">
+        <img src="../tyimages/meta_2.webp" alt="Free Extra Bottle">
       </div>
     </div>
 
@@ -1935,7 +1996,7 @@
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../lib/img/prod1.png" alt="MetaTrim 2 Bottles">
+        <img src="../tyimages/meta_2.webp" alt="MetaTrim 2 Bottles">
       </div>
       <div class="mt-product-details">
         <div class="mt-product-price">
@@ -1964,7 +2025,7 @@
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../lib/img/6-bottles.png" alt="MetaTrim 7 Bottles - Best Value">
+        <img src="../tyimages/meta_6+1.webp" alt="MetaTrim 7 Bottles - Best Value">
         <div class="mt-best-badge">BEST VALUE</div>
       </div>
       <div class="mt-product-details">
@@ -1996,7 +2057,7 @@
     </div>
     <div class="mt-product-content">
       <div class="mt-product-image">
-        <img src="../lib/img/3bottlesupgrade.png" alt="MetaTrim 4 Bottles">
+        <img src="../tyimages/meta_3.webp" alt="MetaTrim 4 Bottles">
       </div>
       <div class="mt-product-details">
         <div class="mt-product-price">
@@ -2110,7 +2171,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Social Proof Notification -->
 <link href="../popup/css/style1.css" type="text/css" rel="stylesheet">
-<section class="custom-social-proof">
+<section class="custom-social-proof" style="display:none">
     <div class="custom-notification">
         <div class="custom-notification-container">
             <div class="custom-notification-image-wrapper">
@@ -2126,7 +2187,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </section>
 <script>window.socialProofBase='../';</script>
-<script type="text/javascript" src="../popup/js/social-proof.js"></script>
+<script type="text/javascript" src="../popup/js/social-proof.js?v=2"></script>
 
 <script>
 // Preserve URL parameters across page navigation
@@ -2237,7 +2298,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ClickBank Trust Badge -->
 <script src='//cbtb.clickbank.net/?vendor=tnproduct'></script>
+
+<div id="sticky-cta-desktop" style="display:none;">
+    <div class="sticky-bar-inner">
+        <div class="sticky-bar-left">
+            <img src="../tyimages/meta_1.webp" alt="Meta Trim BHB">
+            <div class="sticky-bar-info"><h4>Meta Trim BHB</h4><p><span class="sticky-bar-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9/5 (2,847 reviews)</p></div>
+        </div>
+        <span class="sticky-bar-timer" id="sticky-timer">04:59:59</span>
+        <a href="#buynow" class="sticky-bar-btn" onclick="document.getElementById('sticky-cta-desktop').style.display='none';document.getElementById('buynow').scrollIntoView({behavior:'smooth',block:'start'});return false;">ORDER NOW &rarr;</a>
+        <button class="sticky-bar-close" onclick="dismissStickyBar()" aria-label="Close">&times;</button>
+    </div>
+</div>
+<div id="mobile-toast" style="display:none;">
+    <div class="mobile-toast-inner">
+        <div class="mobile-toast-content">
+            <p class="mobile-toast-title">&darr; Up to 61% OFF &mdash; Limited Time</p>
+            <div class="mobile-toast-buttons">
+                <a href="#buynow" class="mobile-toast-btn-primary" onclick="dismissMobileToast();document.getElementById('buynow').scrollIntoView({behavior:'smooth',block:'start'});return false;">See Pricing</a>
+                <a href="/v3/vsl/" class="mobile-toast-btn-secondary">Watch Video</a>
+            </div>
+        </div>
+        <button class="mobile-toast-close" onclick="dismissMobileToast()" aria-label="Close">&times;</button>
+    </div>
+</div>
+<div id="desktop-toast" style="display:none;">
+    <div class="dt-header"><div class="dt-header-left"><span>&#x1F525; Popular right now</span></div><button class="dt-close" onclick="dismissDesktopToast()" aria-label="Close">&times;</button></div>
+    <div class="dt-body"><img src="../tyimages/meta_1.webp" alt="Meta Trim BHB"><div class="dt-info"><h4>Up to 61% OFF Today</h4><p>Free shipping &bull; 60-day guarantee</p></div></div>
+    <div class="dt-footer"><a href="#buynow" onclick="dismissDesktopToast();document.getElementById('buynow').scrollIntoView({behavior:'smooth',block:'start'});return false;">View Packages &rarr;</a><a href="/v3/vsl/" class="dt-link">Watch video</a></div>
+</div>
+
+<script>
+var PAUSE_ICON = '<svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>';
+var PLAY_ICON = '<svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><polygon points="3,1 12,7 3,13"/></svg>';
+var MUTED_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+var UNMUTED_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19" fill="#fff"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+document.querySelectorAll('.mv-player').forEach(function(player) {
+    var video = player.querySelector('video'), progressBar = player.querySelector('.mv-progress-bar'), endCta = player.querySelector('.mv-end-cta'), muteBtn = player.querySelector('.mv-mute-btn'), pauseBtn = player.querySelector('.mv-pause-btn'), playOverlay = player.querySelector('.mv-play-overlay');
+    if (muteBtn) muteBtn.innerHTML = MUTED_ICON;
+    video.addEventListener('timeupdate', function() { if (video.duration) progressBar.style.width = (video.currentTime / video.duration * 100) + '%'; });
+    video.addEventListener('ended', function() { if (endCta) endCta.classList.add('show'); if (pauseBtn) pauseBtn.innerHTML = PLAY_ICON; });
+    video.addEventListener('playing', function() { if (playOverlay) playOverlay.classList.add('hidden'); if (pauseBtn) pauseBtn.innerHTML = PAUSE_ICON; });
+    video.addEventListener('pause', function() { if (!video.ended && pauseBtn) pauseBtn.innerHTML = PLAY_ICON; });
+    if (pauseBtn) { (function(v,b){var h=function(e){e.stopPropagation();e.preventDefault();if(v.paused){v.play().catch(function(){});}else{v.pause();}};b.addEventListener('click',h);b.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();h(e);});})(video,pauseBtn); }
+    if (muteBtn) { (function(v,b){var h=function(e){e.stopPropagation();e.preventDefault();v.muted=!v.muted;b.innerHTML=v.muted?MUTED_ICON:UNMUTED_ICON;if(!v.muted&&v.paused){v.play().catch(function(){});}};b.addEventListener('click',h);b.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();h(e);});})(video,muteBtn); }
+    video.addEventListener('click', function(e) { e.stopPropagation(); if (video.paused) { video.play().catch(function(){}); if (playOverlay) playOverlay.classList.add('hidden'); } else { video.pause(); } });
+});
+var stickyDismissed=0,stickyShown=false;function dismissStickyBar(){document.getElementById('sticky-cta-desktop').style.display='none';stickyDismissed=Date.now();stickyShown=false;}
+(function(){var h=4,m=59,s=59;var t=document.getElementById('sticky-timer');if(!t)return;setInterval(function(){if(s>0)s--;else if(m>0){m--;s=59;}else if(h>0){h--;m=59;s=59;}t.textContent=(h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;},1000);})();
+var mobileDismissed=0,mobileShown=false;function dismissMobileToast(){document.getElementById('mobile-toast').style.display='none';mobileDismissed=Date.now();mobileShown=false;}
+var desktopDismissed=0,desktopShown=false;function dismissDesktopToast(){document.getElementById('desktop-toast').style.display='none';desktopDismissed=Date.now();desktopShown=false;}
+var startTime=Date.now(),lastScrollY=window.scrollY||0;
+window.addEventListener('scroll',function(){var st=window.pageYOffset||document.documentElement.scrollTop;var dh=document.documentElement.scrollHeight-window.innerHeight;var pct=dh>0?(st/dh)*100:0;var el=(Date.now()-startTime)/1000;var mob=window.innerWidth<992;var cd=120000;var up=st<lastScrollY;lastScrollY=st;
+if(!mob){var bar=document.getElementById('sticky-cta-desktop');if(pct>=3&&(Date.now()-stickyDismissed>cd))bar.style.display='block';else if(pct<2)bar.style.display='none';}
+if(mob){var t=document.getElementById('mobile-toast');if(up&&t.style.display==='block'){t.style.display='none';mobileShown=false;}else if(el>=15&&pct>=10&&(Date.now()-mobileDismissed>cd)){if(t.style.display==='none'&&!mobileShown){t.style.display='block';mobileShown=true;setTimeout(function(){if(t.style.display==='block')dismissMobileToast();},8000);}}}
+if(!mob){var dt=document.getElementById('desktop-toast');var sb=document.getElementById('sticky-cta-desktop');var sv=sb&&sb.style.display==='block';if(up&&dt.style.display==='block'){dt.style.display='none';desktopShown=false;}else if(el>=45&&pct>=15&&pct<60&&!sv&&(Date.now()-desktopDismissed>cd)){if(dt.style.display==='none'&&!desktopShown){dt.style.display='block';desktopShown=true;setTimeout(function(){if(dt.style.display==='block')dismissDesktopToast();},12000);}}}
+});
+</script>
 </body>
 
-<!-- Mirrored from eatthefatoff.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Jan 2026 21:36:26 GMT -->
 </html>
