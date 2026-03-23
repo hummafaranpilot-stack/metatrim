@@ -206,15 +206,15 @@
 @media (max-width: 768px) {
   .mt-tryit-banner {
     display: grid;
-    grid-template-columns: 60px 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 55px 1fr auto;
     gap: 2px 10px;
     padding: 10px 12px;
     border-radius: 10px;
     margin: 0 5px;
+    align-items: center;
   }
 
-  /* Image spans all rows on the left */
+  /* Image left, spans both rows */
   .mt-tryit-banner .tryit-img {
     grid-row: 1 / 3;
     grid-column: 1;
@@ -225,34 +225,40 @@
     height: 55px;
   }
 
-  /* Title + subtitle top-right */
+  /* Title top-middle */
   .mt-tryit-banner .tryit-text {
     grid-row: 1;
-    grid-column: 2;
+    grid-column: 2 / 4;
     align-self: end;
   }
 
   .mt-tryit-banner .tryit-text h4 {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   .mt-tryit-banner .tryit-text p {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
   }
 
-  /* Right section: price + guarantee + buy — all in one row */
+  /* Bottom row: price + shipping | guarantee + button */
   .mt-tryit-banner .tryit-right {
     grid-row: 2;
-    grid-column: 2;
+    grid-column: 2 / 4;
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 4px;
-    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .mt-tryit-banner .tryit-price {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
   }
 
   .mt-tryit-banner .tryit-price .price-amount {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .mt-tryit-banner .tryit-price .price-per {
@@ -260,21 +266,21 @@
   }
 
   .mt-tryit-banner .tryit-stack {
-    flex-direction: row-reverse;
+    flex-direction: row;
     gap: 6px;
     align-items: center;
   }
 
   .mt-tryit-banner .tryit-guarantee img {
-    height: 26px;
+    height: 28px;
   }
 
   .mt-tryit-banner .tryit-action .mt-buy-now-btn {
-    max-width: 100px;
+    max-width: 110px;
   }
 
   .mt-tryit-banner .tryit-action .tryit-shipping {
-    font-size: 0.6rem;
+    display: none;
   }
 }
 
