@@ -206,14 +206,15 @@
 @media (max-width: 768px) {
   .mt-tryit-banner {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    gap: 0 0.8rem;
-    padding: 0.7rem 0.8rem;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2px 10px;
+    padding: 10px 12px;
     border-radius: 10px;
     margin: 0 5px;
   }
 
+  /* Image spans all rows on the left */
   .mt-tryit-banner .tryit-img {
     grid-row: 1 / 3;
     grid-column: 1;
@@ -221,9 +222,10 @@
   }
 
   .mt-tryit-banner .tryit-img img {
-    height: 65px;
+    height: 55px;
   }
 
+  /* Title + subtitle top-right */
   .mt-tryit-banner .tryit-text {
     grid-row: 1;
     grid-column: 2;
@@ -231,44 +233,48 @@
   }
 
   .mt-tryit-banner .tryit-text h4 {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .mt-tryit-banner .tryit-text p {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
   }
 
+  /* Right section: price + guarantee + buy — all in one row */
   .mt-tryit-banner .tryit-right {
     grid-row: 2;
-    grid-column: 2 / 4;
-    gap: 0.8rem;
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-top: 4px;
+    flex-wrap: nowrap;
   }
 
   .mt-tryit-banner .tryit-price .price-amount {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   .mt-tryit-banner .tryit-price .price-per {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .mt-tryit-banner .tryit-stack {
-    flex-direction: row;
-    gap: 8px;
+    flex-direction: row-reverse;
+    gap: 6px;
     align-items: center;
   }
 
   .mt-tryit-banner .tryit-guarantee img {
-    height: 28px;
+    height: 26px;
   }
 
   .mt-tryit-banner .tryit-action .mt-buy-now-btn {
-    max-width: 120px;
+    max-width: 100px;
   }
 
   .mt-tryit-banner .tryit-action .tryit-shipping {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 }
 
