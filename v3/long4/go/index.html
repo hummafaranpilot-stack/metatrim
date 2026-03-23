@@ -49,6 +49,167 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
 
+/* TRY-IT BANNER CSS */
+.mt-tryit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border: 2px solid #1976d2;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  font-family: "Montserrat", sans-serif;
+}
+
+.mt-tryit-banner .tryit-img {
+  flex-shrink: 0;
+}
+
+.mt-tryit-banner .tryit-img img {
+  height: 110px;
+  width: auto;
+  object-fit: contain;
+}
+
+.mt-tryit-banner .tryit-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.mt-tryit-banner .tryit-text h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 0 0 2px 0;
+}
+
+.mt-tryit-banner .tryit-text p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+  font-weight: 500;
+}
+
+.mt-tryit-banner .tryit-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-shrink: 0;
+}
+
+.mt-tryit-banner .tryit-price {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mt-tryit-banner .tryit-price .price-amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1565c0;
+  line-height: 1;
+}
+
+.mt-tryit-banner .tryit-price .price-per {
+  font-size: 0.9rem;
+  color: #1565c0;
+  font-weight: 600;
+}
+
+.mt-tryit-banner .tryit-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.mt-tryit-banner .tryit-guarantee img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.mt-tryit-banner .tryit-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.mt-tryit-banner .tryit-action .mt-buy-now-btn {
+  max-width: 160px;
+  margin: 0;
+}
+
+.mt-tryit-banner .tryit-action .tryit-shipping {
+  font-size: 0.78rem;
+  color: #555;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .mt-tryit-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 15px 15px 12px;
+    border-radius: 10px;
+    margin: 0 5px;
+  }
+
+  .mt-tryit-banner .tryit-img img {
+    height: 90px;
+  }
+
+  .mt-tryit-banner .tryit-text h4 {
+    font-size: 1.1rem;
+  }
+
+  .mt-tryit-banner .tryit-text p {
+    font-size: 0.85rem;
+  }
+
+  .mt-tryit-banner .tryit-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .mt-tryit-banner .tryit-price .price-amount {
+    font-size: 2rem;
+  }
+
+  .mt-tryit-banner .tryit-price .price-per {
+    font-size: 0.8rem;
+  }
+
+  .mt-tryit-banner .tryit-stack {
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .mt-tryit-banner .tryit-guarantee img {
+    height: 30px;
+  }
+
+  .mt-tryit-banner .tryit-action .mt-buy-now-btn {
+    max-width: 140px;
+  }
+
+  .mt-tryit-banner .tryit-action .tryit-shipping {
+    font-size: 0.7rem;
+  }
+}
+
 /* NEW PRICING CARDS CSS */
 .mt-product-grid {
   display: flex;
@@ -3125,6 +3286,33 @@ the only 100%-natural blend that addresses the underlying factor of belly fat: L
 			<div class="row">
 				<div class="col-lg-12 mx-auto mt-4 mb-4">
 <!-- META TRIM BHB PRICING CARDS -->
+<div id="buynow" class="mt-tryit-banner">
+  <div class="tryit-img">
+    <img src="../../tyimages/meta_1.webp" alt="MetaTrim 1 Bottle">
+  </div>
+  <div class="tryit-text">
+    <h4>Just Want To Try It First?</h4>
+    <p>1 Bottle &middot; 30 Day Supply</p>
+  </div>
+  <div class="tryit-right">
+    <div class="tryit-price">
+      <span class="price-amount">$79</span>
+      <span class="price-per">/Bottle</span>
+    </div>
+    <div class="tryit-stack">
+      <div class="tryit-guarantee">
+        <img src="../../pills/60days.webp" alt="60 Days Guarantee">
+      </div>
+      <div class="tryit-action">
+        <a href="https://tnproduct.pay.clickbank.net/?cbitems=1&template=checkout3&cbfid=62416&exitoffer=exit_met_2" class="mt-buy-now-btn">
+          <img src="../../lib/img/buy-now.webp" alt="Buy Now">
+        </a>
+        <p class="tryit-shipping">+ $19.99 Shipping</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="mt-product-grid">
   <!-- 2 Bottles -->
   <div class="mt-product-card" data-card="2bottle">
@@ -3339,6 +3527,33 @@ the only 100%-natural blend that addresses the underlying factor of belly fat: L
 			<div class="row">
 				<div class="col-lg-12 mx-auto mt-4 mb-4">
 <!-- META TRIM BHB PRICING CARDS -->
+<div class="mt-tryit-banner">
+  <div class="tryit-img">
+    <img src="../../tyimages/meta_1.webp" alt="MetaTrim 1 Bottle">
+  </div>
+  <div class="tryit-text">
+    <h4>Just Want To Try It First?</h4>
+    <p>1 Bottle &middot; 30 Day Supply</p>
+  </div>
+  <div class="tryit-right">
+    <div class="tryit-price">
+      <span class="price-amount">$79</span>
+      <span class="price-per">/Bottle</span>
+    </div>
+    <div class="tryit-stack">
+      <div class="tryit-guarantee">
+        <img src="../../pills/60days.webp" alt="60 Days Guarantee">
+      </div>
+      <div class="tryit-action">
+        <a href="https://tnproduct.pay.clickbank.net/?cbitems=1&template=checkout3&cbfid=62416&exitoffer=exit_met_2" class="mt-buy-now-btn">
+          <img src="../../lib/img/buy-now.webp" alt="Buy Now">
+        </a>
+        <p class="tryit-shipping">+ $19.99 Shipping</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="mt-product-grid">
   <!-- 2 Bottles -->
   <div class="mt-product-card" data-card="2bottle">
