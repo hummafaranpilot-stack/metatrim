@@ -90,7 +90,17 @@
       "Bash(cmd.exe /c start \"\" \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\cb\\\\go\\\\indexwritten.html\")",
       "Bash(powershell.exe -Command \"Start-Process ''d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\vsl\\\\index.html''\")",
       "Bash(powershell.exe -Command \"Start-Process ''d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\vsl\\\\mobile.html''\")",
-      "Bash(powershell.exe -Command \"Start-Process ''d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\cb\\\\go\\\\indexwritten.html''\")"
+      "Bash(powershell.exe -Command \"Start-Process ''d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\cb\\\\go\\\\indexwritten.html''\")",
+      "Bash(git -C \"d:/TrustedNutraProducts/meta trim/New Funnel\" status)",
+      "Bash(git -C \"d:/TrustedNutraProducts/meta trim/New Funnel\" ls-files --others --exclude-standard v2/)",
+      "Bash(git -C \"d:/TrustedNutraProducts/meta trim/New Funnel\" ls-files v2/vsl/index.html v2/vsl/mobile.html v2/cb/go/indexwritten.html)",
+      "Bash(git -C \"d:/TrustedNutraProducts/meta trim/New Funnel\" diff --stat v2/vsl/index.html v2/vsl/mobile.html v2/cb/go/indexwritten.html)",
+      "WebFetch(domain:metatrim.trustednutraproduct.com)",
+      "Bash(git -C \"d:/TrustedNutraProducts/meta trim/New Funnel\" add v3/vsl/index.html)",
+      "Bash(git -C:*)",
+      "Bash(curl -s https://metatrim.trustednutraproduct.com/v3/vsl/)",
+      "Bash(cp \"d:/TrustedNutraProducts/meta trim/New Funnel/v3/vsl/index.html\" \"d:/TrustedNutraProducts/meta trim/New Funnel/v2/vsl/index.html\")",
+      "Bash(cp \"d:/TrustedNutraProducts/meta trim/New Funnel/v3/vsl/mobile.html\" \"d:/TrustedNutraProducts/meta trim/New Funnel/v2/vsl/mobile.html\")"
     ]
   }
 }

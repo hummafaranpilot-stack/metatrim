@@ -43,7 +43,19 @@
       "Bash(taskkill //F //PID 95764)",
       "Bash(mkdir -p \"D:/TrustedNutraProducts/VSL Downloader/templates\")",
       "Bash(cp \"d:/TrustedNutraProducts/meta trim/New Funnel/v2/hls-downloader/app.py\" \"D:/TrustedNutraProducts/VSL Downloader/app.py\")",
-      "Bash(cp \"d:/TrustedNutraProducts/meta trim/New Funnel/v2/hls-downloader/templates/index.html\" \"D:/TrustedNutraProducts/VSL Downloader/templates/index.html\")"
+      "Bash(cp \"d:/TrustedNutraProducts/meta trim/New Funnel/v2/hls-downloader/templates/index.html\" \"D:/TrustedNutraProducts/VSL Downloader/templates/index.html\")",
+      "Bash(ls \"d:/TrustedNutraProducts/meta trim/New Funnel/v2/\"*.html)",
+      "Bash(python3 -c \":*)",
+      "Bash(git config:*)",
+      "Bash(mkdir -p \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\creative-assets\\\\videos\")",
+      "Bash(cp \"C:\\\\Users\\\\technologyzone.pk\\\\Downloads\\\\Fatima WOrk\\\\metatrim clips/\"*.mp4 \"d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\creative-assets\\\\videos/\")",
+      "Bash(mkdir -p \"/d/TrustedNutraProducts/meta trim/New Funnel/v2/creative-assets/videos\")",
+      "Bash(cp \"/c/Users/technologyzone.pk/Downloads/Fatima WOrk/metatrim clips/\"*.mp4 \"/d/TrustedNutraProducts/meta trim/New Funnel/v2/creative-assets/videos/\")",
+      "Bash(echo \"done: $?\")",
+      "Bash(zip -j zips/videos.zip videos/*.mp4)",
+      "Bash(powershell -Command \"Compress-Archive -Path ''d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\creative-assets\\\\videos\\\\*.mp4'' -DestinationPath ''d:\\\\TrustedNutraProducts\\\\meta trim\\\\New Funnel\\\\v2\\\\creative-assets\\\\zips\\\\videos.zip'' -Force; Write-Host ''done''\")",
+      "Bash(cp -r \"/d/TrustedNutraProducts/meta trim/New Funnel/v2/creative-assets/videos\" \"/d/TrustedNutraProducts/meta trim/New Funnel/v3/creative-assets/videos\")",
+      "Bash(cp \"/d/TrustedNutraProducts/meta trim/New Funnel/v2/creative-assets/zips/videos.zip\" \"/d/TrustedNutraProducts/meta trim/New Funnel/v3/creative-assets/zips/videos.zip\")"
     ]
   }
 }
