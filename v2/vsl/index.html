@@ -4765,7 +4765,16 @@ nav {
 nav img {
 	position: fixed;
     top: 0;
+    left: 10px;
     z-index: 999;
+    max-height: 50px;
+    width: auto;
+}
+@media (max-width: 767px) {
+    nav img {
+        max-height: 40px;
+        left: 5px;
+    }
 }
 .video-fullscreen .fixed-top{
 	display: none;
