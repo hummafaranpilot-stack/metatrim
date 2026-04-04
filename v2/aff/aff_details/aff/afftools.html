@@ -313,13 +313,81 @@ window.__lo_site_id = 329229;
         .zoom-btn:hover {
             background: #eee;
         }
+	/* MetaTrim Gallery */
+	.mt-gallery { display: flex; gap: 10px; max-width: 650px; margin: 0 auto; height: 100%; }
+	.mt-gallery-thumbs { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; width: 88px; }
+	.mt-thumb { width: 88px; height: 50px; object-fit: cover; background: #f5f5f5; border-radius: 10px; border: 2px solid #e0e0e0; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
+	.mt-thumb:hover { border-color: #28a745; transform: scale(1.05); }
+	.mt-thumb.active { border-color: #28a745; box-shadow: 0 0 0 2px rgba(40,167,69,0.3); }
+	.mt-gallery-main { flex: 1; min-width: 0; }
+	.mt-gallery-img-wrap { position: relative; display: inline-block; width: 100%; }
+	.mt-gallery-img-wrap img.mt-main-img { width: 100%; aspect-ratio: 16/9; border-radius: 12px; object-fit: cover; background: #fafafa; transition: opacity 0.3s ease, transform 0.3s ease; cursor: pointer; display: block; }
+	.mt-gallery-img-wrap img.mt-main-img:hover { transform: scale(1.03); }
+	.mt-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.85); border: 1px solid #ddd; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 3; transition: background 0.2s, transform 0.2s; }
+	.mt-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
+	.mt-arrow svg { width: 16px; height: 16px; fill: none; stroke: #333; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+	.mt-arrow-left { left: 8px; }
+	.mt-arrow-right { right: 8px; }
+	@media (min-width: 992px) {
+		#prod-description .container { max-width: 1400px; }
+		#prod-description .col-12.col-lg-11 { flex: 0 0 96%; max-width: 96%; }
+		.mt-gallery { max-width: 100%; }
+		.mt-thumb { width: 122px; height: 69px; }
+		.mt-gallery-thumbs { width: 122px; gap: 4px; }
+	}
+	@media (max-width: 768px) {
+		.mt-gallery { flex-direction: column-reverse; gap: 8px; height: auto; max-width: 100%; }
+		.mt-gallery-thumbs { flex-direction: row; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; justify-content: flex-start; }
+		.mt-gallery-thumbs::-webkit-scrollbar { display: none; }
+		.mt-thumb { width: 70px; height: 39px; min-width: 70px; }
+		.mt-gallery-img-wrap img.mt-main-img { border-radius: 10px; }
+		.mt-arrow { width: 30px; height: 30px; }
+		.mt-arrow svg { width: 14px; height: 14px; }
+		.mt-arrow-left { left: 6px; }
+		.mt-arrow-right { right: 6px; }
+	}
+	.mt-trustpilot-bar { display: inline-flex; align-items: center; gap: 8px; background: #f5f5f5; border-radius: 6px; padding: 6px 12px; font-family: 'Montserrat', sans-serif; font-size: 13px; color: #333; flex-wrap: nowrap; }
+	.mt-tp-wrap { text-align: left; margin-bottom: 8px; }
+	@media (max-width: 768px) { .mt-tp-wrap { text-align: left; } }
+	.mt-tp-stars { height: 18px; width: auto; flex-shrink: 0; }
+	.mt-tp-score { font-weight: 800; font-size: 14px; color: #1a1a1a; }
+	.mt-tp-sep { color: #ccc; }
+	.mt-tp-text { color: #555; font-size: 12px; white-space: nowrap; }
+	.mt-tp-text strong { color: #1a1a1a; }
+	@media (max-width: 768px) { .mt-trustpilot-bar { font-size: 11px; padding: 5px 10px; gap: 5px; flex-wrap: wrap; justify-content: flex-start; } .mt-tp-stars { height: 14px; } .mt-tp-score { font-size: 12px; } .mt-tp-text { font-size: 10px; white-space: normal; } .mt-tp-sep { display: none; } }
+	.mt-social-proof { display: flex; align-items: center; gap: 10px; padding: 8px 0; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-size: 13px; color: #555; flex-wrap: wrap; }
+	.mt-sp-faces { height: 28px; width: auto; flex-shrink: 0; }
+	.mt-sp-text { font-size: 13px; color: #333; }
+	.mt-sp-text strong { color: #1a1a1a; }
+	.mt-sp-stock { display: flex; align-items: center; gap: 5px; color: #4a9e6e; font-weight: 600; font-size: 13px; }
+	.mt-sp-dot { width: 8px; height: 8px; background: #4a9e6e; border-radius: 50%; display: inline-block; }
+	@media (max-width: 768px) { .mt-social-proof { font-size: 11px; gap: 6px; justify-content: flex-start; } .mt-sp-faces { height: 22px; } .mt-sp-text, .mt-sp-stock { font-size: 10px; } }
+	.prod-description { text-align: left !important; }
+	.prod-description h3 { margin-bottom: 0 !important; text-align: left !important; }
+	.prod-description .stars { margin-bottom: 2px !important; text-align: left !important; }
+	.prod-description .mt-tp-wrap { margin-bottom: 2px; text-align: left !important; }
+	#prod-description .prod-description p { margin-bottom: 0 !important; margin-top: 0 !important; text-align: left !important; }
+	#prod-description .prod-description .check-list { margin-bottom: 0 !important; margin-top: 0 !important; list-style: disc !important; padding-left: 18px !important; margin-left: 0 !important; }
+	#prod-description .prod-description .check-list li { margin-bottom: 4px !important; padding-left: 0 !important; line-height: 1.3 !important; display: list-item !important; list-style-type: disc !important; font-size: 18px !important; font-weight: 200 !important; }
+	#prod-description .prod-description .check-list li::before { display: none !important; content: none !important; margin: 0 !important; padding: 0 !important; }
+	.prod-description .mt-social-proof { margin-bottom: 0; margin-top: 0; padding: 0; }
+	.prod-description .button-center { margin-top: 2px; }
+	.button-center.riskfree a { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; color: #fff !important; background: #000 !important; border-color: #000 !important; }
+	#prod-description .button-center.riskfree { padding: 6px 18px !important; }
+	#prod-description .button-center.riskfree:hover { background-color: #222 !important; box-shadow: 0px 3px 0px #555 !important; transform: translateY(-1px); }
+	@media (max-width: 768px) { .riskfree { font-size: 14px !important; padding: 8px 16px !important; border-radius: 28px !important; white-space: nowrap !important; } }
+	#prod-description .prod-description .secure-text { margin-top: 4px !important; margin-bottom: 0 !important; text-align: center !important; }
+	#prod-description .prod-description p.mt-0 { margin-bottom: 4px !important; margin-top: 0 !important; padding-bottom: 0 !important; }
+	#prod-description .prod-description .mt-social-proof { margin-top: 4px !important; margin-bottom: 4px !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+	#prod-description .prod-description .button-center { margin-top: 0 !important; margin-bottom: 0 !important; }
     </style>
 
 
     <!-- Preload product images to prevent flash -->
-    <link rel="preload" as="image" href="../../../tyimages/meta_1.webp">
-    <link rel="preload" as="image" href="../../../tyimages/meta_3.webp">
-    <link rel="preload" as="image" href="../../../tyimages/meta_6+1.webp">
+    <link rel="preload" as="image" href="../../../creative-assets/ugc/4-set-4-category-Hand-Holding-Bottle-in-Store-file_d.jpg">
+    <link rel="preload" as="image" href="../../../creative-assets/influencer/1-set-1-category-Female-Nutritionist-filename-infl_d.jpg">
+    <link rel="preload" as="image" href="../../../creative-assets/influencer/8-set-8-category-Couple-Lifestyle-filename-influen_d.jpg">
+    <link rel="preload" as="image" href="../../../creative-assets/ugc/5-set-5-category-Morning-Routine-with-Product-file_c.jpg">
     </head>
 
 <body>
@@ -348,30 +416,40 @@ window.__lo_site_id = 329229;
 				<section id="prod-description" class="pt-1 pt-md-3 pb-4 pb-lg-5">
 		<div class="container">
 			<div class="col-12 col-lg-11 mx-auto">
-				<div class="row align-items-center">
-					<div class="col-12 col-lg-6 text-center">
-						<!--<img src="https://tgenics-cdn.s3.ap-southeast-1.amazonaws.com/ovunashop/img/ovuna.png" class="img-fluid">-->
-						<picture class="img-fluid d-block mx-auto">
-                            <img src="../../../lib/img/2nd.png" class="img-fluid mx-auto d-block" alt="Meta Trim BHB Bottles" style="max-width: 400px;">
-                        </picture>
+				<div class="row">
+					<div class="col-12 col-lg-6" style="padding-top: 30px;">
+						<div class="mt-gallery">
+							<div class="mt-gallery-thumbs">
+								<img src="../../../creative-assets/ugc/4-set-4-category-Hand-Holding-Bottle-in-Store-file_d.jpg" alt="Hand Holding Bottle" class="mt-thumb active" onclick="mtGallerySelect(this)">
+								<img src="../../../creative-assets/influencer/1-set-1-category-Female-Nutritionist-filename-infl_d.jpg" alt="Nutritionist" class="mt-thumb" onclick="mtGallerySelect(this)">
+								<img src="../../../creative-assets/influencer/8-set-8-category-Couple-Lifestyle-filename-influen_d.jpg" alt="Couple Lifestyle" class="mt-thumb" onclick="mtGallerySelect(this)">
+								<img src="../../../creative-assets/ugc/5-set-5-category-Morning-Routine-with-Product-file_c.jpg" alt="Morning Routine" class="mt-thumb" onclick="mtGallerySelect(this)">
+							</div>
+							<div class="mt-gallery-main">
+								<div class="mt-gallery-img-wrap">
+									<button class="mt-arrow mt-arrow-left" onclick="mtGalleryNav(this,-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+									<img src="../../../creative-assets/ugc/4-set-4-category-Hand-Holding-Bottle-in-Store-file_d.jpg" alt="Meta Trim BHB" class="mt-main-img">
+									<button class="mt-arrow mt-arrow-right" onclick="mtGalleryNav(this,1)"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+								</div>
+							</div>
+						</div>
 					</div>
-						<div class="col-12 col-lg-6 col-md-10 mx-auto prod-description px-1 px-md-3 my-auto">
-					      <ul class="text-left my-lg-4 col-12 col-md-10 mx-auto pl-4 pl-md-0 new-list">
-            <li class="mb-2 mb-lg-4 pb-md-2">Massive payouts - <strong>$150-$170 per sale</strong> with subscription upsells</li>
-            <li class="mb-2 mb-lg-4 pb-md-2">BHB Ketone weight loss supplement - converts well with a wide audience base</li>
-            <li class="mb-2 mb-lg-4 pb-md-2">Constantly optimized swipes & landers to ensure best conversions</li>
-          </ul>
-                        <div class="text-center mt-3">
-                            <a href="https://backoffice.buygoods.com/offer-details?a=xfH/bo4" target="_blank" rel="noopener"
-                               style="display:inline-block;background:linear-gradient(135deg,#0d1117,#1a1f2b);color:#fff;font-family:Montserrat,sans-serif;font-size:14px;font-weight:700;padding:13px 30px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;box-shadow:0 4px 15px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);">
-                                View Offer on BuyGoods &nbsp;&#8594;
-                            </a>
-                        </div>
-			</div>
-
-
-
-
+					<div class="col-12 col-lg-6 col-md-10 mx-auto prod-description px-1 px-md-3 my-auto">
+						<h3 class="font-weight-bold mb-0">Meta Trim BHB<sup>&#8482;</sup></h3>
+						<div class="stars mb-0"><i class="fas fa-star" style="color:#f5a623;"></i><i class="fas fa-star" style="color:#f5a623;"></i><i class="fas fa-star" style="color:#f5a623;"></i><i class="fas fa-star" style="color:#f5a623;"></i><i class="fas fa-star" style="color:#f5a623;"></i> <span class="text-dark">|</span> <span class="font-weight-bold text-success">In Stock</span></div>
+						<div class="mt-tp-wrap"><span class="mt-trustpilot-bar"><img src="../images/star-4.5.svg" alt="Trustpilot" class="mt-tp-stars"><span class="mt-tp-score">4.7</span><span class="mt-tp-sep">|</span><span class="mt-tp-text">Rated <strong>Excellent</strong> based on 2000+ Reviews</span></span></div>
+						<p class="mt-0 mb-0">The powerful BHB Ketone formula inside Meta Trim BHB&#8482; helps support healthy weight loss and natural energy&hellip;</p>
+						<ul class="check-list">
+							<li>Massive payouts - <strong>$150-$170 per sale</strong> with subscription upsells</li>
+							<li>BHB Ketone weight loss supplement - converts well with a wide audience base</li>
+							<li>Constantly optimized swipes &amp; landers for best conversions</li>
+						</ul>
+						<div class="mt-social-proof"><img src="../images/socials.webp" alt="Happy Customers" class="mt-sp-faces"><span class="mt-sp-text"><strong>+2K</strong> Happy Customers</span><span class="mt-sp-stock"><span class="mt-sp-dot"></span> In stock and ready to ship</span></div>
+						<div class="button-center riskfree text-center text-uppercase" style="background-color:#000 !important;box-shadow:0px 3px 0px #333 !important;">
+							<a href="#landing-pages" style="display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;font-weight:800;font-size:16px;padding:10px 24px;border-radius:50px;text-decoration:none;letter-spacing:0.5px;border:none;cursor:pointer;transition:all 0.2s ease;">VIEW 12 HIGH QUALITY LANDING PAGES <i class="fas fa-arrow-right"></i></a>
+						</div>
+						<p class="text-center secure-text my-2"><i class="fas fa-lock"></i> 100% Secure Encrypted Transactions</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -391,6 +469,7 @@ window.__lo_site_id = 329229;
                     <a href="#google-ads-guide">Google Ads Guide</a>
                     <a href="#offer-details">Offer Details</a>
                     <a href="#product-images">Product Images</a>
+                    <a href="#testimonial-videos">Testimonial Videos <span class="new-blink-badge">NEW</span></a>
                     <a href="#install-pixels">Install Pixel</a>
 
                     <span style="flex-basis:100%;height:0;"></span>
@@ -1238,7 +1317,103 @@ bottom: unset;
                 </section>
 
 
-	
+
+				<!-- Video Testimonial Clips for Affiliates -->
+<section class="container-md py-4" id="testimonial-videos">
+    <h3 class="section-header text-center mb-3">Video Testimonial Clips</h3>
+    <p class="text-center text-muted mb-2">Short video clips for Facebook, TikTok, YouTube ads, and presale pages.</p>
+    <p class="text-center mb-4">
+        <a href="../../../../video_clips/" class="btn btn-danger fw-bold" style="font-size: 15px; padding: 10px 25px;" target="_blank"><i class="fas fa-download me-2"></i>Download All Video Clips</a>
+    </p>
+    <h5 class="text-blue text-center mb-3" style="font-weight: 700;">Customer Testimonials</h5>
+    <div class="row g-3 justify-content-center mb-4">
+        <div class="col-12 col-md-4">
+            <div class="card-dashed text-center h-100" style="padding: 20px 15px;">
+                <div class="video-hover-container mb-3" style="cursor:pointer" onclick="openVideoModal(this.querySelector('source').src)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" style="width:100%;border-radius:8px;"><source src="../../../../video_clips/testimonial-patricia.webm" type="video/webm"></video>
+                    <div class="video-progress"></div>
+                </div>
+                <h5 style="font-weight: 700; font-size: 1rem; color: #1a4b8c;">Patricia, 43 — Miami, FL</h5>
+                <p class="text-muted mb-1" style="font-size: 13px;">Lost 54 lbs after 3 kids</p>
+                <p style="font-size: 14px; font-style: italic; color: #555;" class="mb-2">"Now I'm wearing cute dresses again"</p>
+                <a href="../../../../video_clips/testimonial-patricia.webm" class="btn btn-sm btn-danger" download><i class="fas fa-download me-1"></i> Download</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card-dashed text-center h-100" style="padding: 20px 15px;">
+                <div class="video-hover-container mb-3" style="cursor:pointer" onclick="openVideoModal(this.querySelector('source').src)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" style="width:100%;border-radius:8px;"><source src="../../../../video_clips/testimonial-sean.webm" type="video/webm"></video>
+                    <div class="video-progress"></div>
+                </div>
+                <h5 style="font-weight: 700; font-size: 1rem; color: #1a4b8c;">Sean, 69 — Des Moines, IA</h5>
+                <p class="text-muted mb-1" style="font-size: 13px;">Retired firefighter, lost 36 lbs</p>
+                <p style="font-size: 14px; font-style: italic; color: #555;" class="mb-2">"I can outrun and outwork all my grandkids"</p>
+                <a href="../../../../video_clips/testimonial-sean.webm" class="btn btn-sm btn-danger" download><i class="fas fa-download me-1"></i> Download</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card-dashed text-center h-100" style="padding: 20px 15px;">
+                <div class="video-hover-container mb-3" style="cursor:pointer" onclick="openVideoModal(this.querySelector('source').src)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" style="width:100%;border-radius:8px;"><source src="../../../../video_clips/testimonial-linda.webm" type="video/webm"></video>
+                    <div class="video-progress"></div>
+                </div>
+                <h5 style="font-weight: 700; font-size: 1rem; color: #1a4b8c;">Linda, 55 — San Diego, CA</h5>
+                <p class="text-muted mb-1" style="font-size: 13px;">Lost 49 lbs after 25 years of failed diets</p>
+                <p style="font-size: 14px; font-style: italic; color: #555;" class="mb-2">"I dropped 7 pounds the first week"</p>
+                <a href="../../../../video_clips/testimonial-linda.webm" class="btn btn-sm btn-danger" download><i class="fas fa-download me-1"></i> Download</a>
+            </div>
+        </div>
+    </div>
+    <h5 class="text-blue text-center mb-3" style="font-weight: 700;">Ad Hook & Content Clips</h5>
+    <p class="text-center text-muted mb-3"><em>Use these as ad hooks, intro clips, or embed in presale pages</em></p>
+    <div class="row g-3 justify-content-center">
+        <div class="col-6 col-md-3">
+            <div class="card-dashed text-center" style="padding: 15px;">
+                <div class="video-hover-container mb-2" style="cursor:pointer" onclick="openVideoModal(this.querySelector('source').src)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" style="width:100%;border-radius:8px;"><source src="../../../../video_clips/clip1_hero_hook.webm" type="video/webm"></video>
+                    <div class="video-progress"></div>
+                </div>
+                <h6 style="font-size: 0.85rem; font-weight: 700;">Hero Hook</h6>
+                <p class="text-muted mb-2" style="font-size: 12px;">45 sec — Opening pitch</p>
+                <a href="../../../../video_clips/clip1_hero_hook.webm" class="btn btn-sm btn-outline-danger" download>Download</a>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card-dashed text-center" style="padding: 15px;">
+                <div class="video-hover-container mb-2" style="cursor:pointer" onclick="openVideoModal(this.querySelector('source').src)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" style="width:100%;border-radius:8px;"><source src="../../../../video_clips/clip2_transformation.webm" type="video/webm"></video>
+                    <div class="video-progress"></div>
+                </div>
+                <h6 style="font-size: 0.85rem; font-weight: 700;">Transformation</h6>
+                <p class="text-muted mb-2" style="font-size: 12px;">20 sec — Before/after reveal</p>
+                <a href="../../../../video_clips/clip2_transformation.webm" class="btn btn-sm btn-outline-danger" download>Download</a>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card-dashed text-center" style="padding: 15px;">
+                <div class="video-hover-container mb-2" style="cursor:pointer" onclick="openVideoModal(this.querySelector('source').src)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" style="width:100%;border-radius:8px;"><source src="../../../../video_clips/clip3_science.webm" type="video/webm"></video>
+                    <div class="video-progress"></div>
+                </div>
+                <h6 style="font-size: 0.85rem; font-weight: 700;">Science / Fat Cells</h6>
+                <p class="text-muted mb-2" style="font-size: 12px;">15 sec — Mechanism explainer</p>
+                <a href="../../../../video_clips/clip3_science.webm" class="btn btn-sm btn-outline-danger" download>Download</a>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card-dashed text-center" style="padding: 15px;">
+                <div class="video-hover-container mb-2" style="cursor:pointer" onclick="openVideoModal(this.querySelector('source').src)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" style="width:100%;border-radius:8px;"><source src="../../../../video_clips/clip5_lifestyle_promise.webm" type="video/webm"></video>
+                    <div class="video-progress"></div>
+                </div>
+                <h6 style="font-size: 0.85rem; font-weight: 700;">Lifestyle Promise</h6>
+                <p class="text-muted mb-2" style="font-size: 12px;">15 sec — Aspirational close</p>
+                <a href="../../../../video_clips/clip5_lifestyle_promise.webm" class="btn btn-sm btn-outline-danger" download>Download</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 				<!-- Ad Copy Swipes Section -->
 				<section class="container-md py-4" id="ad-copy">
 					<h3 class="section-header text-center mb-3">Ad Copy Swipes</h3>
@@ -2056,7 +2231,28 @@ function hoverPause(container) {
             });
         </script>
 
-
+<!-- MetaTrim Gallery JS -->
+<script>
+function mtGallerySelect(thumb) {
+	var wrap = thumb.closest('.mt-gallery');
+	var mainImg = wrap.querySelector('.mt-main-img');
+	wrap.querySelectorAll('.mt-thumb').forEach(function(t) { t.classList.remove('active'); });
+	thumb.classList.add('active');
+	mainImg.style.opacity = '0';
+	setTimeout(function() {
+		mainImg.src = thumb.src;
+		mainImg.style.opacity = '1';
+	}, 150);
+}
+function mtGalleryNav(btn, dir) {
+	var wrap = btn.closest('.mt-gallery');
+	var thumbs = Array.from(wrap.querySelectorAll('.mt-thumb'));
+	var active = wrap.querySelector('.mt-thumb.active');
+	var idx = thumbs.indexOf(active);
+	var next = (idx + dir + thumbs.length) % thumbs.length;
+	mtGallerySelect(thumbs[next]);
+}
+</script>
 
 </body>
 
