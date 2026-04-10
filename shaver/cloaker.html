@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Cloaker - Trusted Nutra Products</title>
+  <link rel="stylesheet" href="vendors/iconfonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <style>
+    /* ── Status badges ─────────────────────────────────────────── */
+    .badge-active  { background:#1bcfb4; color:#fff; padding:3px 10px; border-radius:12px; font-size:0.78rem; font-weight:600; }
+    .badge-paused  { background:#f7931a; color:#fff; padding:3px 10px; border-radius:12px; font-size:0.78rem; font-weight:600; }
+    .badge-white   { background:#6c757d; color:#fff; padding:2px 8px; border-radius:10px; font-size:0.75rem; }
+    .badge-black   { background:#4B49AC; color:#fff; padding:2px 8px; border-radius:10px; font-size:0.75rem; }
+    .badge-bot     { background:#fc424a; color:#fff; padding:2px 8px; border-radius:10px; font-size:0.75rem; }
+    .badge-clean   { background:#1bcfb4; color:#fff; padding:2px 8px; border-radius:10px; font-size:0.75rem; }
+
+    /* ── Stat cards row ───────────────────────────────────────── */
+    .stat-card      { border-left:4px solid transparent; }
+    .stat-card.blue { border-color:#4B49AC; }
+    .stat-card.teal { border-color:#1bcfb4; }
+    .stat-card.red  { border-color:#fc424a; }
+    .stat-card.orng { border-color:#f7931a; }
+    .stat-num       { font-size:1.8rem; font-weight:700; color:#4B49AC; line-height:1; }
+    .stat-label     { font-size:0.8rem; color:#888; margin-top:4px; }
+
+    /* ── Filter checkbox grid ────────────────────────────────── */
+    .filter-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; }
+    .filter-item { display:flex; align-items:flex-start; gap:8px; }
+    .filter-item input[type=checkbox] { margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:#4B49AC; }
+    .filter-item .fi-label  { font-weight:600; font-size:0.88rem; display:block; }
+    .filter-item .fi-desc   { font-size:0.78rem; color:#888; }
+
+    /* ── IPQS threshold row ──────────────────────────────────── */
+    .threshold-wrap { display:flex; align-items:center; gap:12px; }
+    .threshold-wrap input[type=range] { flex:1; accent-color:#4B49AC; }
+    .threshold-val  { width:44px; text-align:center; font-weight:700; font-size:1.1rem; color:#4B49AC; }
+
+    /* ── Cloak link box ──────────────────────────────────────── */
+    .cloak-url-box {
+      background:#f4f4fb;
+      border:1px dashed #4B49AC;
+      border-radius:8px;
+      padding:10px 14px;
+      font-family:monospace;
+      font-size:0.82rem;
+      color:#333;
+      word-break:break-all;
+    }
+
+    /* ── Log table row coloring ──────────────────────────────── */
+    tr.log-white td { background:#fff8f8; }
+    tr.log-black td { background:#f8fff8; }
+
+    /* ── Domain row action buttons ───────────────────────────── */
+    .btn-xs { padding:3px 10px; font-size:0.75rem; }
+
+    /* ── Empty state ─────────────────────────────────────────── */
+    .empty-state { text-align:center; padding:50px 20px; color:#aaa; }
+    .empty-state i { font-size:3rem; margin-bottom:12px; display:block; }
+
+    /* ── Modal backdrop fix ──────────────────────────────────── */
+    .modal-dialog { max-width: 680px; }
+
+    /* ── Reason pill ─────────────────────────────────────────── */
+    .reason-pill { font-size:0.72rem; background:#eee; color:#555; padding:1px 7px; border-radius:8px; }
+  </style>
+</head>
+<body>
+<div class="container-scroller">
+
+  <!-- ── Navbar ─────────────────────────────────────────────────────── -->
+  <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+      <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
+      <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-stretch">
+      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <span class="fas fa-bars"></span>
+      </button>
+      <ul class="navbar-nav navbar-nav-right ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#"><i class="fas fa-user-circle" style="font-size:24px;"></i></a>
+        </li>
+      </ul>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="fas fa-bars"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container-fluid page-body-wrapper">
+
+    <!-- ── Sidebar ──────────────────────────────────────────────────── -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <ul class="nav">
+        <li class="nav-item nav-profile">
+          <div class="nav-link">
+            <div class="profile-image"><img src="images/logo-mini.svg" alt="image"/></div>
+            <div class="profile-name">
+              <p class="name">Trusted Nutra</p>
+              <p class="designation">Analytics Dashboard</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-tachometer-alt menu-icon"></i>
+            <span class="menu-title">Dashboard Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-item nav-category"><span class="nav-link">SHAVING ANALYTICS</span></li>
+        <li class="nav-item"><a class="nav-link" href="shaving-analytics.html"><i class="fa fa-chart-line menu-icon"></i><span class="menu-title">Traffic Analytics</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="sessions.html"><i class="fa fa-scissors menu-icon"></i><span class="menu-title">Shaving Sessions</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="history.html"><i class="fa fa-history menu-icon"></i><span class="menu-title">Session History</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="embed-code.html"><i class="fa fa-code menu-icon"></i><span class="menu-title">Embed Code</span></a></li>
+
+        <li class="nav-item nav-category"><span class="nav-link">CLOAKER</span></li>
+        <li class="nav-item active">
+          <a class="nav-link" href="cloaker.html">
+            <i class="fa fa-mask menu-icon"></i>
+            <span class="menu-title">Cloaker</span>
+          </a>
+        </li>
+
+        <li class="nav-item nav-category"><span class="nav-link">BUYGOODS ANALYTICS</span></li>
+        <li class="nav-item"><a class="nav-link" href="orders.html"><i class="fa fa-shopping-cart menu-icon"></i><span class="menu-title">Orders</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="revenue.html"><i class="fa fa-dollar-sign menu-icon"></i><span class="menu-title">Revenue Analytics</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="recurring.html"><i class="fa fa-sync-alt menu-icon"></i><span class="menu-title">Recurring Charges</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="refunds.html"><i class="fa fa-undo menu-icon"></i><span class="menu-title">Refunds</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="chargebacks.html"><i class="fa fa-exclamation-triangle menu-icon"></i><span class="menu-title">Chargebacks</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="fraud-detection.html"><i class="fa fa-shield-alt menu-icon"></i><span class="menu-title">Fraud Detection</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html"><i class="fa fa-box menu-icon"></i><span class="menu-title">Products</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="webhooks.html"><i class="fa fa-link menu-icon"></i><span class="menu-title">Webhook Logs</span></a></li>
+
+        <li class="nav-item nav-category"><span class="nav-link">ADMIN</span></li>
+        <li class="nav-item"><a class="nav-link" href="admin.html"><i class="fa fa-cog menu-icon"></i><span class="menu-title">Admin Panel</span></a></li>
+      </ul>
+    </nav>
+
+    <!-- ── Main Panel ───────────────────────────────────────────────── -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+
+        <!-- Page header -->
+        <div class="page-header">
+          <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+              <i class="fa fa-mask"></i>
+            </span>
+            Cloaker
+          </h3>
+          <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">Cloaker</li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- ── Stats row ─────────────────────────────────────────────── -->
+        <div class="row mb-4" id="statsRow">
+          <div class="col-md-3 col-6 grid-margin stretch-card">
+            <div class="card stat-card blue">
+              <div class="card-body py-3">
+                <div class="stat-num" id="stat-total-domains">–</div>
+                <div class="stat-label"><i class="fa fa-globe mr-1"></i> Total Domains</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 grid-margin stretch-card">
+            <div class="card stat-card teal">
+              <div class="card-body py-3">
+                <div class="stat-num" id="stat-active-domains">–</div>
+                <div class="stat-label"><i class="fa fa-circle mr-1" style="color:#1bcfb4;font-size:0.6rem;vertical-align:middle;"></i> Active Domains</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 grid-margin stretch-card">
+            <div class="card stat-card orng">
+              <div class="card-body py-3">
+                <div class="stat-num" id="stat-hits-today">–</div>
+                <div class="stat-label"><i class="fa fa-mouse-pointer mr-1"></i> Hits Today</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 grid-margin stretch-card">
+            <div class="card stat-card red">
+              <div class="card-body py-3">
+                <div class="stat-num" id="stat-bots-today">–</div>
+                <div class="stat-label"><i class="fa fa-robot mr-1"></i> Bots Blocked Today</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Domain list card ──────────────────────────────────────── -->
+        <div class="row">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="card-title mb-0">
+                    <i class="fa fa-globe text-primary mr-2"></i> Cloaked Domains
+                  </h4>
+                  <button class="btn btn-gradient-primary btn-sm" onclick="openAddModal()">
+                    <i class="fa fa-plus mr-1"></i> Add Domain
+                  </button>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Domain</th>
+                        <th>Status</th>
+                        <th>White Page</th>
+                        <th>Black Page</th>
+                        <th>Total Hits</th>
+                        <th>Bots ↓</th>
+                        <th>Real ↑</th>
+                        <th>Last Hit</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="domainTableBody">
+                      <tr><td colspan="9" class="empty-state"><i class="fa fa-spinner fa-spin"></i>Loading…</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Log viewer card ───────────────────────────────────────── -->
+        <div class="row">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="card-title mb-0">
+                    <i class="fa fa-list-alt text-info mr-2"></i> Traffic Log
+                  </h4>
+                  <div class="d-flex gap-2 align-items-center" style="gap:8px;">
+                    <select class="form-control form-control-sm" id="logDomainFilter" style="width:200px;" onchange="loadLogs(1)">
+                      <option value="">— All Domains —</option>
+                    </select>
+                    <button class="btn btn-outline-danger btn-sm" onclick="clearLogs()">
+                      <i class="fa fa-trash mr-1"></i> Clear
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="loadLogs(currentLogPage)">
+                      <i class="fa fa-sync"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Domain</th>
+                        <th>IP</th>
+                        <th>Country</th>
+                        <th>Fraud Score</th>
+                        <th>VPN</th>
+                        <th>Bot</th>
+                        <th>Routed To</th>
+                        <th>Reason</th>
+                        <th>User Agent</th>
+                      </tr>
+                    </thead>
+                    <tbody id="logTableBody">
+                      <tr><td colspan="10" class="empty-state"><i class="fa fa-list-alt"></i>Select a domain or click refresh.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="d-flex justify-content-between align-items-center mt-2" id="logPagination" style="display:none!important;">
+                  <small class="text-muted" id="logPaginationInfo"></small>
+                  <div>
+                    <button class="btn btn-outline-secondary btn-xs mr-1" id="btnPrevPage" onclick="loadLogs(currentLogPage-1)">
+                      <i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-xs" id="btnNextPage" onclick="loadLogs(currentLogPage+1)">
+                      <i class="fa fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content-wrapper -->
+
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+            Copyright &copy; 2026 Trusted Nutra Products. All rights reserved.
+          </span>
+        </div>
+      </footer>
+    </div><!-- /main-panel -->
+  </div><!-- /page-body-wrapper -->
+</div><!-- /container-scroller -->
+
+<!-- ══════════════════════════════════════════════════════════════════
+     ADD / EDIT DOMAIN MODAL
+══════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="domainModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="domainModalTitle">
+          <i class="fa fa-plus-circle mr-2 text-primary"></i> Add Cloaked Domain
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editId" value="0">
+
+        <!-- Domain name -->
+        <div class="form-group">
+          <label><i class="fa fa-globe mr-1"></i> Domain <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="fDomain" placeholder="e.g. myoffer.com">
+          <small class="text-muted">Just the domain name — no http/https needed here.</small>
+        </div>
+
+        <!-- White page URL -->
+        <div class="form-group">
+          <label>
+            <i class="fa fa-file-alt mr-1 text-secondary"></i>
+            White Page URL <span class="text-danger">*</span>
+            <span class="badge badge-secondary ml-1" style="font-size:0.7rem;">Shown to bots / reviewers</span>
+          </label>
+          <input type="url" class="form-control" id="fWhite" placeholder="https://example.com/safe-page">
+        </div>
+
+        <!-- Black page URL -->
+        <div class="form-group">
+          <label>
+            <i class="fa fa-fire mr-1 text-danger"></i>
+            Black Page URL <span class="text-danger">*</span>
+            <span class="badge badge-danger ml-1" style="font-size:0.7rem;">Shown to real users</span>
+          </label>
+          <input type="url" class="form-control" id="fBlack" placeholder="https://youroffer.com/order">
+        </div>
+
+        <hr>
+        <h6 class="mb-3"><i class="fa fa-filter mr-1 text-primary"></i> Filter Rules</h6>
+
+        <!-- Filter checkboxes -->
+        <div class="filter-grid mb-3">
+          <div class="filter-item">
+            <input type="checkbox" id="fBots" checked>
+            <div>
+              <span class="fi-label">Block Known Bots</span>
+              <span class="fi-desc">Crawlers, scrapers, ad-review bots, AI agents</span>
+            </div>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox" id="fVpn" checked>
+            <div>
+              <span class="fi-label">Block VPN / Proxy</span>
+              <span class="fi-desc">Hides reviewer's real IP</span>
+            </div>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox" id="fDatacenter" checked>
+            <div>
+              <span class="fi-label">Block Datacenter IPs</span>
+              <span class="fi-desc">AWS, GCP, Azure — not real browsers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- IPQS fraud score threshold -->
+        <div class="form-group">
+          <label>
+            <i class="fa fa-tachometer-alt mr-1"></i>
+            IPQualityScore Threshold
+            <small class="text-muted ml-1">(send white page if score &ge; this value)</small>
+          </label>
+          <div class="threshold-wrap">
+            <input type="range" id="fThreshold" min="0" max="100" value="60" step="5"
+                   oninput="document.getElementById('fThresholdVal').textContent=this.value">
+            <span class="threshold-val" id="fThresholdVal">60</span>
+          </div>
+          <div class="d-flex justify-content-between mt-1" style="font-size:0.72rem;color:#aaa;">
+            <span>0 — off</span><span>40 — lenient</span><span>60 — recommended</span><span>85 — strict</span><span>100</span>
+          </div>
+        </div>
+
+        <!-- Blocked countries -->
+        <div class="form-group">
+          <label><i class="fa fa-ban mr-1 text-warning"></i> Blocked Countries <small class="text-muted">(optional)</small></label>
+          <input type="text" class="form-control" id="fCountries" placeholder="e.g. IN, PK, BD, NG">
+          <small class="text-muted">Comma-separated 2-letter ISO codes. Leave blank to allow all countries.</small>
+        </div>
+
+        <!-- Allowed referrers -->
+        <div class="form-group">
+          <label><i class="fa fa-link mr-1 text-info"></i> Allowed Referrers <small class="text-muted">(optional)</small></label>
+          <input type="text" class="form-control" id="fReferrers" placeholder="e.g. facebook.com, google.com">
+          <small class="text-muted">Comma-separated. If filled, only traffic from these referrers reaches the offer. Leave blank to allow all referrers.</small>
+        </div>
+
+        <!-- IP blacklist -->
+        <div class="form-group">
+          <label><i class="fa fa-ban mr-1 text-danger"></i> Custom IP Blacklist <small class="text-muted">(optional)</small></label>
+          <textarea class="form-control" id="fIpBlacklist" rows="3" placeholder="One IP per line&#10;192.168.1.1&#10;10.0.0.5"></textarea>
+        </div>
+
+        <hr>
+        <!-- Generated cloak URL preview -->
+        <div id="cloakUrlPreview" style="display:none;">
+          <label><i class="fa fa-link mr-1 text-success"></i> Your Cloak URL <small class="text-muted">(use this as your ad destination)</small></label>
+          <div class="cloak-url-box mb-2" id="cloakUrlBox"></div>
+          <button type="button" class="btn btn-outline-success btn-sm" onclick="copyCloakUrl()">
+            <i class="fa fa-copy mr-1"></i> Copy URL
+          </button>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-gradient-primary" id="saveDomainBtn" onclick="saveDomain()">
+          <i class="fa fa-save mr-1"></i> Save Domain
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     CLOAK URL MODAL (copy link for existing domain)
+══════════════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="cloakLinkModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-link mr-2 text-success"></i> Cloak URL</h5>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted" style="font-size:0.85rem;">Use this as the <strong>destination URL</strong> in your ad campaigns:</p>
+        <div class="cloak-url-box mb-3" id="cloakLinkBox"></div>
+        <button class="btn btn-success btn-block" onclick="copyCloakLink()">
+          <i class="fa fa-copy mr-1"></i> Copy URL
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── JS vendor bundles ─────────────────────────────────────────────── -->
+<script src="vendors/js/vendor.bundle.base.js"></script>
+<script src="vendors/js/vendor.bundle.addons.js"></script>
+<script src="js/off-canvas.js"></script>
+<script src="js/hoverable-collapse.js"></script>
+<script src="js/misc.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/todolist.js"></script>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// Config
+// ══════════════════════════════════════════════════════════════════
+const API         = 'cloaker-api.php';
+const CDN_BASE    = window.location.origin; // change to https://cdn.trustednutraproduct.com if different
+
+let currentLogPage = 1;
+let totalLogPages  = 1;
+
+// ══════════════════════════════════════════════════════════════════
+// Init
+// ══════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  loadStats();
+  loadDomains();
+});
+
+// ══════════════════════════════════════════════════════════════════
+// Stats
+// ══════════════════════════════════════════════════════════════════
+async function loadStats() {
+  try {
+    const r = await fetch(`${API}?action=get_stats`);
+    const j = await r.json();
+    if (!j.success) return;
+    const d = j.data;
+    setText('stat-total-domains',  d.total_domains  || 0);
+    setText('stat-active-domains', d.active_domains || 0);
+    setText('stat-hits-today',     d.hits_today     || 0);
+    setText('stat-bots-today',     (+d.bots_today || 0) + (+d.vpn_today || 0));
+  } catch(e) { console.error('Stats error:', e); }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Domain table
+// ══════════════════════════════════════════════════════════════════
+async function loadDomains() {
+  try {
+    const r = await fetch(`${API}?action=get_domains`);
+    const j = await r.json();
+    if (!j.success) return showError('domainTableBody', 9, j.error);
+
+    const tbody = document.getElementById('domainTableBody');
+    const logSel = document.getElementById('logDomainFilter');
+
+    // Rebuild log domain filter
+    const prevVal = logSel.value;
+    logSel.innerHTML = '<option value="">— All Domains —</option>';
+
+    if (!j.data.length) {
+      tbody.innerHTML = `<tr><td colspan="9">
+        <div class="empty-state">
+          <i class="fa fa-mask"></i>
+          No domains configured yet.<br>
+          <button class="btn btn-gradient-primary btn-sm mt-3" onclick="openAddModal()">
+            <i class="fa fa-plus mr-1"></i> Add Your First Domain
+          </button>
+        </div>
+      </td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = j.data.map(row => {
+      logSel.innerHTML += `<option value="${esc(row.domain)}">${esc(row.domain)}</option>`;
+      const active  = +row.is_active;
+      const pctBot  = row.hits_total > 0 ? Math.round(row.hits_white / row.hits_total * 100) : 0;
+      const lastHit = row.last_hit ? timeSince(row.last_hit) : '—';
+      return `<tr>
+        <td><strong>${esc(row.domain)}</strong></td>
+        <td>${active
+          ? '<span class="badge-active"><i class="fa fa-circle mr-1" style="font-size:0.55rem;"></i>Active</span>'
+          : '<span class="badge-paused"><i class="fa fa-pause-circle mr-1"></i>Paused</span>'}</td>
+        <td><a href="${esc(row.white_page_url)}" target="_blank" title="${esc(row.white_page_url)}"
+               style="font-size:0.78rem;max-width:150px;display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;vertical-align:middle;">
+             <i class="fa fa-external-link-alt mr-1 text-secondary"></i>${truncate(row.white_page_url,30)}</a></td>
+        <td><a href="${esc(row.black_page_url)}" target="_blank" title="${esc(row.black_page_url)}"
+               style="font-size:0.78rem;max-width:150px;display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;vertical-align:middle;">
+             <i class="fa fa-external-link-alt mr-1 text-danger"></i>${truncate(row.black_page_url,30)}</a></td>
+        <td>${(+row.hits_total).toLocaleString()}</td>
+        <td>
+          <span class="badge-white">${(+row.hits_white).toLocaleString()}</span>
+          ${pctBot > 0 ? `<small class="text-muted ml-1">${pctBot}%</small>` : ''}
+        </td>
+        <td><span class="badge-black">${(+row.hits_black).toLocaleString()}</span></td>
+        <td><small class="text-muted">${lastHit}</small></td>
+        <td style="white-space:nowrap;">
+          <button class="btn btn-${active ? 'warning' : 'success'} btn-xs mr-1"
+                  onclick="toggleStatus(${row.id})"
+                  title="${active ? 'Pause' : 'Activate'}">
+            <i class="fa fa-${active ? 'pause' : 'play'}"></i>
+          </button>
+          <button class="btn btn-info btn-xs mr-1" onclick="showCloakLink('${esc(row.domain)}')" title="Get Cloak URL">
+            <i class="fa fa-link"></i>
+          </button>
+          <button class="btn btn-primary btn-xs mr-1" onclick="openEditModal(${row.id})" title="Edit">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-danger btn-xs" onclick="deleteDomain(${row.id}, '${esc(row.domain)}')" title="Delete">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>`;
+    }).join('');
+
+    // Restore log domain filter selection
+    if (prevVal) {
+      logSel.value = prevVal;
+    }
+  } catch(e) {
+    showError('domainTableBody', 9, 'Failed to load domains: ' + e.message);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Toggle status (Active ↔ Paused)
+// ══════════════════════════════════════════════════════════════════
+async function toggleStatus(id) {
+  try {
+    const r = await apiPost({ action: 'toggle_status', id });
+    if (!r.success) return alert('Error: ' + r.error);
+    loadDomains();
+    loadStats();
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Delete domain
+// ══════════════════════════════════════════════════════════════════
+async function deleteDomain(id, domain) {
+  if (!confirm(`Delete cloaker for "${domain}"?\n\nThis will also delete all logs for this domain.`)) return;
+  try {
+    const r = await apiPost({ action: 'delete_domain', id });
+    if (!r.success) return alert('Error: ' + r.error);
+    loadDomains();
+    loadStats();
+    loadLogs(1);
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Add / Edit modal
+// ══════════════════════════════════════════════════════════════════
+function openAddModal() {
+  document.getElementById('domainModalTitle').innerHTML =
+    '<i class="fa fa-plus-circle mr-2 text-primary"></i> Add Cloaked Domain';
+  resetForm();
+  document.getElementById('cloakUrlPreview').style.display = 'none';
+  $('#domainModal').modal('show');
+}
+
+async function openEditModal(id) {
+  try {
+    const r = await fetch(`${API}?action=get_domains`);
+    const j = await r.json();
+    if (!j.success) return alert('Could not load domain data.');
+    const row = j.data.find(d => +d.id === +id);
+    if (!row) return alert('Domain not found.');
+
+    document.getElementById('domainModalTitle').innerHTML =
+      '<i class="fa fa-edit mr-2 text-primary"></i> Edit Cloaked Domain';
+
+    document.getElementById('editId').value          = row.id;
+    document.getElementById('fDomain').value         = row.domain;
+    document.getElementById('fWhite').value          = row.white_page_url;
+    document.getElementById('fBlack').value          = row.black_page_url;
+    document.getElementById('fBots').checked         = !!+row.filter_bots;
+    document.getElementById('fVpn').checked          = !!+row.filter_vpn;
+    document.getElementById('fDatacenter').checked   = !!+row.filter_datacenter;
+    document.getElementById('fThreshold').value      = row.ipqs_threshold;
+    document.getElementById('fThresholdVal').textContent = row.ipqs_threshold;
+    document.getElementById('fCountries').value      = row.blocked_countries || '';
+    document.getElementById('fReferrers').value      = row.allowed_referrers || '';
+    document.getElementById('fIpBlacklist').value    = row.ip_blacklist || '';
+
+    // Show cloak URL for existing domain
+    const url = buildCloakUrl(row.domain);
+    document.getElementById('cloakUrlBox').textContent = url;
+    document.getElementById('cloakUrlPreview').style.display = 'block';
+
+    $('#domainModal').modal('show');
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+function resetForm() {
+  document.getElementById('editId').value           = '0';
+  document.getElementById('fDomain').value          = '';
+  document.getElementById('fWhite').value           = '';
+  document.getElementById('fBlack').value           = '';
+  document.getElementById('fBots').checked          = true;
+  document.getElementById('fVpn').checked           = true;
+  document.getElementById('fDatacenter').checked    = true;
+  document.getElementById('fThreshold').value       = '60';
+  document.getElementById('fThresholdVal').textContent = '60';
+  document.getElementById('fCountries').value       = '';
+  document.getElementById('fReferrers').value       = '';
+  document.getElementById('fIpBlacklist').value     = '';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Save domain
+// ══════════════════════════════════════════════════════════════════
+async function saveDomain() {
+  const btn = document.getElementById('saveDomainBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa fa-spinner fa-spin mr-1"></i> Saving…';
+
+  const payload = {
+    action:             'save_domain',
+    id:                 +document.getElementById('editId').value,
+    domain:             document.getElementById('fDomain').value.trim(),
+    white_page_url:     document.getElementById('fWhite').value.trim(),
+    black_page_url:     document.getElementById('fBlack').value.trim(),
+    filter_bots:        document.getElementById('fBots').checked      ? 1 : 0,
+    filter_vpn:         document.getElementById('fVpn').checked       ? 1 : 0,
+    filter_datacenter:  document.getElementById('fDatacenter').checked ? 1 : 0,
+    ipqs_threshold:     +document.getElementById('fThreshold').value,
+    blocked_countries:  document.getElementById('fCountries').value.trim(),
+    allowed_referrers:  document.getElementById('fReferrers').value.trim(),
+    ip_blacklist:       document.getElementById('fIpBlacklist').value.trim(),
+  };
+
+  try {
+    const r = await apiPost(payload);
+    if (!r.success) {
+      alert('Error: ' + r.error);
+    } else {
+      // Show cloak URL in modal before closing
+      const saved = r.data;
+      const url   = buildCloakUrl(saved.domain);
+      document.getElementById('cloakUrlBox').textContent = url;
+      document.getElementById('cloakUrlPreview').style.display = 'block';
+
+      loadDomains();
+      loadStats();
+
+      // Brief success flash then close
+      btn.innerHTML = '<i class="fa fa-check mr-1"></i> Saved!';
+      btn.classList.replace('btn-gradient-primary', 'btn-success');
+      setTimeout(() => {
+        $('#domainModal').modal('hide');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa fa-save mr-1"></i> Save Domain';
+        btn.classList.replace('btn-success', 'btn-gradient-primary');
+      }, 1200);
+      return;
+    }
+  } catch(e) { alert('Error: ' + e.message); }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa fa-save mr-1"></i> Save Domain';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Cloak URL helpers
+// ══════════════════════════════════════════════════════════════════
+function buildCloakUrl(domain) {
+  return `${CDN_BASE}/cloak.php?d=${encodeURIComponent(domain)}`;
+}
+
+function copyCloakUrl() {
+  const url = document.getElementById('cloakUrlBox').textContent;
+  copyToClipboard(url);
+  showToast('Cloak URL copied!');
+}
+
+function showCloakLink(domain) {
+  document.getElementById('cloakLinkBox').textContent = buildCloakUrl(domain);
+  $('#cloakLinkModal').modal('show');
+}
+
+function copyCloakLink() {
+  const url = document.getElementById('cloakLinkBox').textContent;
+  copyToClipboard(url);
+  showToast('Copied!');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Log viewer
+// ══════════════════════════════════════════════════════════════════
+async function loadLogs(page) {
+  if (page < 1 || page > totalLogPages) return;
+  currentLogPage = page;
+
+  const domain = document.getElementById('logDomainFilter').value;
+  const url    = `${API}?action=get_logs&page=${page}${domain ? '&domain=' + encodeURIComponent(domain) : ''}`;
+
+  try {
+    const r = await fetch(url);
+    const j = await r.json();
+    if (!j.success) return showError('logTableBody', 10, j.error);
+
+    const { logs, total, pages } = j.data;
+    totalLogPages = pages || 1;
+
+    const tbody = document.getElementById('logTableBody');
+    const pgDiv = document.getElementById('logPagination');
+
+    if (!logs.length) {
+      tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state"><i class="fa fa-list-alt"></i>No log entries found.</div></td></tr>`;
+      pgDiv.style.display = 'none';
+      return;
+    }
+
+    tbody.innerHTML = logs.map(l => {
+      const isWhite = l.routed_to === 'white';
+      return `<tr class="${isWhite ? 'log-white' : 'log-black'}">
+        <td style="white-space:nowrap;font-size:0.78rem;">${formatDT(l.created_at)}</td>
+        <td style="font-size:0.78rem;">${esc(l.domain)}</td>
+        <td style="font-size:0.78rem;font-family:monospace;">${esc(l.ip)}</td>
+        <td>${l.country ? `<span class="fi fi-${l.country.toLowerCase()}"></span> ${esc(l.country)}` : '—'}</td>
+        <td>
+          ${+l.fraud_score > 0
+            ? `<span style="font-weight:600;color:${+l.fraud_score>=75?'#fc424a':+l.fraud_score>=50?'#f7931a':'#888'};">${l.fraud_score}</span>`
+            : '<span style="color:#ccc;">0</span>'}
+        </td>
+        <td>${+l.is_vpn ? '<span class="badge-bot">VPN</span>' : '—'}</td>
+        <td>${+l.is_bot ? '<span class="badge-bot">Bot</span>' : '—'}</td>
+        <td>${isWhite
+          ? '<span class="badge-white"><i class="fa fa-arrow-right mr-1"></i>White</span>'
+          : '<span class="badge-black"><i class="fa fa-arrow-right mr-1"></i>Black</span>'}</td>
+        <td>${l.reason ? `<span class="reason-pill">${esc(l.reason)}</span>` : '—'}</td>
+        <td style="max-width:200px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:0.72rem;color:#888;"
+            title="${esc(l.user_agent)}">${esc(truncate(l.user_agent,50))}</td>
+      </tr>`;
+    }).join('');
+
+    // Pagination controls
+    const start = (page - 1) * 50 + 1;
+    const end   = Math.min(page * 50, total);
+    document.getElementById('logPaginationInfo').textContent =
+      `Showing ${start}–${end} of ${total.toLocaleString()} entries`;
+    document.getElementById('btnPrevPage').disabled = page <= 1;
+    document.getElementById('btnNextPage').disabled = page >= totalLogPages;
+    pgDiv.style.display = total > 0 ? 'flex' : 'none';
+
+  } catch(e) {
+    showError('logTableBody', 10, 'Failed to load logs: ' + e.message);
+  }
+}
+
+async function clearLogs() {
+  const domain = document.getElementById('logDomainFilter').value;
+  if (!domain) return alert('Please select a specific domain to clear its logs.');
+  if (!confirm(`Clear all logs for "${domain}"? This will also reset its hit counters.`)) return;
+
+  try {
+    const r = await apiPost({ action: 'clear_logs', domain });
+    if (!r.success) return alert('Error: ' + r.error);
+    loadLogs(1);
+    loadDomains();
+    loadStats();
+    showToast('Logs cleared for ' + domain);
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Utilities
+// ══════════════════════════════════════════════════════════════════
+async function apiPost(payload) {
+  const r = await fetch(API, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(payload),
+  });
+  return r.json();
+}
+
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = (+val).toLocaleString();
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function truncate(s, n) {
+  s = String(s || '');
+  return s.length > n ? s.slice(0, n) + '…' : s;
+}
+
+function timeSince(dtStr) {
+  const diff = Math.floor((Date.now() - new Date(dtStr)) / 1000);
+  if (diff <  60) return diff + 's ago';
+  if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+  return Math.floor(diff / 86400) + 'd ago';
+}
+
+function formatDT(dtStr) {
+  if (!dtStr) return '—';
+  const d = new Date(dtStr);
+  return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function showError(tbodyId, cols, msg) {
+  document.getElementById(tbodyId).innerHTML =
+    `<tr><td colspan="${cols}"><div class="empty-state"><i class="fa fa-exclamation-triangle text-danger"></i>${esc(msg)}</div></td></tr>`;
+}
+
+function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = `
+    position:fixed; bottom:20px; right:20px; background:#1bcfb4; color:#fff;
+    padding:10px 20px; border-radius:8px; z-index:9999;
+    font-size:0.9rem; box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    animation: fadeIn 0.2s ease;
+  `;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+</script>
+</body>
+</html>
