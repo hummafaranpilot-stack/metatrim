@@ -6764,154 +6764,97 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
   }
 </script> <div id="wistia-fs" class="col-lg-12 mx-auto" style="width: 100%; max-width: 100%; padding: 0px;">
 						<div id="wistia-fs-inner" class="vida-vh">
-							<div id="vidalytics_embed_KDBYtIqN3XTRJljr-div">
-								<!-- VSL Video Here -->
-								<div id="vidalytics_embed_KDBYtIqN3XTRJljr" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
-								<script type="text/javascript">
-								(function (v, i, d, a, l, y, t, c, s) {
-									y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl+'Script'],vlf=v[c][vl+'Loaded'],ve='Embed';
-									if(!vsl){vsl=function(u,cb){
-										if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
-										if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
-										i.getElementsByTagName("head")[0].appendChild(s);
-									};}
-									vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-								})(window, document, 'Vidalytics', 'vidalytics_embed_KDBYtIqN3XTRJljr', 'https://fast.vidalytics.com/embeds/p2V5HR6s/KDBYtIqN3XTRJljr/');
-								</script>
+							<!-- YouTube Player (replaces Vidalytics) -->
+							<div id="yt-player-wrapper" style="position:relative;padding-top:56.25%;background:#000;">
+
+								<!-- Looping silent intro video overlay -->
+								<div id="yt-thumbnail" style="position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;overflow:hidden;z-index:3;">
+									<video id="intro-video" autoplay loop muted playsinline
+										style="width:100%;height:100%;object-fit:cover;display:block;">
+										<source src="intro.mp4" type="video/mp4">
+									</video>
+									<!-- Blue unmute box (centered, not fullscreen) -->
+									<style>
+										@keyframes borderPulse {
+											0%   { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+											50%  { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 8px 40px rgba(0,0,0,0.55); }
+											100% { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+										}
+									</style>
+									<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+										<div style="background:rgba(20,45,200,0.95);border:4px solid #fff;border-radius:22px;padding:65px 110px;text-align:center;pointer-events:none;animation:borderPulse 2s ease-in-out infinite;">
+											<img src="https://cdn-icons-png.flaticon.com/512/2058/2058599.png" width="120" height="120" style="display:block;margin:0 auto 24px;filter:brightness(0) invert(1);">
+											<div style="color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(24px,3.2vw,38px);font-weight:800;line-height:1.5;letter-spacing:0.01em;">Your Video is Playing<br>Click to Unmute</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Pause overlay -->
+								<div id="yt-pause-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.35);cursor:pointer;z-index:2;">
+									<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+										<svg height="58" viewBox="0 0 68 48" width="82">
+											<path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="rgba(0,0,0,0.55)"/>
+											<path d="M 45,24 27,14 27,34" fill="#fff"/>
+										</svg>
+									</div>
+								</div>
+
+								<div id="yt-playing-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;z-index:2;"></div>
+								<div id="yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
 							</div>
-						
-							<div id="vidalytics_embed_NAX1NGWxyLl13WyF-div" style="display:none">
-								<!-- FAQ Script Here -->
-								<div id="vidalytics_embed_NAX1NGWxyLl13WyF" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
-							</div>
-              
-      <script>
-		var vslVideoCode = 'vidalytics_embed_KDBYtIqN3XTRJljr';
-		var faqVideoCode = 'vidalytics_embed_NAX1NGWxyLl13WyF';
-		var vidalyticsPlayerAPI = null;
-		var faqPlayer = null;
 
-		function initializePlayerAPI() {
-		// console.log('initializePlayerAPI()');
-		var player = getPlayer(vslVideoCode);
-		
-		if (player._player) {
-			vidalyticsPlayerAPI = player;
-			onPlayerAPIAvailableCallback();
-			return;
-		}
+							<script src="https://www.youtube.com/iframe_api"></script>
+							<script>
+								var ytPlayer;
+								var videoContainer = document.querySelector('#wistia-fs');
+								var titleEl       = document.querySelector('.fullscreen-headline');
+								var cbtb          = document.querySelector('.fixed-top');
+								var fsInner       = document.querySelector('#wistia-fs-inner');
 
-		setTimeout(initializePlayerAPI, 100);
-	}
-	initializePlayerAPI();
-	
-	function initializeSecondPlayerAPI() {
-		console.log('initializeSecondPlayerAPI()');
-		var player = getPlayer(faqVideoCode);
-		
-		if (player._player) {
-			vidalyticsPlayerAPI = player;
-			onPlayerAPIAvailableCallback();
-			return;
-		}
+								function onYouTubeIframeAPIReady() {
+									ytPlayer = new YT.Player('yt-player', {
+										videoId: 'iq1FmlEBgms',
+										playerVars: { autoplay:0, controls:0, rel:0, modestbranding:1, iv_load_policy:3, showinfo:0, playsinline:1 },
+										events: { onStateChange: onYTStateChange }
+									});
+								}
 
-		setTimeout(initializeSecondPlayerAPI, 100);
-	}
+								document.getElementById('yt-thumbnail').addEventListener('click', function () {
+									var iv = document.getElementById('intro-video');
+									if (iv) { iv.pause(); iv.src = ''; }
+									this.style.display = 'none';
+									document.getElementById('yt-playing-overlay').style.display = 'block';
+									ytPlayer.playVideo();
+								});
 
-	function getPlayer(embedCode) {
-		// console.log('getPlayer()');
-		var embeds = (_vidalytics || {}).embeds || {};
-		if (embeds[embedCode]) {
-			return embeds[embedCode].player || {};
-		}
-		return {};
-	}
-	
-	var videoContainer = document.querySelector('#wistia-fs');
-	var title = document.querySelector('.fullscreen-headline');
-	var cbtb = document.querySelector('.fixed-top');
-	//var mainBox = document.querySelector('.main-wrapper');
+								document.getElementById('yt-playing-overlay').addEventListener('click', function () {
+									ytPlayer.pauseVideo();
+								});
 
-	function onPlayerAPIAvailableCallback() {
-		console.log("onPlayerAPIAvailableCallback()");
-        document.querySelector('#wistia-fs-inner').classList.add('vida-vh');
+								document.getElementById('yt-pause-overlay').addEventListener('click', function () {
+									this.style.display = 'none';
+									document.getElementById('yt-playing-overlay').style.display = 'block';
+									ytPlayer.playVideo();
+								});
 
-		// do something related to current video playback time
-		vidalyticsPlayerAPI._player.addEventHandler('onPaused', function () {
-			console.log('onPaused event');
-			videoContainer.style.cssText = 'width: 100%; max-width: 900px;padding: 0;margin-left: auto;margin-right: auto;';
-			//vidalyticsPlayerAPI.seekTo(2690);
-			title.style.cssText = 'display: block;';
-			
-      document.querySelector('#wistia-fs-inner').classList.remove('vida-vh');
-      cbtb.style.cssText = 'display: block;';
-			//mainBox.style.cssText = 'margin-top: 0px;';
-			
-
-			// document.querySelector('video').style.cssText = 'max-height:405px;';
-		});
-
-		vidalyticsPlayerAPI._player.addEventHandler('onPlay', function () {
-			console.log('onPlay event');
-			videoContainer.style.cssText = 'width: 100%; max-width: 100%; padding: 0;';
-			document.querySelector('video').style.cssText = 'max-height:none;';
-			title.style.cssText = 'display: none;';
-
-      document.querySelector('#wistia-fs-inner').classList.add('vida-vh');
-      cbtb.style.cssText = 'display: none;';
-      //mainBox.style.cssText = 'margin-top: -48px;';
-			
-
-			/*   if (window.innerWidth < 768) {
-					mainBox.style.cssText = 'margin-top: 0px;';
-				};
-				 if (window.innerWidth > 769) {
-					mainBox.style.cssText = 'margin-top: -48px;';
-				}
-			 */
-
-		});
-		vidalyticsPlayerAPI._player.addEventHandler('onPlaybackFinished', function () {
-			document.getElementById(vslVideoCode + '-div').style.display = "none";
-			document.getElementById(faqVideoCode + '-div').style.display = "block";
-		  
-			  // load js for faq vsl
-			  (function (v, i, d, a, l, y, t, c, s) {
-			  y = '_' + d.toLowerCase(); c = d + 'L'; if (!v[d]) { v[d] = {}; } if (!v[c]) { v[c] = {}; } if (!v[y]) { v[y] = {}; } var vl = 'Loader', vli = v[y][vl], vsl = v[c][vl + 'Script'], vlf = v[c][vl + 'Loaded'], ve = 'Embed';
-			  if (!vsl) {
-				vsl = function (u, cb) {
-				  if (t) { cb(); return; } s = i.createElement("script"); s.type = "text/javascript"; s.async = 1; s.src = u;
-				  if (s.readyState) { s.onreadystatechange = function () { if (s.readyState === "loaded" || s.readyState == "complete") { s.onreadystatechange = null; vlf = 1; cb(); } }; } else { s.onload = function () { vlf = 1; cb(); }; }
-				  i.getElementsByTagName("head")[0].appendChild(s);
-				};
-			  }
-			  vsl(l + 'loader.min.js', function () { if (!vli) { var vlc = v[c][vl]; vli = new vlc(); } vli.loadScript(l + 'player.min.js', function () { var vec = v[d][ve]; t = new vec(); t.run(a); }); });
-			})(window, document, 'Vidalytics', 'vidalytics_embed_NAX1NGWxyLl13WyF', 'https://fast.vidalytics.com/embeds/hLKq71Yz/NAX1NGWxyLl13WyF/');
-			  
-			//faqPlayer = getPlayer(faqVideoCode);
-			//if (faqPlayer._player) {
-			//	console.log("faqPlayer");
-			//	faqPlayer.play();
-			//}
-			
-			initializeSecondPlayerAPI();
-		});
-		vidalyticsPlayerAPI._player.addEventHandler('onTimeChanged', function () {
-			if (vidalyticsPlayerAPI.getCurrentVideoTime() > 5) {
-				// do something after 5s of playback
-			}
-		});
-		//do something when viewer enters or exits fullscreen mode "onFullscreenEnter" and "onFullscreenExit"
-		vidalyticsPlayerAPI._player.addEventHandler('onFullscreenEnter', function () {
-			// console.log('onFullscreenEnter event');
-		});
-
-		// the other available methods are:
-		// vidalyticsPlayerAPI.play()
-		// vidalyticsPlayerAPI.pause()
-		// vidalyticsPlayerAPI.seekTo(timeInSeconds) ie. seekTo(205) would jump to the 3:25 (180s=3m + 25s)
-	}
-</script>
+								function onYTStateChange(event) {
+									if (event.data === YT.PlayerState.PLAYING) {
+										document.getElementById('yt-pause-overlay').style.display = 'none';
+										document.getElementById('yt-playing-overlay').style.display = 'block';
+										if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
+										if (titleEl) titleEl.style.cssText = 'display:none;';
+										if (fsInner) fsInner.classList.add('vida-vh');
+										if (cbtb) cbtb.style.cssText = 'display:none;';
+									} else if (event.data === YT.PlayerState.PAUSED) {
+										document.getElementById('yt-pause-overlay').style.display = 'block';
+										document.getElementById('yt-playing-overlay').style.display = 'none';
+										if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:900px;padding:0;margin-left:auto;margin-right:auto;';
+										if (titleEl) titleEl.style.cssText = 'display:block;';
+										if (fsInner) fsInner.classList.remove('vida-vh');
+										if (cbtb) cbtb.style.cssText = 'display:block;';
+									}
+								}
+							</script>
 						
 			<script>
 				$(document).ready(function(){

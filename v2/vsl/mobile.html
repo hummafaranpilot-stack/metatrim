@@ -6819,19 +6819,25 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 							<!-- YouTube Player (replaces Vidalytics) -->
 							<div id="yt-player-wrapper" style="position:relative;padding-top:56.25%;background:#000;">
 
-								<!-- Thumbnail + Click to Watch overlay -->
+								<!-- Looping silent intro video overlay -->
 								<div id="yt-thumbnail" style="position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;overflow:hidden;z-index:3;">
-									<img src="https://img.youtube.com/vi/iq1FmlEBgms/maxresdefault.jpg"
-										onerror="this.src='https://img.youtube.com/vi/iq1FmlEBgms/hqdefault.jpg'"
+									<video id="intro-video" autoplay loop muted playsinline
 										style="width:100%;height:100%;object-fit:cover;display:block;">
-									<div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.25);"></div>
-									<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;">
-										<div style="font-family:'Caveat',cursive;color:#fff;font-size:clamp(16px,4vw,26px);margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,0.8);font-weight:700;">Click to Watch</div>
-										<div style="font-family:'Caveat',cursive;color:#fff;font-size:24px;line-height:1;margin-bottom:6px;text-shadow:0 2px 6px rgba(0,0,0,0.7);">&#8595;</div>
-										<svg height="52" viewBox="0 0 68 48" width="74">
-											<path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/>
-											<path d="M 45,24 27,14 27,34" fill="#fff"/>
-										</svg>
+										<source src="intro.mp4" type="video/mp4">
+									</video>
+									<!-- Blue unmute box (centered, not fullscreen) -->
+									<style>
+										@keyframes borderPulse {
+											0%   { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+											50%  { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 8px 40px rgba(0,0,0,0.55); }
+											100% { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+										}
+									</style>
+									<div style="position:absolute;top:20%;left:20%;width:60%;height:60%;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+										<div style="background:rgba(20,45,200,0.95);border:3px solid #fff;border-radius:16px;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;animation:borderPulse 2s ease-in-out infinite;">
+											<img src="https://cdn-icons-png.flaticon.com/512/2058/2058599.png" style="width:30%;max-width:80px;height:auto;display:block;margin:0 auto 10px;filter:brightness(0) invert(1);">
+											<div style="color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(13px,4vw,20px);font-weight:800;line-height:1.4;">Your Video is Playing<br>Click to Unmute</div>
+										</div>
 									</div>
 								</div>
 
@@ -6852,7 +6858,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								<div id="yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
 							</div>
 
-							<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+
 							<script src="https://www.youtube.com/iframe_api"></script>
 							<script>
 								var ytPlayer;
@@ -6878,6 +6884,8 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								}
 
 								document.getElementById('yt-thumbnail').addEventListener('click', function () {
+									var iv = document.getElementById('intro-video');
+									if (iv) { iv.pause(); iv.src = ''; }
 									this.style.display = 'none';
 									document.getElementById('yt-playing-overlay').style.display = 'block';
 									ytPlayer.playVideo();
