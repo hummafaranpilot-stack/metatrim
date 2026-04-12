@@ -6603,26 +6603,33 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 </script> <div id="wistia-fs" class="col-lg-12 mx-auto" style="width: 100%; max-width: 100%; padding: 0px;">
 						<div id="wistia-fs-inner" class="vida-vh">
 							<!-- YouTube Player (replaces Vidalytics) -->
-							<div id="yt-player-wrapper" style="position:relative;padding-top:56.25%;background:#000;">
+							<style>
+								@keyframes borderPulse {
+									0%   { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+									50%  { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 8px 40px rgba(0,0,0,0.55); }
+									100% { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+								}
+								#yt-player-wrapper { position:relative; padding-top:56.25%; background:#000; }
+								#yt-player-wrapper:fullscreen,
+								#yt-player-wrapper:-webkit-full-screen { padding-top:0 !important; height:100vh !important; }
+								/* Custom controls: hidden by default, visible on hover */
+								#yt-controls { opacity:0; transition:opacity 0.3s; }
+								#yt-player-wrapper:hover #yt-controls { opacity:1; }
+								#yt-cover-top, #yt-cover-br { transition:opacity 0.6s ease; }
+								#yt-vol-range { -webkit-appearance:none; height:4px; border-radius:2px; background:#fff; outline:none; cursor:pointer; }
+								#yt-vol-range::-webkit-slider-thumb { -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:#fff; cursor:pointer; }
+							</style>
+							<div id="yt-player-wrapper">
 
 								<!-- Looping silent intro video overlay -->
 								<div id="yt-thumbnail" style="position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;overflow:hidden;z-index:3;">
-									<video id="intro-video" autoplay loop muted playsinline
-										style="width:100%;height:100%;object-fit:cover;display:block;">
+									<video id="intro-video" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
 										<source src="intro.mp4" type="video/mp4">
 									</video>
-									<!-- Blue unmute box (centered, not fullscreen) -->
-									<style>
-										@keyframes borderPulse {
-											0%   { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
-											50%  { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 8px 40px rgba(0,0,0,0.55); }
-											100% { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
-										}
-									</style>
 									<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;pointer-events:none;">
 										<div style="background:rgba(20,45,200,0.95);border:4px solid #fff;border-radius:22px;padding:65px 110px;text-align:center;pointer-events:none;animation:borderPulse 2s ease-in-out infinite;">
 											<img src="https://cdn-icons-png.flaticon.com/512/2058/2058599.png" width="120" height="120" style="display:block;margin:0 auto 24px;filter:brightness(0) invert(1);">
-											<div style="color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(24px,3.2vw,38px);font-weight:800;line-height:1.5;letter-spacing:0.01em;">Your Video is Playing<br>Click to Unmute</div>
+											<div style="color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(24px,3.2vw,38px);font-weight:800;line-height:1.5;">Your Video is Playing<br>Click to Unmute</div>
 										</div>
 									</div>
 								</div>
@@ -6637,53 +6644,78 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									</div>
 								</div>
 
-								<!-- Click-to-pause transparent overlay while playing -->
+								<!-- Click-to-pause overlay (covers video, below controls) -->
 								<div id="yt-playing-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;z-index:2;"></div>
 
-								<!-- YouTube player div -->
+								<!-- YouTube iframe -->
 								<div id="yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
-							</div>
 
+								<!-- Cover strips: hides YouTube channel info / title / DP / logo -->
+								<div id="yt-cover-top" style="display:none;position:absolute;top:0;left:0;width:62%;height:50px;background:#000;z-index:5;pointer-events:none;"></div>
+								<div id="yt-cover-br"  style="display:none;position:absolute;bottom:0;right:0;width:130px;height:38px;background:#000;z-index:5;pointer-events:none;"></div>
+
+								<!-- Custom controls bar (volume + fullscreen) -->
+								<div id="yt-controls" style="display:none;position:absolute;bottom:0;left:0;width:100%;z-index:6;padding:20px 16px 10px;box-sizing:border-box;background:linear-gradient(transparent,rgba(0,0,0,0.7));align-items:center;justify-content:flex-end;gap:10px;">
+									<!-- Mute/Volume button -->
+									<button id="yt-mute-btn" onclick="ytToggleMute()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;z-index:7;">
+										<svg id="yt-vol-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#fff">
+											<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+										</svg>
+									</button>
+									<!-- Volume slider -->
+									<input id="yt-vol-range" type="range" min="0" max="100" value="100" style="width:75px;" oninput="ytSetVolume(this.value)">
+									<!-- Fullscreen button -->
+									<button onclick="ytToggleFullscreen()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;z-index:7;">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#fff">
+											<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+										</svg>
+									</button>
+								</div>
+							</div>
 
 							<script src="https://www.youtube.com/iframe_api"></script>
 							<script>
-								var ytPlayer;
+								var ytPlayer, ytVolume = 100;
 								var videoContainer = document.querySelector('#wistia-fs');
-								var titleEl       = document.querySelector('.fullscreen-headline');
-								var cbtb          = document.querySelector('.fixed-top');
-								var fsInner       = document.querySelector('#wistia-fs-inner');
+								var titleEl = document.querySelector('.fullscreen-headline');
+								var cbtb    = document.querySelector('.fixed-top');
+								var fsInner = document.querySelector('#wistia-fs-inner');
 
 								function onYouTubeIframeAPIReady() {
 									ytPlayer = new YT.Player('yt-player', {
 										videoId: 'iq1FmlEBgms',
-										playerVars: {
-											autoplay: 0,
-											controls: 0,
-											rel: 0,
-											modestbranding: 1,
-											iv_load_policy: 3,
-											showinfo: 0,
-											playsinline: 1
-										},
+										playerVars: { autoplay:0, controls:0, rel:0, modestbranding:1, iv_load_policy:3, showinfo:0, playsinline:1, disablekb:1 },
 										events: { onStateChange: onYTStateChange }
 									});
 								}
 
-								// Intro video click → stop intro, play YouTube
 								document.getElementById('yt-thumbnail').addEventListener('click', function () {
 									var iv = document.getElementById('intro-video');
 									if (iv) { iv.pause(); iv.src = ''; }
 									this.style.display = 'none';
 									document.getElementById('yt-playing-overlay').style.display = 'block';
+									document.getElementById('yt-controls').style.display = 'flex';
+									var ct = document.getElementById('yt-cover-top');
+									var cbr = document.getElementById('yt-cover-br');
+									ct.style.opacity = '1';
+									cbr.style.opacity = '1';
+									ct.style.display = 'block';
+									cbr.style.display = 'block';
+									setTimeout(function() {
+										ct.style.opacity = '0';
+										cbr.style.opacity = '0';
+										setTimeout(function() {
+											ct.style.display = 'none';
+											cbr.style.display = 'none';
+										}, 650);
+									}, 3000);
 									ytPlayer.playVideo();
 								});
 
-								// Playing overlay click → pause
 								document.getElementById('yt-playing-overlay').addEventListener('click', function () {
 									ytPlayer.pauseVideo();
 								});
 
-								// Pause overlay click → resume
 								document.getElementById('yt-pause-overlay').addEventListener('click', function () {
 									this.style.display = 'none';
 									document.getElementById('yt-playing-overlay').style.display = 'block';
@@ -6694,17 +6726,45 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									if (event.data === YT.PlayerState.PLAYING) {
 										document.getElementById('yt-pause-overlay').style.display = 'none';
 										document.getElementById('yt-playing-overlay').style.display = 'block';
-										videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
+										if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
 										if (titleEl) titleEl.style.cssText = 'display:none;';
 										if (fsInner) fsInner.classList.add('vida-vh');
 										if (cbtb) cbtb.style.cssText = 'display:none;';
 									} else if (event.data === YT.PlayerState.PAUSED) {
 										document.getElementById('yt-pause-overlay').style.display = 'block';
 										document.getElementById('yt-playing-overlay').style.display = 'none';
-										videoContainer.style.cssText = 'width:100%;max-width:900px;padding:0;margin-left:auto;margin-right:auto;';
+										if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:900px;padding:0;margin-left:auto;margin-right:auto;';
 										if (titleEl) titleEl.style.cssText = 'display:block;';
 										if (fsInner) fsInner.classList.remove('vida-vh');
 										if (cbtb) cbtb.style.cssText = 'display:block;';
+									}
+								}
+
+								function ytToggleMute() {
+									if (ytPlayer.isMuted()) {
+										ytPlayer.unMute(); ytPlayer.setVolume(ytVolume);
+										document.getElementById('yt-vol-range').value = ytVolume;
+										document.getElementById('yt-vol-icon').innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+									} else {
+										ytPlayer.mute();
+										document.getElementById('yt-vol-range').value = 0;
+										document.getElementById('yt-vol-icon').innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+									}
+								}
+
+								function ytSetVolume(val) {
+									ytVolume = parseInt(val);
+									ytPlayer.setVolume(ytVolume);
+									if (ytVolume === 0) { ytPlayer.mute(); document.getElementById('yt-vol-icon').innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>'; }
+									else { ytPlayer.unMute(); document.getElementById('yt-vol-icon').innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>'; }
+								}
+
+								function ytToggleFullscreen() {
+									var w = document.getElementById('yt-player-wrapper');
+									if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+										(w.requestFullscreen || w.webkitRequestFullscreen).call(w);
+									} else {
+										(document.exitFullscreen || document.webkitExitFullscreen).call(document);
 									}
 								}
 							</script>
