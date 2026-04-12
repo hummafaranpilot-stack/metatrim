@@ -6776,7 +6776,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								#yt-player-wrapper:-webkit-full-screen { padding-top:0 !important; height:100vh !important; }
 								#yt-controls { opacity:0; transition:opacity 0.3s; }
 								#yt-player-wrapper:hover #yt-controls { opacity:1; }
-								#yt-cover-top, #yt-cover-br { transition:opacity 0.6s ease; }
 								#yt-vol-range { -webkit-appearance:none; height:4px; border-radius:2px; background:#fff; outline:none; cursor:pointer; }
 								#yt-vol-range::-webkit-slider-thumb { -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:#fff; cursor:pointer; }
 							</style>
@@ -6808,9 +6807,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 
 								<div id="yt-playing-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;z-index:2;"></div>
 								<div id="yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
-								<!-- Cover strips: hides YouTube channel info / title / DP / logo -->
-								<div id="yt-cover-top" style="display:none;position:absolute;top:0;left:0;width:62%;height:50px;background:#000;z-index:5;pointer-events:none;"></div>
-								<div id="yt-cover-br"  style="display:none;position:absolute;bottom:0;right:0;width:130px;height:38px;background:#000;z-index:5;pointer-events:none;"></div>
 								<!-- Custom controls bar (volume + fullscreen) -->
 								<div id="yt-controls" style="display:none;position:absolute;bottom:0;left:0;width:100%;z-index:6;padding:20px 16px 10px;box-sizing:border-box;background:linear-gradient(transparent,rgba(0,0,0,0.7));align-items:center;justify-content:flex-end;gap:10px;">
 									<button id="yt-mute-btn" onclick="ytToggleMute()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;z-index:7;">
@@ -6849,20 +6845,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									this.style.display = 'none';
 									document.getElementById('yt-playing-overlay').style.display = 'block';
 									document.getElementById('yt-controls').style.display = 'flex';
-									var ct = document.getElementById('yt-cover-top');
-									var cbr = document.getElementById('yt-cover-br');
-									ct.style.opacity = '1';
-									cbr.style.opacity = '1';
-									ct.style.display = 'block';
-									cbr.style.display = 'block';
-									setTimeout(function() {
-										ct.style.opacity = '0';
-										cbr.style.opacity = '0';
-										setTimeout(function() {
-											ct.style.display = 'none';
-											cbr.style.display = 'none';
-										}, 650);
-									}, 3000);
 									ytPlayer.playVideo();
 								});
 
