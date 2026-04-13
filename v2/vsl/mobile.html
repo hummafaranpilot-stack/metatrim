@@ -6882,7 +6882,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 
 							<script src="https://www.youtube.com/iframe_api"></script>
 							<script>
-								var ytPlayer, ytVolume = 100;
+								var ytPlayer, ytVolume = 100, ytClickPending = false;
 								var videoContainer = document.querySelector('#wistia-fs');
 								var titleEl = document.querySelector('.fullscreen-headline');
 								var cbtb    = document.querySelector('.fixed-top');
@@ -6892,7 +6892,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									ytPlayer = new YT.Player('yt-player', {
 										videoId: 'iq1FmlEBgms',
 										playerVars: { autoplay:0, controls:0, rel:0, modestbranding:1, iv_load_policy:3, showinfo:0, playsinline:1, disablekb:1 },
-										events: { onStateChange: onYTStateChange }
+										events: { onReady: function(e){ if(ytClickPending){ ytClickPending=false; e.target.playVideo(); } }, onStateChange: onYTStateChange }
 									});
 								}
 
@@ -6902,7 +6902,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									this.style.display = 'none';
 									document.getElementById('yt-playing-overlay').style.display = 'block';
 									document.getElementById('yt-controls').style.display = 'flex';
-									ytPlayer.playVideo();
+									if (ytPlayer && typeof ytPlayer.playVideo === 'function') { ytPlayer.playVideo(); } else { ytClickPending = true; }
 								});
 
 								document.getElementById('yt-playing-overlay').addEventListener('click', function () {
