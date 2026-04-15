@@ -6702,13 +6702,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									var ctrlsEl = document.getElementById('yt-controls');
 									wrapper.insertBefore(preloadIframe, ctrlsEl);
 								
-									preloadIframe.addEventListener('load', function(){
-										cfPlayer = Stream(preloadIframe);
-										cfPlayer.volume = ytVolume / 100;
-										cfPlayer.addEventListener('play',  onCFPlay);
-										cfPlayer.addEventListener('pause', onCFPause);
-										if(cfPlayPending){ cfPlayPending = false; cfPlayer.play(); }
-									});
 								
 									// Thumbnail click: reveal player + autoplay
 									document.getElementById('yt-thumbnail').addEventListener('click', function(){
@@ -6716,11 +6709,25 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										if(iv){ iv.pause(); iv.src=''; }
 										this.style.display = 'none';
 										document.getElementById('cf-skeleton').style.display = 'none';
-										preloadIframe.style.visibility   = 'visible';
-										preloadIframe.style.pointerEvents = 'auto';
 										document.getElementById('yt-playing-overlay').style.display = 'block';
 										document.getElementById('yt-controls').style.display = 'flex';
-										if(cfPlayer){ cfPlayer.play(); } else { cfPlayPending = true; }
+										// Remove warm iframe; insert fresh iframe with ?autoplay=true in the URL.
+										// Browsers allow autoplay when src is set via user-click; cross-frame play() calls
+										// are blocked by autoplay policy.
+										if(preloadIframe){ preloadIframe.remove(); preloadIframe = null; }
+										var pf = document.createElement('iframe');
+										pf.id  = 'cf-player';
+										pf.src = 'https://iframe.videodelivery.net/' + CF_ID + '?autoplay=true&controls=false&preload=auto';
+										pf.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+										pf.setAttribute('allowfullscreen','');
+										pf.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+										wrapper.insertBefore(pf, ctrlsEl);
+										pf.addEventListener('load', function(){
+											cfPlayer = Stream(pf);
+											cfPlayer.volume = ytVolume / 100;
+											cfPlayer.addEventListener('play',  onCFPlay);
+											cfPlayer.addEventListener('pause', onCFPause);
+										});
 									});
 								
 									document.getElementById('yt-playing-overlay').addEventListener('click', function(){
