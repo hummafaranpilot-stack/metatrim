@@ -6838,8 +6838,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									cfPlayer.addEventListener('pause', onCFPause);
 									if (cfPlayPending) { cfPlayPending = false; cfPlayer.play(); }
 								}
-									});
-								}
 
 								document.getElementById('yt-thumbnail').addEventListener('click', function () {
 									var iv = document.getElementById('intro-video');
@@ -6875,14 +6873,6 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									if (titleEl) titleEl.style.cssText = 'display:block;';
 									if (fsInner) fsInner.classList.remove('vida-vh');
 									if (cbtb) cbtb.style.cssText = 'display:block;';
-								} else if (event.data === YT.PlayerState.PAUSED) {
-										document.getElementById('yt-pause-overlay').style.display = 'block';
-										document.getElementById('yt-playing-overlay').style.display = 'none';
-										if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:900px;padding:0;margin-left:auto;margin-right:auto;';
-										if (titleEl) titleEl.style.cssText = 'display:block;';
-										if (fsInner) fsInner.classList.remove('vida-vh');
-										if (cbtb) cbtb.style.cssText = 'display:block;';
-									}
 								}
 
 								function ytToggleMute() {
