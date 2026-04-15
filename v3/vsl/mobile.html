@@ -7178,15 +7178,17 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										if(!menu) return;
 										menu.innerHTML = '';
 										qs.forEach(function(q){
+											var label = typeof q === 'string' ? q : (q.name || q.label || q.value || q.id || String(q));
+											var value = typeof q === 'string' ? q : (q.name || q.value || q.id || label);
 											var item = document.createElement('div');
-											item.textContent = (q === 'auto' || q === 'Auto') ? 'Auto' : q;
+											item.textContent = /^auto$/i.test(label) ? 'Auto' : label;
 											item.style.cssText = 'padding:8px 16px;color:#fff;font-family:Arial,sans-serif;font-size:13px;cursor:pointer;white-space:nowrap;';
 											item.addEventListener('mouseenter',function(){ this.style.background='rgba(255,255,255,0.12)'; });
 											item.addEventListener('mouseleave',function(){ this.style.background=''; });
 											(function(qual){ item.addEventListener('click',function(){
 												try{ cfPlayer.quality = qual; }catch(e){}
 												document.getElementById('yt-quality-menu').style.display='none';
-											}); })(q);
+											}); })(value);
 											menu.appendChild(item);
 										});
 									}
@@ -7194,13 +7196,14 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										var menu = document.getElementById('yt-quality-menu');
 										if(!menu) return;
 										if(menu.style.display === 'block'){ menu.style.display='none'; return; }
-										if(!cfPlayer){ return; }
-										// Refresh from SDK every time
-										try{
-											var qs = cfPlayer.qualities;
-											if(qs && qs.length){ buildQualityMenu(qs); }
-										}catch(e){}
-										menu.style.display = menu.innerHTML ? 'block' : 'none';
+										var qs = null;
+										try{ if(cfPlayer) qs = cfPlayer.qualities || cfPlayer.videoQualities; }catch(e){}
+										if(qs && qs.length){
+											buildQualityMenu(qs);
+										} else {
+											menu.innerHTML = '<div style="padding:10px 16px;color:#aaa;font-family:Arial,sans-serif;font-size:12px;white-space:nowrap;">Quality unavailable</div>';
+										}
+										menu.style.display = 'block';
 									};
 									// Close quality menu when clicking outside
 									document.addEventListener('click', function(e){
