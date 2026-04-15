@@ -6675,7 +6675,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								<script>
 								(function(){
 									var CF_ID = '3347c5f9ca9120b1adfb0f79cf32fd4c';
-									var cfPlayer = null, ytVolume = 100;
+									var cfPlayer = null, ytVolume = 100, activePf = null;
 									var videoContainer = document.querySelector('#wistia-fs');
 									var titleEl        = document.querySelector('.fullscreen-headline');
 									var cbtb           = document.querySelector('.fixed-top');
@@ -6735,34 +6735,39 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										pf.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;';
 										wrapper.insertBefore(pf, ctrlsEl);
 								
-										pf.addEventListener('load', function(){
+										activePf = pf;
+										// Poll until CF Stream SDK is loaded, then init player
+										(function initSDK(n){
+											if(n > 20) return;
+											if(typeof Stream === 'undefined'){ setTimeout(function(){ initSDK(n+1); }, 250); return; }
 											try {
 												cfPlayer = Stream(pf);
 												cfPlayer.volume = ytVolume / 100;
-												// Early exit: SDK timeupdate fires before 2 s timer
 												cfPlayer.addEventListener('timeupdate', function(){ hideLoader(); });
 												cfPlayer.addEventListener('pause', function(){
-												document.getElementById('yt-pause-overlay').style.display   = 'block';
-												document.getElementById('yt-playing-overlay').style.display = 'none';
+													document.getElementById('yt-pause-overlay').style.display   = 'block';
+													document.getElementById('yt-playing-overlay').style.display = 'none';
 												});
 												cfPlayer.addEventListener('play', function(){
-												document.getElementById('yt-pause-overlay').style.display   = 'none';
-												document.getElementById('yt-playing-overlay').style.display = 'block';
+													document.getElementById('yt-pause-overlay').style.display   = 'none';
+													document.getElementById('yt-playing-overlay').style.display = 'block';
 												});
 												setTimeout(function(){
-												try{ var qs = cfPlayer.qualities; if(qs && qs.length) buildQualityMenu(qs); }catch(e){}
-												}, 2000);
-											} catch(e) {}
-										});
+													try{ var qs = cfPlayer.qualities; if(qs && qs.length) buildQualityMenu(qs); }catch(e){}
+												}, 3000);
+											} catch(e){}
+										})(0);
 									});
 								
 									document.getElementById('yt-playing-overlay').addEventListener('click', function(){
 										if(cfPlayer) cfPlayer.pause();
+										else if(activePf) activePf.contentWindow.postMessage(JSON.stringify({event:'pause'}), '*');
 									});
 									document.getElementById('yt-pause-overlay').addEventListener('click', function(){
 										this.style.display = 'none';
 										document.getElementById('yt-playing-overlay').style.display = 'block';
 										if(cfPlayer) cfPlayer.play();
+										else if(activePf) activePf.contentWindow.postMessage(JSON.stringify({event:'play'}), '*');
 									});
 								
 									window.ytToggleMute = function(){
