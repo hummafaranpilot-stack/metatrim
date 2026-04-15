@@ -6875,6 +6875,20 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										document.getElementById('cf-skeleton').style.display = 'none';
 										document.getElementById('cf-loader').style.display = 'block';
 								
+										// hideLoader declared here — fires 2 s after click regardless of SDK/iframe events
+										var loaderHidden = false;
+										function hideLoader(){
+											if(loaderHidden) return;
+											loaderHidden = true;
+											document.getElementById('cf-loader').style.display = 'none';
+											document.getElementById('yt-playing-overlay').style.display = 'block';
+											if(videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
+											if(titleEl)        titleEl.style.cssText        = 'display:none;';
+											if(fsInner)        fsInner.classList.add('vida-vh');
+											if(cbtb)           cbtb.style.cssText           = 'display:none;';
+										}
+										setTimeout(hideLoader, 2000);
+								
 										if(preloadIframe){ preloadIframe.remove(); preloadIframe = null; }
 										var pf = document.createElement('iframe');
 										pf.src = 'https://iframe.cloudflarestream.com/' + CF_ID + '?autoplay=true&controls=false&preload=auto';
@@ -6884,38 +6898,23 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										wrapper.insertBefore(pf, ctrlsEl);
 								
 										pf.addEventListener('load', function(){
-											cfPlayer = Stream(pf);
-											cfPlayer.volume = ytVolume / 100;
-											var loaderHidden = false;
-											function hideLoader(){
-												if(loaderHidden) return;
-												loaderHidden = true;
-												document.getElementById('cf-loader').style.display = 'none';
-												document.getElementById('yt-playing-overlay').style.display = 'block';
-												if(videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
-												if(titleEl)        titleEl.style.cssText        = 'display:none;';
-												if(fsInner)        fsInner.classList.add('vida-vh');
-												if(cbtb)           cbtb.style.cssText           = 'display:none;';
-											}
-											// Primary: video plays immediately on ?autoplay=true — hide after 1.5 s
-											setTimeout(hideLoader, 1500);
-											// Early exit: timeupdate fires when first frame renders
-											cfPlayer.addEventListener('timeupdate', function(){ hideLoader(); });
-											cfPlayer.addEventListener('pause', function(){
+											try {
+												cfPlayer = Stream(pf);
+												cfPlayer.volume = ytVolume / 100;
+												// Early exit: SDK timeupdate fires before 2 s timer
+												cfPlayer.addEventListener('timeupdate', function(){ hideLoader(); });
+												cfPlayer.addEventListener('pause', function(){
 												document.getElementById('yt-pause-overlay').style.display   = 'block';
 												document.getElementById('yt-playing-overlay').style.display = 'none';
-											});
-											cfPlayer.addEventListener('play', function(){
+												});
+												cfPlayer.addEventListener('play', function(){
 												document.getElementById('yt-pause-overlay').style.display   = 'none';
 												document.getElementById('yt-playing-overlay').style.display = 'block';
-											});
-											// Populate quality selector after player is initialised
-											setTimeout(function(){
-												try{
-													var qs = cfPlayer.qualities;
-													if(qs && qs.length) buildQualityMenu(qs);
-												}catch(e){}
-											}, 2000);
+												});
+												setTimeout(function(){
+												try{ var qs = cfPlayer.qualities; if(qs && qs.length) buildQualityMenu(qs); }catch(e){}
+												}, 2000);
+											} catch(e) {}
 										});
 									});
 								
