@@ -6862,7 +6862,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								<div id="yt-playing-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;z-index:2;"></div>
 
 								<!-- YouTube player div -->
-								<div id="yt-player" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
+								<iframe id="cf-player" src="https://iframe.cloudflarestream.com/3347c5f9ca9120b1adfb0f79cf32fd4c?controls=false&preload=true&loop=false" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen></iframe>
 								<!-- Custom controls bar (volume + fullscreen) -->
 								<div id="yt-controls" style="display:none;position:absolute;bottom:0;left:0;width:100%;z-index:6;padding:16px 12px 8px;box-sizing:border-box;background:linear-gradient(transparent,rgba(0,0,0,0.7));align-items:center;justify-content:flex-end;gap:8px;">
 									<button id="yt-mute-btn" onclick="ytToggleMute()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;z-index:7;">
@@ -6880,19 +6880,21 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 							</div>
 
 
-							<script src="https://www.youtube.com/iframe_api"></script>
+							<script src="https://embed.cloudflarestream.com/embed/sdk.latest.min.js"></script>
 							<script>
-								var ytPlayer, ytVolume = 100, ytClickPending = false;
+								var cfPlayer, ytVolume = 100, cfPlayPending = false;
 								var videoContainer = document.querySelector('#wistia-fs');
 								var titleEl = document.querySelector('.fullscreen-headline');
 								var cbtb    = document.querySelector('.fixed-top');
 								var fsInner = document.querySelector('#wistia-fs-inner');
 
-								function onYouTubeIframeAPIReady() {
-									ytPlayer = new YT.Player('yt-player', {
-										videoId: 'dm2i4TSTAY0',
-										playerVars: { autoplay:0, controls:0, rel:0, modestbranding:1, iv_load_policy:3, showinfo:0, playsinline:1, disablekb:1 },
-										events: { onReady: function(e){ if(ytClickPending){ ytClickPending=false; e.target.playVideo(); } }, onStateChange: onYTStateChange }
+								function initCFPlayer() {
+									cfPlayer = Stream(document.getElementById('cf-player'));
+									cfPlayer.volume = ytVolume / 100;
+									cfPlayer.addEventListener('play',  onCFPlay);
+									cfPlayer.addEventListener('pause', onCFPause);
+									if (cfPlayPending) { cfPlayPending = false; cfPlayer.play(); }
+								}
 									});
 								}
 
@@ -6902,28 +6904,35 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									this.style.display = 'none';
 									document.getElementById('yt-playing-overlay').style.display = 'block';
 									document.getElementById('yt-controls').style.display = 'flex';
-									if (ytPlayer && typeof ytPlayer.playVideo === 'function') { ytPlayer.playVideo(); } else { ytClickPending = true; }
+									if (cfPlayer) { cfPlayer.play(); } else { cfPlayPending = true; }
 								});
 
 								document.getElementById('yt-playing-overlay').addEventListener('click', function () {
-									ytPlayer.pauseVideo();
+									if (cfPlayer) cfPlayer.pause();
 								});
 
 								document.getElementById('yt-pause-overlay').addEventListener('click', function () {
 									this.style.display = 'none';
 									document.getElementById('yt-playing-overlay').style.display = 'block';
-									ytPlayer.playVideo();
+									if (cfPlayer) cfPlayer.play();
 								});
 
-								function onYTStateChange(event) {
-									if (event.data === YT.PlayerState.PLAYING) {
-										document.getElementById('yt-pause-overlay').style.display = 'none';
-										document.getElementById('yt-playing-overlay').style.display = 'block';
-										if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
-										if (titleEl) titleEl.style.cssText = 'display:none;';
-										if (fsInner) fsInner.classList.add('vida-vh');
-										if (cbtb) cbtb.style.cssText = 'display:none;';
-									} else if (event.data === YT.PlayerState.PAUSED) {
+								function onCFPlay() {
+									document.getElementById('yt-pause-overlay').style.display = 'none';
+									document.getElementById('yt-playing-overlay').style.display = 'block';
+									if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
+									if (titleEl) titleEl.style.cssText = 'display:none;';
+									if (fsInner) fsInner.classList.add('vida-vh');
+									if (cbtb) cbtb.style.cssText = 'display:none;';
+								}
+								function onCFPause() {
+									document.getElementById('yt-pause-overlay').style.display = 'block';
+									document.getElementById('yt-playing-overlay').style.display = 'none';
+									if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:900px;padding:0;margin-left:auto;margin-right:auto;';
+									if (titleEl) titleEl.style.cssText = 'display:block;';
+									if (fsInner) fsInner.classList.remove('vida-vh');
+									if (cbtb) cbtb.style.cssText = 'display:block;';
+								} else if (event.data === YT.PlayerState.PAUSED) {
 										document.getElementById('yt-pause-overlay').style.display = 'block';
 										document.getElementById('yt-playing-overlay').style.display = 'none';
 										if (videoContainer) videoContainer.style.cssText = 'width:100%;max-width:900px;padding:0;margin-left:auto;margin-right:auto;';
@@ -6934,12 +6943,12 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								}
 
 								function ytToggleMute() {
-									if (ytPlayer.isMuted()) {
-										ytPlayer.unMute(); ytPlayer.setVolume(ytVolume);
+									if (cfPlayer.muted) {
+										cfPlayer.muted = false; cfPlayer.volume = ytVolume / 100;
 										document.getElementById('yt-vol-range').value = ytVolume;
 										document.getElementById('yt-vol-icon').innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
 									} else {
-										ytPlayer.mute();
+										cfPlayer.muted = true;
 										document.getElementById('yt-vol-range').value = 0;
 										document.getElementById('yt-vol-icon').innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
 									}
@@ -6947,9 +6956,9 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 
 								function ytSetVolume(val) {
 									ytVolume = parseInt(val);
-									ytPlayer.setVolume(ytVolume);
-									if (ytVolume === 0) { ytPlayer.mute(); document.getElementById('yt-vol-icon').innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>'; }
-									else { ytPlayer.unMute(); document.getElementById('yt-vol-icon').innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>'; }
+									cfPlayer.volume = ytVolume / 100;
+									if (ytVolume === 0) { cfPlayer.muted = true; document.getElementById('yt-vol-icon').innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>'; }
+									else { cfPlayer.muted = false; document.getElementById('yt-vol-icon').innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>'; }
 								}
 
 								function ytToggleFullscreen() {
@@ -6960,6 +6969,8 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										(document.exitFullscreen || document.webkitExitFullscreen).call(document);
 									}
 								}
+								// Init Cloudflare Stream player
+								initCFPlayer();
 							</script>
               
               <center>
