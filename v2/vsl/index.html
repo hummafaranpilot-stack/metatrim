@@ -6604,6 +6604,10 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 						<div id="wistia-fs-inner" class="vida-vh">
 							<!-- YouTube Player (replaces Vidalytics) -->
 							<style>
+								@keyframes cfSpin {
+									0%   { transform:rotate(0deg); }
+									100% { transform:rotate(360deg); }
+								}
 								@keyframes skeletonShimmer {
 									0%   { left:-100%; }
 									100% { left:100%; }
@@ -6616,9 +6620,8 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								#yt-player-wrapper { position:relative; padding-top:56.25%; background:#000; }
 								#yt-player-wrapper:fullscreen,
 								#yt-player-wrapper:-webkit-full-screen { padding-top:0 !important; height:100vh !important; }
-								/* Custom controls: hidden by default, visible on hover */
-								#yt-controls { opacity:0; transition:opacity 0.3s; }
-								#yt-player-wrapper:hover #yt-controls { opacity:1; }
+								/* Custom controls: always visible */
+								#yt-controls { opacity:1; }
 								#yt-vol-range { -webkit-appearance:none; height:4px; border-radius:2px; background:#fff; outline:none; cursor:pointer; }
 								#yt-vol-range::-webkit-slider-thumb { -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:#fff; cursor:pointer; }
 							</style>
@@ -6638,14 +6641,17 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 								</div>
 
 								<!-- Pause overlay -->
-								<div id="yt-pause-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.35);cursor:pointer;z-index:2;">
-									<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
-										<svg height="58" viewBox="0 0 68 48" width="82">
-											<path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="rgba(0,0,0,0.55)"/>
-											<path d="M 45,24 27,14 27,34" fill="#fff"/>
-										</svg>
+								<div id="yt-pause-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);cursor:pointer;z-index:2;">
+									<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;">
+										<div style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.15);border:3px solid rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;">
+											<svg viewBox="0 0 24 24" fill="#fff" width="32" height="32"><polygon points="8,5 19,12 8,19"/></svg>
+										</div>
+										<span style="color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:600;letter-spacing:0.5px;text-shadow:0 1px 4px rgba(0,0,0,0.6);">Tap to Resume</span>
 									</div>
 								</div>
+
+								<!-- Video loading spinner (shown after click, hidden once playing) -->
+								<div id="cf-loader" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:4;width:54px;height:54px;border:4px solid rgba(255,255,255,0.2);border-top-color:#fff;border-radius:50%;animation:cfSpin 0.8s linear infinite;"></div>
 
 								<!-- Click-to-pause overlay (covers video, below controls) -->
 								<div id="yt-playing-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;z-index:2;"></div>
@@ -6711,6 +6717,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 										document.getElementById('cf-skeleton').style.display = 'none';
 										document.getElementById('yt-playing-overlay').style.display = 'block';
 										document.getElementById('yt-controls').style.display = 'flex';
+										document.getElementById('cf-loader').style.display = 'block';
 										// Remove warm iframe; insert fresh iframe with ?autoplay=true in the URL.
 										// Browsers allow autoplay when src is set via user-click; cross-frame play() calls
 										// are blocked by autoplay policy.
@@ -6741,6 +6748,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 									});
 								
 									function onCFPlay(){
+										document.getElementById('cf-loader').style.display = 'none';
 										document.getElementById('yt-pause-overlay').style.display   = 'none';
 										document.getElementById('yt-playing-overlay').style.display = 'block';
 										if(videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
