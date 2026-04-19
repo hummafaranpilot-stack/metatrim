@@ -1,4 +1,7 @@
-<!DOCTYPE html><html><head><meta charset="utf-8">
+<!DOCTYPE html><html><head>
+<link rel="preconnect" href="https://customer-8ocoyclfhfvlpft9.cloudflarestream.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<meta charset="utf-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="preload" as="image" href="../tyimages/meta_3.webp">
@@ -6602,243 +6605,313 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
   }
 </script> <div id="wistia-fs" class="col-lg-12 mx-auto" style="width: 100%; max-width: 100%; padding: 0px;">
 						<div id="wistia-fs-inner" class="vida-vh">
-							<!-- YouTube Player (replaces Vidalytics) -->
-							<style>
-								@keyframes cfSpin {
-									0%   { transform:rotate(0deg); }
-									100% { transform:rotate(360deg); }
-								}
-								@keyframes skeletonShimmer {
-									0%   { left:-100%; }
-									100% { left:100%; }
-								}
-								@keyframes borderPulse {
-									0%   { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
-									50%  { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 8px 40px rgba(0,0,0,0.55); }
-									100% { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
-								}
-								#yt-player-wrapper { position:relative; padding-top:56.25%; background:#000; }
-								#yt-player-wrapper:fullscreen,
-								#yt-player-wrapper:-webkit-full-screen { padding-top:0 !important; height:100vh !important; }
-								#yt-vol-range { -webkit-appearance:none; height:4px; border-radius:2px; background:#fff; outline:none; cursor:pointer; }
-								#yt-vol-range::-webkit-slider-thumb { -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:#fff; cursor:pointer; }
-							</style>
-							<div id="yt-player-wrapper">
+							<!-- VSL Video (Cloudflare Stream + hls.js) -->
+							<div style="width:100%; padding:0; position:relative; background:#000;">
+								<style>
+									@keyframes borderPulse {
+										0%   { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+										50%  { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 8px 40px rgba(0,0,0,0.55); }
+										100% { box-shadow: 0 0 0 0px rgba(255,255,255,0.8), 0 8px 40px rgba(0,0,0,0.55); }
+									}
+									@keyframes cfSkShimmer {
+										0%   { background-position: -200% 0; }
+										100% { background-position: 200% 0; }
+									}
+									#cf-player-wrapper { position:relative; padding-top:56.25%; background:#000; }
+									#cf-skeleton { position:absolute; top:0; left:0; width:100%; height:100%; z-index:10; transition:opacity 0.4s ease; background:linear-gradient(90deg,#0a0a0a 25%,#1f1f1f 50%,#0a0a0a 75%); background-size:200% 100%; animation:cfSkShimmer 1.5s infinite; }
+									#cf-skeleton.hidden { opacity:0; pointer-events:none; }
+									#cf-thumb-video, #cf-vsl-video { width:100%; height:100%; object-fit:contain; display:block; background:#000; }
 
-								<!-- Looping silent intro video overlay -->
-								<div id="yt-thumbnail" style="position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;overflow:hidden;z-index:3;">
-									<video id="intro-video" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
-										<source src="intro.mp4" type="video/mp4">
-									</video>
-									<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;pointer-events:none;">
-										<div style="background:rgba(20,45,200,0.95);border:4px solid #fff;border-radius:22px;padding:65px 110px;text-align:center;pointer-events:none;animation:borderPulse 2s ease-in-out infinite;">
-											<img src="https://cdn-icons-png.flaticon.com/512/2058/2058599.png" width="120" height="120" style="display:block;margin:0 auto 24px;filter:brightness(0) invert(1);">
-											<div style="color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(24px,3.2vw,38px);font-weight:800;line-height:1.5;">Your Video is Playing<br>Click to Unmute</div>
+									/* Custom controls */
+									#cf-vsl-controls { position:absolute; bottom:0; left:0; right:0; z-index:6; padding:24px 14px 10px; background:linear-gradient(transparent,rgba(0,0,0,0.75)); display:flex; align-items:center; justify-content:flex-end; gap:6px; opacity:0; transition:opacity 0.25s ease; pointer-events:none; box-sizing:border-box; }
+									#cf-vsl.active:hover #cf-vsl-controls, #cf-vsl.active.show-ctrl #cf-vsl-controls { opacity:1; pointer-events:auto; }
+									@media (hover: none), (pointer: coarse) {
+										#cf-vsl.active #cf-vsl-controls { opacity:1 !important; pointer-events:auto !important; }
+									}
+									.cf-ctrl-btn { background:rgba(0,0,0,0.5); border:none; color:#fff; cursor:pointer; padding:7px 9px; border-radius:6px; display:flex; align-items:center; justify-content:center; transition:background 0.15s; font:600 12px sans-serif; }
+									.cf-ctrl-btn:hover { background:rgba(0,0,0,0.75); }
+									.cf-ctrl-btn svg { width:18px; height:18px; fill:#fff; }
+									#cf-vol-wrap { position:relative; }
+									#cf-vol-slider { position:absolute; bottom:100%; left:50%; transform:translateX(-50%); margin-bottom:8px; background:rgba(0,0,0,0.85); border-radius:8px; padding:10px 6px; display:none; }
+									#cf-vol-wrap:hover #cf-vol-slider { display:block; }
+									#cf-vol-range { -webkit-appearance:none; appearance:none; width:6px; height:80px; writing-mode:bt-lr; -webkit-writing-mode:bt-lr; transform:rotate(270deg); transform-origin:center; background:transparent; outline:none; }
+									#cf-vol-range::-webkit-slider-runnable-track { width:80px; height:4px; background:rgba(255,255,255,0.3); border-radius:2px; }
+									#cf-vol-range::-webkit-slider-thumb { -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:#fff; cursor:pointer; margin-top:-4px; }
+									#cf-quality-menu { position:absolute; bottom:100%; right:0; margin-bottom:8px; background:rgba(0,0,0,0.9); border-radius:6px; padding:4px 0; display:none; min-width:90px; }
+									#cf-quality-wrap.open #cf-quality-menu { display:block; }
+									.cf-quality-item { padding:7px 14px; color:#fff; cursor:pointer; font:600 12px sans-serif; white-space:nowrap; text-align:left; }
+									.cf-quality-item:hover { background:rgba(255,255,255,0.15); }
+									.cf-quality-item.active { color:#4fc3f7; }
+									.cf-quality-item.active::before { content:"✓ "; }
+
+									#cf-vsl-bigplay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:7; opacity:0; pointer-events:none; transition:opacity 0.2s; }
+									#cf-vsl.paused #cf-vsl-bigplay { opacity:1; }
+									#cf-vsl-bigplay svg { width:68px; height:68px; fill:rgba(255,255,255,0.9); filter:drop-shadow(0 4px 12px rgba(0,0,0,0.6)); }
+
+									#cf-player-wrapper:fullscreen, #cf-player-wrapper:-webkit-full-screen { padding-top:0 !important; height:100vh !important; }
+
+									#cf-player-wrapper.pseudo-fullscreen {
+										position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+										width: 100% !important; height: 100% !important; max-width: none !important;
+										padding: 0 !important; padding-top: 0 !important; margin: 0 !important;
+										z-index: 99999 !important; background: #000 !important; aspect-ratio: auto !important;
+									}
+									@media (orientation: portrait) {
+										#cf-player-wrapper.pseudo-fullscreen {
+											width: 100vh !important; height: 100vw !important;
+											top: 50% !important; left: 50% !important; right: auto !important; bottom: auto !important;
+											transform: translate(-50%, -50%) rotate(90deg);
+											transform-origin: center center;
+										}
+									}
+								</style>
+								<div id="cf-player-wrapper">
+									<div id="cf-skeleton"></div>
+									<div id="cf-thumbnail" style="position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;overflow:hidden;z-index:3;">
+										<video id="cf-thumb-video" autoplay muted loop playsinline preload="auto"></video>
+										<div style="position:absolute;top:32%;bottom:32%;left:32%;right:32%;background:rgba(20,45,200,0.7);border:3px solid #fff;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;animation:borderPulse 2s ease-in-out infinite;">
+											<img src="https://cdn-icons-png.flaticon.com/512/2058/2058599.png" style="display:block;margin:0 auto 6%;filter:brightness(0) invert(1);width:clamp(24px,5vw,56px);height:auto;">
+											<div style="color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(11px,2vw,22px);font-weight:800;line-height:1.3;padding:0 6%;">Your Video is Playing<br>Click to Unmute</div>
+										</div>
+									</div>
+									<div id="cf-vsl" style="position:absolute;top:0;left:0;width:100%;height:100%;visibility:hidden;z-index:1;">
+										<video id="cf-vsl-video" playsinline preload="auto"></video>
+										<div id="cf-vsl-bigplay" aria-hidden="true">
+											<svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" opacity="0.75" fill="#000"/><path d="M 45,24 27,14 27,34" fill="#fff"/></svg>
+										</div>
+										<div id="cf-vsl-controls">
+											<div id="cf-vol-wrap">
+												<button id="cf-vol-btn" class="cf-ctrl-btn" aria-label="Mute">
+													<svg id="cf-vol-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+												</button>
+												<div id="cf-vol-slider"><input id="cf-vol-range" type="range" min="0" max="100" value="100"></div>
+											</div>
+											<div id="cf-quality-wrap" style="position:relative;">
+												<button id="cf-quality-btn" class="cf-ctrl-btn" aria-label="Quality"><span id="cf-quality-label">Auto</span></button>
+												<div id="cf-quality-menu"></div>
+											</div>
+											<button id="cf-fs-btn" class="cf-ctrl-btn" aria-label="Fullscreen">
+												<svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+											</button>
 										</div>
 									</div>
 								</div>
 
-								<!-- Video loading spinner (shown after click, hidden once playing) -->
-								<div id="cf-loader" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;z-index:4;width:54px;height:54px;border:4px solid rgba(255,255,255,0.2);border-top-color:#fff;border-radius:50%;animation:cfSpin 0.8s linear infinite;"></div>
-
-								<!-- Skeleton loader -->
-								<div id="cf-skeleton" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:5;background:#0d0d1a;overflow:hidden;"><div style="position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.05) 50%,transparent 100%);animation:skeletonShimmer 1.6s infinite;"></div></div>
-
-								<!-- Pause overlay -->
-								<div id="yt-pause-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);cursor:pointer;z-index:3;">
-									<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;">
-										<div style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.15);border:3px solid rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;">
-											<svg viewBox="0 0 24 24" fill="#fff" width="34" height="34"><polygon points="8,5 19,12 8,19"/></svg>
-										</div>
-										<span style="color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.5px;text-shadow:0 1px 6px rgba(0,0,0,0.7);">Tap to Resume</span>
-									</div>
-								</div>
-								<!-- Transparent click-to-pause overlay -->
-								<div id="yt-playing-overlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:calc(100% - 52px);cursor:pointer;z-index:2;"></div>
-								<!-- Custom controls: mute + volume + fullscreen only -->
-								<div id="yt-controls" style="display:flex;position:absolute;bottom:0;left:0;width:100%;z-index:6;padding:14px 16px 10px;box-sizing:border-box;background:linear-gradient(transparent,rgba(0,0,0,0.75));align-items:center;justify-content:flex-end;gap:10px;">
-									<button id="yt-mute-btn" onclick="ytToggleMute()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;">
-										<svg id="yt-vol-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#fff"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-									</button>
-									<input id="yt-vol-range" type="range" min="0" max="100" value="100" style="width:70px;-webkit-appearance:none;height:4px;border-radius:2px;background:#fff;outline:none;cursor:pointer;" oninput="ytSetVolume(this.value)">
-									<button id="yt-quality-btn" onclick="ytToggleQuality()" title="Quality" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;position:relative;">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#fff"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-									</button>
-									<button onclick="ytToggleFullscreen()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#fff"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-									</button>
-								</div>
-								<!-- Quality selector dropdown (above controls bar) -->
-								<div id="yt-quality-menu" style="display:none;position:absolute;bottom:56px;right:46px;background:rgba(15,15,15,0.96);border-radius:8px;padding:4px 0;z-index:8;min-width:90px;box-shadow:0 4px 16px rgba(0,0,0,0.7);"></div>
-
-															<script src="https://embed.cloudflarestream.com/embed/sdk.latest.js"></script>
+								<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
 								<script>
-								(function(){
-									var CF_ID = '3347c5f9ca9120b1adfb0f79cf32fd4c';
-									var cfPlayer = null, ytVolume = 100, activePf = null;
-									var videoContainer = document.querySelector('#wistia-fs');
-									var titleEl        = document.querySelector('.fullscreen-headline');
-									var cbtb           = document.querySelector('.fixed-top');
-									var fsInner        = document.querySelector('#wistia-fs-inner');
-								
-									// Hide skeleton when intro-video first frame is ready
-									(function(){
-										var sk = document.getElementById('cf-skeleton');
-										var iv = document.getElementById('intro-video');
-										function hide(){ if(sk) sk.style.display='none'; }
-										// Only hide when intro video is actually ready — no fixed timer
-										if(iv){
-										  iv.addEventListener('canplay',   hide);
-										  iv.addEventListener('loadeddata', hide);
-										  iv.addEventListener('playing',    hide);
-										  iv.addEventListener('error', function(){ hide(); });
-										} else { hide(); }
-									})();
-								
-									// Preload CF iframe hidden on page load (warms TCP/TLS connection)
-									var wrapper = document.getElementById('yt-player-wrapper');
-									var ctrlsEl = document.getElementById('yt-controls');
-									var preloadIframe = document.createElement('iframe');
-									preloadIframe.src = 'https://iframe.cloudflarestream.com/' + CF_ID + '?controls=false&preload=auto';
-									preloadIframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-									preloadIframe.setAttribute('allowfullscreen','');
-									preloadIframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;visibility:hidden;pointer-events:none;';
-									wrapper.insertBefore(preloadIframe, ctrlsEl);
-								
-									// Thumbnail click
-									document.getElementById('yt-thumbnail').addEventListener('click', function(){
-										var iv = document.getElementById('intro-video');
-										if(iv){ iv.pause(); iv.src=''; }
-										this.style.display = 'none';
-										document.getElementById('cf-skeleton').style.display = 'none';
-										document.getElementById('cf-loader').style.display = 'block';
-								
-										// hideLoader declared here — fires 2 s after click regardless of SDK/iframe events
-										var loaderHidden = false;
-										function hideLoader(){
-											if(loaderHidden) return;
-											loaderHidden = true;
-											document.getElementById('cf-loader').style.display = 'none';
-											document.getElementById('yt-playing-overlay').style.display = 'block';
-											if(videoContainer) videoContainer.style.cssText = 'width:100%;max-width:100%;padding:0;';
-											if(titleEl)        titleEl.style.cssText        = 'display:none;';
-											if(fsInner)        fsInner.classList.add('vida-vh');
-											if(cbtb)           cbtb.style.cssText           = 'display:none;';
-										}
-										setTimeout(hideLoader, 2000);
-								
-										if(preloadIframe){ preloadIframe.remove(); preloadIframe = null; }
-										var pf = document.createElement('iframe');
-										pf.src = 'https://iframe.cloudflarestream.com/' + CF_ID + '?autoplay=true&controls=false&preload=auto';
-										pf.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-										pf.setAttribute('allowfullscreen','');
-										pf.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;';
-										wrapper.insertBefore(pf, ctrlsEl);
-								
-										activePf = pf;
-										// Poll until CF Stream SDK is loaded, then init player
-										(function initSDK(n){
-											if(n > 20) return;
-											if(typeof Stream === 'undefined'){ setTimeout(function(){ initSDK(n+1); }, 250); return; }
-											try {
-												cfPlayer = Stream(pf);
-												cfPlayer.volume = ytVolume / 100;
-												cfPlayer.addEventListener('timeupdate', function(){ hideLoader(); });
-												cfPlayer.addEventListener('pause', function(){
-													document.getElementById('yt-pause-overlay').style.display   = 'block';
-													document.getElementById('yt-playing-overlay').style.display = 'none';
-												});
-												cfPlayer.addEventListener('play', function(){
-													document.getElementById('yt-pause-overlay').style.display   = 'none';
-													document.getElementById('yt-playing-overlay').style.display = 'block';
-												});
-												setTimeout(function(){
-													try{ var qs = cfPlayer.qualities; if(qs && qs.length) buildQualityMenu(qs); }catch(e){}
-												}, 3000);
-											} catch(e){}
-										})(0);
-									});
-								
-									document.getElementById('yt-playing-overlay').addEventListener('click', function(){
-										if(cfPlayer) cfPlayer.pause();
-										else if(activePf) activePf.contentWindow.postMessage(JSON.stringify({event:'pause'}), '*');
-									});
-									document.getElementById('yt-pause-overlay').addEventListener('click', function(){
-										this.style.display = 'none';
-										document.getElementById('yt-playing-overlay').style.display = 'block';
-										if(cfPlayer) cfPlayer.play();
-										else if(activePf) activePf.contentWindow.postMessage(JSON.stringify({event:'play'}), '*');
-									});
-								
-									window.ytToggleMute = function(){
-										if(!cfPlayer) return;
-										var icon = document.getElementById('yt-vol-icon');
-										if(cfPlayer.muted){
-											cfPlayer.muted=false; cfPlayer.volume=ytVolume/100;
-											document.getElementById('yt-vol-range').value=ytVolume;
-											icon.innerHTML='<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+								(function() {
+									var THUMB_HLS = 'https://customer-8ocoyclfhfvlpft9.cloudflarestream.com/e2da6e828cd05188cbafba9461dbdb1b/manifest/video.m3u8';
+									var VSL_HLS   = 'https://customer-8ocoyclfhfvlpft9.cloudflarestream.com/3347c5f9ca9120b1adfb0f79cf32fd4c/manifest/video.m3u8';
+
+									var thumbVideo = document.getElementById('cf-thumb-video');
+									var vslVideo   = document.getElementById('cf-vsl-video');
+									var skeleton   = document.getElementById('cf-skeleton');
+									var vslWrap    = document.getElementById('cf-vsl');
+
+									function hideSkeleton() {
+										skeleton.classList.add('hidden');
+										setTimeout(function() { skeleton.style.display = 'none'; }, 500);
+									}
+									function onFirstFrame() {
+										if (typeof thumbVideo.requestVideoFrameCallback === 'function') {
+											thumbVideo.requestVideoFrameCallback(function() { hideSkeleton(); });
 										} else {
-											cfPlayer.muted=true;
-											document.getElementById('yt-vol-range').value=0;
-											icon.innerHTML='<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+											setTimeout(hideSkeleton, 200);
 										}
-									};
-									window.ytSetVolume = function(val){
-										ytVolume=parseInt(val);
-										if(!cfPlayer) return;
-										cfPlayer.volume=ytVolume/100;
-										var icon=document.getElementById('yt-vol-icon');
-										if(ytVolume===0){ cfPlayer.muted=true;  icon.innerHTML='<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>'; }
-										else            { cfPlayer.muted=false; icon.innerHTML='<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>'; }
-									};
-									window.ytToggleFullscreen = function(){
-										var w=document.getElementById('yt-player-wrapper');
-										if(!document.fullscreenElement&&!document.webkitFullscreenElement)
-											(w.requestFullscreen||w.webkitRequestFullscreen).call(w);
-										else
-											(document.exitFullscreen||document.webkitExitFullscreen).call(document);
-									};
-									function buildQualityMenu(qs){
-										var menu = document.getElementById('yt-quality-menu');
-										if(!menu) return;
-										menu.innerHTML = '';
-										qs.forEach(function(q){
-											var label = typeof q === 'string' ? q : (q.name || q.label || q.value || q.id || String(q));
-											var value = typeof q === 'string' ? q : (q.name || q.value || q.id || label);
-											var item = document.createElement('div');
-											item.textContent = /^auto$/i.test(label) ? 'Auto' : label;
-											item.style.cssText = 'padding:8px 16px;color:#fff;font-family:Arial,sans-serif;font-size:13px;cursor:pointer;white-space:nowrap;';
-											item.addEventListener('mouseenter',function(){ this.style.background='rgba(255,255,255,0.12)'; });
-											item.addEventListener('mouseleave',function(){ this.style.background=''; });
-											(function(qual){ item.addEventListener('click',function(){
-												try{ cfPlayer.quality = qual; }catch(e){}
-												document.getElementById('yt-quality-menu').style.display='none';
-											}); })(value);
-											menu.appendChild(item);
+									}
+									thumbVideo.addEventListener('loadeddata', onFirstFrame, { once: true });
+									setTimeout(hideSkeleton, 8000);
+
+									if (window.Hls && Hls.isSupported()) {
+										var thumbHls = new Hls({
+											capLevelToPlayerSize: false, maxBufferLength: 30,
+											startLevel: -1, autoStartLoad: true
+										});
+										thumbHls.loadSource(THUMB_HLS);
+										thumbHls.attachMedia(thumbVideo);
+										thumbHls.on(Hls.Events.MANIFEST_PARSED, function() {
+											var top = thumbHls.levels.length - 1;
+											thumbHls.currentLevel = top; thumbHls.nextLevel = top; thumbHls.loadLevel = top;
+										});
+										thumbVideo.addEventListener('canplay', function onCP() {
+											thumbVideo.removeEventListener('canplay', onCP);
+											thumbVideo.play().catch(function(){});
+										});
+									} else if (thumbVideo.canPlayType('application/vnd.apple.mpegurl')) {
+										thumbVideo.src = THUMB_HLS;
+										thumbVideo.addEventListener('canplay', function onCP() {
+											thumbVideo.removeEventListener('canplay', onCP);
+											thumbVideo.play().catch(function(){});
 										});
 									}
-									window.ytToggleQuality = function(){
-										var menu = document.getElementById('yt-quality-menu');
-										if(!menu) return;
-										if(menu.style.display === 'block'){ menu.style.display='none'; return; }
-										var qs = null;
-										try{ if(cfPlayer) qs = cfPlayer.qualities || cfPlayer.videoQualities; }catch(e){}
-										if(qs && qs.length){
-											buildQualityMenu(qs);
-										} else {
-											menu.innerHTML = '<div style="padding:10px 16px;color:#aaa;font-family:Arial,sans-serif;font-size:12px;white-space:nowrap;">Quality unavailable</div>';
+
+									var vslHls = null;
+									function setupVsl() {
+										if (window.Hls && Hls.isSupported()) {
+											vslHls = new Hls({ capLevelToPlayerSize:false, maxBufferLength:30, autoStartLoad:true });
+											vslHls.loadSource(VSL_HLS);
+											vslHls.attachMedia(vslVideo);
+											vslHls.on(Hls.Events.MANIFEST_PARSED, buildQualityMenu);
+										} else if (vslVideo.canPlayType('application/vnd.apple.mpegurl')) {
+											vslVideo.src = VSL_HLS;
 										}
-										menu.style.display = 'block';
+									}
+									setupVsl();
+
+									function buildQualityMenu() {
+										var menu = document.getElementById('cf-quality-menu');
+										var label = document.getElementById('cf-quality-label');
+										menu.innerHTML = '';
+										var levels = vslHls ? vslHls.levels : [];
+										function pick(i, name) {
+											if (vslHls) { vslHls.currentLevel = i; vslHls.nextLevel = i; }
+											label.textContent = name;
+											Array.prototype.forEach.call(menu.children, function(c,idx){
+												c.classList.toggle('active', idx === 0 ? i===-1 : levels[idx-1]===levels[i]);
+											});
+											document.getElementById('cf-quality-wrap').classList.remove('open');
+										}
+										var auto = document.createElement('div');
+										auto.className = 'cf-quality-item active';
+										auto.textContent = 'Auto';
+										auto.onclick = function() { pick(-1, 'Auto'); };
+										menu.appendChild(auto);
+										var sorted = levels.map(function(l,i){ return {l:l, i:i}; }).sort(function(a,b){ return b.l.height - a.l.height; });
+										sorted.forEach(function(item) {
+											var div = document.createElement('div');
+											div.className = 'cf-quality-item';
+											div.textContent = item.l.height + 'p';
+											div.onclick = (function(idx, name){ return function(){ pick(idx, name); }; })(item.i, item.l.height+'p');
+											menu.appendChild(div);
+										});
+									}
+									document.getElementById('cf-quality-btn').addEventListener('click', function(e) {
+										e.stopPropagation();
+										document.getElementById('cf-quality-wrap').classList.toggle('open');
+									});
+									document.addEventListener('click', function() {
+										document.getElementById('cf-quality-wrap').classList.remove('open');
+									});
+
+									var volBtn = document.getElementById('cf-vol-btn');
+									var volRange = document.getElementById('cf-vol-range');
+									var volIcon = document.getElementById('cf-vol-icon');
+									var mutedIconPath = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+									var onIconPath = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+									volBtn.onclick = function() {
+										vslVideo.muted = !vslVideo.muted;
+										volIcon.innerHTML = vslVideo.muted ? mutedIconPath : onIconPath;
+										volRange.value = vslVideo.muted ? 0 : vslVideo.volume * 100;
 									};
-									// Close quality menu when clicking outside
-									document.addEventListener('click', function(e){
-										var btn  = document.getElementById('yt-quality-btn');
-										var menu = document.getElementById('yt-quality-menu');
-										if(menu && btn && !menu.contains(e.target) && !btn.contains(e.target))
-											menu.style.display = 'none';
+									volRange.oninput = function() {
+										var v = parseInt(this.value);
+										vslVideo.volume = v / 100;
+										vslVideo.muted = v === 0;
+										volIcon.innerHTML = vslVideo.muted ? mutedIconPath : onIconPath;
+									};
+
+									function isMobileDevice() {
+										return window.matchMedia && window.matchMedia('(max-width: 991px), (pointer: coarse)').matches;
+									}
+									function tryLockLandscape() {
+										try {
+											if (screen.orientation && screen.orientation.lock) {
+												var p = screen.orientation.lock('landscape');
+												if (p && p.catch) p.catch(function(){});
+											}
+										} catch (e) {}
+									}
+									function tryUnlockOrientation() {
+										try {
+											if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+										} catch (e) {}
+									}
+									var wrapperEl = document.getElementById('cf-player-wrapper');
+									function inPseudoFullscreen() { return wrapperEl.classList.contains('pseudo-fullscreen'); }
+									function inRealFullscreen() {
+										return document.fullscreenElement || document.webkitFullscreenElement ||
+										       document.mozFullScreenElement || document.msFullscreenElement;
+									}
+									function enterFullscreen() {
+										if (isMobileDevice()) {
+											wrapperEl.classList.add('pseudo-fullscreen');
+											document.body.style.overflow = 'hidden';
+											tryLockLandscape();
+										} else {
+											var req = wrapperEl.requestFullscreen || wrapperEl.webkitRequestFullscreen;
+											if (req) try { req.call(wrapperEl); } catch (e) {}
+										}
+									}
+									function exitFullscreen() {
+										if (inPseudoFullscreen()) {
+											wrapperEl.classList.remove('pseudo-fullscreen');
+											document.body.style.overflow = '';
+											tryUnlockOrientation();
+										} else if (inRealFullscreen()) {
+											if (document.exitFullscreen) document.exitFullscreen();
+											else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+										}
+									}
+									document.getElementById('cf-fs-btn').onclick = function() {
+										if (inPseudoFullscreen() || inRealFullscreen()) exitFullscreen();
+										else enterFullscreen();
+									};
+									['fullscreenchange', 'webkitfullscreenchange'].forEach(function(ev) {
+										document.addEventListener(ev, function() { if (!inRealFullscreen()) tryUnlockOrientation(); });
+									});
+
+									vslVideo.addEventListener('click', function() {
+										if (vslVideo.paused) vslVideo.play(); else vslVideo.pause();
+									});
+									vslVideo.addEventListener('play',  function(){ vslWrap.classList.remove('paused'); });
+									vslVideo.addEventListener('pause', function(){ vslWrap.classList.add('paused'); });
+
+									function flashControls(ms) {
+										vslWrap.classList.add('show-ctrl');
+										clearTimeout(vslWrap._t);
+										vslWrap._t = setTimeout(function(){ vslWrap.classList.remove('show-ctrl'); }, ms || 2500);
+									}
+									vslVideo.addEventListener('play', function(){ flashControls(1800); });
+
+									document.getElementById('cf-thumbnail').addEventListener('click', function () {
+										var self = this;
+										function startVsl() {
+											self.style.display = 'none';
+											vslWrap.style.visibility = 'visible';
+											vslWrap.style.zIndex = '5';
+											vslWrap.classList.add('active');
+											vslVideo.muted = false;
+											volRange.value = 100;
+											vslVideo.play().catch(function() {
+												vslVideo.muted = true;
+												volIcon.innerHTML = mutedIconPath;
+												volRange.value = 0;
+												vslVideo.play();
+											});
+										}
+										if (vslVideo.readyState >= 3) {
+											startVsl();
+										} else {
+											var loadingHint = document.createElement('div');
+											loadingHint.textContent = 'Loading video...';
+											loadingHint.style.cssText = 'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);color:#fff;padding:8px 16px;border-radius:6px;font:600 13px sans-serif;z-index:9;';
+											self.appendChild(loadingHint);
+											vslVideo.addEventListener('canplay', function onVslCP() {
+												vslVideo.removeEventListener('canplay', onVslCP);
+												if (loadingHint.parentNode) loadingHint.parentNode.removeChild(loadingHint);
+												startVsl();
+											});
+											setTimeout(function() {
+												if (self.style.display !== 'none') {
+													if (loadingHint.parentNode) loadingHint.parentNode.removeChild(loadingHint);
+													startVsl();
+												}
+											}, 3000);
+										}
 									});
 								})();
 								</script>
+							</div>
 						
 			<script>
 				$(document).ready(function(){
