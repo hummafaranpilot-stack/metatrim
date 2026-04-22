@@ -70,13 +70,17 @@ label {
 }
 
 .check-list li:before {
-	content: "\f14a";
-	color: #f78e3b;
-	font-family: 'Font Awesome 5 Free';
-	font-weight: 600;
-    margin: -5px 10px 0 -44px;
-    position: absolute;
-    padding: 5px 10px;
+	content: "";
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path fill='%23f78e3b' d='M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-204.7 340.7l-141.3-141.3c-6.2-6.2-6.2-16.4 0-22.6l22.6-22.6c6.2-6.2 16.4-6.2 22.6 0l96.4 96.4L385.9 197.4c6.2-6.2 16.4-6.2 22.6 0l22.6 22.6c6.2 6.2 6.2 16.4 0 22.6l-208.6 208.6c-6.1 6.1-16.4 6.1-22.6 0z'/></svg>");
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin: -3px 10px 0 -44px;
+	position: absolute;
+	padding: 5px 10px;
+	vertical-align: middle;
 }
 
 .bg-dark {
