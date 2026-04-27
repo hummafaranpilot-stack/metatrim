@@ -52,14 +52,8 @@
 	/* ── CLS baseline: preserve aspect ratio when HTML dimensions are set ── */
 	img { height: auto; max-width: 100%; }
 
-	/* ── Minimal top loading bar ── */
-	#pg-loadbar { position:fixed; top:0; left:0; right:0; height:3px; z-index:100000; background:transparent; pointer-events:none; transition:opacity 0.25s ease; }
-	#pg-loadbar::after { content:""; display:block; height:100%; width:0%; background:linear-gradient(90deg,#c8922a,#e8b84a,#c8922a); animation:pgLoadFill 1.2s ease-out forwards; box-shadow:0 0 8px rgba(200,146,42,0.6); }
-	#pg-loadbar.done { opacity:0; }
-	@keyframes pgLoadFill { 0% { width:0%; } 60% { width:70%; } 100% { width:100%; } }
-
-	/* ── Skeleton loader ── */
-	#kw-sk { position:fixed; inset:0; z-index:99998; background:#fff; display:flex; flex-direction:column; align-items:center; padding:20px 0; transition:opacity 0.5s ease; }
+	/* ── Skeleton loader (with progress bar + witty status list) ── */
+	#kw-sk { position:fixed; inset:0; z-index:99998; background:#fff; display:flex; flex-direction:column; align-items:center; padding:20px 0; transition:opacity 0.5s ease; overflow:hidden; }
 	#kw-sk.kw-sk-out { opacity:0; pointer-events:none; }
 	#kw-sk .kw-sk-block { background:linear-gradient(90deg,#eee 0%,#f5f5f5 50%,#eee 100%); background-size:200% 100%; animation:kwShimmer 1.4s infinite linear; border-radius:8px; }
 	#kw-sk .kw-sk-logo { width:180px; height:60px; margin:20px auto; }
@@ -67,7 +61,21 @@
 	#kw-sk .kw-sk-line { width:min(680px,92vw); height:14px; margin:12px auto; }
 	#kw-sk .kw-sk-line.short { width:min(420px,70vw); }
 	@keyframes kwShimmer { 0%{background-position:100% 0%;} 100%{background-position:-100% 0%;} }
-
+	#kw-pg-bar { position:absolute; top:0; left:0; right:0; height:3px; background:rgba(0,0,0,0.08); overflow:hidden; z-index:2; }
+	#kw-pg-bar::after { content:""; display:block; height:100%; width:var(--kw-pg, 0%); background:linear-gradient(90deg,#c8922a,#e8b84a,#c8922a); box-shadow:0 0 8px rgba(232,184,74,0.55); transition:width 0.18s ease-out; }
+	#kw-witty-list { position:absolute; left:50%; bottom:7vh; transform:translateX(-50%); width:min(460px,86vw); height:108px; background:#1a1a1a; border-radius:14px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.22), 0 0 0 1px rgba(255,255,255,0.05); pointer-events:none; z-index:3; }
+	#kw-witty-track { display:flex; flex-direction:column; will-change:transform; animation:kwWittyScroll 7.5s cubic-bezier(0.65,0,0.35,1) infinite; -webkit-mask:linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 30%, #000 38%, #000 62%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.5) 100%); mask:linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 30%, #000 38%, #000 62%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.5) 100%); }
+	.kw-witty-row { height:36px; display:flex; align-items:center; gap:12px; color:#ececec; font-family:'Montserrat',sans-serif; font-size:16px; font-weight:600; line-height:36px; padding:0 18px; white-space:nowrap; overflow:hidden; }
+	.kw-witty-icon { width:20px; height:20px; flex-shrink:0; color:#e8b84a; display:inline-block; }
+	.kw-witty-icon svg { width:100%; height:100%; display:block; }
+	@keyframes kwWittyScroll {
+	  0%,13.33%   { transform:translateY(0); }
+	  20%,33.33%  { transform:translateY(-36px); }
+	  40%,53.33%  { transform:translateY(-72px); }
+	  60%,73.33%  { transform:translateY(-108px); }
+	  80%,93.33%  { transform:translateY(-144px); }
+	  100%        { transform:translateY(-180px); }
+	}
 	/* ── Trustpilot Rating Bar (prod-description) ── */
 	.pxp-trustpilot-bar { display:inline-flex; align-items:center; gap:8px; background:#f5f5f5; border-radius:6px; padding:6px 12px; font-family:'Montserrat',sans-serif; font-size:13px; color:#333; flex-wrap:nowrap; }
 	.pxp-tp-wrap { text-align:left; margin-bottom:8px; }
@@ -1782,29 +1790,52 @@ button.trynow { display: none !important; }
 </style>
 
 <body>
-<div id="pg-loadbar"></div>
 <div id="kw-sk" aria-hidden="true">
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><symbol id="kw-witty-tick" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg>
+    <div id="kw-pg-bar"></div>
     <div class="kw-sk-block kw-sk-logo"></div>
     <div class="kw-sk-block kw-sk-hero"></div>
     <div class="kw-sk-block kw-sk-line"></div>
     <div class="kw-sk-block kw-sk-line short"></div>
     <div class="kw-sk-block kw-sk-line"></div>
+    <div id="kw-witty-list">
+        <div id="kw-witty-track">
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>60-day money-back guarantee</div>
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>Welcome to MetaTrim!</div>
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>Securing your connection…</div>
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>Trusted by 50,000+ customers</div>
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>Doctor-formulated BHB ketones</div>
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>60-day money-back guarantee</div>
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>Welcome to MetaTrim!</div>
+            <div class="kw-witty-row"><span class="kw-witty-icon"><svg><use href="#kw-witty-tick"/></svg></span>Securing your connection…</div>
+        </div>
+    </div>
 </div>
 <script>
 (function(){
-    var sk=document.getElementById('kw-sk'), bar=document.getElementById('pg-loadbar'), done=false;
-    function dismiss(){
-        if(done)return; done=true;
-        if(sk){sk.classList.add('kw-sk-out'); setTimeout(function(){if(sk.parentNode)sk.parentNode.removeChild(sk);},600);}
-    }
+    var sk=document.getElementById('kw-sk'),
+        bar=document.getElementById('kw-pg-bar'),
+        done=false,
+        startTime=Date.now();
     var loaded=0, needed=2;
-    function tick(){ if(++loaded>=needed) dismiss(); }
+    function setProgress(pct){ if(bar){ bar.style.setProperty('--kw-pg', pct + '%'); } }
+    function update(){
+        if(done) return;
+        var imgPct = (loaded/needed) * 100;
+        var timePct = Math.min((Date.now()-startTime)/4000*90, 90);
+        setProgress(Math.max(imgPct, timePct));
+    }
+    function dismiss(){
+        if(done) return; done=true;
+        clearInterval(crawlTimer);
+        setProgress(100);
+        if(sk){ setTimeout(function(){ sk.classList.add('kw-sk-out'); setTimeout(function(){ if(sk.parentNode) sk.parentNode.removeChild(sk); }, 600); }, 200); }
+    }
+    function tick(){ if(++loaded>=needed) dismiss(); else update(); }
+    var crawlTimer = setInterval(update, 80);
     var logo=new Image(); logo.onload=logo.onerror=tick; logo.src='../../lib/img/logo.png?v=20260421';
     var hero=new Image(); hero.onload=hero.onerror=tick; hero.src='https://customer-8ocoyclfhfvlpft9.cloudflarestream.com/8af203d339115642335ad9caad6d27e3/thumbnails/thumbnail.jpg?time=2s';
     setTimeout(dismiss, 4000);
-    document.addEventListener('DOMContentLoaded', function(){
-        if(bar){ setTimeout(function(){ bar.classList.add('done'); setTimeout(function(){ if(bar.parentNode) bar.parentNode.removeChild(bar); },300); }, 200); }
-    });
 })();
 </script>
 <!-- Top Header Bar -->
