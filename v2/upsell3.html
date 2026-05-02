@@ -1,1060 +1,1837 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
-<script src="https://cdn.trustednutraproduct.com/t.js?v=metatrim-trustednutraproduct-com-v2"></script>
-    <link rel="icon" href="lib/img/icon-7.svg" type="image/x-icon">
     <meta charset="UTF-8">
+    <link rel="icon" href="lib/img/icon-7.svg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upsell - 3</title>
+    <title>Special Offer - SynaptoFlow</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        /* Base */
-        body,
-        h1,
-        h2,
-        p,
-        ul,
-        li {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
-            color: #222;
             box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #222;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
         }
 
         .container {
             max-width: 1100px;
-            margin: auto;
+            margin: 0 auto;
             padding: 0 20px;
-            text-align: center;
         }
 
-        /* Sticky Banner */
-        .sticky-reminder {
-            position: sticky;
-            text-align: center;
-            top: 0;
-            background: #fff9e6;
-            color: #c00;
-            font-weight: 700;
-            padding: 12px 20px;
-            font-size: 16px;
-            z-index: 999;
-            border-bottom: 2px solid #ffd700;
-            width: 100%;
-        }
-
-        .bottom-reminder {
-            background: #fff4e6;
-            text-align: center;
-            color: #c00;
-            font-weight: 700;
-            padding: 18px 20px;
-            font-size: 16px;
-            border-top: 2px solid #ffd700;
-            margin-top: 40px;
-        }
-
-        /* Timer */
-        .timer-bar {
-            text-align: center;
-            padding: 12px 0;
-            background: linear-gradient(to right, #fff4e6, #fffaf2);
-            font-size: 16px;
-            color: #c00;
-            font-weight: 600;
-            border-radius: 10px;
-            margin: 20px auto;
-        }
-
-        .timer-bar span {
-            font-weight: 700;
-            color: #d60000;
-        }
-
-        .upsell-intro {
-            font-size: 20px;
-            /* Increase font size */
-            line-height: 1.7;
-            /* Add more spacing between lines */
-            margin-bottom: 20px;
-            /* Add space below paragraph */
-            font-weight: 600;
-            /* Make it slightly bolder */
-            color: #0a6bda;
-            /* Optional: make it match the theme */
-        }
-
-        /* Top Section */
-        .top-section h1 {
-            font-size: 28px;
-            color: #0a6bda;
-            margin-bottom: 15px;
-        }
-
-        .top-section p {
-            font-size: 17px;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        /* Upgrade Boxes */
-        .upgrades {
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-        flex-wrap: wrap;
-        align-items: flex-start; /* ensures all boxes start at top */
-        }
-        
-        .upgrade-box {
-        flex: 1 1 45%;
-        min-width: 250px;
-        max-width: 450px;
-        background: #f5faff;
-        padding: 25px 15px;
-        border-radius: 12px;
-        text-align: center;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* ensures buttons stay at bottom */
-        }
-        
-        /* Highlight Box */
-        .upgrade-box.highlight {
-        background: #e6f2ff;
-        border: 2px solid #0a6bda;
-        }
-        
-        /* Box Heading */
-        .upgrade-box h2 {
-        font-size: 22px;
-        margin-bottom: 10px;
-        color: #0a6bda;
-        }
-        
-        /* Images */
-        .upgrade-box img {
-        max-width: 100%; /* ensures image fits box */
-        width: auto; /* maintain aspect ratio */
-        height: auto;
-        margin: 15px auto; /* centers image */
-        border-radius: 8px;
-        }
-        
-        /* Text */
-        .upgrade-box p {
-        font-size: 16px;
-        margin-bottom: 12px;
-        }
-        .cut {
-            text-decoration: line-through;
-            color: #c00;
-            margin-right: 5px;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            margin-top: 10px;
-            background: #0a6bda;
+        /* Success Header Banner */
+        .success-header {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
             color: #fff;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-size: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-            transition: .3s;
+            padding: 20px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .cta-btn:hover {
-            transform: translateY(-1px);
-            opacity: .95;
-        }
-
-        .no-thanks {
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #555;
-            text-decoration: underline;
-        }
-
-        /* Most Popular Tag */
-        .most-popular .tag {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #ffd700;
-            color: #000;
-            font-weight: 700;
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Reviews */
-        .reviews {
-            margin: 50px auto;
-        }
-
-        .reviews h2 {
-            font-size: 26px;
-            color: #0a6bda;
-            margin-bottom: 25px;
-        }
-
-        .review-list {
-            display: flex;
+        .success-header .checkmark {
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            gap: 20px;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 50%;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+
+        .success-header .checkmark svg {
+            width: 24px;
+            height: 24px;
+            fill: #28a745;
+        }
+
+        .success-header p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
+            color: #fff;
+            display: inline;
+            vertical-align: middle;
+        }
+
+        /* Page Indicator Badge - In Header */
+        .page-indicator {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-left: 15px;
+            vertical-align: middle;
+        }
+
+        /* Timer Section */
+        .timer-section {
+            background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .timer-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
-        .review {
-            background: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 300px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            transition: .3s;
+        .timer-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #fff;
         }
 
-        .review:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        .timer-display {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid #F57C00;
+            border-radius: 10px;
+            padding: 10px 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .review p {
-            font-size: 15px;
-            margin-bottom: 8px;
-            color: #333;
+        .timer-display span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: #F57C00;
         }
 
-        .review span {
-            font-size: 13px;
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .wait-badge {
+            display: inline-block;
+            background: #F57C00;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 8px 25px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-title .highlight {
+            color: #FF9800;
+        }
+
+        .hero-title .free-text {
+            color: #FF9800;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 10px;
+        }
+
+        /* Trial Badge */
+        .trial-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: #000;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            padding: 10px 30px;
+            border-radius: 50px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        /* Offer Section */
+        .offer-section {
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 50%, #f5f5f5 100%);
+        }
+
+        .offer-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .offer-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #4A148C;
+            margin-bottom: 10px;
+        }
+
+        .offer-header p {
+            font-size: 16px;
             color: #555;
-            display: block;
-            text-align: right;
         }
 
-        .ingredients-section {
+        /* ============================================
+           PRICING CARD - SILVER THEME FOR VigorX Pro
+        ============================================ */
+        .mt-product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 2rem 1rem;
+            background-color: transparent;
+            font-family: "Montserrat", sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .mt-product-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            /* stack heading + image */
-            justify-content: center;
-            /* vertical alignment if needed */
+            font-family: "Montserrat", sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mt-product-content {
+            position: relative;
+            overflow: visible;
+        }
+
+        .mt-hanging-tag {
+            position: absolute;
+            top: 11px;
+            right: -13%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .mt-product-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .mt-product-card.mt-featured {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border: 2px solid #9C27B0;
+        }
+
+        .mt-product-header {
+            background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+            text-align: center;
+            padding: 0.6rem 1rem;
+            color: white;
+        }
+
+        .mt-product-card.mt-featured .mt-product-header {
+            background: linear-gradient(135deg, #311B92 0%, #4A148C 50%, #7B1FA2 100%);
+        }
+
+        .mt-product-header h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+            color: #fff;
+        }
+
+        .mt-product-header p {
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .mt-trial-label {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: #000;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .mt-product-content {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            /* horizontal center */
-            margin: 40px auto;
+            padding: 1rem;
+        }
+
+        .mt-product-image {
+            width: 100%;
+            position: relative;
+            text-align: center;
+            padding: 0.6rem;
+            border: 2px solid #F57C00;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            margin-bottom: 0.5rem;
+        }
+
+        .mt-product-image img {
+            width: 100%;
+            max-width: 252px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .mt-best-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #4A148C, #7B1FA2);
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(74, 20, 140, 0.4);
+        }
+
+        .mt-product-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            width: 100%;
+        }
+
+        /* Subscribe Checkbox Styles - Matching upsell1 */
+        .mt-subscribe-checkbox {
+            width: 100%;
+            background: #2D1B4E;
+            border-radius: 8px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .mt-subscribe-checkbox:hover {
+            background: #3D2B5E;
+        }
+
+        .mt-subscribe-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #7B1FA2;
+            cursor: pointer;
+        }
+
+        .mt-subscribe-checkbox label {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        /* Subscription Info Section */
+        .mt-subscription-info {
+            display: none;
+            text-align: center;
+            margin: 4px 0;
+            background: #F3E5F5;
+            border: 2px solid #7B1FA2;
+            border-radius: 8px;
+            width: 100%;
+            padding: 6px 10px;
+        }
+
+        .mt-subscription-info.show {
+            display: block;
+            animation: borderFlicker 2.5s ease-in-out infinite;
+        }
+
+        @keyframes borderFlicker {
+
+            0%,
+            100% {
+                border-color: #7B1FA2;
+            }
+
+            50% {
+                border-color: #311B92;
+            }
+        }
+
+        .mt-subscription-info .congrats {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #4A148C;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .mt-subscription-info p {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #333;
+            line-height: 1.3;
+            text-align: center;
+            margin: 0 0 4px 0;
+        }
+
+        .mt-subscription-info .highlight {
+            font-weight: 700;
+            color: #4A148C;
+        }
+
+        .mt-cancel-badge {
+            display: block;
+            text-align: center;
+            margin: 4px 0 0 0;
+            background: #28a745;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 50px;
+        }
+
+        .mt-product-price {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .mt-product-price h4,
+        .mt-display-price {
+            font-size: 4.5rem;
+            color: #4A148C;
+            font-weight: 800;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .mt-price-info p {
+            font-size: 1.3rem;
+            color: #4A148C;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .mt-savings-badge {
+            background: none;
+            color: #000;
+            padding: 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 8px 0 0 0;
+            display: block;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .mt-buy-now-btn {
+            display: block;
+            margin-top: 8px;
+            width: 100%;
+            max-width: 220px;
+        }
+
+        .mt-buy-now-btn img {
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .mt-buy-now-btn:hover img {
+            transform: scale(1.05);
+        }
+
+        .mt-shipping-text {
+            color: #000;
+            font-size: 1rem;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .mt-shipping-text.free {
+            color: #4A148C;
+        }
+
+        .mt-total-line {
+            font-size: 1.1rem;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .mt-strikethrough {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 0.5rem;
+        }
+
+        .mt-final-price {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .mt-payment-icons {
+            margin: 0.4rem 0;
+            padding: 0;
+        }
+
+        .mt-payment-icons img {
+            width: 100%;
+            max-width: 200px;
+            padding: 0;
+        }
+
+        /* No Thanks Link */
+        .no-thanks-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .no-thanks-link:hover {
+            color: #555;
+        }
+
+        /* Benefits Strip */
+        .benefits-strip {
+            background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+            padding: 40px 20px;
+        }
+
+        .benefits-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            text-align: center;
+            flex: 1 1 150px;
+            max-width: 180px;
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(245, 124, 0, 0.2);
+            border: 2px solid #F57C00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .benefit-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #F57C00;
+        }
+
+        .benefit-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .benefit-item p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 60px 20px;
+            background: #fff;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .reviews-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #4A148C;
+            margin-bottom: 10px;
+        }
+
+        .reviews-header .stars {
+            color: #7B1FA2;
+            font-size: 24px;
+            letter-spacing: 3px;
+        }
+
+        .reviews-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            flex: 1 1 280px;
+            max-width: 320px;
+            background: #F3E5F5;
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(74, 20, 140, 0.15);
+        }
+
+        .review-stars {
+            color: #7B1FA2;
+            font-size: 16px;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #4A148C;
+        }
+
+        .verified-badge {
+            font-size: 11px;
+            color: #28a745;
+            font-weight: 600;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* Bottom CTA Banner */
+        .bottom-cta {
+            background: linear-gradient(135deg, #7B1FA2 0%, #4A148C 100%);
+            padding: 30px 20px;
             text-align: center;
         }
 
-        .ingredients-section h2 {
-            font-size: 28px;
-            color: #0a6bda;
-            margin-bottom: 20px;
+        .bottom-cta p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 15px;
         }
 
-        .ingredients-img-wrapper img {
-            max-width: 700px;
-            /* responsive */
-            height: auto;
-            display: block;
-            /* ensures centering in wrapper */
+        .bottom-cta .highlight {
+            color: #FF9800;
         }
 
-        /* Mobile */
-        @media(max-width:768px) {
-            .upgrade-box img {
-            max-width: 90%; /* smaller on mobile */
-            height: auto;
-            }
-            
-            .upgrade-box {
-            flex: 1 1 100%;
-            max-width: 90%;
+        .bottom-cta .no-thanks-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .bottom-cta .no-thanks-link:hover {
+            color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #4A148C 0%, #311B92 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #F57C00;
+        }
+
+        .footer-disclaimer {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 800px;
+            margin: 0 auto 15px;
+            line-height: 1.6;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .success-header p {
+                font-size: 14px;
             }
 
-            .cta-btn {
+            .success-header .checkmark {
+                width: 30px;
+                height: 30px;
+                margin-right: 8px;
+            }
+
+            .success-header .checkmark svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .timer-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .timer-label {
+                font-size: 14px;
+            }
+
+            .timer-display span {
+                font-size: 24px;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .hero-subtitle {
                 font-size: 15px;
-                padding: 10px 22px;
             }
 
-            .top-section h1 {
+            .trial-badge {
+                font-size: 14px;
+                padding: 8px 20px;
+            }
+
+            .offer-header h2 {
                 font-size: 22px;
             }
 
-            .top-section p {
-                font-size: 16px;
-                line-height: 1.4;
+            .benefits-grid {
+                gap: 25px;
             }
 
-            .sticky-reminder,
-            .bottom-reminder {
-                font-size: 14px;
-                padding: 10px;
+            .benefit-item {
+                flex: 1 1 120px;
             }
 
-            .review-list {
-                flex-direction: column;
+            .reviews-header h2 {
+                font-size: 22px;
+            }
+
+            .review-card {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+
+            .bottom-cta p {
+                font-size: 15px;
+            }
+
+            .footer-links {
                 gap: 15px;
             }
 
-            .ingredients-img-wrapper img {
-            max-width: 450px !important;
-            width: 180% !important;
-            height: auto !important;
-            margin: 0 auto !important;
-            display: block !important;
+            .footer-links a {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mt-product-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .mt-product-header p {
+                font-size: 0.9rem;
+            }
+
+            .mt-product-price h4,
+            .mt-display-price {
+                font-size: 3.5rem;
+            }
+
+            .mt-hanging-tag {
+                width: 90px;
+                right: -10%;
+            }
+
+            .mt-subscribe-checkbox {
+                padding: 10px 12px;
+            }
+
+            .mt-subscribe-checkbox label {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-header p {
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            .success-header .checkmark {
+                width: 26px;
+                height: 26px;
+                margin-right: 6px;
+            }
+
+            .success-header .checkmark svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .wait-badge {
+                font-size: 11px;
+                padding: 6px 15px;
+            }
+
+            .hero-title {
+                font-size: 20px;
+                line-height: 1.3;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+            .hero-section {
+                padding: 35px 15px;
+            }
+
+            .trial-badge {
+                font-size: 12px;
+                padding: 6px 15px;
+            }
+
+            .offer-section {
+                padding: 40px 10px;
+            }
+
+            .offer-header h2 {
+                font-size: 18px;
+            }
+
+            .offer-header p {
+                font-size: 14px;
+            }
+
+            .mt-product-grid {
+                padding: 1rem 0.5rem;
+            }
+
+            .mt-product-card {
+                min-width: 260px;
+            }
+
+            .mt-product-header {
+                padding: 0.5rem 0.8rem;
+            }
+
+            .mt-product-header h3 {
+                font-size: 1.3rem;
+            }
+
+            .mt-product-header p {
+                font-size: 0.8rem;
+            }
+
+            .mt-product-content {
+                padding: 0.8rem;
+            }
+
+            .mt-product-image {
+                padding: 0.4rem;
+            }
+
+            .mt-product-image img {
+                max-width: 200px;
+            }
+
+            .mt-product-price h4,
+            .mt-display-price {
+                font-size: 3rem;
+            }
+
+            .mt-price-info p {
+                font-size: 1.1rem;
+            }
+
+            .mt-savings-badge {
+                font-size: 0.8rem;
+            }
+
+            .mt-buy-now-btn {
+                max-width: 200px;
+            }
+
+            .mt-shipping-text {
+                font-size: 0.9rem;
+            }
+
+            .mt-total-line {
+                font-size: 1rem;
+            }
+
+            .mt-payment-icons img {
+                max-width: 180px;
+            }
+
+            .no-thanks-link {
+                font-size: 12px;
+            }
+
+            .mt-hanging-tag {
+                width: 80px;
+                right: -8%;
+                top: 8px;
+            }
+
+            /* Benefits Section Mobile */
+            .benefits-strip {
+                padding: 30px 15px;
+            }
+
+            .benefits-grid {
+                gap: 20px;
+            }
+
+            .benefit-item {
+                flex: 1 1 45%;
+                max-width: 45%;
+            }
+
+            .benefit-icon {
+                width: 55px;
+                height: 55px;
+            }
+
+            .benefit-icon svg {
+                width: 26px;
+                height: 26px;
+            }
+
+            .benefit-item h4 {
+                font-size: 12px;
+            }
+
+            .benefit-item p {
+                font-size: 11px;
+            }
+
+            /* Reviews Mobile */
+            .reviews-section {
+                padding: 40px 15px;
+            }
+
+            .reviews-header h2 {
+                font-size: 18px;
+            }
+
+            .reviews-header .stars {
+                font-size: 20px;
+            }
+
+            .reviews-grid {
+                gap: 15px;
+            }
+
+            .review-card {
+                padding: 20px 15px;
+            }
+
+            .review-stars {
+                font-size: 14px;
+            }
+
+            .review-text {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .review-author {
+                font-size: 13px;
+            }
+
+            /* Bottom CTA Mobile */
+            .bottom-cta {
+                padding: 25px 15px;
+            }
+
+            .bottom-cta p {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            /* Footer Mobile */
+            .footer {
+                padding: 30px 15px;
+            }
+
+            .footer-links {
+                gap: 10px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-links a {
+                font-size: 12px;
+            }
+
+            .footer-disclaimer {
+                font-size: 10px;
+            }
+        }
+
+        /* Product Label Section */
+        .product-label-section {
+            max-width: 600px;
+            margin: 40px auto 0;
+            text-align: center;
+        }
+
+        .product-label-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: #4A148C;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-label-wrapper {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(74, 20, 140, 0.12);
+            border: 2px solid #E1BEE7;
+            border-top: 4px solid #7B1FA2;
+            overflow: hidden;
+            padding: 15px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .product-label-wrapper:hover {
+            box-shadow: 0 12px 35px rgba(74, 20, 140, 0.2);
+        }
+
+        .product-label-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-label-wrapper:hover img {
+            transform: scale(1.02);
+        }
+
+        .product-label-caption {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #777;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .product-label-section {
+                margin-top: 30px;
+            }
+
+            .product-label-section h3 {
+                font-size: 18px;
+            }
+
+            .product-label-wrapper {
+                padding: 10px;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-label-section {
+                margin-top: 25px;
+            }
+
+            .product-label-section h3 {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+
+            .product-label-wrapper {
+                padding: 8px;
+                border-radius: 8px;
+            }
+
+            .product-label-caption {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .product-label-section h3 {
+                font-size: 14px;
+            }
+
+            .product-label-wrapper {
+                padding: 6px;
+            }
+        }
+
+        /* Extra Small Screens */
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 18px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+
+            .mt-product-price h4,
+            .mt-display-price {
+                font-size: 2.5rem;
+            }
+
+            .mt-product-header h3 {
+                font-size: 1.2rem;
+            }
+
+            .benefit-item {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+
+            .benefits-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .benefit-item {
+                max-width: 200px;
+            }
+        }
+
+        /* Custom Social Proof Notification Styles */
+        .custom-social-proof {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+        }
+
+        .custom-notification {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            max-width: 350px;
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: all 0.4s ease;
+            border-left: 4px solid #7B1FA2;
+        }
+
+        .custom-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .custom-notification-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .custom-notification-image-wrapper {
+            flex-shrink: 0;
+        }
+
+        .custom-notification-image-wrapper img {
+            width: 60px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .custom-notification-content-wrapper {
+            flex: 1;
+        }
+
+        .custom-notification-content {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .custom-notification-content b {
+            color: #4A148C;
+        }
+
+        .custom-notification-content small {
+            color: #888;
+            font-size: 11px;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .custom-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .custom-close:hover {
+            opacity: 1;
+        }
+
+        .custom-close::before,
+        .custom-close::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 2px;
+            background: #666;
+        }
+
+        .custom-close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .custom-close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        @media (max-width: 480px) {
+            .custom-social-proof {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .custom-notification {
+                max-width: 100%;
+                padding: 12px;
+            }
+
+            .custom-notification-image-wrapper img {
+                width: 50px;
+            }
+
+            .custom-notification-content {
+                font-size: 12px;
             }
         }
     </style>
+
+    <!-- BuyGoods Tracking -->
+    <script>var mysrc = "https://tracking.buygoods.com/track/?a=11943&firstcookie=0"+"&tracking_redirect=&referrer="+encodeURIComponent(document.referrer)+"&sessid2="+ReadCookie('sessid2')+"&product=syn1u,syn1us&vid1=&vid2=&vid3=&caller_url="+encodeURIComponent(window.location.href); if(typeof add_to_cart !== 'undefined') { mysrc = mysrc+'&add_to_cart='+add_to_cart; } var newScript = document.createElement('script'); newScript.type = 'text/javascript'; newScript.defer = true; newScript.src = mysrc; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(newScript, s); function ReadCookie(name){name += '='; var parts = document.cookie.split(/;\s*/);for (var i = 0; i < parts.length; i++) {var part = parts[i]; if (part.indexOf(name) == 0) return part.substring(name.length)} return '';}</script>
+
+    <script type="text/javascript">var i = document.createElement("iframe"),oid = new URLSearchParams(window.location.search);i.async = true;i.style="display:none";i.setAttribute("src", "https://buygoods.com/affiliates/go/conversion/iframe/bg?a=11943&t=6bea6c7c7a71a36b83e176af6f6189de&conversion=1&s="+ReadCookie('sessid2')+"&o="+oid.get('order_id_global')+"&ut="+oid.get('token'));document.body.appendChild(i);</script>
 </head>
 
 <body>
 
-    <section class="upsell-wrapper">
-
-        <!-- Sticky Reminder -->
-        <div class="sticky-reminder">
-            Grab your Neurozenix™ Focus+ today <br> 1 bottle for just $39 or 3 bottles for only $99. <br>Sharper focus, clearer thinking,
-            and a limited-time discount!
-        </div>
-
-        <!-- Timer -->
-        <div class="timer-bar">
-            ⏳ Wait! Your order is not completed yet. Offer Expires In: <span id="countdown">05:00</span>
-        </div>
-
-        <!-- Top Info -->
-        <div class="container top-section">
-            <h1>Brain Enhancement Formula (Neurozenix™ Focus+) <br> A Must Have for Men Over 35</h1>
-            <p>As men age, prostate issues, stress, and hormone imbalance directly affect mental clarity, focus, and memory. <br>That’s why
-            Neurozenix™ Focus+ is the perfect companion to your prostate or weight-loss supplement <br> it supports the part of your
-            health most people ignore: your brain. </p><br>
-            <p class="upsell-intro">
-                Neurozenix™ is a next-generation cognitive formula designed to restore sharp focus, boost mental clarity, and support
-                long-term memory , all using science-backed nootropics your brain needs as you age.
-            </p>
-
-            <h3>MetaTrim BHB™: </h3>
-            <p>Converts fat into energy, curbs cravings, keeps you active.</p>
-
-            <h3>ProstaPrime Support™:</h3>
-            <p> Supports prostate & bladder health, boosts overall vitality.</p>
-
-            <h3>Neurozenix™ Focus+:</h3>
-            <p> Elevate Your Mind. Sharpen Focus. Boost Clarity..</p>
-
-            <h3>Together:</h3>
-            <p> Fat gone. Flow better. Think sharper. Feel unstoppable. 🔥</p>
-            <br>
-            <h1>
-                <p>Why Men Taking Prostate or Weight Loss Supplements Need This Too🔥:</p>
-            </h1>
-            
-            <p>Prostate discomfort, disturbed sleep, stress, and low energy can slow down your thinking and weaken memory.Neurozenix™ helps counter all of that by delivering advanced nutrients that protect neurons, enhance concentration, and
-            keep your mind sharp and active every day.</p>
-            <h1>
-                <p>3-Way Brain Support for Men🔥:</p>
-            </h1>
-            <ul style="text-align:left; max-width:600px; margin:15px auto;">
-                <li>⚡ Improves focus & mental energy so you stay sharp throughout the day.</li>
-                <li>🧠 Supports long-term memory that naturally declines with age.</li>
-                <li>🌿 Reduces brain fog & stress, helping you think clearly and make better decisions.</li>
-                
-            </ul>
-        </div>
-
-        <!-- Ingredients -->
-        <div class="ingredients-section">
-            <h2>Key Ingredients</h2>
-            <div class="ingredients-img-wrapper">
-                <img src="lib/img/creative1.png" alt="MetaTrim BHB Ingredients">
-            </div>
-        </div>
-<!-- Ingredients -->
-<div class="ingredients-section">
-    
-    <div class="ingredients-img-wrapper">
-        <img src="lib/img/labels (1).png" alt="MetaTrim BHB Ingredients">
+    <!-- Success Header Banner -->
+    <div class="success-header">
+        <span class="checkmark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
+        </span>
+        <p>Your Order Is Complete!</p>
+        <span class="page-indicator">Upsell-3</span>
     </div>
-</div>
-        <!-- Upgrade Boxes -->
-        <div class="container upgrades">
 
-            <!-- 2 Bottle -->
-            <div class="upgrade-box">
-                <h2>1 Bottle Upgrade</h2>
-                <img src="lib/img/greenbaseneuroxen-8b15a821 (1).png" alt="2 Bottle MetaTrim BHB™">
-                <p>Regular Price: <span class="cut">$69</span> <strong>$39 Today!</strong></p>
-                <a href="#" class="cta-btn">Add 1 Bottles for $39</a><br>
-                <a href="#" class="no-thanks">No thanks, continue</a>
+    <!-- Timer Section -->
+    <div class="timer-section">
+        <div class="timer-container">
+            <span class="timer-label">Special Offer Expires In:</span>
+            <div class="timer-display">
+                <span id="countdown">05:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content container">
+            <span class="wait-badge">Add Daily Use Products to Your Order!</span>
+            <!-- ORIGINAL - Pending BuyGoods Approval to restore
+            <h1 class="hero-title"><span class="free-text">FREE! FREE! FREE!</span></h1>
+            <p class="hero-subtitle">Just Pay Minor <span class="highlight">Shipping Charges</span></p>
+            <span class="trial-badge">FREE Trial Offer</span>
+            -->
+            <h1 class="hero-title"><span class="free-text">Special Trial Offer!</span></h1>
+            <p class="hero-subtitle">Try SynaptoFlow with <span class="highlight">Shipping On Us</span></p>
+            <span class="trial-badge">Trial Offer</span>
+        </div>
+    </section>
+
+    <!-- Offer Section -->
+    <section class="offer-section">
+        <div class="container">
+            <div class="offer-header">
+                <!-- ORIGINAL - Pending BuyGoods Approval to restore
+                <h2>Try SynaptoFlow Risk-Free!</h2>
+                -->
+                <h2>Try SynaptoFlow Today!</h2>
+                <p>Advanced brain health & cognitive support for memory, focus & mental clarity</p>
             </div>
 
-            <!-- 3 Bottle Most Popular -->
-            <div class="upgrade-box highlight most-popular">
-                <div class="tag">Most Popular</div>
-                <h2>3 Bottle Upgrade</h2>
-                <img src="lib/img/threebottles(1).png" alt="3 Bottle MetaTrim BHB™"><br><br><br><br>
-                <p>Regular Price: <span class="cut">$177</span> <strong>$99 Today!</strong></p>
-                <a href="#" class="cta-btn">Yes! Add 3 Bottles for $99</a><br>
-                <a href="#" class="no-thanks">No thanks, continue</a>
+            <!-- PRICING CARD FOR SynaptoFlow TRIAL -->
+            <div class="mt-product-grid">
+                <!-- 1 Bottle Trial -->
+                <div class="mt-product-card mt-featured">
+                    <div class="mt-product-header">
+                        <h3>1 BOTTLE</h3>
+                        <p>30 DAY SUPPLY</p>
+                        <span class="mt-trial-label">TRIAL OFFER</span>
+                    </div>
+                    <div class="mt-product-content">
+                        <img src="pricing-assets/tag.png" class="mt-hanging-tag" alt="Tag">
+                        <div class="mt-product-image">
+                            <img src="single_bottle.webp" alt="SynaptoFlow 1 Bottle">
+                            <span class="mt-best-badge">TRY IT!</span>
+                        </div>
+                        <div class="mt-product-details">
+                            <!-- Subscribe Checkbox -->
+                            <div class="mt-subscribe-checkbox">
+                                <input type="checkbox" id="subscribe-checkbox">
+                                <label for="subscribe-checkbox">Subscribe & Go Hassle Free</label>
+                            </div>
+                            <div class="mt-product-price">
+                                <!-- ORIGINAL - Pending BuyGoods Approval to restore
+                                <h4 class="mt-display-price">$0</h4>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
+                            </div>
+                            <div class="mt-subscription-info" id="sub-info-trial">
+                                <div class="congrats">Congrats!</div>
+                                <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span
+                                        class="highlight">$69+Shipping</span> will start delivering <span
+                                        class="highlight">every Month</span>.</p>
+                                <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                            </div>
+                            <div class="mt-savings-badge">YOU SAVE $159!</div>
+                            <a href="#" class="mt-buy-now-btn" id="buy-btn-trial">
+                                <img src="lib/img/buy-now2.webp" alt="Buy Now" id="buy-img-trial">
+                            </a>
+                            <p class="mt-shipping-text">+ $19.99 Shipping</p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span
+                                    class="mt-final-price">$19.99</span></p>
+                                -->
+                                <h4 class="mt-display-price">$19.99</h4>
+                                <div class="mt-price-info">
+                                    <p>/Bottle</p>
+                                </div>
+                            </div>
+                            <!-- Subscription Info -->
+                            <div class="mt-subscription-info" id="sub-info-trial">
+                                <div class="congrats">Congrats!</div>
+                                <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span
+                                        class="highlight">$69+Shipping</span> will start delivering <span
+                                        class="highlight">every Month</span>.</p>
+                                <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
+                            </div>
+                            <div class="mt-savings-badge">YOU SAVE $159!</div>
+
+                            <a href="#"
+                                class="mt-buy-now-btn" id="buy-btn-trial">
+                                <img src="lib/img/buy-now2.webp" alt="Buy Now" id="buy-img-trial">
+                            </a>
+                            <p class="mt-shipping-text free">Shipping: Included</p>
+                            <p class="mt-total-line">TOTAL: <span class="mt-strikethrough">$179</span> <span
+                                    class="mt-final-price">$19.99</span></p>
+                            <div class="mt-payment-icons"><img src="lib/img/cards.webp" alt="Payment Methods"></div>
+                            <a href="#" class="no-thanks-link">No thanks,
+                                continue</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Label -->
+            <div class="product-label-section">
+                <h3>What's Inside the Bottle</h3>
+                <div class="product-label-wrapper">
+                    <img src="label.jpg" alt="SynaptoFlow Supplement Facts Label - Ingredients & Dosage Information">
+                </div>
+                <p class="product-label-caption">Full supplement facts & ingredient transparency</p>
             </div>
 
         </div>
+    </section>
 
-        <!-- Reviews -->
-        <div class="container reviews">
-            <h2>Trusted Customer Reviews</h2>
-            <div class="review-list">
-                <div class="review">
-                    <p>“Within weeks, my focus sharpened and my memory improved. Neurozenix™ Focus+ made brain health simple and effective! 🧠✨”</p>
-                    <span>- Michael T • Austin, Texas</span>
+    <!-- Benefits Strip -->
+    <section class="benefits-strip">
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
                 </div>
-                <div class="review">
-                    <p>“My memory is sharper, my focus is clearer, and even my doctor noticed the improvement! Neurozenix™ Focus+ is amazing.”</p>
-                    <span>- Jennifer C • Seattle, Washington</span>
+                <h4>Sharp Memory</h4>
+                <p>Enhanced recall</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
                 </div>
-                <div class="review">
-                    <p>“I love that it’s all-natural. Safe, effective support for my brain. My focus and memory have never been better! 🌿🧠.”</p>
-                    <span>- Emily P • Denver, Colorado</span>
+                <h4>Laser Focus</h4>
+                <p>Better concentration</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M17.66 7.93L12 2.27 6.34 7.93c-3.12 3.12-3.12 8.19 0 11.31C7.9 20.8 9.95 21.58 12 21.58s4.1-.78 5.66-2.34c3.12-3.12 3.12-8.19 0-11.31zM12 19.59c-1.6 0-3.11-.62-4.24-1.76C6.62 16.69 6 15.19 6 13.59s.62-3.11 1.76-4.24L12 5.1v14.49z" />
+                    </svg>
+                </div>
+                <h4>Mental Clarity</h4>
+                <p>Clear thinking</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                    </svg>
+                </div>
+                <h4>Brain Energy</h4>
+                <p>Mental vitality</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="reviews-header">
+                <h2>What Our Customers Say</h2>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"My memory has improved so much! After just a month on SynaptoFlow, I can
+                        recall names and details effortlessly. My focus at work is razor-sharp too!"</p>
+                    <span class="review-author">- Jennifer W.</span>
+                    <span class="verified-badge">&#10003; Verified Buyer</span>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"I've struggled with brain fog for years. SynaptoFlow has been a game-changer
+                        for my mental clarity. Plus my energy levels are up - win win!"</p>
+                    <span class="review-author">- Marcus T.</span>
+                    <span class="verified-badge">&#10003; Verified Buyer</span>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"The trial offer made it easy to try. Now I'm a subscriber! My focus is
+                        better, my thinking is clearer, and I feel mentally sharper overall. Highly recommend!"</p>
+                    <span class="review-author">- Lisa M.</span>
+                    <span class="verified-badge">&#10003; Verified Buyer</span>
                 </div>
             </div>
         </div>
+    </section>
 
+    <!-- Bottom CTA Banner -->
+    <div class="bottom-cta">
+        <!-- ORIGINAL - Pending BuyGoods Approval to restore
+        <p>Don't miss this <span class="highlight">exclusive trial offer</span>! Try SynaptoFlow for just <span
+                class="highlight">$19.99 shipping</span>!</p>
+        -->
+        <p>Don't miss this <span class="highlight">exclusive trial offer</span>! Try SynaptoFlow for just <span
+                class="highlight">$19.99</span> with shipping included!</p>
+        <a href="#" class="no-thanks-link">No thanks, I'll pass on this
+            exclusive offer</a>
+    </div>
 
-        <div class="bottom-reminder">
-            Grab your Neurozenix™ Focus+ today <br> 1 bottle for just $39 or 3 bottles for only $99. <br>Sharper focus, clearer thinking,
-                        and a limited-time discount!
-            <br><a href="#" class="no-thanks">No thanks, continue</a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="Terms & Conditions.html" target="_blank">Terms & Conditions</a>
+            <a href="Privacy policy.html" target="_blank">Privacy Policy</a>
+            <a href="Return Policy.html" target="_blank">Return Policy</a>
+            <a href="contact.html" target="_blank">Contact Us</a>
         </div>
+        <p class="footer-disclaimer">
+            BuyGoods is the retailer of products on this site. BuyGoods is a registered trademark of BuyGoods Inc.
+            BuyGoods' role as retailer does not constitute an endorsement, approval or review of these products or any
+            claim, statement or opinion used in promotion of these products.
+        </p>
+        <p class="footer-disclaimer">
+            Statements on this website have not been evaluated by the Food and Drug Administration. Products are not
+            intended to diagnose, treat, cure or prevent any disease. If you are pregnant, nursing, taking medication,
+            or have a medical condition, consult your physician before using our products.
+        </p>
+        <p class="footer-disclaimer">
+            Testimonials, case studies, and examples found on this page are results that have been forwarded to us by
+            users of SynaptoFlow products and related products are not intended to represent or guarantee that anyone
+            will achieve the same or similar results.
+        </p>
+    </footer>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-    /* TIMER */
-    let t=300;
-    const countdownEl=document.querySelector('.timer-bar span');
-    setInterval(()=>{
-        let m=String(Math.floor(t/60)).padStart(2,'0');
-        let s=String(t%60).padStart(2,'0');
-        countdownEl.textContent=`${m}:${s}`;
-        if(t>0) t--;
-    },1000);
+    <span id=disclaimer></span>
+    <script src="https://display.buygoods.com/v1/disclaimer?id=disclaimer&account_id=11943"></script>
 
-});
-        </script>
+    <!-- Timer Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let t = 300; // 5 minutes in seconds
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                let minutes = String(Math.floor(t / 60)).padStart(2, '0');
+                let seconds = String(t % 60).padStart(2, '0');
+                countdownEl.textContent = `${minutes}:${seconds}`;
+                if (t > 0) t--;
+                else clearInterval(timerInterval);
+            }, 1000);
+        });
+    </script>
+
+    <!-- Subscribe Toggle Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const checkbox = document.getElementById('subscribe-checkbox');
+            const buyBtn = document.getElementById('buy-btn-trial');
+            const subscriptionInfo = document.getElementById('sub-info-trial');
+
+            // URLs for subscription and one-time purchase
+            const subscribeUrl = "#";
+            const oneTimeUrl = "#";
+
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    buyBtn.href = subscribeUrl;
+                    subscriptionInfo.classList.add('show');
+                } else {
+                    buyBtn.href = oneTimeUrl;
+                    subscriptionInfo.classList.remove('show');
+                }
+            });
+
+            // Make entire checkbox wrapper clickable
+            document.querySelector('.mt-subscribe-checkbox').addEventListener('click', function (e) {
+                if (e.target.tagName !== 'INPUT') {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+    </script>
+
+    <!-- Social Proof Popup -->
+    <link href="popup/css/style1.css" type="text/css" rel="stylesheet">
+    <section class="custom-social-proof">
+        <div class="custom-notification">
+            <div class="custom-notification-container">
+                <div class="custom-notification-image-wrapper">
+                    <img src="single_bottle.webp" id="notify-image" alt="Product">
+                </div>
+                <div class="custom-notification-content-wrapper">
+                    <p class="custom-notification-content">
+                        <span id="notify-customer">Jennifer W</span> - <span id="notify-state">CA</span><br> Purchased
+                        <strong>Trial</strong> of <b>SynaptoFlow</b> <small><span id="notify-ago">3 minutes
+                                ago</span></small>
+                    </p>
+                </div>
+            </div>
+            <div class="custom-close"></div>
+        </div>
+    </section>
+
+    <!-- Custom Social Proof Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const notifications = [
+                { name: 'Jennifer W', state: 'CA', ago: '2 minutes ago' },
+                { name: 'Marcus T', state: 'TX', ago: '4 minutes ago' },
+                { name: 'Lisa M', state: 'FL', ago: '7 minutes ago' },
+                { name: 'David R', state: 'NY', ago: '11 minutes ago' },
+                { name: 'Sarah P', state: 'OH', ago: '14 minutes ago' },
+                { name: 'Kevin B', state: 'WA', ago: '17 minutes ago' },
+                { name: 'Nicole H', state: 'AZ', ago: '21 minutes ago' },
+                { name: 'Chris C', state: 'IL', ago: '24 minutes ago' },
+                { name: 'Rachel S', state: 'GA', ago: '27 minutes ago' },
+                { name: 'Mike J', state: 'NC', ago: '31 minutes ago' }
+            ];
+
+            let currentIndex = 0;
+            const popup = document.querySelector('.custom-social-proof');
+            const notification = document.querySelector('.custom-notification');
+
+            function showNotification() {
+                const data = notifications[currentIndex];
+
+                document.getElementById('notify-customer').textContent = data.name;
+                document.getElementById('notify-state').textContent = data.state;
+                document.getElementById('notify-ago').textContent = data.ago;
+
+                notification.classList.add('show');
+
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    currentIndex = (currentIndex + 1) % notifications.length;
+                }, 5000);
+            }
+
+            // Initial delay then show first notification
+            setTimeout(() => {
+                showNotification();
+                // Then show every 12 seconds
+                setInterval(showNotification, 12000);
+            }, 3000);
+
+            // Close button
+            document.querySelector('.custom-close').addEventListener('click', function () {
+                notification.classList.remove('show');
+            });
+        });
+    </script>
+
+    <div class="popup-loading-wrapper" style="display:none;">
+        <div class="popup">
+            <figure class="product-image"></figure>
+            <p>Reserving Your Bottle Of</p>
+            <h2>SynaptoFlow</h2>
+            <img src="popup/bmf/assets/css/img/loading.gif" alt="" class="loading-image">
+        </div>
+    </div>
+
+    <p id="loading-indicator" style="display:none;">Processing...</p>
+    <p id="crm-response-container" style="display:none;">Limelight messages will appear here...</p>
+
+    <script type="text/javascript" src="popup/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="popup/js/slick.min.js"></script>
+    <script type="text/javascript" src="popup/js/social-proof.js"></script>
+    <script type="text/javascript" src="popup/js/scripts.js"></script>
+
+    <!-- URL Parameter Preservation Scripts -->
+    <script>
+        // Preserve URL parameters across page navigation
+        (function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var paramString = urlParams.toString();
+
+            if (paramString) {
+                var links = document.querySelectorAll('a[href]');
+
+                links.forEach(function (link) {
+                    var href = link.getAttribute('href');
+
+                    if (!href ||
+                        href.startsWith('http://') ||
+                        href.startsWith('https://') ||
+                        href.startsWith('mailto:') ||
+                        href.startsWith('tel:') ||
+                        href.startsWith('javascript:') ||
+                        href.startsWith('#')) {
+                        return;
+                    }
+
+                    var separator = href.includes('?') ? '&' : '?';
+                    link.setAttribute('href', href + separator + paramString);
+                });
+            }
+        })();
+    </script>
+    <script>
+        // Preserve ALL URL parameters on checkout/buy buttons (with redirect parameter support)
+        (function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var paramString = urlParams.toString();
+
+            if (!paramString) return;
+
+            function appendParams(url) {
+                if (!url) return url;
+
+                try {
+                    var urlObj = new URL(url);
+                    var redirectParam = urlObj.searchParams.get('redirect');
+
+                    if (redirectParam) {
+                        try {
+                            var decodedRedirect = atob(redirectParam);
+                            var separator = decodedRedirect.includes('?') ? '&' : '?';
+                            var updatedRedirect = decodedRedirect + separator + paramString;
+                            urlObj.searchParams.set('redirect', btoa(updatedRedirect));
+                        } catch (e) {
+                            var separator = redirectParam.includes('?') ? '&' : '?';
+                            urlObj.searchParams.set('redirect', redirectParam + separator + paramString);
+                        }
+                    }
+
+                    paramString.split('&').forEach(function (param) {
+                        var parts = param.split('=');
+                        if (parts[0] && parts[1]) {
+                            urlObj.searchParams.set(parts[0], parts[1]);
+                        }
+                    });
+
+                    return urlObj.toString();
+                } catch (e) {
+                    var separator = url.includes('?') ? '&' : '?';
+                    return url + separator + paramString;
+                }
+            }
+
+            function updateAllLinks() {
+                var externalLinks = document.querySelectorAll('a[href^="http"], a[href^="https"]');
+                externalLinks.forEach(function (link) {
+                    var href = link.getAttribute('href');
+                    link.setAttribute('href', appendParams(href));
+                });
+
+                var dataUrlElements = document.querySelectorAll('[data-url^="http"], [data-url^="https"]');
+                dataUrlElements.forEach(function (element) {
+                    var dataUrl = element.getAttribute('data-url');
+                    element.setAttribute('data-url', appendParams(dataUrl));
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updateAllLinks);
+            } else {
+                updateAllLinks();
+            }
+        })();
+    </script>
 
 </body>
 
-</html>
-
-
-<link href="popup/css/style1.css" type="text/css" rel="stylesheet">
-<section class="custom-social-proof">
-    <div class="custom-notification">
-        <div class="custom-notification-container">
-            <div class="custom-notification-image-wrapper">
-                <img src="popup/img/img/3bottle.png">
-            </div>
-            <div class="custom-notification-content-wrapper">
-                <p class="custom-notification-content">
-                    <span id="notify-customer">Eli H</span> - <span id="notify-state">TX</span><br> Purchased <strong><span id="notify-quantity">7</span></strong> Bottle(s) of <b>Neurozenix™ Focus+</b> <small><span id="notify-ago">9 minutes ago</span></small>
-                </p>
-            </div>
-        </div>
-        <div class="custom-close"></div>
-    </div>
-</section>
-
-<div class="popup-loading-wrapper" style="display:none;">
-    <div class="popup">
-        <figure class="product-image"></figure>
-        <p>Reserving Your Bottle Of</p>
-        <h2>Neurozenix™ Focus+</h2>
-        <div class="loading-image" style="width:40px;height:40px;margin:0 auto;border:4px solid #f3f3f3;border-top:4px solid #3498db;border-radius:50%;animation:spin 1s linear infinite;"></div><style>@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}</style>
-    </div>
-</div>
-
-<p id="loading-indicator" style="display:none;">Processing...</p>
-<p id="crm-response-container" style="display:none;">Limelight messages will appear here...</p>
-
-<script type="text/javascript" src="popup/js/jquery-3.5.1.min.js"></script> 
-<script type="text/javascript" src="popup/js/slick.min.js"></script>
-<script type="text/javascript" src="popup/js/social-proof.js"></script>
-<script type="text/javascript" src="popup/js/scripts.js"></script>
-<script type="text/javascript" src="popup/js/jquery.mask.min5e1f.js?v=2"></script>	
-
-<script type="text/javascript">
-$(document).ready(function () {
-	$('#fields_phone').mask('000-000-0000');
-	
-  	$('.single-item').slick({
-		arrows: false,
-		dots: true,
-		autoplay: true,
-		autoplaySpeed: 2600,
-  	});
-  
-	/*$('.loading-btn').click(function(e) {
-		$('.popup-loading-wrapper').show();
-		setTimeout(function() {
-		  $('#lpFrm').submit();
-		}, 2000);
-		return false
-	});*/
-});
-</script>
-<script type="text/javascript" src="popup/bmf/assets/js/jquery.autocomplete.min.js"></script>
-<script>
-var smtKey = '';
-var smtAuto = 0;
-var smtVerify = 0;
-var smartUrl = "https://us-autocomplete-pro.api.smartystreets.com/lookup?key=" + smtKey + "&prefer_geolocation=city";
-var lastAddress1 = '';
-var lastAddress2 = '';
-
-if(typeof smtKey !== "undefined" && smtKey != '') {
-	function submitAddress2() {
-		if(lastAddress1 == '') {
-			lastAddress1 = $('input[name="fields_address1"]').val();
-			lastAddress1.replace('"', '');
-		}
-		lastAddress2 = $('input[name="fields_address2"]').val();
-		lastAddress2.replace('"', '');
-		var combAddr = lastAddress1 + ', ' + lastAddress2;
-		$('input[name="fields_address1"]').val(combAddr);
-		$('#app_common_modal').remove();
-		$('#theForm').trigger('submit');
-		return false;
-	}
-
-	var utils2 = (function () {
-		return {
-			escapeRegExChars: function (value) {
-				return value.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
-			},
-			createNode: function (containerClass) {
-				var div = document.createElement('div');
-				div.className = containerClass;
-				div.style.position = 'absolute';
-				div.style.display = 'none';
-				return div;
-			}
-		};
-	}());
-
-	$(document).ready(function(ee) {
-		if(typeof smtAuto !== "undefined" && smtAuto == 1) {
-			$('#fields_address1').autocomplete({
-				serviceUrl: smartUrl,
-				paramName: "search",
-				ajaxSettings: {},
-				minChars: 2,
-				deferRequestBy: 400,
-				transformResult: function(response) {
-					if (typeof response === "undefined") { 
-						return {
-							"suggestions": []
-						};
-					} else if (typeof response == "string") { 
-						respJson = JSON.parse(response); 
-					} else {
-						respJson = response;
-					}
-					if(!(respJson) || typeof respJson.suggestions === "undefined" || respJson.suggestions == null) {
-						return {
-							"suggestions": []
-						};
-					}
-					
-					return {
-						suggestions: $.map(respJson.suggestions, function(dataItem) {
-							return { value: dataItem.street_line + (dataItem.secondary != '' && dataItem.entries == 1 ? (', ' + dataItem.secondary) : '') , data: dataItem};
-						})
-					};
-				},
-				formatResult: function (suggestion, currentValue) {
-					if(typeof suggestion.data === "undefined") {
-						return "";
-					} else {
-						if (!currentValue) {
-							return suggestion.data.text;
-						}
-				
-						var pattern = '(' + utils2.escapeRegExChars(currentValue) + ')';
-						
-						var addrfull = suggestion.data.street_line + (
-							suggestion.data.secondary != '' ? ( 
-								suggestion.data.entries > 1 ? (', ' + suggestion.data.secondary + ' (' + suggestion.data.entries + ' entries)') : (', ' + suggestion.data.secondary) 
-							) : '') + ', ' + suggestion.data.city + ' ' + suggestion.data.state + ' ' + suggestion.data.zipcode;  
-				
-						return addrfull
-							.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>')
-							.replace(/&/g, '&amp;')
-							.replace(/</g, '&lt;')
-							.replace(/>/g, '&gt;')
-							.replace(/"/g, '&quot;')
-							.replace(/&lt;(\/?strong)&gt;/g, '<$1>');
-					}
-				},
-				onSelect: function (suggestion) {
-					if($('#fields_city').length == 1 && (suggestion.data.city)) {
-						$('#fields_city').val(suggestion.data.city);
-					}
-					if($('#fields_state').length == 1 && (suggestion.data.state)) {
-						$('#fields_state').val(suggestion.data.state);
-					}
-					if($('#fields_zip').length == 1 && (suggestion.data.zipcode)) {
-						$('#fields_zip').val(suggestion.data.zipcode);
-					}
-								
-				}
-			});
-		}
-	});
-
-}
-
-
-$('form.form123').find('#fields_email').on('change keyup', function() {
-	var emailReg2 = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-	if ( !emailReg2.test($('#fields_email').val()) ) {
-		$(this).addClass('has-error');
-		$(this).removeClass('no-error');
-	}
-});
-
-$('form.form123').find('#fields_zip').on('change keyup', function() {
-	var zip = $('#fields_zip').val();
-	if ((zip.length)< 5 ){
-		$(this).addClass('has-error');
-		$(this).removeClass('no-error');
-	}
-});
-
-$('form#theForm').find('input, select, textarea').on('change keyup', function() {
-	$('form#theForm').find('input, select').each(function() {
-		if($(this).val()==''){
-			$(this).addClass('has-error');
-			$(this).removeClass('no-error');
-		}else{
-			$(this).removeClass('has-error');
-			$(this).addClass('no-error');	
-		}
-	});
-});
-
-
-function validate_optin_form(){
-	ShowExitPopup = false;
-	internal = 1;
-	isExit=false;
-
-	var errors = new Array();
-	var phonefilter = /^([0-9\-\+\(\)]{8,22})+$/ ;
-	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-	//var is_terms_condtion_cheked = $('#agree_terms').prop('checked'); 
-	//console.log($('#fields_fname').val().replace(/^\s+|\s+$/g,"")==''));
-
-	$("input").removeClass("has-error");
-	
-	if ($('#fields_fname').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your first name');
-		$('#fields_fname').addClass("has-error");
-	}
-	if ($('#fields_lname').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your last name');
-		$('#fields_lname').addClass("has-error");
-	}
-	if ($('#fields_address1').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please select your address');
-		$('#fields_address1').addClass("has-error");
-	}
-	if ($('#fields_city').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your city');
-		$('#fields_city').addClass("has-error");
-	}
-	if ($('#country').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your country');
-		$('#country').addClass("has-error");
-	}
-	if ($('#fields_state').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your State');
-		$('#fields_state').addClass("has-error");
-	}
-	if ($('#fields_zip').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your Zip Code');
-		$('#fields_zip').addClass("has-error");
-	}
-	if ($('#fields_phone').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your phone number');
-		$('#fields_phone').addClass("has-error");
-	}
-	if ($('#fields_email').val().replace(/^\s+|\s+$/g,"")=='') {
-		errors.push('Please enter your email address');
-		$('#fields_email').addClass("has-error");
-	} else if ( !emailReg.test($('#fields_email').val()) ) {
-		errors.push('Please enter valid email address');
-		$('#fields_email').addClass("has-error");
-	}
-	
-	/*if($('#agree_terms:checked').length == 0) {
-	errors.push('Please accept our terms and condition');
-	}*/
-	
-	
-	if(typeof smtKey !== "undefined" && smtKey != '' && typeof smtVerify !== "undefined" && smtVerify == 1) {
-		if (errors.length == 0 ) {
-			var addr = $('input[name="fields_address1"]').val() + ', ' + $('input[name="fields_city"]').val() + ' ' + $('select[name="fields_state"]').val() + ' ' + $('input[name="fields_zip"]').val() ;
-			var errmsg = "";
-			var vcode = "";
-			var apiUrl = "https://us-street.api.smartystreets.com/street-address"
-				+ "?street=" + encodeURI(addr)
-				+ "&key=" + smtKey;
-			$.ajax({
-			  url: apiUrl,
-			  method: "get",
-			  async: false,
-			  beforeSend: function( xhr ) {
-			  }
-			})
-			.done(function(resData) {
-				var errmsg = "";
-				if(!(resData) || !(resData[0]) || !(resData[0].analysis) || !(resData[0].analysis.dpv_match_code)) {
-					vcode = "";
-				} else {
-					vcode = resData[0].analysis.dpv_match_code;
-				}
-				
-				if(vcode != '' && vcode != 'N' && vcode != 'D') {
-					if(typeof resData[0].delivery_line_1 !== "undefined" && resData[0].delivery_line_1 != "") {
-						$('input[name="fields_address1"]').val(resData[0].delivery_line_1);
-						lastAddress1 = $('input[name="fields_address1"]').val();
-					}
-					
-					if(typeof resData[0].components !== "undefined") {
-						if(typeof resData[0].components.city_name !== "undefined" && resData[0].components.city_name != "") {
-							$('input[name="fields_city"]').val(resData[0].components.city_name);
-						}
-						if(typeof resData[0].components.zipcode !== "undefined" && resData[0].components.zipcode != "") {
-							$('input[name="fields_zip"]').val(resData[0].components.zipcode);
-						}
-						if(typeof resData[0].components.state_abbreviation !== "undefined" && resData[0].components.state_abbreviation != "") {
-							$('select[name="fields_state"]').val(resData[0].components.state_abbreviation);
-						}
-					}
-					
-				}
-			})
-			.fail(function() {
-			})
-			.always(function() {
-			});
-			
-			
-			if(vcode == '') {
-				errors.push('Address could not be found');
-			} else if(vcode == 'N') {
-				errors.push('Address does not seem to be deliverable');
-			} else if(vcode == 'D') {
-				
-				var html = '';
-				html += '<div id="app_common_modal">';
-				html += '<div class="app_modal_body" style="text-align:center;min-height:150px;"><a href="javascript:void(0);" id="app_common_modal_close">X</a>';
-	
-				html += '<div>'
-					+ '<form method="get" action="" onSubmit="return submitAddress2();">'
-					+ '<h4>' + "Please enter your Apartment/Suite/Unit # to proceed" + '</h4>'
-					+ '<input type="text" name="fields_address2" id="fields_address2" placeholder="" autocomplete="off" required style="width:80%;line-height:22px;margin:10px;padding:5px" maxlength="50" value="'+ (lastAddress2 != '' ? lastAddress2 : '') +'" data-error-message="Please enter your address!" />'
-					+ '<button type="submit" style="width:40%;height:30px;line-height:22px;cursor:pointer;">OK</button>'
-					+ '</form>';
-					+ '</div>';
-	
-				html += '</div>';
-				html += '</div>';
-				
-				if (!$('#app_common_modal').length) {
-					$('body').append(html);
-				}
-				$('#app_common_modal').fadeIn(500);
-				return false;
-				
-			}
-			
-		}
-	}
-	
-	
-	if (errors.length == 0 ) {
-		$('.popup-loading-wrapper').show();
-		$('#fields_phone').unmask();
-		document.getElementById('theForm').submit();
-		return false;
-	} else {
-		var li = '';
-		$.each(errors, function(key, value) {
-			li += '<li>' + value + '</li>';
-		});
-	
-		var html = '';
-		html += '<div id="error_handler_overlay">';
-		html += '<div class="error_handler_body"><a href="javascript:void(0);" id="error_handler_overlay_close">X</a><ul>' + li + '</ul></div>';
-		html += '</div>';
-	
-		$('body').append(html);
-	
-		$('#error_handler_overlay').fadeIn(500);
-		return false;
-	}
-}
-
-
-$(function() {
-	$(window).keydown(function(e) {
-		if (e.which === 27 && $('#error_handler_overlay').length) {
-			$('#error_handler_overlay').remove();
-		}
-	});
-	
-	$(document).off('click', '#error_handler_overlay');
-	$(document).on('click', '#error_handler_overlay', function() {
-		$(this).remove();
-	});
-
-	$(document).off('click', '#error_handler_overlay_close');
-	$(document).on('click', '#error_handler_overlay_close', function() {
-		$('#error_handler_overlay').remove();
-	});
-
-	$(document).on('click', '#app_common_modal_close', function() {
-		//     alert('close');
-		$('#app_common_modal').remove();
-	});	
-});
-
-</script> 
-<script>
-function onlyNumbers(e,type)
-{
-	var keynum;
-	var keychar;
-	var numcheck;
-	if(window.event) // IE
-	{
-		keynum = e.keyCode;
-	}
-	else if(e.which) // Netscape/Firefox/Opera
-	{
-		keynum = e.which;
-	}
-	keychar = String.fromCharCode(keynum);
-	numcheck = /\d/;
-	
-	switch (keynum){
-		case 8:    //backspace
-		case 9:    //tab
-		case 35:   //end
-		case 36:   //home
-		case 37:   //left arrow
-		case 38:   //right arrow
-		case 39:   //insert
-		case 45:   //delete
-		case 46:   //0
-		case 48:   //1
-		case 49:   //2
-		case 50:   //3
-		case 51:   //4
-		case 52:   //5
-		case 54:   //6
-		case 55:   //7
-		case 56:   //8
-		case 57:   //9
-		case 96:   //0
-		case 97:   //1
-		case 98:   //2
-		case 99:   //3
-		case 100:  //4
-		case 101:  //5
-		case 102:  //6
-		case 103:  //7
-		case 104:  //8
-		case 105:  //9
-			result2 = true;
-			break;
-		case 109: // dash -
-			if (type == 'phone'){
-				result2 = true;
-			} else {
-				result2 = false;
-			}
-			break;
-		default:
-			result2 = numcheck.test(keychar);
-			break;
-	}
-	
-	return result2;
-}
-
-function openNewWindow(page_url, type, window_name, width, height, top, left, features) {
-    if (!type) {
-        type = 'popup';
-    }
-
-    if (!width) {
-        width = 480;
-    }
-
-    if (!height) {
-        height = 480;
-    }
-
-    if (!top) {
-        top = 50;
-    }
-
-    if (!left) {
-        left = 50;
-    }
-
-    if (!features) {
-        features = 'resizable,scrollbars';
-    }
-
-    if (type == 'popup') {
-        var settings = 'height=' + height + ',';
-        settings += 'width=' + width + ',';
-        settings += 'top=' + top + ',';
-        settings += 'left=' + left + ',';
-        settings += features;
-
-        win = window.open(page_url, window_name, settings);
-        win.window.focus();
-    } else if (type == 'modal') {
-        var html = '';
-        html += '<div id="app_common_modal">';
-        html += '<div class="app_modal_body"><a href="javascript:void(0);" id="app_common_modal_close">X</a><iframe src="' + page_url + '" frameborder="0"></iframe></div>';
-        html += '</div>';
-
-        if (!$('#app_common_modal').length) {
-
-            $('body').append(html);
-        }
-        $('#app_common_modal').fadeIn();
-    }
-
-}
-
-<script>
-// Preserve URL parameters across page navigation
-(function() {
-  // Get all URL parameters from current page
-  var urlParams = new URLSearchParams(window.location.search);
-  var paramString = urlParams.toString();
-
-  if (paramString) {
-    // Find all internal links (excluding external links, anchors, and special protocols)
-    var links = document.querySelectorAll('a[href]');
-
-    links.forEach(function(link) {
-      var href = link.getAttribute('href');
-
-      // Skip if it's an external link, anchor, mailto, tel, javascript, or #
-      if (!href ||
-          href.startsWith('http://') ||
-          href.startsWith('https://') ||
-          href.startsWith('mailto:') ||
-          href.startsWith('tel:') ||
-          href.startsWith('javascript:') ||
-          href.startsWith('#')) {
-        return;
-      }
-
-      // Add parameters to the link
-      var separator = href.includes('?') ? '&' : '?';
-      link.setAttribute('href', href + separator + paramString);
-    });
-  }
-})();
-</script>
-<script>
-// Preserve ALL URL parameters on checkout/buy buttons (with redirect parameter support)
-(function() {
-  var urlParams = new URLSearchParams(window.location.search);
-  var paramString = urlParams.toString();
-
-  if (!paramString) return; // Exit if no parameters
-
-  function appendParams(url) {
-    if (!url) return url;
-
-    try {
-      var urlObj = new URL(url);
-      var redirectParam = urlObj.searchParams.get('redirect');
-
-      // If there's a redirect parameter, decode and add params to it
-      if (redirectParam) {
-        try {
-          // Decode base64 redirect URL
-          var decodedRedirect = atob(redirectParam);
-
-          // Add parameters to decoded redirect URL
-          var separator = decodedRedirect.includes('?') ? '&' : '?';
-          var updatedRedirect = decodedRedirect + separator + paramString;
-
-          // Re-encode and update the redirect parameter
-          urlObj.searchParams.set('redirect', btoa(updatedRedirect));
-        } catch (e) {
-          // If decode fails, redirect might not be base64, append params directly
-          var separator = redirectParam.includes('?') ? '&' : '?';
-          urlObj.searchParams.set('redirect', redirectParam + separator + paramString);
-        }
-      }
-
-      // Also add parameters to the main URL
-      paramString.split('&').forEach(function(param) {
-        var parts = param.split('=');
-        if (parts[0] && parts[1]) {
-          urlObj.searchParams.set(parts[0], parts[1]);
-        }
-      });
-
-      return urlObj.toString();
-    } catch (e) {
-      // Fallback: simple append if URL parsing fails
-      var separator = url.includes('?') ? '&' : '?';
-      return url + separator + paramString;
-    }
-  }
-
-  function updateAllLinks() {
-    // Update all external checkout links (href attribute)
-    var externalLinks = document.querySelectorAll('a[href^="http"], a[href^="https"]');
-    externalLinks.forEach(function(link) {
-      var href = link.getAttribute('href');
-      link.setAttribute('href', appendParams(href));
-    });
-
-    // Update data-url attributes (used by subscription toggle)
-    var dataUrlElements = document.querySelectorAll('[data-url^="http"], [data-url^="https"]');
-    dataUrlElements.forEach(function(element) {
-      var dataUrl = element.getAttribute('data-url');
-      element.setAttribute('data-url', appendParams(dataUrl));
-    });
-  }
-
-  // Run on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateAllLinks);
-  } else {
-    updateAllLinks();
-  }
-})();
-</script>
-</body>
 </html>
