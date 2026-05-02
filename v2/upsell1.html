@@ -357,102 +357,6 @@
             margin: 0;
         }
 
-        /* Subscribe Checkbox Styles */
-        .mt-subscribe-checkbox {
-            width: 100%;
-            background: #1a1a2e;
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .mt-subscribe-checkbox:hover {
-            background: #252542;
-        }
-
-        .mt-subscribe-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: #c8922a;
-            cursor: pointer;
-        }
-
-        .mt-subscribe-checkbox label {
-            color: #fff;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        /* Subscription Info Section */
-        .mt-subscription-info {
-            display: none;
-            text-align: center;
-            margin: 4px 0;
-            background: rgba(26, 26, 46, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(26, 26, 46, 0.15);
-            border-radius: 8px;
-            padding: 6px 10px;
-        }
-
-        .mt-subscription-info.show {
-            display: block;
-            animation: borderFlicker 2.5s ease-in-out infinite;
-        }
-
-        @keyframes borderFlicker {
-
-            0%,
-            100% {
-                border-color: transparent;
-            }
-
-            50% {
-                border-color: #000;
-            }
-        }
-
-        .mt-subscription-info .congrats {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #c8922a;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .mt-subscription-info p {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #333;
-            display: block;
-            line-height: 1.3;
-            margin: 0 0 4px 0;
-        }
-
-        .mt-subscription-info .highlight {
-            font-weight: 700;
-            color: #c8922a;
-        }
-
-        .mt-cancel-badge {
-            display: block;
-            text-align: center;
-            margin: 4px 0 0 0;
-            padding: 6px 10px;
-            background: #28a745;
-            border-radius: 6px;
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
         .mt-savings-badge {
             background: none;
             color: #000;
@@ -925,14 +829,6 @@
                 font-size: 1.1rem;
             }
 
-            .mt-subscribe-checkbox {
-                padding: 10px 12px;
-            }
-
-            .mt-subscribe-checkbox label {
-                font-size: 0.85rem;
-            }
-
             .mt-savings-badge {
                 font-size: 0.8rem;
             }
@@ -1286,24 +1182,13 @@
                             <img src="pricing-assets/1x.png" alt="MetaTrim 1 Bottle">
                         </div>
                         <div class="mt-product-details">
-                            <div class="mt-subscribe-checkbox">
-                                <input type="checkbox" id="subscribe-1bottle">
-                                <label for="subscribe-1bottle">Subscribe & Go Hassle Free</label>
-                            </div>
-                            <div class="mt-product-price">
+<div class="mt-product-price">
                                 <h4 class="mt-display-price">$69</h4>
                                 <div class="mt-price-info">
                                     <p>/Bottle</p>
                                 </div>
                             </div>
-                            <div class="mt-subscription-info" id="sub-info-1">
-                                <div class="congrats">Congrats!</div>
-                                <p>After <span class="highlight">30 Days</span>, 1 Bottle for <span
-                                        class="highlight">$69+Shipping</span> will start delivering <span
-                                        class="highlight">every Month</span>.</p>
-                                <span class="mt-cancel-badge">Cancel Subscription Anytime!</span>
-                            </div>
-                            <div class="mt-savings-badge">YOU SAVE $110!</div>
+<div class="mt-savings-badge">YOU SAVE $110!</div>
                             <a href="#" class="mt-buy-now-btn"
                                 id="buy-btn-1">
                                 <img src="lib/img/buy-now.webp" alt="Buy Now" id="buy-img-1">
@@ -1514,72 +1399,6 @@
                 if (t > 0) t--;
                 else clearInterval(timerInterval);
             }, 1000);
-        });
-    </script>
-
-    <!-- Subscription Checkbox JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Store original buy button images
-            document.querySelectorAll('.mt-buy-now-btn img').forEach(img => {
-                img.dataset.originalSrc = img.src;
-            });
-
-            // Handle checkbox subscribe functionality
-            const subscribeCheckboxes = document.querySelectorAll('.mt-subscribe-checkbox input[type="checkbox"]');
-
-            subscribeCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function () {
-                    const card = this.closest('.mt-product-card');
-                    const isSubscribe = this.checked;
-
-                    // Swap buy button image and href
-                    const buyButton = card.querySelector('.mt-buy-now-btn');
-                    const btnImg = buyButton ? buyButton.querySelector('img') : null;
-                    if (btnImg) {
-                        if (isSubscribe) {
-                            btnImg.src = 'lib/img/subscribe.webp';
-                            btnImg.alt = 'Subscribe Now';
-                        } else {
-                            btnImg.src = btnImg.dataset.originalSrc;
-                            btnImg.alt = 'Buy Now';
-                        }
-                    }
-                    if (buyButton) {
-                        if (isSubscribe) {
-                            buyButton.dataset.originalHref = buyButton.dataset.originalHref || buyButton.href;
-                            buyButton.href = '#';
-                        } else {
-                            buyButton.href = buyButton.dataset.originalHref || buyButton.href;
-                        }
-                    }
-
-                    // Show/hide subscription info with flicker animation
-                    const subscriptionInfo = card.querySelector('.mt-subscription-info');
-                    if (subscriptionInfo) {
-                        if (isSubscribe) {
-                            subscriptionInfo.classList.add('show');
-                            // Re-trigger animation
-                            subscriptionInfo.style.animation = 'none';
-                            subscriptionInfo.offsetHeight; // Trigger reflow
-                            subscriptionInfo.style.animation = 'borderFlicker 2.5s ease-in-out infinite';
-                        } else {
-                            subscriptionInfo.classList.remove('show');
-                        }
-                    }
-                });
-            });
-
-            // Make entire checkbox wrapper clickable
-            document.querySelectorAll('.mt-subscribe-checkbox').forEach(wrapper => {
-                wrapper.addEventListener('click', function (e) {
-                    if (e.target.tagName !== 'INPUT') {
-                        const checkbox = this.querySelector('input[type="checkbox"]');
-                        checkbox.checked = !checkbox.checked;
-                        checkbox.dispatchEvent(new Event('change'));
-                    }
-                });
-            });
         });
     </script>
 
